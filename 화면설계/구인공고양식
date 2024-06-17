@@ -1,1 +1,69 @@
-loading..
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이력서 작성 페이지</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>이력서 작성</h1>
+        <form action="${pageContext.request.contextPath}/submit" method="post">
+            <!-- 폼 필드들 -->
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="birthYear">생년</label>
+                <input type="text" class="form-control" id="birthYear" name="birthYear" required>
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="mainInfo">자기소개</label>
+                <textarea class="form-control" id="mainInfo" name="mainInfo" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="gender">성별</label>
+                <input type="text" class="form-control" id="gender" name="gender" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">전화번호</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="address">주소</label>
+                <input type="text" class="form-control" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="desiredJob">희망직무</label>
+                <input type="text" class="form-control" id="desiredJob" name="desiredJob" required>
+            </div>
+            <div class="form-group">
+                <label for="skills">스킬</label>
+                <input type="text" class="form-control" id="skills" name="skills" required>
+            </div>
+            <div class="form-group">
+                <label for="workType">근무형태</label>
+                <input type="text" class="form-control" id="workType" name="workType" required>
+            </div>
+            <div class="form-group">
+                <label for="salary">희망연봉</label>
+                <input type="text" class="form-control" id="salary" name="salary" required>
+            </div>
+            <div class="form-group">
+                <label for="location">선호지역</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <button type="submit" class="btn btn-primary">제출</button>
+        </form>
+    </div>
+</body>
+</html>
+
