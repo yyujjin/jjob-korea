@@ -32,8 +32,8 @@ class MapperTests {
 	@Test
 	public void testOfInsert2() {
 		JoinDTO params = new JoinDTO();
-		params.setId(5);
-		params.setUserId("피카츄");
+		params.setId(10);
+		params.setUserId("제발");
 		params.setPassWord("1234");
 
 		joinMapper.insertJoin(params);
