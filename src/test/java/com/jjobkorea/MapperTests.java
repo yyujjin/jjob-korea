@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jjobkorea.dto.LoginDTO;
-import com.jjobkorea.mapper.LoginMapper;
+import com.jjobkorea.dto.user.LoginDTO;
+import com.jjobkorea.mapper.user.LoginMapper;
 
 @SpringBootTest
 class MapperTests {

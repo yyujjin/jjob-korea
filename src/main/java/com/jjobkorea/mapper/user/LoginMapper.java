@@ -1,8 +1,8 @@
-package com.jjobkorea.mapper;
+package com.jjobkorea.mapper.user;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jjobkorea.dto.LoginDTO;
+import com.jjobkorea.dto.user.LoginDTO;
 
 @Mapper
 public interface LoginMapper {

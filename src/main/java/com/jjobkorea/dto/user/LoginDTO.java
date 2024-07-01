@@ -1,4 +1,4 @@
-package com.jjobkorea.dto;
+package com.jjobkorea.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;

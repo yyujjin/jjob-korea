@@ -37,7 +37,9 @@ public class DBconfiguration {
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource());
+		//어떤 경로든 상관없다는 거 
 		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mapper/**/*Mapper.xml"));
+		//dto 하위에 있는건 다 ? 
 		factoryBean.setTypeAliasesPackage("com.jjobkorea.dto");
 		factoryBean.setConfiguration(mybatisConfg());
 		return factoryBean.getObject();
