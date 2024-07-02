@@ -8,7 +8,7 @@
 	
 </head>
 <body>
-	<h1>test입니다!</h1>
+	<h1>하이루!</h1>
 </body>
 	
 </html>

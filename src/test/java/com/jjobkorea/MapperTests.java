@@ -4,39 +4,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jjobkorea.dto.user.JoinDTO;
-import com.jjobkorea.dto.user.LoginDTO;
-import com.jjobkorea.mapper.user.JoinMapper;
-import com.jjobkorea.mapper.user.LoginMapper;
+import com.jjobkorea.dto.TestDTO;
+import com.jjobkorea.mapper.TestMapper;
+
 
 @SpringBootTest
 class MapperTests {
 
-	@Autowired
-	private LoginMapper loginMapper;
 	
 	@Autowired
-	private JoinMapper joinMapper;
+	private TestMapper testMapper;
 
-//	@Test
-//	public void testOfInsert() {
-//		LoginDTO params = new LoginDTO();
-////		params.setId(1);
-//		params.setUserId("피카츄");
-//		params.setPassWord("1234");
-//
-//		loginMapper.insertLogin(params);
-//		System.out.println("실행완료!");
-//	}
-	
+
 	@Test
-	public void testOfInsert2() {
-		JoinDTO params = new JoinDTO();
-		params.setId(15);
-		params.setUserId("제발");
-		params.setPassWord("1234");
-
-		joinMapper.insertJoin(params);
+	public void test() {
+		TestDTO dto= new TestDTO();
+		//중복안됨
+		//duplication~ 뭐라뭐라하면 아이디 중복돼서 그런거니 db에 없는 번호 넣으면 됨. 
+		dto.setId(0);
+		testMapper.insertTest(dto);
 		System.out.println("실행완료!");
 	}
 
