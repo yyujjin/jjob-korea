@@ -32,7 +32,7 @@ class MapperTests {
 	@Test
 	public void testOfInsert2() {
 		JoinDTO params = new JoinDTO();
-		params.setId(10);
+		params.setId(15);
 		params.setUserId("제발");
 		params.setPassWord("1234");
 

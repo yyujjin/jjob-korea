@@ -10,7 +10,7 @@
 </sql>
 
 <insert id="insertJoin" parameterType="JoinDTO">
-		insert into testdb.join (id,userId,passWord) values (#{id},#{userId},#{passWord});
+		insert into team_db.join (id,userId,passWord) values (#{id},#{userId},#{passWord});
 </insert>
 
 
