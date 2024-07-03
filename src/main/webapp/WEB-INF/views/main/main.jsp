@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+//요청 들어오는 페이지 값을 저장하고 있다. 
+String pagefile = request.getParameter("page");
+if (pagefile == null) {
+	System.out.println("페이지 검사 지나감");
+	pagefile = "main-content";
+}
+%>
 
 <html>
 <head>
@@ -51,7 +59,7 @@
 	          <jsp:include page="main-header.jsp" />
 	      </div>
 	      <div class="content">
-	          <jsp:include page="main-content.jsp" />
+	          <jsp:include page='<%=pagefile + ".jsp"%>' />
 	      </div>
 	      <div class="footer">
 	          <jsp:include page="main-footer.jsp" />
