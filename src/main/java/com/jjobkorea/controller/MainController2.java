@@ -32,14 +32,4 @@ public class MainController2 {
     public String listJobPostingsPage() {
         return "kth/listJobPostings"; // listJobPostings.jsp로 이동
     }
-
-    @GetMapping("/listAdmins")
-    public String listAdminsPage() {
-        return "kth/listAdmins"; // listAdmins.jsp로 이동
-    }
-
-    @GetMapping("/addAdmin")
-    public String addAdminPage() {
-        return "kth/addAdmin"; // addAdmin.jsp로 이동
-    }
 }
