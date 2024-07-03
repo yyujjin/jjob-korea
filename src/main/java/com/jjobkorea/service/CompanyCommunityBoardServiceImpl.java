@@ -1,4 +1,4 @@
-package com.jjobkorea.service.bin;
+package com.jjobkorea.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jjobkorea.dao.bin.CompanyCommunityBoardDAO;
-import com.jjobkorea.dto.bin.CompanyCommunityBoardDTO;
+import com.jjobkorea.dto.CompanyCommunityBoardDTO;
+import com.jjobkorea.mapper.CompanyCommunityBoardDAO;
 
 import lombok.extern.slf4j.Slf4j;
 

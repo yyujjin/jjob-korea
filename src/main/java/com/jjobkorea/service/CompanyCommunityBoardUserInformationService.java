@@ -1,8 +1,8 @@
-package com.jjobkorea.service.bin;
+package com.jjobkorea.service;
 
 import java.util.ArrayList;
 
-import com.jjobkorea.dto.bin.CompanyCommunityBoardUserInformationDTO;
+import com.jjobkorea.dto.CompanyCommunityBoardUserInformationDTO;
 
 public interface CompanyCommunityBoardUserInformationService {
 	public ArrayList<CompanyCommunityBoardUserInformationDTO> list();

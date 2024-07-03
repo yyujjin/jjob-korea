@@ -1,4 +1,4 @@
-package com.jjobkorea.dto.bin;
+package com.jjobkorea.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

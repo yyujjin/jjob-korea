@@ -1,4 +1,4 @@
-package com.jjobkorea.controller.bin;
+package com.jjobkorea.controller;
 
 import java.util.ArrayList;
 
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jjobkorea.dto.bin.CompanyCommunityBoardDTO;
-import com.jjobkorea.dto.bin.Criteria;
-import com.jjobkorea.dto.bin.PageDTO;
-import com.jjobkorea.service.bin.PageService;
+import com.jjobkorea.dto.CompanyCommunityBoardDTO;
+import com.jjobkorea.dto.Criteria;
+import com.jjobkorea.dto.PageDTO;
+import com.jjobkorea.service.PageService;
 
 import lombok.extern.slf4j.Slf4j;
 

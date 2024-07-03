@@ -1,9 +1,9 @@
-package com.jjobkorea.service.bin;
+package com.jjobkorea.service;
 
 import java.util.ArrayList;
 
-import com.jjobkorea.dto.bin.CompanyCommunityBoardDTO;
-import com.jjobkorea.dto.bin.Criteria;
+import com.jjobkorea.dto.CompanyCommunityBoardDTO;
+import com.jjobkorea.dto.Criteria;
 
 public interface PageService {
 	public ArrayList<CompanyCommunityBoardDTO> listWithPaging(Criteria cri);

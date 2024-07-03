@@ -1,4 +1,4 @@
-package com.jjobkorea.controller.bin;
+package com.jjobkorea.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,10 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jjobkorea.dto.bin.CompanyBoardCommentDTO;
-import com.jjobkorea.dto.bin.CompanyCommunityBoardDTO;
-import com.jjobkorea.service.bin.CompanyBoardCommentService;
-import com.jjobkorea.service.bin.CompanyCommunityBoardService;
+import com.jjobkorea.dto.CompanyBoardCommentDTO;
+import com.jjobkorea.dto.CompanyCommunityBoardDTO;
+import com.jjobkorea.service.CompanyBoardCommentService;
+import com.jjobkorea.service.CompanyCommunityBoardService;
 
 import lombok.extern.slf4j.Slf4j;
 

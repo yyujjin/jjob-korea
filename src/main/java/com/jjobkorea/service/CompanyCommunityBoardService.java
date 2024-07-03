@@ -1,9 +1,9 @@
-package com.jjobkorea.service.bin;
+package com.jjobkorea.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.jjobkorea.dto.bin.CompanyCommunityBoardDTO;
+import com.jjobkorea.dto.CompanyCommunityBoardDTO;
 
 public interface CompanyCommunityBoardService {
 	public ArrayList<CompanyCommunityBoardDTO> list();
