@@ -2,12 +2,20 @@ package com.jjobkorea.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
-	@GetMapping("/main")
-	public String enterMain() {
+	@RequestMapping("/main")
+	@GetMapping
+	public String enterMain(@RequestParam(required = false) String page) {
+//		if(page==null) {
+//			return "redirect:/main";
+//		}
 		System.err.println("메인 페이지 진입");
+		System.err.println("요청 page "+page);
 		return "main/main";
 	}
 	
