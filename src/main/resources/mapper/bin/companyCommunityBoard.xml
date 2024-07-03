@@ -1,0 +1,57 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.dao.CompanyCommunityBoardDAO">
+    
+    <select id="list" resultType="com.boot.dto.CompanyCommunityBoardDTO">
+       select companyCommunityBoardNum
+       		 ,companyUserName
+        	 ,companyCommunityBoardTitle
+        	 ,companyCommunityBoardContent
+        	 ,companyCommunityBoardDate
+        	 ,companyCommunityBoardHit
+       from companyCommunityBoard
+    </select>
+
+    
+    <insert id="write">
+    	<selectKey keyProperty="companyCommunityBoardNum" order="BEFORE" resultType="int">
+    		select ifnull(max(companyCommunityBoardnum),0)+1 from companyCommunityBoard
+    	</selectKey>
+		insert into companyCommunityBoard(companyCommunityBoardNum, companyUserName, companyCommunityBoardTitle, companyCommunityBoardContent, companyCommunityBoardHit) 
+				select ifnull(max(companyCommunityBoardNum),0)+1,#{companyUserName},#{companyCommunityBoardTitle},#{companyCommunityBoardContent},0 
+				  from companyCommunityBoard
+    </insert>
+    
+				
+    <select id="contentView" resultType="com.boot.dto.CompanyCommunityBoardDTO">
+        select companyCommunityBoardNum, companyUserName, companyCommunityBoardTitle, companyCommunityBoardDate, companyCommunityBoardHit, companyCommunityBoardContent from companyCommunityBoard where companyCommunityBoardNum=#{companyCommunityBoardNum}
+    </select>
+    
+    <update id="hit">
+		update companyCommunityBoard set companyCommunityBoardHit=companyCommunityBoardHit+1 where companyCommunityBoardNum=#{companyCommunityBoardNum}
+    </update>
+    
+    <update id="modify">
+		update companyCommunityBoard set companyCommunityBoardTitle=#{companyCommunityBoardTitle}, companyCommunityBoardContent=#{companyCommunityBoardContent} where companyCommunityBoardNum=#{companyCommunityBoardNum}
+    </update>
+    
+    <delete id="delete">
+		delete from companyCommunityBoard where companyCommunityBoardNum=#{companyCommunityBoardNum}
+    </delete>
+			
+			
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
