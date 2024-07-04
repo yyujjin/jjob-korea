@@ -1,53 +1,56 @@
 package com.jjobkorea.controller;
 
-import com.jjobkorea.entity.Company;
+import com.jjobkorea.entity.*;
 import com.jjobkorea.service.CompanyService;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/companies")
 public class CompanyController {
-    private final CompanyService companyService;
 
-    public CompanyController(CompanyService companyService) {
-        this.companyService = companyService;
+    @Autowired
+    private CompanyService companyService;
+
+    @PostMapping("/basic")
+    public CompanyBasicInfo createCompanyBasicInfo(@RequestBody CompanyBasicInfo basicInfo) {
+        return companyService.saveBasicInfo(basicInfo);
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    @PostMapping("/contact")
+    public CompanyContactInfo createCompanyContactInfo(@RequestBody CompanyContactInfo contactInfo) {
+        return companyService.saveContactInfo(contactInfo);
     }
 
-    @GetMapping("/list")
-    public String listCompaniesPage(Model model) {
-        model.addAttribute("companies", companyService.findAll());
-        return "listCompanies"; // listCompanies.jsp로 이동
+    @PostMapping("/incharge")
+    public CompanyInCharge createCompanyInCharge(@RequestBody CompanyInCharge inCharge) {
+        return companyService.saveInCharge(inCharge);
     }
 
-    @GetMapping("/add")
-    public String addCompanyPage() {
-        return "addCompany"; // addCompany.jsp로 이동
+    @PostMapping("/additional")
+    public CompanyAdditionalInfo createCompanyAdditionalInfo(@RequestBody CompanyAdditionalInfo additionalInfo) {
+        return companyService.saveAdditionalInfo(additionalInfo);
     }
 
-    @PostMapping("/add")
-    public String createCompany(@ModelAttribute Company company,
-                                @RequestParam("adminId") String adminId) {
-        company.setAdminId(adminId); // adminId 설정
-        companyService.saveCompany(company);
-        return "redirect:/companies/list";
+    @PostMapping("/sizetype")
+    public CompanySizeType createCompanySizeType(@RequestBody CompanySizeType sizeType) {
+        return companyService.saveSizeType(sizeType);
+    }
+
+    @GetMapping
+    public List<CompanyBasicInfo> getAllCompanies() {
+        return companyService.getAllCompanies();
+    }
+
+    @GetMapping("/{id}")
+    public CompanyBasicInfo getCompanyById(@PathVariable Long id) {
+        return companyService.getCompanyById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCompany(@PathVariable Long id) {
+        companyService.deleteCompany(id);
     }
 }
