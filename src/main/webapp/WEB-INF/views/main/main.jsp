@@ -9,6 +9,9 @@ if (pagefile == null) {
 }
 %>
 
+<!-- jstl을 사용하기 위한 라이브러리 추가 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -59,7 +62,14 @@ if (pagefile == null) {
 	          <jsp:include page="main-header.jsp" />
 	      </div>
 	      <div class="content">
-	          <jsp:include page='<%=pagefile + ".jsp"%>' />
+			<c:choose>
+			          <c:when test="${page != null && !page.isEmpty()}">
+			              <jsp:include page="/WEB-INF/views/${page}.jsp" />
+			          </c:when>
+			          <c:otherwise>
+			              <p>페이지를 로드할 수 없습니다.</p>
+			          </c:otherwise>
+			      </c:choose>
 	      </div>
 	      <div class="footer">
 	          <jsp:include page="main-footer.jsp" />
