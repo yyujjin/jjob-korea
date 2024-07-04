@@ -67,7 +67,9 @@ if (pagefile == null) {
 			              <jsp:include page="/WEB-INF/views/${page}.jsp" />
 			          </c:when>
 			          <c:otherwise>
-			              <p>페이지를 로드할 수 없습니다.</p>
+			             <!--<p>페이지를 로드할 수 없습니다.</p>-->
+						 <jsp:include page="/WEB-INF/views/main/main-content.jsp" />
+						 
 			          </c:otherwise>
 			      </c:choose>
 	      </div>
