@@ -1,23 +1,41 @@
 package com.jjobkorea.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class MainController {
-	@RequestMapping("/main")
-	@GetMapping
-	public String enterMain(@RequestParam(required = false) String page) {
-//		if(page==null) {
-//			return "redirect:/main";
-//		}
-		System.err.println("메인 페이지 진입");
-		System.err.println("요청 page "+page);
+	
+//	 private static final Logger log = LoggerFactory.getLogger(MainController.class);
+	
+	// 메인 페이지로 이동
+	@GetMapping("/main")
+	public String enterMain() {
+		log.info("메인 페이지 진입");
+		
 		return "main/main";
 	}
+	
+	@GetMapping("requestPage/{page}")
+	public String requestPage (@PathVariable("page") String page) {
+		
+		log.info("요청 페이지 -> " + page);
+		System.err.println(page);
+		return "main/main";
+	}
+			
+	
+	
 	
 	@GetMapping("/login")
 	public String enterlogin() {
