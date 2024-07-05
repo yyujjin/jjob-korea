@@ -69,17 +69,17 @@ class MapperTests {
 	//채용 정보 리스트 select 테스트 
 	@Test
 	public void selectListTest() {
-		JobPostringDTO dto = new JobPostringDTO();
 		
 			List<JobPostringDTO> postingList = jobPostringMapper.getList();
 			
-				for (JobPostringDTO postring : postingList) {
+				for (JobPostringDTO posting : postingList) {
 					log.info("=========================");
-					log.info("id : ", postring.getId());
-					log.info("CompanyName : ", postring.getCompanyName());
-					log.info("PostingImage : ", postring.getPostingImage());
-					log.info("PostingTitle : ", postring.getPostingTitle());
-					log.info("Hit : ", postring.getHit());
+					log.info("id :{} ", posting.getId());
+					log.info("CompanyName :{} ", posting.getCompanyName());
+					log.info("PostingImage :{} ", posting.getPostingImage());
+					log.info("PostingTitle : {}", posting.getPostingTitle());
+					log.info("Hit :{} ", posting.getHit());
+					log.info("=========================");
 					
 				}
 			}

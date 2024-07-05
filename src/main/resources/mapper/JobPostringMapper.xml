@@ -11,9 +11,7 @@
 	</sql>
 
 	<select id="getList" resultType="JobPostringDTO">
-		SELECT
-		 <include refid="jobPostingColums" />
-		FROM job_posting 
+		SELECT * FROM jobposting 
 	</select>
 
 </mapper>
