@@ -1,56 +1,36 @@
 package com.jjobkorea.controller;
 
-import com.jjobkorea.entity.*;
+import com.jjobkorea.entity.Company;
 import com.jjobkorea.service.CompanyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
+import java.util.Optional;
 
-@RestController
-@RequestMapping("/companies")
+@Controller
+@RequiredArgsConstructor
 public class CompanyController {
 
-    @Autowired
-    private CompanyService companyService;
+    private final CompanyService companyService;
 
-    @PostMapping("/basic")
-    public CompanyBasicInfo createCompanyBasicInfo(@RequestBody CompanyBasicInfo basicInfo) {
-        return companyService.saveBasicInfo(basicInfo);
+    @GetMapping("/companies")
+    public String getAllCompanies(Model model) {
+        model.addAttribute("companies", companyService.getAllCompanies());
+        return "companies/list";
     }
 
-    @PostMapping("/contact")
-    public CompanyContactInfo createCompanyContactInfo(@RequestBody CompanyContactInfo contactInfo) {
-        return companyService.saveContactInfo(contactInfo);
-    }
-
-    @PostMapping("/incharge")
-    public CompanyInCharge createCompanyInCharge(@RequestBody CompanyInCharge inCharge) {
-        return companyService.saveInCharge(inCharge);
-    }
-
-    @PostMapping("/additional")
-    public CompanyAdditionalInfo createCompanyAdditionalInfo(@RequestBody CompanyAdditionalInfo additionalInfo) {
-        return companyService.saveAdditionalInfo(additionalInfo);
-    }
-
-    @PostMapping("/sizetype")
-    public CompanySizeType createCompanySizeType(@RequestBody CompanySizeType sizeType) {
-        return companyService.saveSizeType(sizeType);
-    }
-
-    @GetMapping
-    public List<CompanyBasicInfo> getAllCompanies() {
-        return companyService.getAllCompanies();
-    }
-
-    @GetMapping("/{id}")
-    public CompanyBasicInfo getCompanyById(@PathVariable Long id) {
-        return companyService.getCompanyById(id);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteCompany(@PathVariable Long id) {
-        companyService.deleteCompany(id);
+    @GetMapping("/companies/{id}")
+    public String getCompanyById(@PathVariable Long id, Model model) {
+        Optional<Company> company = companyService.getCompanyById(id);
+        if (company.isPresent()) {
+            model.addAttribute("company", company.get());
+            model.addAttribute("jobPostings", company.get().getJobPostings());
+            return "companies/detail";
+        } else {
+            return "companies/not-found";
+        }
     }
 }
