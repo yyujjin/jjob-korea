@@ -25,7 +25,6 @@
             <div class="card-body">
               <h5 class="card-title"><c:out value='${postingList.companyName}'/></h5>
               <p class="card-text"><c:out value='${postingList.postingTitle}'/></p>
-              <a href="#" class="btn btn-primary">지원하기</a>
             </div>
           </div>
         </div>	
