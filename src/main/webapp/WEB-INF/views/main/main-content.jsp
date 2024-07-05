@@ -12,7 +12,8 @@
     <!-- row-cols-md-3   중간 크기 화면(medium screen) 이상에서 한 행에 세 개의 열이 포함되도록 설정합니다. -->
     <div class="row row-cols-2 row-cols-md-4 g-4 ">
         <div class="col">
-          <div class="card h-100 w-90">
+          <!-- text-center mb-3   mb-3는 아래쪽에 약간의 여백(마진)을 설정하는데 사용-->
+          <div class="card h-100 w-90 text-center " >
            <img src="../../resources/img/jjobkorea_logo.png" alt="..."  class="card-img-top" >
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
@@ -22,7 +23,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card h-100 w-90">
+          <div class="card h-100 w-90 text-center">
             <img src="../../resources/img/jjobkorea_logo.png" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
@@ -32,7 +33,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card h-100 w-90">
+          <div class="card h-100 w-90 text-center">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
@@ -42,7 +43,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card h-100 w-90">
+          <div class="card h-100 w-90 text-center">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
@@ -52,7 +53,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card h-100 w-90">
+          <div class="card h-100 w-90 text-center">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
@@ -62,7 +63,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card h-100 w-90">
+          <div class="card h-100 w-90 text-center">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
@@ -72,7 +73,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card h-100 w-90">
+          <div class="card h-100 w-90 text-center">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
@@ -82,7 +83,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card h-100 w-90">
+          <div class="card h-100 w-90 text-center">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
