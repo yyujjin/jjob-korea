@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-//요청 들어오는 페이지 값을 저장하고 있다. 
-String pagefile = request.getParameter("page");
-if (pagefile == null) {
-	System.out.println("페이지 검사 지나감");
-	pagefile = "main-content";
-}
-%>
+
 
 <!-- jstl을 사용하기 위한 라이브러리 추가 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
