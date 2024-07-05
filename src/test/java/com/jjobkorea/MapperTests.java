@@ -21,7 +21,7 @@ class MapperTests {
 		TestDTO dto= new TestDTO();
 		//중복안됨
 		//duplication~ 뭐라뭐라하면 아이디 중복돼서 그런거니 db에 없는 번호 넣으면 됨. 
-		dto.setId(0);
+		dto.setId(55);
 		testMapper.insertTest(dto);
 		System.out.println("실행완료!");
 	}

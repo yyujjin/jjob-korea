@@ -26,21 +26,21 @@
 	               <a class="nav-link active" aria-current="page" href="#">Home</a>
 	             </li>
 	             <li class="nav-item">
-	               <a class="nav-link" href="/main?page=login">채용 정보</a>
+	               <a class="nav-link" href="/requestPage/jobPosting">채용 정보</a>
 	             </li>
 	             <li class="nav-item">
-	               <a class="nav-link" href="#">구직자 게시판</a>
+	               <a class="nav-link" href="/requestPage/jobSeekerBoard">구직자 게시판</a>
 	             </li>
 	             <li class="nav-item">
-	               <a class="nav-link" href="#">기업 게시판</a>
+	               <a class="nav-link" href="/requestPage/companyBoard">기업 게시판</a>
 	             </li>
 	             <li class="nav-item">
-	               <a class="nav-link" href="#">로그인</a>
+					<!--파라미터 넘기기-->
+	               <a class="nav-link" href="/requestPage/login">로그인</a>
 	             </li>
 	             <li class="nav-item">
 	               <a class="nav-link" href="#">마이 페이지</a>
 	             </li>
-	            
 	           </ul>
 	         </div>
 	       </div>
