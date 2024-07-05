@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+
+<!-- <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.7.1.min.js"></script> -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+<!-- 후일 경로수정이 되면 고쳐야한다. --> 
+
 </head>
 <body>
 	<table width="500" border="1">
@@ -31,7 +35,7 @@
 			<tr>
 				<td>이름</td>
 				<td>
-						${content_view.companyUserName}
+					${content_view.companyUserName}
 				</td>
 			</tr>
 			<tr>
@@ -60,11 +64,12 @@
 	
 	
 	
-	
+	<!-- 댓글기능 단?-->
 	<div>
 			<input type="text" id="companyCommentWriter" placeholder="작성자">
 			<input type="text" id="companyCommentContent" placeholder="내용">
 			<button onclick="commentWrite()">댓글작성</button>
+			<!-- 버튼을 누르면 안의 함수가 실행됨 -->
 		</div>
 
 		<div id="comment-list">
@@ -87,10 +92,12 @@
 		</div>
 	</body>
 		<script>
+			//실행함수
 			const commentWrite = () => {
 				const writer = document.getElementById("companyCommentWriter").value;
 				const content = document.getElementById("companyCommentContent").value;
 				const no = "${content_view.companyCommunityBoardNum}";
+//				const no = "${companyBoardContent_view.companyCommunityBoardNum}";
 
 				$.ajax({
 					 type: "post"
