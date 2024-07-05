@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jjobkorea.mapper.CompanyBoardCommentMapper">
+    <insert id="save">
+		insert into companyBoardComment(companyCommentWriter ,companyCommentContent ,companyCommunityBoardNum) 
+			   values(#{companyCommentWriter},#{companyCommentContent},#{companyCommunityBoardNum})
+    </insert>
+    
+    <select id="findAll" resultType="CompanyBoardCommentDTO">
+        select companyCommentNum
+			 , companyCommentWriter
+			 , companyCommentContent
+			 , companyCommunityBoardNum
+			 , companyCommentTime
+		  from companyBoardComment
+		 where companyCommunityBoardNum=#{companyCommunityBoardNum}
+		 order by companyCommentNum desc
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
