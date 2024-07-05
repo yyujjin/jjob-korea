@@ -1,59 +1,24 @@
 package com.jjobkorea.service;
 
-import com.jjobkorea.entity.*;
-import com.jjobkorea.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jjobkorea.entity.Company;
+import com.jjobkorea.repository.CompanyRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CompanyService {
 
-    @Autowired
-    private CompanyBasicInfoRepository basicInfoRepository;
+    private final CompanyRepository companyRepository;
 
-    @Autowired
-    private CompanyContactInfoRepository contactInfoRepository;
-
-    @Autowired
-    private CompanyInChargeRepository inChargeRepository;
-
-    @Autowired
-    private CompanyAdditionalInfoRepository additionalInfoRepository;
-
-    @Autowired
-    private CompanySizeTypeRepository sizeTypeRepository;
-
-    public CompanyBasicInfo saveBasicInfo(CompanyBasicInfo basicInfo) {
-        return basicInfoRepository.save(basicInfo);
+    public List<Company> getAllCompanies() {
+        return companyRepository.findAll();
     }
 
-    public CompanyContactInfo saveContactInfo(CompanyContactInfo contactInfo) {
-        return contactInfoRepository.save(contactInfo);
-    }
-
-    public CompanyInCharge saveInCharge(CompanyInCharge inCharge) {
-        return inChargeRepository.save(inCharge);
-    }
-
-    public CompanyAdditionalInfo saveAdditionalInfo(CompanyAdditionalInfo additionalInfo) {
-        return additionalInfoRepository.save(additionalInfo);
-    }
-
-    public CompanySizeType saveSizeType(CompanySizeType sizeType) {
-        return sizeTypeRepository.save(sizeType);
-    }
-
-    public List<CompanyBasicInfo> getAllCompanies() {
-        return basicInfoRepository.findAll();
-    }
-
-    public CompanyBasicInfo getCompanyById(Long id) {
-        return basicInfoRepository.findById(id).orElse(null);
-    }
-
-    public void deleteCompany(Long id) {
-        basicInfoRepository.deleteById(id);
+    public Optional<Company> getCompanyById(Long id) {
+        return companyRepository.findById(id);
     }
 }
