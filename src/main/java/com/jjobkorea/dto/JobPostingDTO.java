@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class JobPostingDTO {
-    private Long id;
-    private String title;
-    private String description;
-    private Long companyId;
-    private String companyName;
-    private String companyAddress;
+  
+	private int id;
+	private String companyName;
+	private String postingImage;
+	private String postingTitle;
+	private int hit;
 }
