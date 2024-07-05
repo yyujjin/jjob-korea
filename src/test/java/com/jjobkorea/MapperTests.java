@@ -1,17 +1,26 @@
 package com.jjobkorea;
 
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 //import java.util.List;
 
 //import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jjobkorea.dto.TestDTO;
-import com.jjobkorea.mapper.TestMapper;
+import com.jjobkorea.dto.JobPostringDTO;
+import com.jjobkorea.mapper.JobPostringMapper;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @SpringBootTest
 class MapperTests {
+	
+	
+	@Autowired
+	private JobPostringMapper jobPostringMapper;
 
 //	
 //	@Autowired
@@ -52,24 +61,28 @@ class MapperTests {
 //		}
 //	}
 //	
-	
-//}
-//리스트 조회 일단 보류
-	//isEmpty 오류남
-//	@Test
-//	public void testSelectList() {
-//		int boardTotalCount = boardMapper.selectBoardTotalCount();
-//		if (boardTotalCount > 0) {
-//			List<BoardDTO> boardList = boardMapper.selectBoardList();
-//			if (CollectionUtils.isEmpty(boardList) == false) {
-//				for (BoardDTO board : boardList) {
-//					System.out.println("=========================");
-//					System.out.println(board.getTitle());
-//					System.out.println(board.getContent());
-//					System.out.println(board.getWriter());
-//					System.out.println("=========================");
-//				}
-//			}
-}
 
+//}
 	
+	
+	
+	//채용 정보 리스트 select 테스트 
+	@Test
+	public void selectListTest() {
+		JobPostringDTO dto = new JobPostringDTO();
+		
+			List<JobPostringDTO> postingList = jobPostringMapper.getList();
+			
+				for (JobPostringDTO postring : postingList) {
+					log.info("=========================");
+					log.info("id : ", postring.getId());
+					log.info("CompanyName : ", postring.getCompanyName());
+					log.info("PostingImage : ", postring.getPostingImage());
+					log.info("PostingTitle : ", postring.getPostingTitle());
+					log.info("Hit : ", postring.getHit());
+					
+				}
+			}
+		
+	}
+
