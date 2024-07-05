@@ -23,7 +23,7 @@
 	           <ul class="navbar-nav">
 	             <li class="nav-item">
 	               <!-- aria-current=>현재 상태를 나타내는 역할 -->
-				  <!--/requestPage/main/main-content 이런식으로 경로 하려니까 요청 경로 자체가 바뀜--> 
+				  <!--/requestPage/main/main-content 이런식으로 경로 하려니까 요청 경로 자체가 바껴서 컨트롤러 단에서 해줘야 함 --> 
 	               <a class="nav-link active" aria-current="page" href="/requestPage/main">Home</a>
 	             </li>
 	             <li class="nav-item">
@@ -40,7 +40,7 @@
 	               <a class="nav-link" href="/requestPage/login">로그인</a>
 	             </li>
 	             <li class="nav-item">
-	               <a class="nav-link" href="#">마이 페이지</a>
+	               <a class="nav-link" href="/requestPage/mypage">마이 페이지</a>
 	             </li>
 	           </ul>
 	         </div>
