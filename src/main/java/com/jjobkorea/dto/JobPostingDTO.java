@@ -3,7 +3,7 @@ package com.jjobkorea.dto;
 import lombok.Data;
 
 @Data
-public class JobPostringDTO {
+public class JobPostingDTO {
 
 	private int id;
 	private String companyName;

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jjobkorea.dto.JobPostringDTO;
-import com.jjobkorea.mapper.JobPostringMapper;
+import com.jjobkorea.dto.JobPostingDTO;
+import com.jjobkorea.mapper.JobPostingMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,7 +20,7 @@ class MapperTests {
 	
 	
 	@Autowired
-	private JobPostringMapper jobPostringMapper;
+	private JobPostingMapper jobPostingMapper;
 
 //	
 //	@Autowired
@@ -70,9 +70,9 @@ class MapperTests {
 	@Test
 	public void selectListTest() {
 		
-			List<JobPostringDTO> postingList = jobPostringMapper.getList();
+			List<JobPostingDTO> postingList = jobPostingMapper.getPostingList();
 			
-				for (JobPostringDTO posting : postingList) {
+				for (JobPostingDTO posting : postingList) {
 					log.info("=========================");
 					log.info("id :{} ", posting.getId());
 					log.info("CompanyName :{} ", posting.getCompanyName());
