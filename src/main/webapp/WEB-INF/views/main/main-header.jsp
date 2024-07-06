@@ -60,6 +60,7 @@
                             type="search"
                             class="form-control"
                             placeholder="#백엔드 채용"
+							autofocus
                             aria-label="Search"
                         />
                     </form>
