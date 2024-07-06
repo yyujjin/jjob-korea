@@ -20,11 +20,9 @@ public class MainController {
 	@Autowired
 	private JobPostingService jobPostingService;
 
-	// 프로젝트 대문 페이지
-	//독립된 매핑 존재로 주소창에 이거 적어도 바로들어갈 수 있음 
-	//여기로 요청 다 보내기 
+	//프로젝트 시작 페이지
 	// 슬러시 하나로도 되게 처리하기
-	@GetMapping("/main")
+	@GetMapping(value={"/","/main"})
 	public String enterMain(Model model) {
 		log.info("메인 페이지 진입");
 
