@@ -20,9 +20,8 @@ public class MainController {
 	@Autowired
 	private JobPostingService jobPostingService;
 
-	//프로젝트 시작 페이지
-	// 슬러시 하나로도 되게 처리하기
-	@GetMapping(value={"/","/main"})
+	// 프로젝트 시작 페이지
+	@GetMapping(value = { "/", "/main" })
 	public String enterMain(Model model) {
 		log.info("메인 페이지 진입");
 
@@ -31,42 +30,32 @@ public class MainController {
 		return "main/main";
 	}
 
-	
-	//메인 컨텐츠 페이지 
+	// 메인 컨텐츠 페이지
 	@GetMapping("/mainContent")
-	public String handleMainPageRequest(Model model) {
+	public String enterMainContent(Model model) {
 		log.info("메인 페이지 컨텐츠");
-		
+
 		List<JobPostingDTO> postingList = jobPostingService.getPostingList();
 		model.addAttribute("postingList", postingList);
 		String page = "main/main-content";
-		
+
 		model.addAttribute("page", page);
-		
+
 		return "main/main";
 	}
-	
-	
-	
+
 	// 요청 파라미터에 따라 해당 페이지 컨트롤러 작동
 	@GetMapping("requestPage/{page}")
 	public String requestPage(@PathVariable("page") String page, Model model) {
 
 		log.info("요청 페이지 -> " + page);
 
-		switch(page) {
-		//각 메서드에서도 model이 필요하기에 파라미터를 맞춰줘야해서 여기도 model 넣어줘야 함 (각 메서드의 파라미터 맞추기) 
-		case "main" : return handleMainPageRequest(model);
+		switch (page) {
+		case "main":
+			return enterMainContent(model);
 		}
-		
-
 
 		return "main/main";
 	}
-	
-	
-	
-	
-	
 
 }
