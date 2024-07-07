@@ -27,12 +27,6 @@
 	</style>
 </head>
 <body>
-	<hr>
-	<p class="hotPosting">주간 <span id="hot"> 	<image
-	                               src="../../resources/img/hotPosting_icon.png"
-	                               width="30"
-	                               height="30"
-	                           />HOT</span>! 공고 TOP 8 </p>
     <!-- 반응형 -->
     <!-- //.row-cols-1한 열에 카드를 배치하고, .row-cols-md-3중간 중단점에서 위로 여러 행에 걸쳐 g-4 4장의 카드를 동일한 너비로 분할합니다. -->
     <!-- row-cols-md-3   중간 크기 화면(medium screen) 이상에서 한 행에 세 개의 열이 포함되도록 설정합니다. -->
