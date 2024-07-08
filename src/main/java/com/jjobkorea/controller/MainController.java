@@ -20,6 +20,10 @@ public class MainController {
 	@Autowired
 	private JobPostingService jobPostingService;
 
+	// 로그인, 회원가입 컨트롤러
+	@Autowired
+	private MemController memController;
+
 	// 프로젝트 시작 페이지
 	@GetMapping(value = { "/", "/main" })
 	public String enterMain(Model model) {
@@ -53,8 +57,12 @@ public class MainController {
 		switch (page) {
 		case "main":
 			return enterMainContent(model);
-		}
+		case "login":
+			return memController.login(model);
+		case "register":
+			return memController.register(model);
 
+		}
 		return "main/main";
 	}
 

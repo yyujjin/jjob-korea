@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	
+		 
+
 	<table width="500" border="1">
 		<form method="post" action="write">
 			
@@ -36,6 +40,12 @@
 			</tr>
 		</form>
 	</table>
+
+	
+
+	
+	
+
 </body>
 </html>
 

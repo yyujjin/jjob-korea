@@ -1,0 +1,85 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jjobkorea.mapper.MemMapper">
+    <!-- 로그인 -->
+    <select id="loginYn" resultType="MemDTO">
+        SELECT 
+        tb.memPwd, 
+        tb.cpId,
+        cp.companyType, 
+        cp.companyRegistrationNum, 
+        cp.companyRepresentativeName,
+        cp.companyName, 
+        cp.companyAddr, 
+        cp.companyBusinessRegistration AS companyBusinessRegistrationNum
+    FROM 
+        signup_tb tb 
+    LEFT JOIN 
+        signup_cp cp 
+    ON 
+        tb.cpId = cp.id 
+    WHERE 
+        tb.memId = #{memId}
+    </select>
+
+    <!-- 회원 등록 -->
+    <insert id="write" parameterType="map">
+        <!-- 기업 정보 삽입 -->
+        <selectKey keyProperty="cpId" resultType="int" order="BEFORE">
+            SELECT ifnull(MAX(id), 0) + 1 FROM signup_cp
+        </selectKey>
+
+        <if test="companyType != null and companyType != ''">
+            INSERT INTO signup_cp (
+                id, companyType, companyRegistrationNum, companyName, companyRepresentativeName, companyAddr, companyBusinessRegistrationNum
+            ) VALUES (
+                #{cpId}, #{companyType}, #{companyRegistrationNum}, #{companyName}, #{companyAddr}, #{companyBusinessRegistrationNum}
+            );
+        </if>
+
+        <!-- 개인 회원 정보 삽입 -->
+        <if test="type == 'individual'">
+            INSERT INTO signup_tb (
+                memId, memPwd, memName, memPhone, memAddr, memEmail, memBirth, memGender, memCreationDate
+            ) VALUES (
+                #{memId}, #{memPwd}, #{memName}, #{memPhone}, #{memAddr}, #{memEmail}, #{memBirth}, #{memGender}, CURRENT_TIMESTAMP
+            );
+        </if>
+
+        <!-- 기업 회원 정보 삽입 -->
+        <if test="type == 'enterprise'">
+            INSERT INTO signup_tb (
+                memId, memPwd, memName, memPhone, memAddr, memEmail, memCreationDate, cpId
+            ) VALUES (
+                #{memId}, #{memPwd}, #{memName}, #{memPhone}, #{memAddr}, #{memEmail}, CURRENT_TIMESTAMP, #{cpId}
+            );
+        </if>
+    </insert>
+
+    <!-- 기업회원 등록번호 중복 확인 -->
+    <select id="checkcompanyRegistrationNum" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM signup_cp WHERE companyRegistrationNum = #{companyRegistrationNum}
+    </select>
+
+    <!-- cpId로 회원 조회 -->
+    <select id="selectByCpId" resultType="MemDTO">
+        SELECT 
+            tb.cpId,
+            cp.companyType, 
+            cp.companyRegistrationNum, 
+            cp.companyName, 
+            cp.companyRepresentativeName
+            cp.companyAddr, 
+            cp.companyBusinessRegistrationNum
+        FROM 
+            signup_tb tb 
+        LEFT JOIN 
+            signup_cp cp 
+        ON 
+            tb.cpId = cp.id 
+        WHERE 
+            tb.cpId = #{cpId}
+    </select>
+</mapper>
