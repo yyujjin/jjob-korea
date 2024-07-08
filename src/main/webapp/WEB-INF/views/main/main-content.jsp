@@ -11,6 +11,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main-content</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<!-- 글꼴 설정 -->
+    <link
+        href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css"
+        rel="stylesheet"
+    />
+	<style>
+		.hotPosting{
+			font-family: "NanumBarunGothicBold";
+			font-size: 25px;
+		}
+		#hot{
+			color:#dd0000;
+		}
+	</style>
 </head>
 <body>
     <!-- 반응형 -->
@@ -25,7 +39,6 @@
             <div class="card-body">
               <h5 class="card-title"><c:out value='${postingList.companyName}'/></h5>
               <p class="card-text"><c:out value='${postingList.postingTitle}'/></p>
-              <a href="#" class="btn btn-primary">지원하기</a>
             </div>
           </div>
         </div>	

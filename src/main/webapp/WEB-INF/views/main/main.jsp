@@ -60,7 +60,7 @@
 			              <jsp:include page="/WEB-INF/views/${page}.jsp" />
 			          </c:when>
 			          <c:otherwise>
-			             <!--<p>페이지를 로드할 수 없습니다.</p>-->
+						<!--페이지 요청이 없을 때 main컨텐츠 표시-->
 						 <jsp:include page="/WEB-INF/views/main/main-content.jsp" />
 						 
 			          </c:otherwise>
