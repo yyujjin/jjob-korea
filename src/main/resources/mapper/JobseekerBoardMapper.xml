@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jjobkorea.mapper.JobseekerBoardMapper">
+    <select id="jobseekerList" resultType="com.jjobkorea.dto.JobseekerBoardDTO">
+        select jobseekerCommunityBoardNum
+        	  ,jobseekerCommunityBoardName
+        	  ,jobseekerCommunityBoardTitle
+        	  ,jobseekerCommunityBoardContent
+        	  ,jobseekerCommunityBoardDate
+        	  ,jobseekerCommunityBoardHit 
+          from jobseekerCommunityBoard
+    </select>
+    <insert id="jobseekerWrite">
+    	<selectKey keyProperty="jobseekerCommunityBoardNum" order="BEFORE" resultType="int">
+    		select ifnull(max(jobseekerCommunityBoardNum),0)+1 
+    		  from jobseekerCommunityBoard
+    	</selectKey>
+		insert into jobseekerCommunityBoard(
+					jobseekerCommunityBoardNum
+				   ,jobseekerCommunityBoardName
+				   ,jobseekerCommunityBoardTitle
+				   ,jobseekerCommunityBoardContent
+				   ,jobseekerCommunityBoardHit) 
+		select ifnull(max(jobseekerCommunityBoardNum),0)+1,
+				   #{jobseekerCommunityBoardName}
+				  ,#{jobseekerCommunityBoardTitle}
+				  ,#{jobseekerCommunityBoardContent}
+				  ,0 
+			from jobseekerCommunityBoard
+    </insert>
+				
+    <select id="jobseekerContentView" resultType="com.jjobkorea.dto.JobseekerBoardDTO">
+        select jobseekerCommunityBoardNum
+        	  ,jobseekerCommunityBoardName
+        	  ,jobseekerCommunityBoardTitle
+        	  ,jobseekerCommunityBoardContent
+        	  ,jobseekerCommunityBoardDate
+        	  ,jobseekerCommunityBoardHit 
+           from jobseekerCommunityBoard
+       	where jobseekerCommunityBoardNum=#{jobseekerCommunityBoardNum}
+    </select>
+    
+    <update id="jobseekerModify">
+		update jobseekerCommunityBoard
+		set jobseekerCommunityBoardName=#{jobseekerCommunityBoardName}
+			,jobseekerCommunityBoardTitle=#{jobseekerCommunityBoardTitle}
+			,jobseekerCommunityBoardContent=#{jobseekerCommunityBoardContent}
+		 where jobseekerCommunityBoardNum=#{jobseekerCommunityBoardNum}
+    </update>
+    
+    <delete id="jobseekerDelete">
+		delete from jobseekerCommunityBoard
+		where jobseekerCommunityBoardNum=#{jobseekerCommunityBoardNum}
+    </delete>
+    
+<!--    조회수-->
+    <update id="jobseekerHit" parameterType="int">
+	    update jobseekerCommunityBoard
+	    set jobseekerCommunityBoardHit = jobseekerCommunityBoardHit + 1
+	    where jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
+	</update>
+</mapper>
