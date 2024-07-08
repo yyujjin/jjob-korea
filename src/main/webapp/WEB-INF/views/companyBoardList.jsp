@@ -99,8 +99,6 @@
 </head>
 
 <body>
-  
-    <h1> 기업게시판 페이지 </h1>
     
     <div class="center-table">
         <table width="500" border="1" class="styled-table">
