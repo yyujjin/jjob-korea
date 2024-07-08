@@ -13,7 +13,7 @@
 			 </div>
 			 
 			 
-	<table width="500" border="1" >
+	<table width="500" border="1">
 		<form method="post" action="companyBoardModify">
 			<input type="hidden" name="companyCommunityBoardNum" value="${modify_view.companyCommunityBoardNum}">
 			<tr>
