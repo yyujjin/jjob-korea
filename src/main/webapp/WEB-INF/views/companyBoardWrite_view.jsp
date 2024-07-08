@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="header">
-			<jsp:include page="/WEB-INF/views/main/main-header.jsp" />
-		 </div>
+	
 		 
 	<table width="500" border="1">
 		<form method="post" action="write">
@@ -42,9 +40,7 @@
 	</table>
 	
 
-	<div class="footer">
-		<jsp:include page="/WEB-INF/views/main/main-footer.jsp" />
-	</div>
+	
 	
 </body>
 </html>

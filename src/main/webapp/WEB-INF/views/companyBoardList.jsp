@@ -98,9 +98,7 @@
 </head>
 
 <body>
-    <div class="header">
-        <jsp:include page="/WEB-INF/views/main/main-header.jsp" />
-    </div>
+  
     <h1> 기업게시판 페이지 </h1>
     
     <div class="center-table">
@@ -185,9 +183,7 @@
         <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
     </form>
     
-    <div class="footer">
-        <jsp:include page="/WEB-INF/views/main/main-footer.jsp" />
-    </div>
+  
 
     <script>
         var actionForm = $("#actionForm");
