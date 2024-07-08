@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <!-- 후일 경로수정이 되면 고쳐야한다. --> 
 <style>
@@ -87,7 +88,7 @@
 	<h1> 기업게시판 페이지 </h1>
 	
 	<div class="center-table">
-	<table width="500" border="1">
+	<table width="500" border="1" >
 		<tr>
 			<td>번호</td>
 			<td>제목</td>
@@ -261,7 +262,8 @@
 		</script>
 </script>
 
-
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.bundle.min.js"></script>
 
 
 
