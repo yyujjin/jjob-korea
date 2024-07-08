@@ -9,7 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+import com.jjobkorea.dto.CompanyBoardCommentDTO;
 import com.jjobkorea.dto.CompanyCommunityBoardDTO;
+import com.jjobkorea.mapper.CompanyBoardCommentMapper;
+import com.jjobkorea.service.CompanyBoardCommentService;
+
 import com.jjobkorea.service.CompanyCommunityBoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CompanyCommunityBoardController {
 	@Autowired
 	private CompanyCommunityBoardService service;
-//	@Autowired
-//	private CompanyBoardCommentService commentService;
+
+	@Autowired
+	private CompanyBoardCommentService commentService;
+
 	
 	
 	@RequestMapping("/companyBoardList")
@@ -60,10 +67,15 @@ public class CompanyCommunityBoardController {
 		CompanyCommunityBoardDTO dto = service.companyBoardContentView(param);
 		model.addAttribute("content_view", dto);
 		
-		model.addAttribute("pageMaker", param);
+
+//		model.addAttribute("pageMaker", param);
 		
-//		ArrayList<CompanyBoardCommentDTO> commentList = commentService.findAll(param);
-//		model.addAttribute("commentList", commentList);
+		ArrayList<CompanyBoardCommentDTO> commentList = commentService.allFind(param);
+		log.info("@#@#@#commentList=>"+commentList);
+//		int companycomentNum = commentList.get(0).getCompanyCommentNum();
+		model.addAttribute("commentList", commentList);
+//		model.addAttribute("companycomentNum", companycomentNum);
+
 		
 		return "companyBoardContent_view";
 	}
