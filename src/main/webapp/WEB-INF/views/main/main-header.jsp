@@ -15,7 +15,7 @@
 	         <a class="navbar-brand" href="#">
 
 	           <!-- 이미지 추가 -->
-	           <img src="../../resources/img/jjobkorea로고.png" alt="Logo" width="200" height="100" class="d-inline-block align-text-top">
+	           <img src="../../resources/img/jjobkorea_logo.png" alt="Logo" width="200" height="100" class="d-inline-block align-text-top">
 
 	         </a>
 	        
