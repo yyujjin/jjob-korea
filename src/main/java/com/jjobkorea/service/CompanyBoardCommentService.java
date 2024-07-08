@@ -8,4 +8,5 @@ import com.jjobkorea.dto.CompanyBoardCommentDTO;
 public interface CompanyBoardCommentService {
 	public void save(HashMap<String, String> param);
 	public ArrayList<CompanyBoardCommentDTO> findAll(HashMap<String, String> param);
+	
 }

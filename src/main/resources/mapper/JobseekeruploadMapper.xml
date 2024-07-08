@@ -1,0 +1,46 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jjobkorea.mapper.JobseekerBoardAttachMapper">
+    <insert id="insertFile">
+		insert into jobseekerBoardAttach
+					(jobseekerBoardAttachUuid
+					,jobseekerBoardAttachUploadPath 
+					,jobseekerBoardAttachFileName
+					,jobseekerBoardAttachImage
+					,jobseekerCommunityBoardNum) 
+			  values(#{jobseekerBoardAttachUuid}
+			   		,#{jobseekerBoardAttachUploadPath}
+			   		,#{jobseekerBoardAttachFileName}
+			   		,#{jobseekerBoardAttachImage}
+			   		,#{jobseekerCommunityBoardNum})
+    </insert>
+    
+    <select id="getFileList" resultType="com.jjobkorea.dto.JobseekerBoardAttachDTO">
+        select jobseekerBoardAttachUuid
+        	  ,jobseekerBoardAttachUploadPath 
+        	  ,jobseekerBoardAttachFileName
+        	  ,jobseekerBoardAttachImage
+        	  ,jobseekerCommunityBoardNum
+  		  from jobseekerBoardAttach 
+  		where jobseekerCommunityBoardNum=#{jobseekerCommunityBoardNum}
+    </select>
+    
+    <delete id="deleteFile">
+		delete from jobseekerBoardAttach
+		where jobseekerCommunityBoardNum=#{jobseekerCommunityBoardNum}
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jjobkorea.mapper.JobseekerCommentMapper">
+    <insert id="save">
+		insert into jobseekerBoardComment(
+					jobseekerCommentCommentWriter 
+				   ,jobseekerCommunityCommentContent
+				   ,jobseekerCommunityBoardNum) 
+		   values(#{jobseekerCommentCommentWriter}
+		   		 ,#{jobseekerCommunityCommentContent}
+		   		 ,#{jobseekerCommunityBoardNum})
+    </insert>
+    
+    <select id="findAll" resultType="com.jjobkorea.dto.JobseekerCommentDTO">
+        select jobseekerCommentBoardNum
+			 , jobseekerCommentCommentWriter
+			 , jobseekerCommunityCommentContent
+			 , jobseekerCommunityBoardNum
+			 , jobseekerCommentTime
+		  from jobseekerBoardComment
+		 where jobseekerCommunityBoardNum=#{jobseekerCommunityBoardNum}
+		 order by jobseekerCommentBoardNum desc
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
