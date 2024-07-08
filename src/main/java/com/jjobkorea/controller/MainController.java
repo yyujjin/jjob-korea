@@ -19,7 +19,8 @@ public class MainController {
 
 	@Autowired
 	private JobPostingService jobPostingService;
-	
+
+	// 로그인, 회원가입 컨트롤러
 	@Autowired
 	private MemController memController;
 
@@ -54,12 +55,14 @@ public class MainController {
 		log.info("요청 페이지 -> " + page);
 
 		switch (page) {
-		case "main" :
+		case "main":
 			return enterMainContent(model);
-		case "login" :
+		case "login":
 			return memController.login(model);
-		}
+		case "register":
+			return memController.register(model);
 
+		}
 		return "main/main";
 	}
 
