@@ -63,13 +63,13 @@ public class CompanyCommunityBoardController {
 		CompanyCommunityBoardDTO dto = service.companyBoardContentView(param);
 		model.addAttribute("content_view", dto);
 		
-		model.addAttribute("pageMaker", param);
+//		model.addAttribute("pageMaker", param);
 		
 		ArrayList<CompanyBoardCommentDTO> commentList = commentService.allFind(param);
 		log.info("@#@#@#commentList=>"+commentList);
-		int companycomentNum = commentList.get(0).getCompanyCommentNum();
+//		int companycomentNum = commentList.get(0).getCompanyCommentNum();
 		model.addAttribute("commentList", commentList);
-		model.addAttribute("companycomentNum", companycomentNum);
+//		model.addAttribute("companycomentNum", companycomentNum);
 		
 		return "companyBoardContent_view";
 	}

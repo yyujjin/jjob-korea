@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,11 @@
 
 </head>
 <body>
+	
+	<div class="header">
+		<jsp:include page="/WEB-INF/views/main/main-header.jsp" />
+	 </div>
+				
 	<table width="500" border="1">
 		<form method="post" action="companyBoardModify_view">
 			<input type="hidden" name="companyCommunityBoardNum" value="${content_view.companyCommunityBoardNum}">
@@ -71,10 +77,7 @@
 			<button onclick="commentWrite()">댓글작성</button>
 			<!-- 버튼을 누르면 안의 함수가 실행됨 -->
 		</div>
-		시작
-		<h3>${commentList}</h3>
-		${companycomentNum}
-		종료
+		
 		<div id="comment-list">
 			<table>
 				<tr>
@@ -85,7 +88,7 @@
 				</tr>
 				<c:forEach items="${commentList}" var="comment">
 					<tr>
-						<td>${companycomentNum}</td>
+						<td>${comment.companyCommentNum}</td>
 						<td>${comment.companyCommentWriter}</td>
 						<td>${comment.companyCommentContent}</td>
 						<td>${comment.companyCommentTime}</td>
@@ -93,6 +96,12 @@
 				</c:forEach>
 			</table>
 		</div>
+		
+		
+		<div class="footer">
+			<jsp:include page="/WEB-INF/views/main/main-footer.jsp" />
+		</div>
+		
 	</body>
 		<script>
 			//실행함수
@@ -145,6 +154,8 @@
 				});//end of ajax
 			}//end of script
 		</script>
+		
+		
 </html>
 
 

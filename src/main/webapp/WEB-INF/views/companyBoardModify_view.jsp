@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+	
+	<div class="header">
+				<jsp:include page="/WEB-INF/views/main/main-header.jsp" />
+			 </div>
+			 
+			 
 	<table width="500" border="1">
 		<form method="post" action="companyBoardModify">
 			<input type="hidden" name="companyCommunityBoardNum" value="${modify_view.companyCommunityBoardNum}">
@@ -47,11 +53,17 @@
 				<td colspan="2">
 					<input type="submit" value="수정">
 					&nbsp;&nbsp;<a href="companyBoardList">목록보기</a>
-<!--					
+				
 				</td>
 			</tr>
 		</form>
 	</table>
+	
+
+	<div class="footer">
+		<jsp:include page="/WEB-INF/views/main/main-footer.jsp" />
+	</div>
+	
 </body>
 </html>
 
