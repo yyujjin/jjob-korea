@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +15,11 @@
 
 </head>
 <body>
+
 	
 	
 				
+
 	<table width="500" border="1">
 		<form method="post" action="companyBoardModify_view">
 			<input type="hidden" name="companyCommunityBoardNum" value="${content_view.companyCommunityBoardNum}">
@@ -75,7 +79,9 @@
 			<button onclick="commentWrite()">댓글작성</button>
 			<!-- 버튼을 누르면 안의 함수가 실행됨 -->
 		</div>
+
 		
+
 		<div id="comment-list">
 			<table>
 				<tr>
@@ -94,10 +100,12 @@
 				</c:forEach>
 			</table>
 		</div>
+
 		
 		
 	
 		
+
 	</body>
 		<script>
 			//실행함수
@@ -150,8 +158,10 @@
 				});//end of ajax
 			}//end of script
 		</script>
+
 		
 		
+
 </html>
 
 

@@ -8,7 +8,9 @@
 			   values(#{companyCommentWriter},#{companyCommentContent},#{companyCommunityBoardNum})
     </insert>
     
+
     <select id="allFind" resultType="CompanyBoardCommentDTO">
+
         select companyCommentNum
 			 , companyCommentWriter
 			 , companyCommentContent

@@ -7,10 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	
 	
 			 
 			 
+
 	<table width="500" border="1">
 		<form method="post" action="companyBoardModify">
 			<input type="hidden" name="companyCommunityBoardNum" value="${modify_view.companyCommunityBoardNum}">
@@ -51,15 +53,19 @@
 				<td colspan="2">
 					<input type="submit" value="수정">
 					&nbsp;&nbsp;<a href="companyBoardList">목록보기</a>
+
 				
+
 				</td>
 			</tr>
 		</form>
 	</table>
+
 	
 
 
 	
+
 </body>
 </html>
 

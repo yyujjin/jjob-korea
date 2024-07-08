@@ -31,9 +31,11 @@ public class CompanyBoardCommentController {
 		service.save(param);
 		
 		// 해당 게시글에 작성된 댓글 리스트를 가져옴
+    
 		ArrayList<CompanyBoardCommentDTO> commentList = service.allFind(param);
 		
 		log.info("@### commentList =====>"+commentList);
+
 		return commentList;
 	}
 }

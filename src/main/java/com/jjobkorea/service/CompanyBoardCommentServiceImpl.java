@@ -25,11 +25,13 @@ public class CompanyBoardCommentServiceImpl implements CompanyBoardCommentServic
 	}
 
 	@Override
+
 	public ArrayList<CompanyBoardCommentDTO> allFind(HashMap<String, String> param) {
 		log.info("@# CompanyBoardCommentServiceImpl allFind");
 		
 		ArrayList<CompanyBoardCommentDTO> list = dao.allFind(param);
 		log.info("@#list ===> "+list);
+
 		
 		return list;
 	}
