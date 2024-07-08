@@ -37,7 +37,12 @@ public class CompanyCommunityBoardController {
 		ArrayList<CompanyCommunityBoardDTO> CompanyBoardList = service.companyBoardList();
 		model.addAttribute("list", CompanyBoardList);
 		
-		return "companyBoardList";
+		// "companyBoardList" 페이지 경로를 모델에 추가하여 뷰에서 사용할 수 있도록 함
+        String page = "companyBoardList";
+        model.addAttribute("page", page);
+
+     // 메인 페이지로 이동
+        return "main/main";
 	}
 	
 	

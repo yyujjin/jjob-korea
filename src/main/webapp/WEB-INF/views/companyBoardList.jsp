@@ -14,45 +14,22 @@
             display: flex;
             list-style: none;
         }
-        
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        .navbar {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-        
-        .container {
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            height: 100%;
-        }
-
-        .header, .content, .footer {
-            padding: 20px;
-            width: auto;
-            height: auto;
-        }
-        
+     
         .center-table {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 50vh; /* 예시를 위해 전체 높이를 100%로 설정 */
+			
         }
-
+	
         #searchForm {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 20vh; /* 예시를 위해 전체 높이를 100%로 설정 */
+			padding: 0 20px;
+          
         }
-
+		
         .div_page {
             display: flex;
             justify-content: center;
@@ -99,8 +76,6 @@
 </head>
 
 <body>
-  
-    <h1> 기업게시판 페이지 </h1>
     
     <div class="center-table">
         <table width="500" border="1" class="styled-table">
