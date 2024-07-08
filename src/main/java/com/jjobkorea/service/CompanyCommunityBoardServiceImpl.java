@@ -54,7 +54,9 @@ public class CompanyCommunityBoardServiceImpl implements CompanyCommunityBoardSe
 
 	@Override
 	public void companyBoardHit(HashMap<String, String> param) {
-		log.info("CompanyCommunityBoardNum 작동" );
+
+		log.info("@#@#@#@#CompanyCommunityBoardNum 작동" );
+
 		
 		dao.companyBoardHit(param);
 	}
