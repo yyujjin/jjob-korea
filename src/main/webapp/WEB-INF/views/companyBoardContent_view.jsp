@@ -71,7 +71,10 @@
 			<button onclick="commentWrite()">댓글작성</button>
 			<!-- 버튼을 누르면 안의 함수가 실행됨 -->
 		</div>
-
+		시작
+		<h3>${commentList}</h3>
+		${companycomentNum}
+		종료
 		<div id="comment-list">
 			<table>
 				<tr>
@@ -82,7 +85,7 @@
 				</tr>
 				<c:forEach items="${commentList}" var="comment">
 					<tr>
-						<td>${comment.companyCommentNum}</td>
+						<td>${companycomentNum}</td>
 						<td>${comment.companyCommentWriter}</td>
 						<td>${comment.companyCommentContent}</td>
 						<td>${comment.companyCommentTime}</td>

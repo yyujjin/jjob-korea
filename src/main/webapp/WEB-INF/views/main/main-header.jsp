@@ -33,7 +33,8 @@
 	               <a class="nav-link" href="/requestPage/jobSeekerBoard">구직자 게시판</a>
 	             </li>
 	             <li class="nav-item">
-	               <a class="nav-link" href="/requestPage/companyBoard">기업 게시판</a>
+	               <a class="nav-link" href="/companyBoardList">기업 게시판</a>
+<!--	               <a class="nav-link" href="/requestPage/companyBoard">기업 게시판</a> -->
 	             </li>
 	             <li class="nav-item">
 					<!--파라미터 넘기기-->
