@@ -102,7 +102,7 @@
                         <div class="text-end">
                             <ul class="nav">
                                 <li class="nav-item"><a href="/requestPage/login" class="nav-link link-body-emphasis px-2 text-secondary">로그인</a></li>
-                                <li class="nav-item"><a href="/requestPage/signUp" class="nav-link link-body-emphasis px-2 text-secondary">회원가입</a></li>
+                                <li class="nav-item"><a href="/requestPage/register" class="nav-link link-body-emphasis px-2 text-secondary">회원가입</a></li>
                               </ul>
                         </div>
                     </div>
