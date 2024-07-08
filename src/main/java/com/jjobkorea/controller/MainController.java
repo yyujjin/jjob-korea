@@ -19,6 +19,9 @@ public class MainController {
 
 	@Autowired
 	private JobPostingService jobPostingService;
+	
+	@Autowired
+	private MemController memController;
 
 	// 프로젝트 시작 페이지
 	@GetMapping(value = { "/", "/main" })
@@ -51,8 +54,10 @@ public class MainController {
 		log.info("요청 페이지 -> " + page);
 
 		switch (page) {
-		case "main":
+		case "main" :
 			return enterMainContent(model);
+		case "login" :
+			return memController.login(model);
 		}
 
 		return "main/main";
