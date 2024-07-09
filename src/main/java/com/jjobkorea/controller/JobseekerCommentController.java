@@ -28,10 +28,10 @@ public class JobseekerCommentController {
 		log.info("@# save");
 		log.info("@# param=>"+param);
 		
-		service.jobseekerSave(param);
+		service.save(param);
 		
 		// 해당 게시글에 작성된 댓글 리스트를 가져옴
-		ArrayList<JobseekerCommentDTO> jobseekerlistCommentList = service.jobseekerFindAll(param);
+		ArrayList<JobseekerCommentDTO> jobseekerlistCommentList = service.findAll(param);
 		return jobseekerlistCommentList;
 	}
 }
