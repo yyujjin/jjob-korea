@@ -1,7 +1,7 @@
 package com.jjobkorea.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.jjobkorea.entity.SignupCp;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SignupCpRepository extends JpaRepository<SignupCp, Long> {
+public interface SignupCpRepository extends JpaRepository<SignupCp, Integer> {
 }
