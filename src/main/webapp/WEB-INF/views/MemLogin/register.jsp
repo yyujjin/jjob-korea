@@ -6,12 +6,23 @@
 <meta charset="UTF-8">
 <title>회원가입 양식</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
+    body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
     }
-    .head-guide{font-size: 12px; float: right; list-style: none; margin-right: 10px; }  ************
-    .tab-container { width: 600px; margin: 40px auto; border: 1px solid black; overflow: hidden;
-    }
+    .head-guide {
+    font-size: 12px;
+    float: right;
+    list-style: none;
+    margin-right: 10px;
+}
+    .tab-container {
+    margin: 30px auto;
+    border: 1px solid black;
+    overflow: hidden;
+}
     .tabs { display: flex; cursor: pointer;
     }
     .tab { flex: 1; padding: 15px 20px; text-align: center; background-color: #f1f1f1; border-bottom: 2px solid transparent;
@@ -19,8 +30,11 @@
     .tab.active { background-color: #007bff; color: white; border-bottom: 2px solid #007bff;
     }
 
-    .container {max-width: 600px; margin: auto; padding: 20px;
-        background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    max-width: 100%;
     }
 
     h1 {text-align: center; margin-bottom: 20px;
@@ -40,9 +54,12 @@
     } #birth{ width: 75%; padding: 10px; margin-left: -1px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
     }
 
-    .contactPerson { max-width: 600px; margin: 10px; padding: 20px;
-        background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+    .contactPerson {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
     .radio-Box{
         padding: 0px 10px; 
     }
@@ -66,7 +83,7 @@
     }
 
     button[type="submit"] { background-color: #0057ff; color: white; padding: 10px 20px;
-        margin: 10px auto; border: none; border-radius: 4px; cursor: pointer; width: 100%;
+        margin: 10px auto; border: none; border-radius: 4px; cursor: pointer; width: 100%;height: 60px;
     }
 
     button[type="submit"]:hover { background-color: #0057ff;
@@ -80,17 +97,14 @@
         border-radius: 4px;
         box-sizing: border-box;
         appearance: none;
-        background: url('data:image/svg+xml;utf8,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
-        background-size: 12px;
+        background: url('data:image/svg+xml;utf8,<svg fill="%23007bff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+        background-size: 30px;
+        
     }
     
     /* 약관동의 */
     * { margin:  auto; padding: 0; box-sizing: border-box;
     }
-
-    body { max-width: 600px; background-color: #f7f7f7;
-    }
-
     ul>li { list-style: none;
     }
 
@@ -100,14 +114,11 @@
     .clearfix::after { content: ""; display: block; clear: both;
     }
 
-    #joinForm { width: 600px; margin: 0 auto;
-    }
-
     ul.join_box { border: 1px solid #ddd; background-color: #fff;
     }
 
     .checkBox,
-    .checkBox>ul { position: relative;
+    .checkBox>ul { position: relative; margin: 0 auto;
     }
 
     .checkBox>ul>li {
@@ -120,21 +131,15 @@
     .checkBox>ul>li:nth-child(2) { position: absolute; top: 50%; right: 30px; margin-top: -12px;
     }
 
-    .footBtwap { margin-top: 15px;
-    }
-
-    .footBtwap>li { float: center; width: 100%; height: 50px;
-    }
-
-    .footBtwap>li>button { display: block; background-color: #0057ff; color: #fff;
-        width: 100%; height: 60%; font-size: 15px; text-align: center; line-height: 1px;
-    }
 
     hr { display: flex; margin: 0 auto; width: 90%;
     }
 
-    #chk.all { width: 20px; height: 20px; background-color: #888;
-    }
+    #chk.all {
+    width: 20px;
+    height: 20px;
+    background-color: #888;
+}
 
    
 </style>
@@ -369,7 +374,7 @@
                         필수동의 항목 및 개인정보 수집 및 이용 동의(선택), 광고성 정보 수신
                         (선택)에 모두 동의합니다.</span></li>
                         <li class="checkA11btn">
-                            <input type="checkbox" name="chk" id="chkEnterprise" class="all">
+                            <input type="checkbox" name="chk" id="chk" class="all">
                         </li>
                     </ul>
                 </li>

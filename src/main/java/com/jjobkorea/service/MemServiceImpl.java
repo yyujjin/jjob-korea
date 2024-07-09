@@ -18,13 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 public class MemServiceImpl implements MemService {
     @Autowired
     private SqlSession sqlSession;
-//    private MemMapper memmapper;
 
     @Override
     public ArrayList<MemDTO> loginYn(HashMap<String, String> param) {
         log.info("@# MemServiceImpl loginYn");
         MemMapper dao = sqlSession.getMapper(MemMapper.class);
-//        MemMapper dao = memmapper.getMapper(MemMapper.class);
         return dao.loginYn(param);
     }
 
@@ -32,11 +30,10 @@ public class MemServiceImpl implements MemService {
     @Transactional
     public void write(HashMap<String, String> param) {
         log.info("@# MemServiceImpl write");
-        log.info("Parameters in service: " + param); // 서비스 계층에서 파라미터 로그 출력
+        log.info("Parameters in service: " + param);
 
         MemMapper dao = sqlSession.getMapper(MemMapper.class);
 
-        // 기업회원 등록번호 중복 체크
         if (param.get("companyType") != null && !param.get("companyType").isEmpty()) {
             int count = dao.checkCpRegistrationNum(param.get("companyRegistrationNum"));
             if (count > 0) {
