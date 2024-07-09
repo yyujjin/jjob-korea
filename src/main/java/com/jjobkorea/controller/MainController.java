@@ -24,8 +24,6 @@ public class MainController {
 	@Autowired
 	private MemController memController;
 	
-	@Autowired
-	private CompanyCommunityBoardController companyCommunityBoardController;
 	
 	//기업 게시판 컨트롤러
 
@@ -69,9 +67,6 @@ public class MainController {
 		// 회원가입 페이지
 		case "register":
 			return memController.register(model);
-		// 기업 게시판 페이지
-		case "companyBoard":
-			return companyCommunityBoardController.list(model);
 
 		}
 		return "main/main";
