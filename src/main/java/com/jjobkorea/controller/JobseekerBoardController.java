@@ -43,7 +43,12 @@ public class JobseekerBoardController {
 		ArrayList<JobseekerBoardDTO> jobseekerlist = service.jobseekerBoardList();
 		model.addAttribute("list", jobseekerlist);
 		
-		return "jobseekerBoardList";
+		// "jobseekerBoardList" 페이지 경로를 모델에 추가하여 뷰에서 사용할 수 있도록 함
+		String page = "jobseekerBoardList";
+		model.addAttribute("page",page);
+		
+		//메인 페이지로 이동
+		return "main/main";
 	}
 	
 	@RequestMapping("/jobseekerWrite")

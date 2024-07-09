@@ -28,6 +28,10 @@ public class MainController {
 	@Autowired
 	private JobPostingController jobPostingController;
 
+	// 구직자 게시판 컨트롤러
+	@Autowired
+	private JobseekerBoardController jobseekerBoardController;
+
 	// 프로젝트 시작 페이지
 	@GetMapping(value = { "/", "/main" })
 	public String enterMain(Model model) {
@@ -59,19 +63,21 @@ public class MainController {
 		log.info("요청 페이지 -> " + page);
 
 		switch (page) {
-		// 메인 페이지
+		// 메인 페이지 진입
 		case "main":
 			return enterMainContent(model);
-		// 로그인 페이지
+		// 로그인 페이지 진입
 		case "login":
 			return memController.login(model);
-		// 회원가입 페이지
+		// 회원가입 페이지 진입
 		case "register":
 			return memController.register(model);
-		// 채용 정보 페이지
+		// 채용 정보 페이지 진입
 		case "jobPosting":
 			return jobPostingController.enterJobPosting(model);
-
+		// 구직자 게시판 페이지 진입
+		case "jobseekerBoard":
+			return jobseekerBoardController.list(model);
 		}
 		return "main/main";
 	}
