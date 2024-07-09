@@ -7,6 +7,11 @@
 		, companyName
 		, postingImage
 		, postingTitle
+		, jobTitle
+		, workLocation
+		, employmentType
+		, jobExperience
+		, deadline
 		, hit
 	</sql>
 

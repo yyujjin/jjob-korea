@@ -2,6 +2,8 @@
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,38 +24,23 @@ prefix="c"%>
     </head>
     <body>
         <h1>채용 정보 리스트</h1>
+		
+		<c:forEach items="${postingList}" var="postingList" >
+		
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-body-secondary">3 days ago</small>
+                    <h5 class="mb-1"><c:out value='${postingList.postingTitle}'/></h5>
+                    <small class="text-body-secondary"><c:out value='${postingList.deadline}'/></small>
                 </div>
                
                 <small class="text-body-secondary"
-                    >And some muted small print.</small
-                >
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-body-secondary">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-body-secondary"
-                    >And some muted small print.</small
-                >
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-body-secondary">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-body-secondary"
-                    >And some muted small print.</small
+                    ><c:out value='${postingList.postingTitle}'/></small
                 >
             </a>
         </div>
+		</c:forEach>
+		
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
