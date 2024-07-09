@@ -21,6 +21,18 @@ prefix="c"%>
             href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css"
             rel="stylesheet"
         />
+		
+		<style>
+			.job-detail {
+			    /* 개별 항목 거리 조정  */
+			    padding: 3px;
+			}
+			.postingTitle{
+				font-family: "NanumBarunGothic";
+				font-size: 18px;
+			}
+		</style>
+		
     </head>
     <body>
         <h1>채용 정보 리스트</h1>
@@ -30,12 +42,20 @@ prefix="c"%>
         <div class="list-group">
             <a href="" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"><c:out value='${postingList.postingTitle}'/></h5>
+                    <h5 class="mb-1 postingTitle"><c:out value='${postingList.postingTitle}'/></h5>
                     <small class="text-body-secondary"><c:out value='${postingList.deadline}'/></small>
                 </div>
                
-                <small class="text-body-secondary"
-                    ><c:out value='${postingList.postingTitle}'/></small
+                <small class="text-body-secondary ">
+					<!--경력 여부-->
+					<span class="job-detail"><c:out value='${postingList.jobExperience}'/></span>
+					<!--직무-->
+					<span class="job-detail"><c:out value='${postingList.jobTitle}'/></span>
+					<!--근무 지역-->
+					<span class="job-detail"><c:out value='${postingList.workLocation}'/></span>
+					<!--고용 형태-->
+					<span class="job-detail"><c:out value='${postingList.employmentType}'/></span>
+				</small
                 >
             </a>
         </div>
