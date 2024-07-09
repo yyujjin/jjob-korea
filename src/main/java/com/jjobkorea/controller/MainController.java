@@ -17,15 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MainController {
 
-	@Autowired
-	private JobPostingService jobPostingService;
-
 	// 로그인, 회원가입 컨트롤러
 	@Autowired
 	private MemController memController;
 	
 	@Autowired
-	private CompanyCommunityBoardController companyCommunityBoardController;
+	private JobPostingService jobPostingService;;
+	
 	
 	//기업 게시판 컨트롤러
 
@@ -44,7 +42,7 @@ public class MainController {
 	public String enterMainContent(Model model) {
 		log.info("메인 페이지 컨텐츠");
 
-		List<JobPostingDTO> postingList = jobPostingService.getPostingList();
+		List<JobPostingDTO>postingList = jobPostingService.getPostingList();
 		model.addAttribute("postingList", postingList);
 		String page = "main/main-content";
 
@@ -69,9 +67,6 @@ public class MainController {
 		// 회원가입 페이지
 		case "register":
 			return memController.register(model);
-		// 기업 게시판 페이지
-		case "companyBoard":
-			return companyCommunityBoardController.list(model);
 
 		}
 		return "main/main";
