@@ -78,7 +78,8 @@
                                 >
                             </li>
                             <li>
-                                <a href="/requestPage/jobSeekerBoard" class="nav-link px-4 text-dark"
+								<!--구직자 게시판-->
+                                <a href="/requestPage/jobseekerBoard" class="nav-link px-4 text-dark"
                                     >취업 톡톡
                                 </a>
                             </li>
