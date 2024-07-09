@@ -59,13 +59,13 @@ pageEncoding="UTF-8"%>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-white">
                             <li>
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">프론트엔드</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">백엔드</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#">풀스택</a>
                             </li>
                         </ul>
                     </li>
@@ -79,13 +79,28 @@ pageEncoding="UTF-8"%>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-white">
                             <li>
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">서울특별시</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">부산광역시</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#">대구광역시</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">인천광역시</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">광주광역시</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">대전광역시</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">울산광역시</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">세종특별자치시</a>
                             </li>
                         </ul>
                     </li>
@@ -99,13 +114,13 @@ pageEncoding="UTF-8"%>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-white">
                             <li>
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">대기업</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">중·소기업</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#">스타트업</a>
                             </li>
                         </ul>
                     </li>
@@ -119,13 +134,13 @@ pageEncoding="UTF-8"%>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-white">
                             <li>
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">정규직</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">계약직</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#">인턴</a>
                             </li>
                         </ul>
                     </li>
