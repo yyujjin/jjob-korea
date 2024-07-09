@@ -4,15 +4,17 @@
 
 <mapper namespace="com.jjobkorea.mapper.MemMapper">
     <!-- 로그인 -->
-    <select id="loginYn" resultType="MemDTO">
-        SELECT 
-        tb.memPwd, 
+ <select id="loginYn" resultType="com.jjobkorea.dto.MemDTO">
+    SELECT 
+        tb.memId,
+        tb.memPwd,
+        tb.memName,
         tb.cpId,
-        cp.companyType, 
-        cp.companyRegistrationNum, 
+        cp.companyType,
+        cp.companyRegistrationNum,
         cp.companyRepresentativeName,
-        cp.companyName, 
-        cp.companyAddr, 
+        cp.companyName,
+        cp.companyAddr,
         cp.companyBusinessRegistration AS companyBusinessRegistrationNum
     FROM 
         signup_tb tb 
@@ -22,7 +24,8 @@
         tb.cpId = cp.id 
     WHERE 
         tb.memId = #{memId}
-    </select>
+</select>
+
 
     <!-- 회원 등록 -->
     <insert id="write" parameterType="map">

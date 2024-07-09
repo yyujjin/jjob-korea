@@ -76,7 +76,7 @@
         </div>
     </div>
     <div id="loginForm">
-        <form id="individualForm" method="post" action="login_yn">
+        <form id="individualForm" method="post" action="/login_yn">
             <input type="hidden" name="loginType" value="individual">
             <div class="input-container">
                 <input type="text" name="memId" placeholder="아이디" required>
@@ -88,7 +88,7 @@
             <span class="register-link" data-type="individual">회원가입</span>
         </form>
 
-        <form id="companyForm" method="post" action="login_yn" style="display: none;">
+        <form id="companyForm" method="post" action="/login_yn" style="display: none;">
             <input type="hidden" name="loginType" value="enterprise">
             <div class="input-container">
                 <input type="text" name="memId" placeholder="기업회원아이디" required>
