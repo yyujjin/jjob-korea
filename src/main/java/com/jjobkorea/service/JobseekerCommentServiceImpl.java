@@ -20,7 +20,7 @@ public class JobseekerCommentServiceImpl implements JobseekerCommentService{
 	private SqlSession sqlSession;
 
 	@Override
-	public void jobseekerSave(HashMap<String, String> param) {
+	public void save(HashMap<String, String> param) {
 		log.info("@# CommentServiceImpl save");
 		
 		JobseekerCommentMapper dao = sqlSession.getMapper(JobseekerCommentMapper.class);
@@ -28,7 +28,7 @@ public class JobseekerCommentServiceImpl implements JobseekerCommentService{
 	}
 
 	@Override
-	public ArrayList<JobseekerCommentDTO> jobseekerFindAll(HashMap<String, String> param) {
+	public ArrayList<JobseekerCommentDTO> findAll(HashMap<String, String> param) {
 		log.info("@# CommentServiceImpl findAll");
 		
 		JobseekerCommentMapper dao = sqlSession.getMapper(JobseekerCommentMapper.class);

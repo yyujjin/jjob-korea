@@ -29,7 +29,7 @@ import com.jjobkorea.dto.JobseekerBoardAttachDTO;
 import com.jjobkorea.service.JobseekerUploadService;
 
 import lombok.extern.slf4j.Slf4j;
-// import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Slf4j
@@ -96,7 +96,7 @@ public class JobseekerUploadController {
 					FileOutputStream thumnail = new FileOutputStream(new File(uploadPath, "s_"+uploadFileName));
 					
 //					썸네일 파일 형식을 100/100 크기로 생성
-					// Thumbnailator.createThumbnail(fis, thumnail, 100, 100);
+					Thumbnailator.createThumbnail(fis, thumnail, 100, 100);
 					
 					thumnail.close();
 				}
@@ -153,7 +153,7 @@ public class JobseekerUploadController {
 	
 //	이미지파일을 받아서 화면에 출력(byte 배열타입)
 	@GetMapping("/display")
-	public ResponseEntity<byte[]> getFile(String fileName) {
+	public ResponseEntity<byte[]> getFile(@RequestParam(name = "fileName") String fileName) {
 		log.info("@# display fileName=>"+fileName);
 		
 //		업로드 파일경로+이름
@@ -176,7 +176,7 @@ public class JobseekerUploadController {
 	}
 	
 	@PostMapping("/deleteFile")
-	public ResponseEntity<String> deleteFile(String fileName, String type) {
+	public ResponseEntity<String> deleteFile(@RequestParam("fileName") String fileName, @RequestParam("type") String type) {
 		log.info("@# deleteFile fileName=>"+fileName);
 		File file;
 		

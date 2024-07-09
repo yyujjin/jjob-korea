@@ -67,39 +67,37 @@
 
 	<h3>${pageMaker}</h3>
 	<div class="div_page">
-		<ul>
-			<c:if test="${pageMaker.prev}">
-				<!-- <li>[Previous]</li> -->
-				<li class="paginate_button">
-					<a href="${pageMaker.startpage - 1}">
-						[Previous]
-					</a>
-				</li>
-			</c:if>
-			<c:forEach var="num" begin="${pageMaker.startpage}" end="${pageMaker.endpage}">
-				<!-- <li>[${num}]</li> -->
-				<!-- <li ${pageMaker.cri.pageNum == num ? "style='color: red'" : ""}> -->
-					<!-- 				현재 페이지는 배경색 노란색으로 표시 -->
-				<li class="paginate_button" ${pageMaker.cri.pageNum == num ? "style='background-color: yellow'" : ""}>
-					<!-- [${num}] -->
-					<a href="${num}">
-						[${num}]
-					</a>
-				</li>
-			</c:forEach>
-			<c:if test="${pageMaker.next}">
-				<!-- <li>[Next]</li> -->
-				<li class="paginate_button">
-					<a href="${pageMaker.endpage + 1}">
-						[Next]
-					</a>
-				</li>
-			</c:if>
-		</ul>
-	</div>
+			<ul>
+				<c:if test="${pageMaker.prev}">
+					<!-- <li>[Previous]</li> -->
+					<li class="paginate_button">
+						<a href="${pageMaker.startpage - 1}">
+							[Previous]
+						</a>
+					</li>
+				</c:if>
+				<c:forEach var="num" begin="${pageMaker.startpage}" end="${pageMaker.endpage}">
+					<!-- <li>[${num}]</li> -->
+					<!-- <li ${pageMaker.cri.pageNum == num ? "style='color: red'" : ""}> -->
+						<!-- 				현재 페이지는 배경색 노란색으로 표시 -->
+					<li class="paginate_button" ${pageMaker.cri.pageNum == num ? "style='background-color: yellow'" : ""}>
+						<!-- [${num}] -->
+						<a href="${num}">
+							[${num}]
+						</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageMaker.next}">
+					<!-- <li>[Next]</li> -->
+					<li class="paginate_button">
+						<a href="${pageMaker.endpage + 1}">
+							[Next]
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
 
-	<!-- <form id="actionForm" method="get" action="listWithPaging"> -->
-	<!-- <form id="actionForm" method="get" action="list"> -->
 	<form id="actionForm" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
@@ -129,7 +127,7 @@
 
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		// actionForm.submit();
-		actionForm.attr("action","list").submit();
+		actionForm.attr("action","jobseekerBoardList").submit();
 	});//end of paginate_button clcik
 
 	// 	게시글 처리
@@ -170,7 +168,7 @@
 			alert("키워드를 입력하세요.");
 			return false;
 		}
-		searchForm.attr("action","list").submit();
+		searchForm.attr("action","jobseekerBoardList").submit();
 	});//end of searchForm click
 
 	// 	type 콤보박스 변경
@@ -182,7 +180,6 @@
 		}
 	});//end of searchForm select change
 </script>
-
 
 
 
