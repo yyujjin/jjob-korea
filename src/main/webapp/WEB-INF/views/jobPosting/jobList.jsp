@@ -28,7 +28,7 @@ prefix="c"%>
                     <h5 class="mb-1">List group item heading</h5>
                     <small class="text-body-secondary">3 days ago</small>
                 </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
+               
                 <small class="text-body-secondary"
                     >And some muted small print.</small
                 >
