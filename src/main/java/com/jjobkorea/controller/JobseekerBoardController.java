@@ -36,12 +36,12 @@ public class JobseekerBoardController {
 	private JobseekerUploadService uploadService;
 	
 //	@RequestMapping("/list")
-	@RequestMapping("/jobseekerBoardList")
+	@RequestMapping("/jobseekerBoardList_old")
 	public String list(Model model) {
 		log.info("@# list");
 		
-		ArrayList<JobseekerBoardDTO> jobseekerlist = service.jobseekerBoardList();
-		model.addAttribute("list", jobseekerlist);
+		ArrayList<JobseekerBoardDTO> list = service.jobseekerBoardList();
+		model.addAttribute("list", list);
 		
 		return "jobseekerBoardList";
 	}
@@ -80,7 +80,7 @@ public class JobseekerBoardController {
 		model.addAttribute("pageMaker", param);
 		
 		// 해당 게시글에 작성된 댓글 리스트를 가져옴
-		ArrayList<JobseekerCommentDTO> commentList = commentService.jobseekerFindAll(param);
+		ArrayList<JobseekerCommentDTO> commentList = commentService.findAll(param);
 		model.addAttribute("commentList", commentList);
 		
 		int jobseekerCommunityBoardNum = Integer.parseInt(param.get("jobseekerCommunityBoardNum"));

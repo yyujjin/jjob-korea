@@ -31,20 +31,19 @@ public class JobseekerPageController {
 	private JobseekerPageService service;
 	
 //	@RequestMapping("/listWithPaging")
-	@RequestMapping("/jobseekerList")
+	@RequestMapping("/jobseekerBoardList")
 	public String listWithPaging(JobseekerCriteria cri, Model model) {
 		log.info("@# list");
 		log.info("@# cri=>"+cri);
 		
 		ArrayList<JobseekerBoardDTO> list = service.listWithPaging(cri);
-//		int total = service.getTotalCount();
 		int total = service.getTotalCount(cri);
 		log.info("@# total=>"+total);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new JobseekerPageDTO(total, cri));
 		
-		return "jobseekerList";
+		return "jobseekerBoardList";
 	}
 	
 }
