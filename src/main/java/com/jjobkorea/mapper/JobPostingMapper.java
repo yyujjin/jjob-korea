@@ -9,7 +9,7 @@ import com.jjobkorea.dto.JobPostingDTO;
 @Mapper
 public interface JobPostingMapper {
 	
+	//채용 정보 리스트 가져오기
 	public List<JobPostingDTO> getPostingList();
-	
 	
 }

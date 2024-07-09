@@ -73,6 +73,7 @@
                     <ul
                         class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-start mb-md-0 navigation"
                     >
+
                         <li>
                             <a href="/requestPage/jobPosting" class="nav-link px-4 text-dark"
                                 >채용 정보</a
@@ -94,6 +95,7 @@
                             >
                         </li>
                     </ul>
+
 
                     <div class="text-end">
                         <ul class="nav">
