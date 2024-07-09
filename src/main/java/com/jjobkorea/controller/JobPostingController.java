@@ -39,6 +39,7 @@ public class JobPostingController {
 
 		// 채용 정보 서비스단 연결
 		List<JobPostingDTO> postingList = jobPostingService.getPostingList();
+		log.info("채용 정보 리스트 :{} ", postingList.getFirst());
 		model.addAttribute("postingList", postingList);
 
 		return "jobPosting/jobList";

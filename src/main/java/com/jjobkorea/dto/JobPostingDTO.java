@@ -1,5 +1,6 @@
 package com.jjobkorea.dto;
 
+import java.sql.Date;
 import java.sql.Time;
 
 import lombok.Data;
@@ -23,7 +24,7 @@ public class JobPostingDTO {
 	//경력 여부
 	private String jobExperience;
 	//채용 마감 날짜
-	private Time deadline;
+	private Date deadline;
 	//조회수
 	private int hit;
 }
