@@ -21,6 +21,10 @@
 			font-family: "NanumBarunGothicBold";
 			font-size: 25px;
 		}
+		.card-title {
+			font-family: "NanumBarunGothic";
+			font-size: 25px;
+		}
 		#hot{
 			color:#dd0000;
 		}
