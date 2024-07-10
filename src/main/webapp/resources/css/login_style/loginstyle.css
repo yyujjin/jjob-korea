@@ -1,0 +1,135 @@
+  /* 0 */
+    body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    }
+    .head-guide {
+    font-size: 12px;
+    float: right;
+    list-style: none;
+    margin-right: 10px;
+}
+    .tab-container {
+    margin: 30px auto;
+    border: 1px solid black;
+    overflow: hidden;
+}
+    .tabs { display: flex; cursor: pointer;
+    }
+    .tab { flex: 1; padding: 15px 20px; text-align: center; background-color: #f1f1f1; border-bottom: 2px solid transparent;
+    }
+    .tab.active { background-color: #007bff; color: white; border-bottom: 2px solid #007bff;
+    }
+
+    .container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    max-width: 100%;
+    }
+
+    h1 {text-align: center; margin-bottom: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: left; 
+        margin-bottom: 20px;
+    }
+
+    label { display: block; font-weight: bold; margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+    } #birth{ width: 75%; padding: 10px; margin-left: -1px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+    }
+
+    .contactPerson {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+    .radio-Box{
+        padding: 0px 10px; 
+    }
+    .radio-Box input[type=radio]{
+        display: none;
+    }
+    .radio-Box input[type=radio]+label{
+        border-radius: 4px;
+        box-sizing: border-box;
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+        font-size: 12px;
+
+    }
+    .radio-Box input[type=radio]:checked+label{
+        background-color: white;
+        border-color: black;
+    }
+
+    button[type="submit"] { background-color: #0057ff; color: white; padding: 10px 20px;
+        margin: 10px auto; border: none; border-radius: 4px; cursor: pointer; width: 100%;height: 60px;
+    }
+
+    button[type="submit"]:hover { background-color: #0057ff;
+    }
+    .cpinfo{margin: 0 0 10px; padding:10px 0 0;float: left;}
+
+    select{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        appearance: none;
+        background: url('data:image/svg+xml;utf8,<svg fill="%23007bff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+        background-size: 30px;
+        
+    }
+    
+    /* 약관동의 */
+    * { margin:  auto; padding: 0; box-sizing: border-box;
+    }
+    ul>li { list-style: none;
+    }
+
+    a { text-decoration: none;
+    }
+
+    .clearfix::after { content: ""; display: block; clear: both;
+    }
+
+    ul.join_box { border: 1px solid #ddd; background-color: #fff;
+    }
+
+    .checkBox,
+    .checkBox>ul { position: relative; margin: 0 auto;
+    }
+
+    .checkBox>ul>li {
+        float: left;
+    }
+
+    .checkBox>ul>li:first-child { width: 85%; padding: 15px; font-weight: 600; color: #888;
+    }
+
+    .checkBox>ul>li:nth-child(2) { position: absolute; top: 50%; right: 30px; margin-top: -12px;
+    }
+
+
+    hr { display: flex; margin: 0 auto; width: 90%;
+    }
+
+    #chk.all {
+    width: 20px;
+    height: 20px;
+    background-color: #888;
+}

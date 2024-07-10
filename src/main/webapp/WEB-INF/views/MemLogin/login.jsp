@@ -133,6 +133,11 @@
                     }
                 });
             });
+             // 로그인 실패 시 메시지 출력
+             const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('error')) {
+                alert('아이디 또는 비밀번호가 일치하지 않습니다. 다시 확인 후 입력해주시기 바랍니다.');
+            }
         });
     </script>
 </body>

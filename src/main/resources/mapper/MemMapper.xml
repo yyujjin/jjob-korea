@@ -4,28 +4,27 @@
 
 <mapper namespace="com.jjobkorea.mapper.MemMapper">
     <!-- 로그인 -->
- <select id="loginYn" resultType="com.jjobkorea.dto.MemDTO">
-    SELECT 
-        tb.memId,
-        tb.memPwd,
-        tb.memName,
-        tb.cpId,
-        cp.companyType,
-        cp.companyRegistrationNum,
-        cp.companyRepresentativeName,
-        cp.companyName,
-        cp.companyAddr,
-        cp.companyBusinessRegistration AS companyBusinessRegistrationNum
-    FROM 
-        signup_tb tb 
-    LEFT JOIN 
-        signup_cp cp 
-    ON 
-        tb.cpId = cp.id 
-    WHERE 
-        tb.memId = #{memId}
-</select>
-
+    <select id="loginYn" resultType="com.jjobkorea.dto.MemDTO">
+        SELECT 
+            tb.memId,
+            tb.memPwd,
+            tb.memName,
+            tb.cpId,
+            cp.companyType,
+            cp.companyRegistrationNum,
+            cp.companyRepresentativeName,
+            cp.companyName,
+            cp.companyAddr,
+            cp.companyBusinessRegistration AS companyBusinessRegistrationNum
+        FROM 
+            signup_tb tb 
+        LEFT JOIN 
+            signup_cp cp 
+        ON 
+            tb.cpId = cp.id 
+        WHERE 
+            tb.memId = #{memId}
+    </select>
 
     <!-- 회원 등록 -->
     <insert id="write" parameterType="map">
@@ -38,7 +37,7 @@
             INSERT INTO signup_cp (
                 id, companyType, companyRegistrationNum, companyName, companyRepresentativeName, companyAddr, companyBusinessRegistrationNum
             ) VALUES (
-                #{cpId}, #{companyType}, #{companyRegistrationNum}, #{companyName}, #{companyAddr}, #{companyBusinessRegistrationNum}
+                #{cpId}, #{companyType}, #{companyRegistrationNum}, #{companyName}, #{companyRepresentativeName}, #{companyAddr}, #{companyBusinessRegistrationNum}
             );
         </if>
 
@@ -73,7 +72,7 @@
             cp.companyType, 
             cp.companyRegistrationNum, 
             cp.companyName, 
-            cp.companyRepresentativeName
+            cp.companyRepresentativeName,
             cp.companyAddr, 
             cp.companyBusinessRegistrationNum
         FROM 

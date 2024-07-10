@@ -28,6 +28,7 @@ pageEncoding="UTF-8"%>
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     />
+	<script src="../../resources/js/jobPosting/searchFilter.js" defer></script> <!--js연결-->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -57,15 +58,15 @@ pageEncoding="UTF-8"%>
                         >
                             직무
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-white">
+                        <ul class="dropdown-menu dropdown-menu-white job-title">
                             <li>
-                                <a class="dropdown-item" href="#">프론트엔드</a>
+                               프론트엔드
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">백엔드</a>
+                                백엔드
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">풀스택</a>
+                               풀스택
                             </li>
                         </ul>
                     </li>
@@ -77,30 +78,30 @@ pageEncoding="UTF-8"%>
                         >
                             근무지역
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-white">
+                        <ul class="dropdown-menu dropdown-menu-white work-location">
                             <li>
-                                <a class="dropdown-item" href="#">서울특별시</a>
+                                서울특별시
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">부산광역시</a>
+                                부산광역시
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">대구광역시</a>
+                                대구광역시
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">인천광역시</a>
+                                인천광역시
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">광주광역시</a>
+                                광주광역시
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">대전광역시</a>
+                                대전광역시
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">울산광역시</a>
+                               울산광역시
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">세종특별자치시</a>
+                                세종특별자치시
                             </li>
                         </ul>
                     </li>
@@ -114,13 +115,13 @@ pageEncoding="UTF-8"%>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-white">
                             <li>
-                                <a class="dropdown-item" href="#">대기업</a>
+                               대기업
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">중·소기업</a>
+                                중·소기업
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">스타트업</a>
+                                스타트업
                             </li>
                         </ul>
                     </li>
@@ -132,15 +133,15 @@ pageEncoding="UTF-8"%>
                         >
                             고용형태
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-white">
+                        <ul class="dropdown-menu dropdown-menu-white employment-type">
                             <li>
-                                <a class="dropdown-item" href="#">정규직</a>
+                               정규직
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">계약직</a>
+                                계약직
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">인턴</a>
+                                인턴
                             </li>
                         </ul>
                     </li>
