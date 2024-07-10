@@ -34,7 +34,9 @@ public class MainController {
 	@Autowired
 	private JobseekerPageController jobseekerPageController;
 	
-	
+	//공고 등록 페이지
+	@Autowired
+	private JobPostingDetailController jobPostingDetailController;
 
 	// 프로젝트 시작 페이지
 	@GetMapping(value = { "/", "/main" })
@@ -83,6 +85,9 @@ public class MainController {
 		// 구직자 게시판 페이지 진입
 		case "jobseekerBoard":
 			return jobseekerPageController.listWithPaging(cri, model);
+		//공고 등록 페이지 진입
+		case "jobPostingResister":
+			return jobPostingDetailController.addJobPostingForm(model);
 		}
 		return "main/main";
 	}
