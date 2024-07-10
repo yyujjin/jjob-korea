@@ -44,7 +44,7 @@ prefix="c"%>
                     <h5 class="mb-1 postingTitle"><c:out value='${postingList.postingTitle}'/></h5>
                     <small class="text-body-secondary">
 						<c:choose>
-					          <c:when test="${postingList.countdownDays != null}">
+					          <c:when test="${postingList.countdownDays != null && postingList.countdownDays !=0}">
 									 <c:out value="D-${postingList.countdownDays}"/>
 					          </c:when>
 					          <c:otherwise>
