@@ -21,10 +21,15 @@ public class JobPostingDetailController {
         return "job-posting-list";
     }
 
+    //진입 페이지
     @GetMapping("/addJobPosting")
     public String addJobPostingForm(Model model) {
         model.addAttribute("jobPostingDetail", new JobPostingDetail());
-        return "add-job-posting";
+        
+        //메인 페이지로 연결
+        String page = "addJobPosting";
+        model.addAttribute("page",page);
+        return "main/main";
     }
 
     @PostMapping("/jobPostingDetail")
