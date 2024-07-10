@@ -29,7 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 public class JobseekerPageController {
 	@Autowired
 	private JobseekerPageService service;
+		
 	
+	//이 페이지가 연결됨 
 //	@RequestMapping("/listWithPaging")
 	@RequestMapping("/jobseekerBoardList")
 	public String listWithPaging(JobseekerCriteria cri, Model model) {
@@ -40,6 +42,7 @@ public class JobseekerPageController {
 		int total = service.getTotalCount(cri);
 		log.info("@# total=>"+total);
 		
+		//메인페이지로 연결 
 		String page = "jobseekerBoardList";
 		model.addAttribute("page", page);
 		

@@ -35,6 +35,7 @@ public class JobseekerBoardController {
 	@Autowired
 	private JobseekerUploadService uploadService;
 	
+//이 메서드의 기능은 뭘까?
 //	@RequestMapping("/list")
 	@RequestMapping("/jobseekerBoardList_old")
 	public String list(Model model) {
@@ -42,12 +43,8 @@ public class JobseekerBoardController {
 		
 		ArrayList<JobseekerBoardDTO> list = service.jobseekerBoardList();
 		model.addAttribute("list", list);
-		
-		String page = "jobseekerBoardList";
-		model.addAttribute("page", page);
-		
-		
-		return "main/main";
+
+		return "jobseekerBoardList";
 	}
 	
 	@RequestMapping("/jobseekerWrite")
