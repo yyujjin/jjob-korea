@@ -42,8 +42,8 @@ public class JobseekerBoardController {
 		
 		ArrayList<JobseekerBoardDTO> list = service.jobseekerBoardList();
 		model.addAttribute("list", list);
-		
-		return "jobseekerBoardList";
+				
+		return "main/main";
 	}
 	
 	@RequestMapping("/jobseekerWrite")

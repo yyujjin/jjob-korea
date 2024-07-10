@@ -72,8 +72,8 @@
 					<input type="submit" value="수정">
 					<!-- &nbsp;&nbsp;<a href="list">목록보기</a> -->
 					 <!-- formaction="list" : name 으로 설정된 값들을 가지고 이동 -->
-					&nbsp;&nbsp;<input type="submit" value="목록보기" formaction="jobseekerBoardList">
-					&nbsp;&nbsp;<input type="submit" value="삭제" formaction="jobseekerDelete">
+					&nbsp;&nbsp;<input type="submit" value="목록보기" form action="jobseekerBoardList">
+					&nbsp;&nbsp;<input type="submit" value="삭제" form action="jobseekerDelete">
 				</td>
 			</tr>
 		</form>

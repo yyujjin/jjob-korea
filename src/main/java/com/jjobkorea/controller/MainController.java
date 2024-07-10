@@ -77,7 +77,7 @@ public class MainController {
 		case "jobPosting":
 			return jobPostingController.enterJobPosting(model);
 		// 구직자 게시판 페이지 진입
-		case "jobseekerBoard":
+		case "jobseekerBoardList":
 			return jobseekerBoardController.list(model);
 		}
 		return "main/main";
