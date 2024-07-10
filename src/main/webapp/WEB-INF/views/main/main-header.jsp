@@ -80,7 +80,7 @@
                             >
                         </li>
                         <li>
-                            <a href="/requestPage/jobSeekerBoard" class="nav-link px-4 text-dark"
+                            <a href="/requestPage/jobseekerBoard" class="nav-link px-4 text-dark"
                                 >취업 톡톡
                             </a>
                         </li>
