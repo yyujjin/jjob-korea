@@ -17,7 +17,8 @@
 
 	<select id="getPostingList" resultType="JobPostingDTO">
 		SELECT <include refid="jobPostingColums" /> 
-		FROM jobposting 
+		FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
 	</select>
 
 </mapper>
+
