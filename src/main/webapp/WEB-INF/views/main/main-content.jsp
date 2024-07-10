@@ -24,6 +24,8 @@
 		.card-title {
 			font-family: "NanumBarunGothic";
 			font-size: 25px;
+			font-size: 25px; /* 글자 크기 조절 */
+			text-align: left; /* 왼쪽 정렬 */
 		}
 		#hot{
 			color:#dd0000;
@@ -36,7 +38,7 @@
 		}
 		
 		.card-text {
-           	text-align: left;
+           	text-align: left;  /* 왼쪽 정렬 */
        	}
 
 	</style>
