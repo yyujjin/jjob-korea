@@ -10,7 +10,7 @@ import com.jjobkorea.dto.JobseekerBoardDTO;
 //실행시 매퍼파일을 읽어 들이도록 지정
 @Mapper
 public interface JobseekerBoardMapper {
-	public ArrayList<JobseekerBoardDTO> jobseekerBoardList();
+	public ArrayList<JobseekerBoardDTO> jobseekerList();
 	public void jobseekerWrite(JobseekerBoardDTO boardDTO);
 	public JobseekerBoardDTO jobseekerContentView(HashMap<String, String> param);
 	public void jobseekerModify(HashMap<String, String> param);

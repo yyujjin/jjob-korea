@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.jjobkorea.dto.JobPostingDTO;
+import com.jjobkorea.dto.JobseekerCriteria;
 import com.jjobkorea.service.JobPostingService;
+import com.jjobkorea.service.JobseekerPageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,9 +30,16 @@ public class MainController {
 	@Autowired
 	private JobPostingController jobPostingController;
 
-	// 구직자 게시판 컨트롤러
+	//원래는 이 주소로 불렀음
+//	@Autowired
+//	private JobseekerBoardController jobseekerBoardController;
+
+
+	//구직자 게시판 컨트롤러
 	@Autowired
-	private JobseekerBoardController jobseekerBoardController;
+	private JobseekerPageController jobseekerPageController;
+	
+	
 
 	// 프로젝트 시작 페이지
 	@GetMapping(value = { "/", "/main" })
@@ -59,7 +68,7 @@ public class MainController {
 
 	// 요청 파라미터에 따라 해당 페이지 컨트롤러 작동
 	@GetMapping("requestPage/{page}")
-	public String requestPage(@PathVariable("page") String page, Model model) {
+	public String requestPage(@PathVariable("page") String page, Model model,JobseekerCriteria cri) {
 
 		log.info("요청 페이지 -> " + page);
 
@@ -77,8 +86,8 @@ public class MainController {
 		case "jobPosting":
 			return jobPostingController.enterJobPosting(model);
 		// 구직자 게시판 페이지 진입
-		case "jobseekerBoardList":
-			return jobseekerBoardController.list(model);
+		case "jobseekerBoard":
+			return jobseekerPageController.listWithPaging(cri, model);
 		}
 		return "main/main";
 	}
