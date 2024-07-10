@@ -24,7 +24,7 @@ public class JobPostingDetailController {
     @GetMapping("/addJobPosting")
     public String addJobPostingForm(Model model) {
         model.addAttribute("jobPostingDetail", new JobPostingDetail());
-        return "add-job-posting";
+        return "addJobPosting";
     }
 
     @PostMapping("/jobPostingDetail")
