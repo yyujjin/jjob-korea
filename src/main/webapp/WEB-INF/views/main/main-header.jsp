@@ -90,7 +90,7 @@
                             >
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-4 text-dark"
+                            <a href="/requestPage/jobPostingResister" class="nav-link px-4 text-dark"
                                 >공고 등록</a
                             >
                         </li>
