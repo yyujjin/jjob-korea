@@ -66,26 +66,36 @@
         });
     });
 
-    $(document).ready(function() {
-        $('#memId').on('blur', function() {
+   
+</script>
+<script>
+     $(document).ready(function() {
+        console.log("JQuery Loaded");
+        $('#memid').on('blur', function() {
             var memId = $(this).val();
+            console.log("memId:", memId);
             if (memId) {
                 $.ajax({
                     type: 'POST',
                     url: '/checkId',
                     data: { memId: memId },
                     success: function(response) {
+                        console.log("AJAX Response:", response);
                         if (response.exists) {
                             $('#idError').text('이미 존재하는 아이디입니다.');
                         } else {
                             $('#idError').text('');
                         }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error:", status, error);
                     }
                 });
             }
         });
     });
 </script>
+</head>
 <body>
     <div class="tab-container">
         <div class="tabs">
@@ -98,7 +108,7 @@
             <input type="hidden" name="type" value="individual">
             <div class="form-group">
                 <input type="text" id="id" name="memId" placeholder="아이디" required>
-                <div id="idError" class="error-message"></div>
+                <div id="idError" class="error-message" style="color:red;"></div>
             </div>
             <div class="form-group">
                 <input type="password" id="password" name="memPwd" placeholder="비밀번호(8-16자 영문, 숫자, 특수문자)" required>
@@ -113,7 +123,6 @@
                     <label for="boy">남자</label>
                     <input type="radio" id="girl" name="memGender" value="F" required>
                     <label for="girl">여자</label>
-
                 </div>
             </div>
             <div class="form-group">
@@ -234,6 +243,7 @@
             <h3>인사담당자 정보</h3>
             <div class="form-group">
                 <input type="text" name="memId" placeholder="아이디*" required>
+                <div id="idError" class="error-message" style="color:red;"></div>
             </div>
             <div class="form-group">
                 <input type="password" name="memPwd" placeholder="비밀번호*" required>

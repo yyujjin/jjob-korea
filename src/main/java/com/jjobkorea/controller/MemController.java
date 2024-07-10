@@ -147,6 +147,7 @@ public class MemController {
     public String logout(HttpSession session) {
         log.info("@# logout");
         session.invalidate();  // 세션 무효화
-        return "redirect:login";  // 로그인 페이지로 리디렉션
+//        return "redirect:login";  // 로그인 페이지로 리디렉션
+        return "redirect:main";  // 메인 페이지로 리디렉션
     }
 }
