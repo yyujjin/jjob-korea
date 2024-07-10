@@ -25,9 +25,9 @@ public class JobseekerBoardServiceImpl implements JobseekerBoardService{
 		log.info("@# BoardServiceImpl list");
 		
 		JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
-		ArrayList<JobseekerBoardDTO> jobseekerList=dao.jobseekerBoardList();
+		ArrayList<JobseekerBoardDTO> jobseekerBoardList=dao.jobseekerBoardList();
 		
-		return jobseekerList;
+		return jobseekerBoardList;
 	}
 
 	@Override
