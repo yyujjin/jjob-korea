@@ -6,6 +6,6 @@ import java.util.HashMap;
 import com.jjobkorea.dto.JobseekerCommentDTO;
 
 public interface JobseekerCommentService {
-	public void jobseekerSave(HashMap<String, String> param);
-	public ArrayList<JobseekerCommentDTO> jobseekerFindAll(HashMap<String, String> param);
+	public void save(HashMap<String, String> param);
+	public ArrayList<JobseekerCommentDTO> findAll(HashMap<String, String> param);
 }

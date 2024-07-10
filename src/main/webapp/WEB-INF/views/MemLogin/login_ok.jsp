@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 성공</title>
 </head>
 <body>
-	login ok~!!
+    <h1>로그인 성공</h1>
+    <p>환영합니다, ${memName}님!</p>
+    <a href="main">메인 페이지로 이동</a>
 </body>
 </html>
