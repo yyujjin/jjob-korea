@@ -45,7 +45,7 @@
     <div class="container">
         <h1>회원가입 성공</h1>
         <p>회원가입이 성공적으로 완료되었습니다.</p>
-        <p><button onclick="window.location.href='login'">로그인 페이지로 이동</button></p>
+        <p><button onclick="window.location.href='/'">메인화면으로 이동</button></p>
     </div>
 </body>
 </html>
