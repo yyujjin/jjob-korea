@@ -30,11 +30,6 @@ public class MainController {
 	@Autowired
 	private JobPostingController jobPostingController;
 
-	//원래는 이 주소로 불렀음
-//	@Autowired
-//	private JobseekerBoardController jobseekerBoardController;
-
-
 	//구직자 게시판 컨트롤러
 	@Autowired
 	private JobseekerPageController jobseekerPageController;
