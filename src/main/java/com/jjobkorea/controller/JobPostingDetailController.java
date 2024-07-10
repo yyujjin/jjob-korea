@@ -29,6 +29,7 @@ public class JobPostingDetailController {
         return "/jobPostingDetails/addJobPosting";
     }
 
+
     @PostMapping("/jobPostingDetails/addJobPosting")
     public String addJobPosting(@RequestParam("companyId") Long companyId,
                                 @RequestParam("jobTitle") String jobTitle,
@@ -43,6 +44,17 @@ public class JobPostingDetailController {
         jobPostingDetailService.addJobPosting(companyId, jobTitle, jobDescription, jobRequirements, employmentType, salary, location, applicationDeadline, contactEmail);
 
         return "redirect:/jobPostingDetail?companyId=" + companyId;
+
+    //진입 페이지
+    @GetMapping("/addJobPosting")
+    public String addJobPostingForm(Model model) {
+        model.addAttribute("jobPostingDetail", new JobPostingDetail());
+        
+        //메인 페이지로 연결
+        String page = "addJobPosting";
+        model.addAttribute("page",page);
+        return "main/main";
+
     }
 
     @GetMapping("/jobPostingDetails/jobPostingDetail")
