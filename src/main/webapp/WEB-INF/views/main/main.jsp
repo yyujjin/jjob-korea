@@ -56,15 +56,15 @@
 	      </div>
 	      <div class="content">
 			<c:choose>
-			          <c:when test="${page != null && !page.isEmpty()}">
-			              <jsp:include page="/WEB-INF/views/${page}.jsp" />
-			          </c:when>
-			          <c:otherwise>
-						<!--페이지 요청이 없을 때 main컨텐츠 표시-->
-						 <jsp:include page="/WEB-INF/views/main/main-content.jsp" />
-						 
-			          </c:otherwise>
-			      </c:choose>
+		          <c:when test="${page != null && !page.isEmpty()}">
+		             <jsp:include page="/WEB-INF/views/${page}.jsp" />
+		          </c:when>
+		          <c:otherwise>
+					<!--페이지 요청이 없을 때 main컨텐츠 표시-->
+					<jsp:include page="/WEB-INF/views/main/main-content.jsp" />
+					 
+		          </c:otherwise>
+		      </c:choose>
 	      </div>
 	      <div class="footer">
 	          <jsp:include page="main-footer.jsp" />
