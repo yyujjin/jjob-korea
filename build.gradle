@@ -53,6 +53,7 @@ implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl' //스프링부트 3.
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
 
 	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.20' // 썸네일 임포트
+	 implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'//json 변환 
 
 }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobPostingDetailService {
@@ -17,15 +18,11 @@ public class JobPostingDetailService {
         return jobPostingDetailRepository.findAll();
     }
 
+    public Optional<JobPostingDetail> findById(Long id) {
+        return jobPostingDetailRepository.findById(id);
+    }
+
     public void save(JobPostingDetail jobPostingDetail) {
         jobPostingDetailRepository.save(jobPostingDetail);
-    }
-
-    public JobPostingDetail findById(Long id) {
-        return jobPostingDetailRepository.findById(id).orElse(null);
-    }
-
-    public void deleteById(Long id) {
-        jobPostingDetailRepository.deleteById(id);
     }
 }

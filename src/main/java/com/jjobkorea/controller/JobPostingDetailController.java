@@ -1,15 +1,19 @@
 package com.jjobkorea.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jjobkorea.entity.JobPostingDetail;
+import com.jjobkorea.entity.SignupCp;
+import com.jjobkorea.service.JobPostingDetailService;
+import com.jjobkorea.service.AddSignupCpService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import com.jjobkorea.entity.JobPostingDetail;
-import com.jjobkorea.service.JobPostingDetailService;
-import com.jjobkorea.service.AddSignupCpService;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 @Controller
 public class JobPostingDetailController {
@@ -20,25 +24,26 @@ public class JobPostingDetailController {
     @Autowired
     private AddSignupCpService addSignupCpService;
 
-    @GetMapping("/add-job-posting")
+    @GetMapping("/addJobPosting")
     public String addJobPostingForm(Model model) {
         model.addAttribute("jobPostingDetail", new JobPostingDetail());
-        model.addAttribute("signupCpList", addSignupCpService.findAll());
+        List<SignupCp> signupCpList = addSignupCpService.findAll();
+        model.addAttribute("signupCpList", signupCpList);
 
-        // Convert signupCpList to JSON
+        // Convert signupCpList to JSON for JavaScript usage
         try {
             ObjectMapper mapper = new ObjectMapper();
-            String signupCpListJson = mapper.writeValueAsString(addSignupCpService.findAll());
+            String signupCpListJson = mapper.writeValueAsString(signupCpList);
             model.addAttribute("signupCpListJson", signupCpListJson);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return "add-job-posting";
+        return "addJobPosting";
     }
 
     @PostMapping("/jobPostingDetail")
-    public String submitJobPostingDetail(JobPostingDetail jobPostingDetail, Model model) {
+    public String submitJobPostingDetail(JobPostingDetail jobPostingDetail) {
         jobPostingDetailService.save(jobPostingDetail);
         return "redirect:/jobPostingDetail";
     }
