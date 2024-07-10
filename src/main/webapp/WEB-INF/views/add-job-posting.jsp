@@ -43,7 +43,7 @@
     <script>
         function updateCompanyInfo() {
             var selectedCompanyId = document.getElementById("companySelect").value;
-            var companies = ${signupCpList};
+            var companies = JSON.parse('${signupCpListJson}');
             var selectedCompany = companies.find(company => company.id == selectedCompanyId);
 
             if (selectedCompany) {
