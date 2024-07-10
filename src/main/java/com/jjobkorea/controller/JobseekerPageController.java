@@ -40,10 +40,14 @@ public class JobseekerPageController {
 		int total = service.getTotalCount(cri);
 		log.info("@# total=>"+total);
 		
+		String page = "jobseekerBoardList";
+		model.addAttribute("page", page);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new JobseekerPageDTO(total, cri));
 		
-		return "jobseekerBoardList";
+		return "main/main";
 	}
 	
 }
+
