@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Service
 public class MemSignupService {
@@ -17,8 +18,13 @@ public class MemSignupService {
 
     @Transactional
     public void registerEnterprise(Map<String, String> params) {
-    	 // 파라미터 로그 출력
+        // 파라미터 로그 출력
         log.info("Received parameters: " + params);
+
+        // memId 중복 확인
+        if (isMemIdExists(params.get("memId"))) {
+            throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
+        }
 
         if ("enterprise".equals(params.get("type"))) {
             // 기업 정보 삽입
@@ -58,5 +64,12 @@ public class MemSignupService {
                 params.get("memGender")
             );
         }
+    }
+
+    // 새로운 메서드 추가: memId 중복 확인
+    public boolean isMemIdExists(String memId) {
+        String sql = "SELECT COUNT(*) FROM signup_tb WHERE memId = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, memId);
+        return count != null && count > 0;
     }
 }

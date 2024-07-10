@@ -103,11 +103,11 @@
                                 <c:when test="${not empty sessionScope.user}">
                                     <li class="nav-item">
                                         <span class="nav-link px-2 text-secondary">
-                                            환영합니다, ${sessionScope.user.memName}님!
+                                            ${sessionScope.user.memName}
                                         </span>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/requestPage/logout" class="nav-link link-body-emphasis px-2 text-secondary">로그아웃</a>
+                                        <a href="logout" class="nav-link link-body-emphasis px-2 text-secondary">로그아웃</a>
                                     </li>
                                 </c:when>
                                 <c:otherwise>
