@@ -57,7 +57,7 @@ pageEncoding="UTF-8"%>
                         >
                             직무
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-white">
+                        <ul class="dropdown-menu dropdown-menu-white job-title">
                             <li>
                                프론트엔드
                             </li>
@@ -77,7 +77,7 @@ pageEncoding="UTF-8"%>
                         >
                             근무지역
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-white">
+                        <ul class="dropdown-menu dropdown-menu-white work-location">
                             <li>
                                 서울특별시
                             </li>
@@ -132,7 +132,7 @@ pageEncoding="UTF-8"%>
                         >
                             고용형태
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-white">
+                        <ul class="dropdown-menu dropdown-menu-white employment-type">
                             <li>
                                정규직
                             </li>
