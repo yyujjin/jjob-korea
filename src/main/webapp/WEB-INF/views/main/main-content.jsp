@@ -34,6 +34,10 @@
 		    height: 150px;
 		    object-fit: cover;
 		}
+		
+		.card-text {
+           	text-align: left;
+       	}
 
 	</style>
 </head>
