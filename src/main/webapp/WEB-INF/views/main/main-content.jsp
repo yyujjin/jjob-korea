@@ -24,6 +24,13 @@
 		#hot{
 			color:#dd0000;
 		}
+		/*사진 크기 조절*/
+		.fixed-size-image {
+		    width: 200px;
+		    height: 150px;
+		    object-fit: cover;
+		}
+
 	</style>
 </head>
 <body>
@@ -35,7 +42,7 @@
 		<c:forEach items="${postingList}" var="postingList" >
 		<div class="col">
           <div class="card h-100 w-90 text-center">
-           <img src="<c:out value='${postingList.postingImage}'/>" class="card-img-top" alt="..."/>
+           <img src="<c:out value='${postingList.postingImage}'/>" class="card-img-top fixed-size-image" alt="..."/>
             <div class="card-body">
               <h5 class="card-title"><c:out value='${postingList.companyName}'/></h5>
               <p class="card-text"><c:out value='${postingList.postingTitle}'/></p>
