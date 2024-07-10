@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jjobkorea.dto.JobseekerBoardAttachDTO;
 import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.dto.JobseekerCommentDTO;
-import com.jjobkorea.dto.JobseekerPageDTO;
 import com.jjobkorea.service.JobseekerBoardService;
 import com.jjobkorea.service.JobseekerCommentService;
 import com.jjobkorea.service.JobseekerUploadService;
@@ -35,7 +33,7 @@ public class JobseekerBoardController {
 	@Autowired
 	private JobseekerUploadService uploadService;
 	
-//이 메서드의 기능은 뭘까?
+//이 메서드의 기능은 뭘까? 목록을 가져와요~
 //	@RequestMapping("/list")
 	@RequestMapping("/jobseekerBoardList_old")
 	public String list(Model model) {
@@ -47,8 +45,8 @@ public class JobseekerBoardController {
 		return "jobseekerBoardList";
 	}
 	
-	@RequestMapping("/jobseekerWrite")
-//	public String write(@RequestParam HashMap<String, String> param) {
+	// @RequestMapping("/jobseekerWrite")
+	@PostMapping("/jobseekerWrite")
 	public String write(JobseekerBoardDTO boardDTO) {
 		log.info("@# write");
 		log.info("@# boardDTO=>"+boardDTO);
@@ -90,7 +88,8 @@ public class JobseekerBoardController {
 		return "jobseekerContent_view";
 	}
 	
-	@RequestMapping("/jobseekerModify")
+	// @RequestMapping("/jobseekerModify")
+	@PostMapping("/jobseekerModify")
 //	public String modify(@RequestParam HashMap<String, String> param) {
 	public String modify(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
 		log.info("@# modify");
@@ -102,10 +101,11 @@ public class JobseekerBoardController {
 		rttr.addAttribute("pageNum", param.get("pageNum"));
 		rttr.addAttribute("amount", param.get("amount"));
 
-		return "redirect:jobseekerBoardList";
+		return "redirect:/jobseekerBoardList";
 	}
 	
-	@RequestMapping("/jobseekerDelete")
+	// @RequestMapping("/jobseekerDelete")
+	@PostMapping("/jobseekerDelete")
 //	public String delete(@RequestParam HashMap<String, String> param) {
 	public String delete(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
 		log.info("@# delete");
@@ -122,7 +122,7 @@ public class JobseekerBoardController {
 		rttr.addAttribute("pageNum", param.get("pageNum"));
 		rttr.addAttribute("amount", param.get("amount"));
 		
-		return "redirect:jobseekerBoardList";
+		return "redirect:/jobseekerBoardList";
 	}
 	
 }
