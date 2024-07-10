@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.jjobkorea.entity.JobPostingDetail;
 import com.jjobkorea.service.JobPostingDetailService;
-import com.jjobkorea.service.SignupCpService;
+import com.jjobkorea.service.AddSignupCpService;
 
 @Controller
 public class JobPostingDetailController {
@@ -16,7 +16,7 @@ public class JobPostingDetailController {
     private JobPostingDetailService jobPostingDetailService;
 
     @Autowired
-    private SignupCpService signupCpService;
+    private AddSignupCpService addSignupCpService;
 
     @GetMapping("/add-job-posting")
     public String addJobPostingForm(Model model) {
@@ -33,7 +33,7 @@ public class JobPostingDetailController {
     @GetMapping("/jobPostingDetail")
     public String jobPostingDetail(Model model) {
         model.addAttribute("jobPostings", jobPostingDetailService.getAllJobPostings());
-        model.addAttribute("signupCpList", signupCpService.findAll());
+        model.addAttribute("signupCpList", addSignupCpService.findAll());
         return "job-posting-detail";
     }
 }

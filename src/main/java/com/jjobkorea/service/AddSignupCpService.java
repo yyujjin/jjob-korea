@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class SignupCpService {
+public class AddSignupCpService {
     @Autowired
     private SignupCpRepository signupCpRepository;
 

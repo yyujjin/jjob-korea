@@ -1,7 +1,7 @@
 package com.jjobkorea.controller;
 
 import com.jjobkorea.entity.SignupCp;
-import com.jjobkorea.service.SignupCpService;
+import com.jjobkorea.service.AddSignupCpService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +14,11 @@ import java.util.List;
 public class SignupCpController {
 
     @Autowired
-    private SignupCpService signupCpService;
+    private AddSignupCpService addSignupCpService;
 
     @GetMapping("/signupCpList")
     public String signupCpList(Model model) {
-        List<SignupCp> signupCpList = signupCpService.findAll();
+        List<SignupCp> signupCpList = addSignupCpService.findAll();
         model.addAttribute("signupCpList", signupCpList);
         return "signup-cp-list";
     }
