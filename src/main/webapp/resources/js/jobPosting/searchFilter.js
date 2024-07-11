@@ -6,8 +6,9 @@ const filterBox = document.querySelector("filter-box")
 //필터박스 ul
 const filterBoxUl = document.querySelector(".filter-box-ul")
 //필터 리스트
-const filterList = []
-
+let filterList = []
+//초기화 버튼
+const resetFiltersButton = document.querySelector(".reset-filters-button")
 
 
 //필터 박스에 추가
@@ -46,6 +47,16 @@ function deleteFilter(){
         })
     }
 }
+
+//선택한 필터 초기화
+resetFilter()
+function resetFilter(){
+    resetFiltersButton.addEventListener("click",function(){
+        filterList=[]
+        makeList()
+    })   
+}
+
 
 
 
