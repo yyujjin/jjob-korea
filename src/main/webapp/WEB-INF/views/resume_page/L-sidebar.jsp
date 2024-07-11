@@ -5,7 +5,8 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./resources/css/resume_css/L-sidebar.css">
+	<!--절대경로로 변경-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/resume_css/L-sidebar.css">
 </head>
 <body>
     <sidebar>
