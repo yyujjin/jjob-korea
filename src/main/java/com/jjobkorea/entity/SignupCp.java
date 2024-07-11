@@ -10,7 +10,7 @@ public class SignupCp {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;  // int 타입으로 변경
+    private Long id;  // 변경
 
     private String companyType;
     private String companyRegistrationNum;

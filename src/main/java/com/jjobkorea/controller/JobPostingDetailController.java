@@ -28,7 +28,7 @@ public class JobPostingDetailController {
             return "error/404"; // 404 에러 페이지로 리다이렉트
         }
         SignupCp signupCp = jobPostingDetail.getCompany();
-        List<JobPostingDetail> jobPostingDetails = jobPostingDetailService.getJobPostingDetailsByCompanyId(signupCp.getId());
+        List<JobPostingDetail> jobPostingDetails = jobPostingDetailService.getJobPostingDetailsByCompanyId(signupCp.getId().longValue());
         
         model.addAttribute("signupCp", signupCp);
         model.addAttribute("jobPostingDetails", jobPostingDetails);

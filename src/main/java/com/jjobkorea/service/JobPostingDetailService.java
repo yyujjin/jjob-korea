@@ -13,7 +13,7 @@ public class JobPostingDetailService {
     @Autowired
     private JobPostingDetailRepository jobPostingDetailRepository;
 
-    public List<JobPostingDetail> getJobPostingDetailsByCompanyId(int companyId) {
+    public List<JobPostingDetail> getJobPostingDetailsByCompanyId(Long companyId) {
         return jobPostingDetailRepository.findByCompanyId(companyId);
     }
     
