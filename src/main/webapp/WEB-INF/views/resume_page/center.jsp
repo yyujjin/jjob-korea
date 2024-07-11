@@ -5,9 +5,10 @@ pageEncoding="UTF-8"%>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="./resources/css/resume_css/center.css">
+		<!--절대 경로로 변경 -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/resume_css/center.css">
         <a href="#3">
-            <img class="img" src = "./resources/img/resume_img_page/advertisement.png">
+            <img class="img" src = "${pageContext.request.contextPath}/resources/img/resume_img_page/advertisement.png">
             <div class="under-line"></div>
         </a>
     </head>
