@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jjobkorea.dto.JobPostingDTO;
 import com.jjobkorea.service.JobPostingService;
@@ -24,15 +27,13 @@ public class JobPostingController {
 	public String enterJobPosting(Model model) {
 		String page = "jobPosting/jobPostingMain";
 		model.addAttribute("page", page);
-		
-		//채용 정보 리스트 가져오는 메서드 실행시키기 
+
+		// 채용 정보 리스트 가져오는 메서드 실행시키기
 		getPostingList(model);
 
 		return "main/main";
 	}
 
-	
-	
 	// 채용 정보 페이지 진입 시 리스트 가져오기
 	public String getPostingList(Model model) {
 		log.info("채용정보 리스트 가져오기");
@@ -43,5 +44,12 @@ public class JobPostingController {
 
 		return "jobPosting/jobList";
 	}
+//	@PostMapping("/searchFilter")
 
+	// AJAX 요청
+	@PostMapping("/searchFilter")
+	@ResponseBody
+	public void searchFilter(@RequestParam(value="filterList") String[] filterList, Model model) {
+		log.info("요청됨!!!!");
+	}
 }

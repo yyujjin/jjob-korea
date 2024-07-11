@@ -9,7 +9,8 @@ const filterBoxUl = document.querySelector(".filter-box-ul")
 let filterList = []
 //초기화 버튼
 const resetFiltersButton = document.querySelector(".reset-filters-button")
-
+//검색 버튼
+const searchFiltersButton = document.querySelector(".search-filters-button")
 
 //필터 박스에 추가
 addToFilterBox()
@@ -54,12 +55,29 @@ function resetFilter(){
     resetFiltersButton.addEventListener("click",function(){
         filterList=[]
         makeList()
-    })   
+    })
+    
 }
 
-
-
-
-
-
-
+searchFilter()
+//AJAX 연결
+function searchFilter(){
+    searchFiltersButton.addEventListener("click",function(){
+        $.ajax({
+            type : 'post',
+            url : 'http://localhost:8082/searchFilter',
+            data : {filterList : filterList},
+            /*dataType : 'json',*/
+            /*traditional: true,*/
+            error: function(error){
+                console.error('에러 발생:', error);
+            },
+            success : function(data){
+                console.log('성공:', data);
+                // 서버에서 반환된 데이터 처리
+            }
+          });
+          console.log("AJAX 요청 전송됨")
+    })
+    
+}
