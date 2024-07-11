@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.jjobkorea.dto.JobPostingDTO;
 import com.jjobkorea.dto.JobseekerCriteria;
 import com.jjobkorea.service.JobPostingService;
-import com.jjobkorea.service.JobseekerPageService;
 
 import lombok.extern.slf4j.Slf4j;
 
