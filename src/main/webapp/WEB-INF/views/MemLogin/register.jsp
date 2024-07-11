@@ -8,92 +8,90 @@
 <link rel="stylesheet" href="../resources/css/login_style/loginstyle.css">
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tabs = document.querySelectorAll('.tab');
-        const individualForm = document.getElementById('individualForm');
-        const enterpriseForm = document.getElementById('enterpriseForm');
-        const signupForm = enterpriseForm.querySelector('form');
+	 $(document).ready(function() {
+	        console.log("JQuery Loaded");
+	        $('#id').on('blur', function() {
+	            var memId = $(this).val();
+	            console.log("memId:", memId);
+	            if (memId) {
+	                $.ajax({
+	                    type: 'POST',
+	                    url: '/checkId',
+	                    data: { memId: memId },
+	                    success: function(response) {
+	                        console.log("AJAX Response:", response);
+	                        if (response.exists) {
+	                            $('#idError').text('이미 존재하는 아이디입니다.');
+	                        } else {
+	                            $('#idError').text('');
+	                        }
+	                    },
+	                    error: function(xhr, status, error) {
+	                        console.error("AJAX Error:", status, error);
+	                    }
+	                });
+	            }
+	        });
+	    });
+	</script>
+	<script>
+	    document.addEventListener('DOMContentLoaded', function() {
+	        const tabs = document.querySelectorAll('.tab');
+	        const individualForm = document.getElementById('individualForm');
+	        const enterpriseForm = document.getElementById('enterpriseForm');
+	        const signupForm = enterpriseForm.querySelector('form');
 
-        // 폼 제출 시 데이터 출력 이벤트 리스너 추가
-        signupForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // 기본 제출 동작을 막습니다.
+	        // 폼 제출 시 데이터 출력 이벤트 리스너 추가
+	        signupForm.addEventListener('submit', function(event) {
+	            event.preventDefault(); // 기본 제출 동작을 막습니다.
 
-            const formData = new FormData(signupForm);
-            const entries = Object.fromEntries(formData.entries());
+	            const formData = new FormData(signupForm);
+	            const entries = Object.fromEntries(formData.entries());
 
-            console.log('Form Data:', entries); // 제출된 데이터를 콘솔에 출력합니다.
+	            console.log('Form Data:', entries); // 제출된 데이터를 콘솔에 출력합니다.
 
-            signupForm.submit(); // 기본 제출 동작을 다시 수행합니다.
-        });
+	            signupForm.submit(); // 기본 제출 동작을 다시 수행합니다.
+	        });
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
+	        tabs.forEach(tab => {
+	            tab.addEventListener('click', () => {
+	                tabs.forEach(t => t.classList.remove('active'));
+	                tab.classList.add('active');
 
-                if (tab.dataset.tab === 'enterprise') {
-                    individualForm.style.display = 'none';
-                    enterpriseForm.style.display = 'block';
-                } else {
-                    individualForm.style.display = 'block';
-                    enterpriseForm.style.display = 'none';
-                }
-            });
-        });
+	                if (tab.dataset.tab === 'enterprise') {
+	                    individualForm.style.display = 'none';
+	                    enterpriseForm.style.display = 'block';
+	                } else {
+	                    individualForm.style.display = 'block';
+	                    enterpriseForm.style.display = 'none';
+	                }
+	            });
+	        });
 
-        const filter01 = document.querySelectorAll('.filter01');
-        const filterAll = document.querySelectorAll('.all');
+	        const filter01 = document.querySelectorAll('.filter01');
+	        const filterAll = document.querySelectorAll('.all');
 
-        filterAll.forEach(allCheckbox => {
-            allCheckbox.addEventListener('click', function() {
-                const allChecked = this.checked;
-                const container = this.closest('.terms-container');
-                const checkboxes = container.querySelectorAll('.filter01');
-                checkboxes.forEach(function(obj) {
-                    obj.checked = allChecked;
-                });
-            });
-        });
+	        filterAll.forEach(allCheckbox => {
+	            allCheckbox.addEventListener('click', function() {
+	                const allChecked = this.checked;
+	                const container = this.closest('.terms-container');
+	                const checkboxes = container.querySelectorAll('.filter01');
+	                checkboxes.forEach(function(obj) {
+	                    obj.checked = allChecked;
+	                });
+	            });
+	        });
 
-        filter01.forEach(function(el) {
-            el.addEventListener('click', function() {
-                const container = this.closest('.terms-container');
-                const allCheckbox = container.querySelector('.all');
-                const checkboxes = container.querySelectorAll('.filter01');
-                const checked = container.querySelectorAll('.filter01:checked');
-                allCheckbox.checked = (checkboxes.length === checked.length);
-            });
-        });
-    });
-
-   
-</script>
-<script>
-     $(document).ready(function() {
-        console.log("JQuery Loaded");
-        $('#memid').on('blur', function() {
-            var memId = $(this).val();
-            console.log("memId:", memId);
-            if (memId) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/checkId',
-                    data: { memId: memId },
-                    success: function(response) {
-                        console.log("AJAX Response:", response);
-                        if (response.exists) {
-                            $('#idError').text('이미 존재하는 아이디입니다.');
-                        } else {
-                            $('#idError').text('');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("AJAX Error:", status, error);
-                    }
-                });
-            }
-        });
-    });
+	        filter01.forEach(function(el) {
+	            el.addEventListener('click', function() {
+	                const container = this.closest('.terms-container');
+	                const allCheckbox = container.querySelector('.all');
+	                const checkboxes = container.querySelectorAll('.filter01');
+	                const checked = container.querySelectorAll('.filter01:checked');
+	                allCheckbox.checked = (checkboxes.length === checked.length);
+	            });
+	        });
+	    });
 </script>
 </head>
 <body>
