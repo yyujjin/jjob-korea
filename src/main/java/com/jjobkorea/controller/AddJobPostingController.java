@@ -2,6 +2,7 @@ package com.jjobkorea.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jjobkorea.entity.JobPostingDetail;
 import com.jjobkorea.entity.SignupCp;
 import com.jjobkorea.service.JobPostingCpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +27,13 @@ public class AddJobPostingController {
         String signupCpListJson = objectMapper.writeValueAsString(companies);
         model.addAttribute("signupCpList", companies);
         model.addAttribute("signupCpListJson", signupCpListJson);
-        model.addAttribute("signupCp", new SignupCp());
+        model.addAttribute("jobPostingDetail", new JobPostingDetail());
         return "jobPostingDetails/addJobPosting";
     }
 
     @PostMapping("/addJobPosting")
-    public String saveJobPosting(@ModelAttribute("signupCp") SignupCp signupCp, Model model) {
-        if (jobPostingCpService.existsByCompanyRegistrationNum(signupCp.getCompanyRegistrationNum())) {
-            model.addAttribute("errorMessage", "중복된 회사 등록 번호입니다.");
-            return "jobPostingDetails/addJobPosting";
-        }
-
-        if (jobPostingCpService.existsByCompanyBusinessRegistration(signupCp.getCompanyBusinessRegistration())) {
-            model.addAttribute("errorMessage", "중복된 사업자 등록 번호입니다.");
-            return "jobPostingDetails/addJobPosting";
-        }
-        
-        jobPostingCpService.saveCompany(signupCp);
-        return "redirect:/jobPostingDetail?companyId=" + signupCp.getId();
+    public String saveJobPosting(@ModelAttribute("jobPostingDetail") JobPostingDetail jobPostingDetail, Model model) {
+        jobPostingCpService.saveJobPosting(jobPostingDetail);
+        return "redirect:/jobPostingDetail?jobPostingId=" + jobPostingDetail.getId();
     }
 }

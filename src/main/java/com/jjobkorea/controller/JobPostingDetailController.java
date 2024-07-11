@@ -22,12 +22,16 @@ public class JobPostingDetailController {
     private JobPostingCpService jobPostingCpService;
 
     @GetMapping("/jobPostingDetail")
-    public String viewJobPostingDetails(@RequestParam("companyId") int companyId, Model model) {
-        SignupCp signupCp = jobPostingCpService.getCompanyById(companyId);
-        List<JobPostingDetail> jobPostingDetails = jobPostingDetailService.getJobPostingDetailsByCompanyId(companyId);
+    public String viewJobPostingDetails(@RequestParam("jobPostingId") Long jobPostingId, Model model) {
+        JobPostingDetail jobPostingDetail = jobPostingDetailService.getJobPostingById(jobPostingId);
+        if (jobPostingDetail == null) {
+            return "error/404"; // 404 에러 페이지로 리다이렉트
+        }
+        SignupCp signupCp = jobPostingDetail.getCompany();
+        List<JobPostingDetail> jobPostingDetails = jobPostingDetailService.getJobPostingDetailsByCompanyId(signupCp.getId());
         
         model.addAttribute("signupCp", signupCp);
         model.addAttribute("jobPostingDetails", jobPostingDetails);
-        return "jobPostingDetails/JobPostingDetail";
+        return "jobPostingDetails/jobPostingDetail";
     }
 }

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회사 정보 및 채용 정보</title>
+    <title>채용 정보 상세</title>
     <!-- Bootstrap CSS -->
     <link href="<c:url value='/resources/css/bootstrap/bootstrap.css' />" rel="stylesheet">
     <style>
@@ -13,21 +13,25 @@
             background-color: #f8f9fa;
         }
 
+        .container {
+            max-width: 800px;
+        }
+
         .table th, .table td {
             vertical-align: middle;
         }
 
-        .container {
-            max-width: 800px;
+        .card {
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center mb-4">회사 정보 및 채용 정보</h2>
+        <h2 class="text-center mb-4">채용 정보 상세</h2>
 
         <!-- 회사 정보 -->
-        <div class="card mb-4">
+        <div class="card">
             <div class="card-header">회사 정보</div>
             <div class="card-body">
                 <table class="table table-bordered">
@@ -62,7 +66,7 @@
         </div>
 
         <!-- 채용 정보 -->
-        <div class="card mb-4">
+        <div class="card">
             <div class="card-header">채용 정보</div>
             <div class="card-body">
                 <c:forEach var="jobPostingDetail" items="${jobPostingDetails}">
@@ -110,6 +114,6 @@
     <!-- jQuery -->
     <script src="<c:url value='/resources/js/jquery-3.7.1.min.js' />"></script>
     <!-- Bootstrap JS -->
-    <script src="<c:url value='/resources/css/bootstrap/bootstrap.js' />"></script>
+    <script src="<c:url value='/resources/js/bootstrap/bootstrap.js' />"></script>
 </body>
 </html>

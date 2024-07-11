@@ -71,17 +71,12 @@
         <h2 class="text-center mb-4">채용 정보 입력</h2>
 
         <form action="/addJobPosting" method="POST">
-            <c:if test="${not empty errorMessage}">
-                <div class="alert alert-danger" role="alert">
-                    ${errorMessage}
-                </div>
-            </c:if>
             <!-- 회사 정보 섹션 -->
             <div class="card mb-4">
                 <div class="card-header">회사 정보</div>
                 <div class="card-body">
                     <div class="form-floating">
-                        <select class="form-control" id="companySelect" name="companyId" required>
+                        <select class="form-control" id="companySelect" name="company.id" required>
                             <option value="">회사를 선택하세요</option>
                             <c:forEach var="company" items="${signupCpList}">
                                 <option value="${company.id}">${company.companyName}</option>

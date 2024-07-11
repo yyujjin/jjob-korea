@@ -16,4 +16,8 @@ public class JobPostingDetailService {
     public List<JobPostingDetail> getJobPostingDetailsByCompanyId(int companyId) {
         return jobPostingDetailRepository.findByCompanyId(companyId);
     }
+    
+    public JobPostingDetail getJobPostingById(Long jobPostingId) {
+        return jobPostingDetailRepository.findById(jobPostingId).orElse(null);
+    }
 }
