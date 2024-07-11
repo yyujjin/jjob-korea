@@ -15,8 +15,7 @@ body, html {
     color: #333;
 }
 header {
-    position: absolute;
-    top: 0;
+    grid-area: header;
     width: 100%;
     height: 250px; /* 배너 높이는 필요에 따라 조절하세요 */
     background-color: #fff;
@@ -26,7 +25,6 @@ header {
     align-items: center;
 }
 header .content {
-    position: absolute;;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -56,11 +54,12 @@ header .content {
     cursor: pointer;
 }
 
-header .head-nav img{
+header .head-nav img {
     filter: invert(100%) sepia(1%) saturate(2539%) hue-rotate(314deg) brightness(115%) contrast(80%);
     margin-top: 3.8px;
     height: 16px;
 }
+
 header .logo {
     display: flex;
     justify-content: center;
@@ -74,5 +73,38 @@ header .logo img {
     height: 200px;
 }
 
+.main-container {
+    display: grid;
+    grid-template-areas: 
+        "header header header"
+        "sidebar-left content sidebar-right"
+        "footer footer footer";
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    width: 100%;
+}
 
+.sidebar-left {
+    grid-area: sidebar-left;
+    background-color: #f4f4f4;
+}
 
+.sidebar-right {
+    grid-area: sidebar-right;
+    background-color: #f4f4f4;
+}
+
+.content {
+    grid-area: content;
+    background-color: #fff;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #fff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -18,46 +18,36 @@ pageEncoding="UTF-8"%>
     </style>
 </head>
 <body>
-    <%
-		String select = request.getParameter("pageChange");
-	%>
-
-    <div class="scroll">
+    <div class="main-container">
         <header>
-                <div class="content">
-                    <div class="logo">
-                        <img src="./resources/img/jjobkorea_logo.png">
-                    </div>
-                    <div class="head-nav">
-                        <ul>
-                            <img src="./resources/img/resume_img_page/membername.png">
-                            <li><a href="#">회원명</a></li>
-                            <img src="./resources/img/resume_img_page/logout.png">
-                            <li><a href="#">로그아웃</a></li>
-                        </ul>
-                    </div> 
+            <div class="content">
+                <div class="logo">
+                    <img src="./resources/img/jjobkorea_logo.png">
                 </div>
-            </header>
-            <!-- L-sidebar -->
+                <div class="head-nav">
+                    <ul>
+                        <img src="./resources/img/resume_img_page/membername.png">
+                        <li><a href="#">회원명</a></li>
+                        <img src="./resources/img/resume_img_page/logout.png">
+                        <li><a href="#">로그아웃</a></li>
+                    </ul>
+                </div> 
+            </div>
+        </header>
+        <div class="sidebar-left">
             <jsp:include page="L-sidebar.jsp"></jsp:include>
-            <!-- end L-sidebar -->
-            
-            <!-- R-sidebar -->
-            
-            <jsp:include page="R-sidebar.jsp"></jsp:include>
-            <!-- end R-sidebar -->
-            
-            <!-- center -->
-            <jsp:include page="center.jsp"></jsp:include>
-            <!-- end center -->
-            
-            <!-- content -->
-            <jsp:include page="content.jsp"></jsp:include>
-            <!-- end content -->
-
-             <!-- footer -->
-            <jsp:include page="footer.jsp"></jsp:include>
-            <!-- end footer -->
         </div>
-        </body>
+        <div class="sidebar-right">
+            <jsp:include page="R-sidebar.jsp"></jsp:include>
+        </div>
+        <div class="content">
+            <jsp:include page="center.jsp"></jsp:include>
+            <jsp:include page="content.jsp"></jsp:include>
+        </div>
+        <footer>
+            <jsp:include page="footer.jsp"></jsp:include>
+        </footer>
+    </div>
+</body>
+
         </html>
