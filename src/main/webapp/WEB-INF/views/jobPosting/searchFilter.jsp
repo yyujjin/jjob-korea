@@ -21,11 +21,22 @@ pageEncoding="UTF-8"%>
         .btn {
             width: 180px; /* 버튼의 너비를 150px로 설정 */
         }
-        .filter-box{
+        .filter-box-ul{
             border: solid black 1px;
             width: 100%;
             height: 100px;
             border-color:#eceff7 ;
+        }
+        .delete-button {
+            color: #d2d2d3;
+            border: none;
+            background-color: #ffffff;
+            
+            
+        }
+        .filterLi{
+            list-style-type: none;
+            color: #6db6ff;
         }
     </style>
     <link
@@ -165,4 +176,6 @@ pageEncoding="UTF-8"%>
     ></script>
 </body>
 </html>
+
+
 

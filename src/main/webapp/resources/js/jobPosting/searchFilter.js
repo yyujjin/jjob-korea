@@ -1,12 +1,14 @@
 
 //필터
 const filters = document.querySelectorAll(".filter")
-//필터박스
+//필터박스 
 const filterBox = document.querySelector("filter-box")
 //필터박스 ul
 const filterBoxUl = document.querySelector(".filter-box-ul")
 //필터 리스트
 const filterList = []
+
+
 
 //필터 박스에 추가
 addToFilterBox()
@@ -28,7 +30,7 @@ function addToFilterBox() {
 function makeList() {
     filterBoxUl.innerHTML = ""; // filterBoxUl 초기화
     filterList.forEach(filter => {
-        filterBoxUl.innerHTML += `<li>${filter}<button class="delete-button">x</button></li>`;
+        filterBoxUl.innerHTML += `<li class="filterLi">${filter}<button class="delete-button">x</button></li>`;
     })
 
     deleteFilter()
@@ -44,3 +46,9 @@ function deleteFilter(){
         })
     }
 }
+
+
+
+
+
+
