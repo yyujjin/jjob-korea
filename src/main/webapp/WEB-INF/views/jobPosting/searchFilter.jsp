@@ -26,18 +26,22 @@ pageEncoding="UTF-8"%>
             width: 100%;
             height: 100px;
             border-color:#eceff7 ;
+            display: flex;
+            flex-direction: row; /* 수평으로 배치 */
+            padding: 0; /* 내부 패딩 제거 */
+        }
+        .filter-box-ul li{
+            list-style-type: none;
+            color: #6db6ff;
+            padding: 5px 10px; /* 각 요소의 패딩 설정 */
+            flex-wrap: wrap; /* 자동 줄 바꿈 설정 */
         }
         .delete-button {
             color: #d2d2d3;
             border: none;
             background-color: #ffffff;
-            
-            
         }
-        .filterLi{
-            list-style-type: none;
-            color: #6db6ff;
-        }
+        
     </style>
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -176,6 +180,3 @@ pageEncoding="UTF-8"%>
     ></script>
 </body>
 </html>
-
-
-
