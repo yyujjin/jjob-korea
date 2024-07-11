@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.jjobkorea.dto.JobPostingDTO;
 import com.jjobkorea.dto.JobseekerCriteria;
 import com.jjobkorea.service.JobPostingService;
-import com.jjobkorea.service.JobseekerPageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +33,12 @@ public class MainController {
 	@Autowired
 	private JobseekerPageController jobseekerPageController;
 	
-	//공고 등록 페이지
+	//이력서 컨트롤러
+	@Autowired
+	private ResumeController resumeController;
+	
+	
+	//공고 등록 컨트롤러
 	@Autowired
 	private JobPostingDetailController jobPostingDetailController;
 
@@ -85,6 +89,11 @@ public class MainController {
 		// 구직자 게시판 페이지 진입
 		case "jobseekerBoard":
 			return jobseekerPageController.listWithPaging(cri, model);
+			
+		//이력서 등록 페이지 진입
+		case "resume":
+			return resumeController.resister(model);
+			
 		//공고 등록 페이지 진입
 		case "jobPostingResister":
 			return null;

@@ -85,7 +85,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-4 text-dark"
+                            <a href="/requestPage/resume" class="nav-link px-4 text-dark"
                                 >이력서 등록</a
                             >
                         </li>

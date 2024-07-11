@@ -1,135 +1,111 @@
 body {
     background: #E6E6E6;
     font-family: 'Roboto', sans-serif;
-    width: 100%;
-}
-
-* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-.scroll { 
-    width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
-.container {
     display: flex;
-    border: 1px solid black;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    overflow: auto;
-}
-.container2 {
-    display: flex;
-    border: 1px solid black;
-
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-.container3 {
-    display: flex;
-    border: 1px solid black;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-h3 {
-    display: flex;
-    border: 1px solid black;
-    justify-content: center;
-    text-align: center;
-    flex-wrap: wrap;
-    font-size: 15px;
-    margin-top: 15px;
 }
 
 header {
     width: 100%;
     background-color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-input, select {
-    margin: 0 0 5px 0;
+.main-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px;
+}
+
+.content {
+    flex: 3;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-right: 20px;
+}
+
+
+.profilephoto {
+    background: white;
+    width: 150px;
+    height: 210px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-left: 20px;
     text-align: center;
 }
 
-.container header .logo {
+h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.input-group {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.resumeinform {
-    height: 100px;
-    margin: 10px;
+input, select, textarea, button {
     padding: 10px;
-    background-color: white;
-}
-
-.skill {
-    margin: 10px;
-    padding: 10px;
-    height: 110px;
-    background-color: white;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(50% - 10px);
 }
 
 button {
-    width: 100px;
-    margin: 3px;
-    height: 40px;
+    cursor: pointer;
 }
 
-.profilephoto {
+.buttons {
     display: flex;
-    font-size: 12px;
-    width: 150px;
-    height: 210px;
-    background-color: white;
-    margin: 0px 10px 10px 0px;
-}
-
-.portpolio {
-    background-color: white;
-    margin-bottom: 20px;
-}
-
-#url {
-    padding: 10px;
-    width: 100%; /* 필요에 따라 너비 조정 */
-}
-.btn-upload {
-  width: 80px;
-  height: 30px;
-  font-size: 12px;
-  background: #fff;
-  border: 1px solid rgb(77,77,77);
-  border-radius: 10px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    background: rgb(77,77,77);
-    color: #fff;
-  }
-}
-
-#file {
-  display: none;
-}
-.sidebar{
-    display: flex;
-    border: 1px solid black;
-    justify-content: flex-end;
-    align-items: flex-end;
     flex-wrap: wrap;
-    background-color: white;
+    gap: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-bottom: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+.btn-upload {
+    background-color: #ccc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+}
+  
+  #file {
+    display: none;
+  }
+  textarea{
+    width: 100%;
+      resize: none;
+  }
+  #output {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
