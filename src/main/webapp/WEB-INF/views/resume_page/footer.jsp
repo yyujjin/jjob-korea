@@ -5,7 +5,8 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="./resources/css/resume_css/footer.css">
+	<!--절대경로로 변경-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/resume_css/footer.css">
     <title>Document</title>
 </head>
 <body>

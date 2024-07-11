@@ -6,9 +6,10 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
-    <!-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script> -->
-    <link rel="stylesheet" href="./resources/css/resume_css/resume_css.css">
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/resume_css/resume_css.css">
+	
     <style>
         .scroll{
             width: 100%;
@@ -23,6 +24,10 @@ pageEncoding="UTF-8"%>
 	%>
 
     <div class="scroll">
+		
+		
+		<!--메인 헤더와 코드 중복으로 주석처리-->
+		<!-- 
         <header>
                 <div class="content">
                     <div class="logo">
@@ -38,6 +43,11 @@ pageEncoding="UTF-8"%>
                     </div> 
                 </div>
             </header>
+			-->
+			
+			
+			
+			
             <!-- L-sidebar -->
             <jsp:include page="L-sidebar.jsp"></jsp:include>
             <!-- end L-sidebar -->
