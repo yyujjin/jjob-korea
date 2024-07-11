@@ -1,5 +1,6 @@
 package com.jjobkorea.entity;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 

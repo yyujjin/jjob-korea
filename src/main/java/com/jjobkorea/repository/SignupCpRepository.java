@@ -1,7 +1,9 @@
 package com.jjobkorea.repository;
 
 import com.jjobkorea.entity.SignupCp;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface SignupCpRepository extends CrudRepository<SignupCp, Long> {
+@Repository
+public interface SignupCpRepository extends JpaRepository<SignupCp, Integer> {
 }

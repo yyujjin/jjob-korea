@@ -6,19 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class AddSignupCpService {
-
+public class JobPostingCpService {
+    
     @Autowired
     private SignupCpRepository signupCpRepository;
 
-    public List<SignupCp> findAll() {
+    public List<SignupCp> getAllCompanies() {
         return signupCpRepository.findAll();
     }
 
-    public Optional<SignupCp> findById(Long id) {
-        return signupCpRepository.findById(id);
+    public void saveCompany(SignupCp signupCp) {
+        signupCpRepository.save(signupCp);
     }
 }

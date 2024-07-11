@@ -87,7 +87,7 @@ public class MainController {
 			return jobseekerPageController.listWithPaging(cri, model);
 		//공고 등록 페이지 진입
 		case "jobPostingResister":
-			return jobPostingDetailController.addJobPostingForm(model);
+			return null;
 		}
 		return "main/main";
 	}
