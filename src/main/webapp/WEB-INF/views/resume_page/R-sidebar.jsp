@@ -6,11 +6,10 @@ pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 	<!--절대 경로로 변경 -->	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/resume_css/R-sidebar.css">
 </head>
 <body>
-    <R-sidebar>
-		<div class="R-sidebar">
+    <sidebar>
+		<div>
 			<ul>
                 <h3>회원정보 관리</h3>
 				<div class="underbar-line"></div>
@@ -19,6 +18,6 @@ pageEncoding="UTF-8"%>
 				<li><a href="#">MyPage 이동</a></li></p>
 			</ul>
 		</div>
-	</R-sidebar>
+	</sidebar>
 </body>
 </html>
