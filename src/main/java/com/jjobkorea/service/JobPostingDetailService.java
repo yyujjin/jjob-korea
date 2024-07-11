@@ -1,10 +1,11 @@
 package com.jjobkorea.service;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.jjobkorea.entity.JobPostingDetail;
 import com.jjobkorea.repository.JobPostingDetailRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class JobPostingDetailService {
@@ -12,11 +13,11 @@ public class JobPostingDetailService {
     @Autowired
     private JobPostingDetailRepository jobPostingDetailRepository;
 
-    public List<JobPostingDetail> getAllJobPostings() {
-        return jobPostingDetailRepository.findAll();
+    public List<JobPostingDetail> getJobPostingDetailsByCompanyId(Long companyId) {
+        return jobPostingDetailRepository.findByCompanyId(companyId);
     }
-
-    public void saveJobPosting(JobPostingDetail jobPostingDetail) {
-        jobPostingDetailRepository.save(jobPostingDetail);
+    
+    public JobPostingDetail getJobPostingById(Long jobPostingId) {
+        return jobPostingDetailRepository.findById(jobPostingId).orElse(null);
     }
 }

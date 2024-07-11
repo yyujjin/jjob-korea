@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>채용 정보 입력</title>
     <!-- Bootstrap CSS -->
-    <link href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/bootstrap/bootstrap.css' />" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
@@ -41,33 +41,42 @@
         }
     </style>
     <script>
-        function updateCompanyInfo() {
-            var selectedCompanyId = document.getElementById("companySelect").value;
-            var companies = JSON.parse('${signupCpListJson}');
-            var selectedCompany = companies.find(company => company.id == selectedCompanyId);
+        document.addEventListener('DOMContentLoaded', function() {
+            var signupCpList = ${signupCpListJson};
+            document.getElementById("companySelect").addEventListener("change", function() {
+                var selectedCompanyId = this.value;
+                var selectedCompany = signupCpList.find(company => company.id == selectedCompanyId);
 
-            if (selectedCompany) {
-                document.getElementById("companyName").value = selectedCompany.companyName;
-                document.getElementById("companyType").value = selectedCompany.companyType;
-                document.getElementById("companyRegistrationNum").value = selectedCompany.companyRegistrationNum;
-                document.getElementById("companyRepresentativeName").value = selectedCompany.companyRepresentativeName;
-                document.getElementById("companyAddr").value = selectedCompany.companyAddr;
-                document.getElementById("companyBusinessRegistration").value = selectedCompany.companyBusinessRegistration;
-            }
-        }
+                if (selectedCompany) {
+                    document.getElementById("companyName").value = selectedCompany.companyName;
+                    document.getElementById("companyType").value = selectedCompany.companyType;
+                    document.getElementById("companyRegistrationNum").value = selectedCompany.companyRegistrationNum;
+                    document.getElementById("companyRepresentativeName").value = selectedCompany.companyRepresentativeName;
+                    document.getElementById("companyAddr").value = selectedCompany.companyAddr;
+                    document.getElementById("companyBusinessRegistration").value = selectedCompany.companyBusinessRegistration;
+                } else {
+                    document.getElementById("companyName").value = "";
+                    document.getElementById("companyType").value = "";
+                    document.getElementById("companyRegistrationNum").value = "";
+                    document.getElementById("companyRepresentativeName").value = "";
+                    document.getElementById("companyAddr").value = "";
+                    document.getElementById("companyBusinessRegistration").value = "";
+                }
+            });
+        });
     </script>
 </head>
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">채용 정보 입력</h2>
 
-        <form action="/jobPostingDetail" method="POST">
+        <form action="/addJobPosting" method="POST">
             <!-- 회사 정보 섹션 -->
             <div class="card mb-4">
                 <div class="card-header">회사 정보</div>
                 <div class="card-body">
                     <div class="form-floating">
-                        <select class="form-control" id="companySelect" name="companyId" onchange="updateCompanyInfo()" required>
+                        <select class="form-control" id="companySelect" name="company.id" required>
                             <option value="">회사를 선택하세요</option>
                             <c:forEach var="company" items="${signupCpList}">
                                 <option value="${company.id}">${company.companyName}</option>
@@ -169,6 +178,6 @@
     <!-- jQuery -->
     <script src="<c:url value='/resources/js/jquery-3.7.1.min.js' />"></script>
     <!-- Bootstrap JS -->
-    <script src="<c:url value='/resources/css/bootstrap/bootstrap.min.js' />"></script>
+    <script src="<c:url value='/resources/js/bootstrap/bootstrap.js' />"></script>
 </body>
 </html>

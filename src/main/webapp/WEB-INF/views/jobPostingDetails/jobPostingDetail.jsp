@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,12 +13,16 @@
             background-color: #f8f9fa;
         }
 
+        .container {
+            max-width: 800px;
+        }
+
         .table th, .table td {
             vertical-align: middle;
         }
 
-        .container {
-            max-width: 800px;
+        .card {
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -28,7 +31,7 @@
         <h2 class="text-center mb-4">채용 정보 상세</h2>
 
         <!-- 회사 정보 -->
-        <div class="card mb-4">
+        <div class="card">
             <div class="card-header">회사 정보</div>
             <div class="card-body">
                 <table class="table table-bordered">
@@ -63,45 +66,47 @@
         </div>
 
         <!-- 채용 정보 -->
-        <div class="card mb-4">
+        <div class="card">
             <div class="card-header">채용 정보</div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th>채용 제목</th>
-                            <td>${jobPostingDetail.jobTitle}</td>
-                        </tr>
-                        <tr>
-                            <th>채용 설명</th>
-                            <td>${jobPostingDetail.jobDescription}</td>
-                        </tr>
-                        <tr>
-                            <th>채용 요구사항</th>
-                            <td>${jobPostingDetail.jobRequirements}</td>
-                        </tr>
-                        <tr>
-                            <th>고용 형태</th>
-                            <td>${jobPostingDetail.employmentType}</td>
-                        </tr>
-                        <tr>
-                            <th>급여</th>
-                            <td>${jobPostingDetail.salary}</td>
-                        </tr>
-                        <tr>
-                            <th>근무지</th>
-                            <td>${jobPostingDetail.location}</td>
-                        </tr>
-                        <tr>
-                            <th>지원 마감일</th>
-                            <td>${jobPostingDetail.applicationDeadline}</td>
-                        </tr>
-                        <tr>
-                            <th>연락처 이메일</th>
-                            <td>${jobPostingDetail.contactEmail}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <c:forEach var="jobPostingDetail" items="${jobPostingDetails}">
+                    <table class="table table-bordered mb-4">
+                        <tbody>
+                            <tr>
+                                <th>채용 제목</th>
+                                <td>${jobPostingDetail.jobTitle}</td>
+                            </tr>
+                            <tr>
+                                <th>채용 설명</th>
+                                <td>${jobPostingDetail.jobDescription}</td>
+                            </tr>
+                            <tr>
+                                <th>채용 요구사항</th>
+                                <td>${jobPostingDetail.jobRequirements}</td>
+                            </tr>
+                            <tr>
+                                <th>고용 형태</th>
+                                <td>${jobPostingDetail.employmentType}</td>
+                            </tr>
+                            <tr>
+                                <th>급여</th>
+                                <td>${jobPostingDetail.salary}</td>
+                            </tr>
+                            <tr>
+                                <th>근무지</th>
+                                <td>${jobPostingDetail.location}</td>
+                            </tr>
+                            <tr>
+                                <th>지원 마감일</th>
+                                <td>${jobPostingDetail.applicationDeadline}</td>
+                            </tr>
+                            <tr>
+                                <th>연락처 이메일</th>
+                                <td>${jobPostingDetail.contactEmail}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </c:forEach>
             </div>
         </div>
     </div>
@@ -109,6 +114,6 @@
     <!-- jQuery -->
     <script src="<c:url value='/resources/js/jquery-3.7.1.min.js' />"></script>
     <!-- Bootstrap JS -->
-    <script src="<c:url value='/resources/css/bootstrap/bootstrap.js' />"></script>
+    <script src="<c:url value='/resources/js/bootstrap/bootstrap.js' />"></script>
 </body>
 </html>
