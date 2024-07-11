@@ -1,11 +1,12 @@
 package com.jjobkorea.repository;
 
 import com.jjobkorea.entity.JobPostingDetail;
-import com.jjobkorea.entity.SignupCp;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface JobPostingDetailRepository extends CrudRepository<JobPostingDetail, Long> {
-    List<JobPostingDetail> findBySignupCp(SignupCp signupCp);
+@Repository
+public interface JobPostingDetailRepository extends JpaRepository<JobPostingDetail, Long> {
+    List<JobPostingDetail> findByCompanyId(int companyId);
 }

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>채용 정보 입력</title>
     <!-- Bootstrap CSS -->
-    <link href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/bootstrap/bootstrap.css' />" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
@@ -71,6 +71,11 @@
         <h2 class="text-center mb-4">채용 정보 입력</h2>
 
         <form action="/addJobPosting" method="POST">
+            <c:if test="${not empty errorMessage}">
+                <div class="alert alert-danger" role="alert">
+                    ${errorMessage}
+                </div>
+            </c:if>
             <!-- 회사 정보 섹션 -->
             <div class="card mb-4">
                 <div class="card-header">회사 정보</div>
@@ -178,6 +183,6 @@
     <!-- jQuery -->
     <script src="<c:url value='/resources/js/jquery-3.7.1.min.js' />"></script>
     <!-- Bootstrap JS -->
-    <script src="<c:url value='/resources/js/bootstrap/bootstrap.min.js' />"></script>
+    <script src="<c:url value='/resources/js/bootstrap/bootstrap.js' />"></script>
 </body>
 </html>

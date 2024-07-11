@@ -1,29 +1,48 @@
 package com.jjobkorea.entity;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "job_posting_detail")
 @Data
-@NoArgsConstructor
 public class JobPostingDetail {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "signup_cp_id")
-    private SignupCp signupCp;
+    @Column(name = "companyName")
+    private String companyName;
 
+    @Column(name = "postingImage")
+    private String postingImage;
+
+    @Column(name = "postingTitle")
+    private String postingTitle;
+
+    @Column(name = "jobTitle")
     private String jobTitle;
-    private String jobDescription;
-    private String jobRequirements;
+
+    @Column(name = "workLocation")
+    private String workLocation;
+
+    @Column(name = "employmentType")
     private String employmentType;
-    private String salary;
-    private String location;
-    private String applicationDeadline;
-    private String contactEmail;
+
+    @Column(name = "jobExperience")
+    private String jobExperience;
+
+    @Column(name = "deadline")
+    private Date deadline;
+
+    @Column(name = "hit")
+    private int hit;
+
+    @ManyToOne
+    @JoinColumn(name = "companyId")
+    private SignupCp company;
 }

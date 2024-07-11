@@ -30,9 +30,19 @@ public class AddJobPostingController {
         return "jobPostingDetails/addJobPosting";
     }
 
-    @PostMapping("/jobPosting")
-    public String saveJobPosting(@ModelAttribute("signupCp") SignupCp signupCp) {
+    @PostMapping("/addJobPosting")
+    public String saveJobPosting(@ModelAttribute("signupCp") SignupCp signupCp, Model model) {
+        if (jobPostingCpService.existsByCompanyRegistrationNum(signupCp.getCompanyRegistrationNum())) {
+            model.addAttribute("errorMessage", "중복된 회사 등록 번호입니다.");
+            return "jobPostingDetails/addJobPosting";
+        }
+
+        if (jobPostingCpService.existsByCompanyBusinessRegistration(signupCp.getCompanyBusinessRegistration())) {
+            model.addAttribute("errorMessage", "중복된 사업자 등록 번호입니다.");
+            return "jobPostingDetails/addJobPosting";
+        }
+        
         jobPostingCpService.saveCompany(signupCp);
-        return "redirect:/jobPosting/new";
+        return "redirect:/jobPostingDetail?companyId=" + signupCp.getId();
     }
 }

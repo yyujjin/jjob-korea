@@ -15,10 +15,5 @@ public class JobPostingCpController {
     @Autowired
     private JobPostingCpService jobPostingCpService;
 
-    @GetMapping("/companies")
-    public String getAllCompanies(Model model) {
-        List<SignupCp> companies = jobPostingCpService.getAllCompanies();
-        model.addAttribute("companies", companies);
-        return "jobPostingDetails/companies";
-    }
+   
 }
