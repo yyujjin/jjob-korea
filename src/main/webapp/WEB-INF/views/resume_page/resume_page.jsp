@@ -26,6 +26,9 @@ pageEncoding="UTF-8"%>
             <div class="under-line"></div>
             <jsp:include page="center.jsp"></jsp:include>
         </div>
+		<div class="content2">
+			<jsp:include page="content.jsp"></jsp:include>
+		</div>
         <div class="resume_footer">
             <jsp:include page="resume_footer.jsp"></jsp:include>
         </div>

@@ -13,7 +13,7 @@ public class ResumeController {
 	//도훈씨 개인 작업 할 때 경로 
 	
 	@RequestMapping("/resume")
-	public String hello(Model model) {
+	public String resume(Model model) {
 		log.info("@#hello");
 
 		model.addAttribute("message", "핼로~");
