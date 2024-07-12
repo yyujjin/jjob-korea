@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jjobkorea.dto.FilterDTO;
+
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
@@ -17,7 +19,7 @@ public class SearchFilterController {
 	JobPostingController jobPostingController;
 
 	@PostMapping("/searchFilter")
-	public void searchFilter(@RequestBody List<String> filterList, HttpServletResponse response, Model model)
+	public void searchFilter(@RequestBody List<String> filterList, HttpServletResponse response, Model model,FilterDTO dto)
 			throws Exception {
 		// 수신된 데이터 처리 (여기서는 단순히 출력)
 		System.out.println("수신된 필터 리스트: " + filterList);
@@ -36,7 +38,7 @@ public class SearchFilterController {
        
        
        
-		jobPostingController.getSearchFilterList(filterList);
+		jobPostingController.getSearchFilterList(filterList, dto);
 
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jjobkorea.dto.FilterDTO;
 import com.jjobkorea.dto.JobPostingDTO;
 import com.jjobkorea.service.JobPostingService;
 
@@ -56,9 +57,9 @@ public class JobPostingController {
 	}
 
 	//상세조건 검색
-	public void getSearchFilterList( List<String> filterList) {
+	public void getSearchFilterList( List<String> filterList,FilterDTO dto) {
 		log.info("getSearchFilterList 실행됨!!!");
-		List<JobPostingDTO> searchList = jobPostingService.getSearchList(filterList);
+		List<JobPostingDTO> searchList = jobPostingService.getSearchList(filterList,dto);
 		
 		
 	}

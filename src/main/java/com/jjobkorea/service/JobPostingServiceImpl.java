@@ -46,6 +46,8 @@ public class JobPostingServiceImpl implements JobPostingService {
 		return getPostingList;
 	}
 
+	
+	//조건 검색
 	@Override
 	public List<JobPostingDTO> getSearchList(List<String> filterList, FilterDTO dto ) {
 		log.info("getSearchList 서비스 실행됨!!");
@@ -76,7 +78,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 		
 		
 		//필터 dto qhsorl 
-		List<JobPostingDTO> searchList = jobPostingMapper.getSearchList(dto);
+		List<FilterDTO> searchList = jobPostingMapper.getSearchList(dto);
 		log.info("받아온 searchList{} :",  searchList);
 		
 		return null;
