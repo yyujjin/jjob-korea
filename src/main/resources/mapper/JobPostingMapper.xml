@@ -27,87 +27,72 @@
 	    SELECT *
 	    FROM jobposting
 	    <where>
-	        <!-- fullStack 필드가 true인 경우 -->
+	       
 	        <if test="fullStack != null">
 	            AND filters LIKE CONCAT('%', #{fullStack}, '%')
 	        </if>
 	
-	        <!-- frontEnd 필드가 true인 경우 -->
+	        
 	        <if test="frontEnd != null">
 	            AND filters LIKE CONCAT('%', #{frontEnd}, '%')
 	        </if>
 	
-	        <!-- backEnd 필드가 true인 경우 -->
 	        <if test="backEnd != null">
 	            AND filters LIKE CONCAT('%', #{backEnd}, '%')
 	        </if>
 	
-	        <!-- seoul 필드가 true인 경우 -->
 	        <if test="seoul != null">
 	            AND filters LIKE CONCAT('%', #{seoul}, '%')
 	        </if>
 	
-	        <!-- busan 필드가 true인 경우 -->
 	        <if test="busan != null">
 	            AND filters LIKE CONCAT('%', #{busan}, '%')
 	        </if>
 	
-	        <!-- daegu 필드가 true인 경우 -->
 	        <if test="daegu != null">
 	            AND filters LIKE CONCAT('%', #{daegu}, '%')
 	        </if>
 	
-	        <!-- incheon 필드가 true인 경우 -->
 	        <if test="incheon != null">
 	            AND filters LIKE CONCAT('%', #{incheon}, '%')
 	        </if>
 	
-	        <!-- gwangju 필드가 true인 경우 -->
 	        <if test="gwangju != null">
 	            AND filters LIKE CONCAT('%', #{gwangju}, '%')
 	        </if>
 	
-	        <!-- daejeon 필드가 true인 경우 -->
 	        <if test="daejeon != null">
 	            AND filters LIKE CONCAT('%', #{daejeon}, '%')
 	        </if>
 	
-	        <!-- ulsan 필드가 true인 경우 -->
 	        <if test="ulsan != null">
 	            AND filters LIKE CONCAT('%', #{ulsan}, '%')
 	        </if>
 	
-	        <!-- sejong 필드가 true인 경우 -->
 	        <if test="sejong != null">
 	            AND filters LIKE CONCAT('%', #{sejong}, '%')
 	        </if>
 	
-	        <!-- largeCompany 필드가 true인 경우 -->
 	        <if test="largeCompany != null">
 	            AND filters LIKE CONCAT('%', #{largeCompany}, '%')
 	        </if>
 	
-	        <!-- smallMediumCompany 필드가 true인 경우 -->
 	        <if test="smallMediumCompany != null ">
 	            AND filters LIKE CONCAT('%', #{smallMediumCompany}, '%')
 	        </if>
 	
-	        <!-- startup 필드가 true인 경우 -->
 	        <if test="startup != null ">
 	            AND filters LIKE CONCAT('%', #{startup}, '%')
 	        </if>
 	
-	        <!-- regularEmployee 필드가 true인 경우 -->
 	        <if test="regularEmployee != null">
 	            AND filters LIKE CONCAT('%', #{regularEmployee}, '%')
 	        </if>
 	
-	        <!-- contractEmployee 필드가 true인 경우 -->
 	        <if test="contractEmployee != null ">
 	            AND filters LIKE CONCAT('%', #{contractEmployee}, '%')
 	        </if>
 	
-	        <!-- intern 필드가 true인 경우 -->
 	        <if test="intern != null">
 	            AND filters LIKE CONCAT('%', #{intern}, '%')
 	        </if>
