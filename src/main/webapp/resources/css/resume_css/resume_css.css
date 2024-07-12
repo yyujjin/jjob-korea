@@ -109,3 +109,13 @@
 li{
     list-style-type: none;
 }
+.content2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: center;
+    font-size: 15px;
+    grid-column: 3 / 4;
+    grid-row: 2;
+    z-index: 1;
+}

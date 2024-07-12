@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+  	<mapper namespace="com.jjobkorea.mapper.ResumeWritePageMapper">
+  		<select id="list" resultType="com.jjobkorea.dto.ResumeWritePageDTO">
+			SELECT 
+			    su.id AS user_id,
+			    su.memId, -- memId
+			    wp.Id AS resume_id, 
+			    su.memId AS resumePageUserId, -- resumePageUserId (same as memId)
+			    GROUP_CONCAT(DISTINCT wp.resumePageTitle) AS resumePageTitle, 
+			    GROUP_CONCAT(DISTINCT wp.resumePageWriteDate) AS resumePageWriteDate, 
+			    GROUP_CONCAT(DISTINCT ui.resumeUserName) AS resumeUserName, 
+			    GROUP_CONCAT(DISTINCT ui.resumeBirthDay) AS resumeBirthDay, 
+			    GROUP_CONCAT(DISTINCT ui.resumeGender) AS resumeGender, 
+			    GROUP_CONCAT(DISTINCT ui.resumeUserEmail) AS resumeUserEmail, 
+			    GROUP_CONCAT(DISTINCT ui.resumeUserPhone) AS resumeUserPhone, 
+			    GROUP_CONCAT(DISTINCT ui.resumeUserCellPhone) AS resumeUserCellPhone, 
+			    GROUP_CONCAT(DISTINCT ui.resumeUserAddress) AS resumeUserAddress, 
+			    GROUP_CONCAT(DISTINCT ui.resumeProfilePhoto) AS resumeProfilePhoto, 
+			    GROUP_CONCAT(DISTINCT ui.resumeSkillName) AS resumeSkillName, 
+			    GROUP_CONCAT(DISTINCT ui.resumePortpolio) AS resumePortpolio, 
+			    GROUP_CONCAT(DISTINCT ui.resumeEduStage) AS resumeEduStage, 
+			    GROUP_CONCAT(DISTINCT ui.resumeSchoolName) AS resumeSchoolName, 
+			    GROUP_CONCAT(DISTINCT ui.resumeCpName) AS resumeCpName, 
+			    GROUP_CONCAT(DISTINCT ui.resumeCpDept) AS resumeCpDept, 
+			    GROUP_CONCAT(DISTINCT ui.resumeCpJoinDate) AS resumeCpJoinDate, 
+			    GROUP_CONCAT(DISTINCT ui.resumeCpLeaveDate) AS resumeCpLeaveDate, 
+			    GROUP_CONCAT(DISTINCT ui.resumeCpPosition) AS resumeCpPosition, 
+			    GROUP_CONCAT(DISTINCT ui.resumeCpDuty) AS resumeCpDuty, 
+			    GROUP_CONCAT(DISTINCT ui.resumeCpSalary) AS resumeCpSalary, 
+			    GROUP_CONCAT(DISTINCT ui.resumeIntroduce) AS resumeIntroduce
+			FROM signup_tb su
+			LEFT JOIN resume_write_page wp ON su.memId = wp.resumePageUserId
+			LEFT JOIN resume_user_information ui ON su.memId = ui.resumePageUserId
+			GROUP BY su.id, wp.Id, su.memId, su.memName, su.memPhone, su.memAddr, su.memEmail, su.memBirth, su.memGender
+			LIMIT 0, 10000;
+  		</select>
+  	</mapper>
