@@ -55,7 +55,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 		for(String filter : filterList) {
 			
 			switch (filter) {
-			case "프론트" : dto.setFrontEnd(filter); break;
+			case "프론트엔드" : dto.setFrontEnd(filter); break;
 			case "백엔드" : dto.setBackEnd(filter); break;
 			case "풀스택" : dto.setFullStack(filter); break;
 			case "서울" : dto.setSeoul(filter); break;
