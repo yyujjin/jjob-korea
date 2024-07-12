@@ -20,7 +20,8 @@ public class JobseekerCriteria {
 	
 	public JobseekerCriteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
-		this.amount = amount;
+ 		this.amount = amount;
+
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,5 +35,14 @@ public class JobseekerCommentController {
 		ArrayList<JobseekerCommentDTO> jobseekerlistCommentList = service.findAll(param);
 		return jobseekerlistCommentList;
 	}
+	
+	//실시간댓글
+	@GetMapping("/getComments")
+    public @ResponseBody ArrayList<JobseekerCommentDTO> getComments(@RequestParam("jobseekerCommunityBoardNum") int jobseekerCommunityBoardNum) {
+        HashMap<String, String> param = new HashMap<>();
+        param.put("jobseekerCommunityBoardNum", String.valueOf(jobseekerCommunityBoardNum));
+        return service.findAll(param);
+    }
+	
 }
 

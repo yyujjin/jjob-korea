@@ -70,14 +70,10 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="수정">
-					<!-- &nbsp;&nbsp;<a href="list">목록보기</a> -->
-					 <!-- formaction="list" : name 으로 설정된 값들을 가지고 이동 -->
-					<!-- &nbsp;&nbsp;<input type="submit" value="목록보기" form action="jobseekerBoardList"> -->
 					&nbsp;&nbsp;<input type="submit" value="목록보기" formmethod="get" 
-					formaction="jobseekerBoardList">
-					<!-- &nbsp;&nbsp;<input type="submit" value="삭제" form action="jobseekerDelete"> -->
+					formaction="/requestPage/jobseekerBoardList">
 					&nbsp;&nbsp;<input type="submit" value="삭제" formmethod="post"
-					form action="jobseekerDelete">
+					formaction="delete">
 				</td>
 			</tr>
 		</form>
@@ -134,7 +130,7 @@
 				   ,jobseekerCommunityCommentContent: content
 				   ,jobseekerCommunityBoardNum: no
 				}
-				,url: "/comment/save"
+				,url: "${pageContext.request.contextPath}/jobseekercomment/jobseekerSave"
 				,success: function(commentList){
 					console.log("작성성공");
 					console.log(commentList);
@@ -150,7 +146,7 @@
 							output += "<td>"+commentList[i].jobseekerCommentCommentWriter+"</td>";
 							output += "<td>"+commentList[i].jobseekerCommunityCommentContent+"</td>";
 						let jobseekerCommentTime = commentList[i].jobseekerCommentTime.substring(0, 10)+" ";
-							jobseekerCommentTime += parseInt(commentList[i].jobseekerCommentTime.substring(12, 13))+9;
+							jobseekerCommentTime += parseInt(commentList[i].jobseekerCommentTime.substring(12, 13))+10;
 							jobseekerCommentTime += commentList[i].jobseekerCommentTime.substring(13, 16);
 							output += "<td>"+jobseekerCommentTime+"</td>";
 							output += "</tr>";
@@ -170,41 +166,74 @@
 	</script>
 	<script>
 		$(document).ready(function (){
-			// 즉시실행함수
+			const boardNum = "${content_view.jobseekerCommunityBoardNum}";
+
+			const loadComments = () => {
+				$.ajax({
+					url: "${pageContext.request.contextPath}/jobseekercomment/getComments",
+					method: "GET",
+					data: { jobseekerCommunityBoardNum: boardNum },
+					success: function(commentList) {
+						let output = "<table>";
+						output += "<tr><th>댓글번호</th>";
+						output += "<th>작성자</th>";
+						output += "<th>내용</th>";
+						output += "<th>작성시간</th></tr>";
+						for (let i in commentList){
+							output += "<tr>";
+							output += "<td>"+commentList[i].jobseekerCommentBoardNum+"</td>";
+							output += "<td>"+commentList[i].jobseekerCommentCommentWriter+"</td>";
+							output += "<td>"+commentList[i].jobseekerCommunityCommentContent+"</td>";
+							let jobseekerCommentTime = commentList[i].jobseekerCommentTime.substring(0, 10)+" ";
+							jobseekerCommentTime += parseInt(commentList[i].jobseekerCommentTime.substring(12, 13))+10;
+							jobseekerCommentTime += commentList[i].jobseekerCommentTime.substring(13, 16);
+							output += "<td>"+jobseekerCommentTime+"</td>";
+							output += "</tr>";
+						}
+						output += "</table>";
+						document.getElementById("comment-list").innerHTML = output;
+					},
+					error: function() {
+						console.log("댓글 불러오기 실패");
+					}
+				});
+			};
+
+			// 페이지 로드 시 댓글을 불러옵니다.
+			loadComments();
+
 			(function(){
 				console.log("@# document ready");
-				var boardNum = "<c:out value='${content_view.jobseekerCommunityBoardNum}'/>";
-				
-				
-			if (boardNum.trim() !== "") {
-				console.log("@# boardNum=>"+boardNum);
-				$.getJSON("/getFileList", {jobseekerCommunityBoardNum: boardNum}, function (arr){
-					console.log("@# arr=>"+arr);
 
-					var str="";
+				if (boardNum.trim() !== "") {
+					console.log("@# boardNum=>"+boardNum);
+					$.getJSON("${pageContext.request.contextPath}/getFileList", {jobseekerCommunityBoardNum: boardNum}, function (arr){
+						console.log("@# arr=>"+arr);
 
-					$(arr).each(function (i, attach){
-						if (attach.jobseekerBoardAttachImage) {
-							var fileCallPath = encodeURIComponent(attach.jobseekerBoardAttachUploadPath +"/s_"+ attach.jobseekerBoardAttachUuid + "_" + attach.jobseekerBoardAttachFileName);
-							str += "<li data-path='" + attach.jobseekerBoardAttachUploadPath + "'";
-							str += " data-uuid='" + attach.jobseekerBoardAttachUuid + "' data-filename='" + attach.jobseekerBoardAttachFileName + "' data-type='" + attach.jobseekerBoardAttachImage + "'"
-							str + " ><div>";
-							str += "<span>"+attach.jobseekerBoardAttachFileName+"</span>";
-							str += "<img src='/display?fileName="+fileCallPath+"'>";
-							str += "</div></li>";
-						} else {
-							str += "<li data-path='" + attach.jobseekerBoardAttachUploadPath + "'";
-							str += " data-uuid='" + attach.jobseekerBoardAttachUuid + "' data-filename='" + attach.jobseekerBoardAttachFileName + "' data-type='" + attach.jobseekerBoardAttachImage + "'"
-							str + " ><div>";
-							str += "<span>"+attach.jobseekerBoardAttachFileName+"</span>";
-							str += "<img src='./resources/img/attach.png'>";
-							str += "</div></li>";			
-						}
-					});//end of arr each
+						let str="";
 
-					$(".uploadResult ul").html(str);
-				});//end of getJSON
-			}
+						$(arr).each(function (i, attach){
+							if (attach.jobseekerBoardAttachImage) {
+								const fileCallPath = encodeURIComponent(attach.jobseekerBoardAttachUploadPath +"/s_"+ attach.jobseekerBoardAttachUuid + "_" + attach.jobseekerBoardAttachFileName);
+								str += "<li data-path='" + attach.jobseekerBoardAttachUploadPath + "'";
+								str += " data-uuid='" + attach.jobseekerBoardAttachUuid + "' data-filename='" + attach.jobseekerBoardAttachFileName + "' data-type='" + attach.jobseekerBoardAttachImage + "'"
+								str + " ><div>";
+								str += "<span>"+attach.jobseekerBoardAttachFileName+"</span>";
+								str += "<img src='/display?fileName="+fileCallPath+"'>";
+								str += "</div></li>";
+							} else {
+								str += "<li data-path='" + attach.jobseekerBoardAttachUploadPath + "'";
+								str += " data-uuid='" + attach.jobseekerBoardAttachUuid + "' data-filename='" + attach.jobseekerBoardAttachFileName + "' data-type='" + attach.jobseekerBoardAttachImage + "'"
+								str + " ><div>";
+								str += "<span>"+attach.jobseekerBoardAttachFileName+"</span>";
+								str += "<img src='./resources/img/attach.png'>";
+								str += "</div></li>";			
+							}
+						});
+
+						$(".uploadResult ul").html(str);
+					});
+				}
 
 				$(".uploadResult").on("click", "li", function (e){
 					console.log("@# uploadResult click");
