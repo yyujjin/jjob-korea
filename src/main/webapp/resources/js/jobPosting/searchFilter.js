@@ -85,6 +85,9 @@ function searchFilter() {
 			},
 		});
 		console.log("AJAX 요청 전송됨")
+		
+		filterList = [] //배열 초기화하기
+        makeList() 
 	})
 
 }
