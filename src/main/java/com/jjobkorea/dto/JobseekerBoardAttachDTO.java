@@ -14,3 +14,4 @@ public class JobseekerBoardAttachDTO {
 	private boolean jobseekerBoardAttachImage;
 	private int jobseekerCommunityBoardNum;
 }
+
