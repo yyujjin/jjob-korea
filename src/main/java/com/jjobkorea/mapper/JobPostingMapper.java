@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.jjobkorea.dto.FilterDTO;
 import com.jjobkorea.dto.JobPostingDTO;
 
 @Mapper
@@ -13,6 +14,6 @@ public interface JobPostingMapper {
 	public List<JobPostingDTO> getPostingList();
 	
 	//선택조건 리스트 가져오기
-	public List<JobPostingDTO> getSearchList();
+	public List<JobPostingDTO> getSearchList(FilterDTO dto);
 	
 }

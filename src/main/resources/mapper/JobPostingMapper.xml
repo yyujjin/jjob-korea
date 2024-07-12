@@ -20,11 +20,6 @@
 		FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
 	</select>
 
-	<select id="getSearchList" parameterType="String"  resultType="JobPostingDTO">
-		SELECT <include refid="jobPostingColums" /> 
-		FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
-	</select>
-	
 
 </mapper>
 
