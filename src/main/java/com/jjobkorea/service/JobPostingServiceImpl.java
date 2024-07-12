@@ -17,13 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 public class JobPostingServiceImpl implements JobPostingService {
 
 	@Autowired
-	JobPostingMapper jobPostringMapper;
+	JobPostingMapper jobPostingMapper;
 
 	// 채용 정보 리스트 가져오기
 	@Override
 	public List<JobPostingDTO> getPostingList() {
 		// 채용 정보리스트 가져오기
-		List<JobPostingDTO> getPostingList = jobPostringMapper.getPostingList();
+		List<JobPostingDTO> getPostingList = jobPostingMapper.getPostingList();
 
 		// 현재 날짜 가져오기
 		LocalDate currentDate = LocalDate.now();
@@ -48,14 +48,13 @@ public class JobPostingServiceImpl implements JobPostingService {
 	@Override
 	public List<JobPostingDTO> getSearchList(List<String> filterList) {
 		log.info("getSearchList 서비스 실행됨!!");
-		String searchFilter = "";
-		
-		for(String filter: filterList) {
-			searchFilter += filter+"-";
-		}
-		log.info(searchFilter);
 
 		
+		
+		log.info();
+
+		List<JobPostingDTO> searchList = jobPostingMapper.getSearchList();
+		log.info("searchList{} : {}",  searchList);
 		
 		return null;
 	}
