@@ -54,7 +54,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 			searchFilter += filter+"-";
 		}
 		log.info(searchFilter);
-		
+
 		
 		
 		return null;
