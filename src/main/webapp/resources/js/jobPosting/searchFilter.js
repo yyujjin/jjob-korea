@@ -2,7 +2,7 @@
 //필터
 const filters = document.querySelectorAll(".filter")
 //필터박스 
-const filterBox = document.querySelector("filter-box")
+const filterBox = document.querySelector(".filter-box")
 //필터박스 ul
 const filterBoxUl = document.querySelector(".filter-box-ul")
 //필터 리스트
@@ -23,6 +23,8 @@ function addToFilterBox() {
             if(isInList==-1){
                 filterList.push(event.target.id)
             }
+			//배열에 추가됐는지 확인
+			console.log(filterList)
             makeList()
         })
     }
@@ -34,7 +36,6 @@ function makeList() {
     filterList.forEach(filter => {
         filterBoxUl.innerHTML += `<li class="filterLi">${filter}<button class="delete-button">x</button></li>`;
     })
-
     deleteFilter()
 }
 
@@ -62,20 +63,21 @@ function resetFilter(){
 searchFilter()
 //AJAX 연결
 function searchFilter(){
+	
     searchFiltersButton.addEventListener("click",function(){
+		
         $.ajax({
-            type : 'post',
-            url : 'http://localhost:8082/searchFilter',
-            data : {filterList : filterList},
-            /*dataType : 'json',*/
-            /*traditional: true,*/
-            error: function(error){
-                console.error('에러 발생:', error);
-            },
+            url : "/searchFilter",
+            type : "POST",
+            data: JSON.stringify(filterList),// filterList 배열을 직접 전송
+			contentType: "application/json; charset=UTF-8",
             success : function(data){
                 console.log('성공:', data);
                 // 서버에서 반환된 데이터 처리
-            }
+            },
+            error: function(error){
+                console.error('에러 발생:', error);
+            },
           });
           console.log("AJAX 요청 전송됨")
     })

@@ -51,6 +51,8 @@ pageEncoding="UTF-8"%>
         crossorigin="anonymous"
     />
 	<script src="../../resources/js/jobPosting/searchFilter.js" defer></script> <!--js연결-->
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><!-- jQuery 라이브러리 추가 -->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
