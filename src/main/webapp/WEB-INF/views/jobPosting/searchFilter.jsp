@@ -32,7 +32,7 @@ pageEncoding="UTF-8"%>
         }
         .filter-box-ul li{
             list-style-type: none;
-            color: #6db6ff;
+            color:#1219fe;
             padding: 5px 10px; /* 각 요소의 패딩 설정 */
             flex-wrap: wrap; /* 자동 줄 바꿈 설정 */
         }
