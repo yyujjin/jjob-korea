@@ -1,9 +1,7 @@
 package com.jjobkorea.service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +44,22 @@ public class JobPostingServiceImpl implements JobPostingService {
 
 		return getPostingList;
 	}
+
+	@Override
+	public List<JobPostingDTO> getSearchList(List<String> filterList) {
+		log.info("getSearchList 서비스 실행됨!!");
+		String searchFilter = "";
+		
+		for(String filter: filterList) {
+			searchFilter += filter+"-";
+		}
+		log.info(searchFilter);
+
+		
+		
+		return null;
+	}
+
+	
 
 }

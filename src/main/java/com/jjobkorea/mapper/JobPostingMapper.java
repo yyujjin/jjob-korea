@@ -12,4 +12,7 @@ public interface JobPostingMapper {
 	//채용 정보 리스트 가져오기
 	public List<JobPostingDTO> getPostingList();
 	
+	//선택조건 리스트 가져오기
+	public List<JobPostingDTO> getSearchList();
+	
 }

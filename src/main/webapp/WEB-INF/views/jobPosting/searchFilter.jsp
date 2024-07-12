@@ -24,17 +24,18 @@ pageEncoding="UTF-8"%>
         .filter-box-ul{
             border: solid black 1px;
             width: 100%;
-            height: 100px;
+            height: auto;  /*  줄 바꿈에 따라 높이가 자동으로 조정되도록 함 */
             border-color:#eceff7 ;
             display: flex;
             flex-direction: row; /* 수평으로 배치 */
+			flex-wrap: wrap; /* 자동 줄 바꿈 설정 */
             padding: 0; /* 내부 패딩 제거 */
         }
         .filter-box-ul li{
             list-style-type: none;
-            color: #6db6ff;
+            color:#1219fe;
             padding: 5px 10px; /* 각 요소의 패딩 설정 */
-            flex-wrap: wrap; /* 자동 줄 바꿈 설정 */
+            
         }
         .delete-button {
             color: #d2d2d3;
@@ -50,6 +51,8 @@ pageEncoding="UTF-8"%>
         crossorigin="anonymous"
     />
 	<script src="../../resources/js/jobPosting/searchFilter.js" defer></script> <!--js연결-->
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><!-- jQuery 라이브러리 추가 -->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -135,13 +138,13 @@ pageEncoding="UTF-8"%>
                             기업형태
                         </button>
                         <ul class="dropdown-menu dropdown-menu-white">
-                            <li>
+                            <li class="filter" id="대기업">
                                대기업
                             </li>
-                            <li>
+                            <li class="filter" id="중소기업">
                                 중·소기업
                             </li>
-                            <li>
+                            <li class="filter" id="스타트업">
                                 스타트업
                             </li>
                         </ul>
