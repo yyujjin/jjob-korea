@@ -20,20 +20,20 @@ pageEncoding="UTF-8"%>
             <section class="personal-info">
                 <h3>인적 사항</h3>
                 <div class="input-group">
-                    <input type="text" placeholder="이름" required>
-                    <input type="text" placeholder="생년월일" required>
-                    <select>
+                    <input type="text" placeholder="이름" name="resumeUserName" required>
+                    <input type="text" placeholder="생년월일" name="resumeBirthDay" required>
+                    <select name="resumeGender">
                         <option value="0">성별</option>
                         <option value="1">남자</option>
                         <option value="2">여자</option>
                     </select>
-                    <input type="email" placeholder="이메일" required>
-                    <input type="text" placeholder="전화번호">
-                    <input type="text" placeholder="휴대폰번호" required>
-                    <input type="text" placeholder="주소" required>
+                    <input type="email" placeholder="이메일" name="resumeUserEmail" required>
+                    <input type="text" placeholder="전화번호" name="resumeUserPhone" >
+                    <input type="text" placeholder="휴대폰번호" name="resumeUserCellPhone" required>
+                    <input type="text" placeholder="주소"  name="resumeUserAddress" required>
                 </div>
             </section>
-            <section class="skills">
+            <section class="skills" name="resumeSkillName">
                 <h3>기술 스택 (최대 3개 선택 가능)</h3>
                 <div class="buttons">
                     <button>Java</button>
