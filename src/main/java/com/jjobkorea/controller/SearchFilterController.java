@@ -2,6 +2,7 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.jjobkorea.service.JobPostingService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONArray;
 
 @Slf4j
 @RestController
@@ -36,6 +38,7 @@ JobPostingService jobPostingService;
     	List<JobPostingDTO> searchList = jobPostingService.getSearchList(filterList,dto);
     	log.info("받아온 서치 리스트 : {} ",searchList);
        
-
+    	JSONArray result = JSONArray.fromObject(searchList);
+    	log.info("제이슨 결과 = {}", result);
 	}
 }
