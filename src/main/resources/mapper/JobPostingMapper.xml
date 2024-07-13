@@ -23,7 +23,7 @@
 
 
 
-	<select id="getSearchList" parameterType="FilterDTO" resultType="FilterDTO">
+	<select id="getSearchList" parameterType="FilterDTO" resultType="JobPostingDTO">
 	    SELECT <include refid="jobPostingColums" /> 
 	    FROM jobposting
 	    <where>

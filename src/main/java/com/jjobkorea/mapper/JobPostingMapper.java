@@ -14,6 +14,6 @@ public interface JobPostingMapper {
 	public List<JobPostingDTO> getPostingList();
 	
 	//선택조건 리스트 가져오기
-	public List<FilterDTO> getSearchList(FilterDTO dto);
+	public List<JobPostingDTO> getSearchList(FilterDTO dto);
 	
 }
