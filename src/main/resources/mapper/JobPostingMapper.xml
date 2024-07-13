@@ -97,9 +97,8 @@
 	            OR filters LIKE CONCAT('%', #{intern}, '%')
 	        </if>
 	        
-	        AND DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
 	    </where>
-	    
+	    AND DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
 	    
 </select>
 
