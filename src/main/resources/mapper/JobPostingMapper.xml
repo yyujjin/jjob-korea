@@ -24,77 +24,77 @@
 
 
 	<select id="getSearchList" parameterType="FilterDTO" resultType="FilterDTO">
-	    SELECT *
+	    SELECT <include refid="jobPostingColums" /> 
 	    FROM jobposting
 	    <where>
 	       
 	        <if test="fullStack != null">
-	            AND filters LIKE CONCAT('%', #{fullStack}, '%')
+	            OR filters LIKE CONCAT('%', #{fullStack}, '%')
 	        </if>
 	
 	        
 	        <if test="frontEnd != null">
-	            AND filters LIKE CONCAT('%', #{frontEnd}, '%')
+	            OR filters LIKE CONCAT('%', #{frontEnd}, '%')
 	        </if>
 	
 	        <if test="backEnd != null">
-	            AND filters LIKE CONCAT('%', #{backEnd}, '%')
+	            OR filters LIKE CONCAT('%', #{backEnd}, '%')
 	        </if>
 	
 	        <if test="seoul != null">
-	            AND filters LIKE CONCAT('%', #{seoul}, '%')
+	            OR filters LIKE CONCAT('%', #{seoul}, '%')
 	        </if>
 	
 	        <if test="busan != null">
-	            AND filters LIKE CONCAT('%', #{busan}, '%')
+	            OR filters LIKE CONCAT('%', #{busan}, '%')
 	        </if>
 	
 	        <if test="daegu != null">
-	            AND filters LIKE CONCAT('%', #{daegu}, '%')
+	            OR filters LIKE CONCAT('%', #{daegu}, '%')
 	        </if>
 	
 	        <if test="incheon != null">
-	            AND filters LIKE CONCAT('%', #{incheon}, '%')
+	            OR filters LIKE CONCAT('%', #{incheon}, '%')
 	        </if>
 	
 	        <if test="gwangju != null">
-	            AND filters LIKE CONCAT('%', #{gwangju}, '%')
+	            OR filters LIKE CONCAT('%', #{gwangju}, '%')
 	        </if>
 	
 	        <if test="daejeon != null">
-	            AND filters LIKE CONCAT('%', #{daejeon}, '%')
+	            OR filters LIKE CONCAT('%', #{daejeon}, '%')
 	        </if>
 	
 	        <if test="ulsan != null">
-	            AND filters LIKE CONCAT('%', #{ulsan}, '%')
+	            OR filters LIKE CONCAT('%', #{ulsan}, '%')
 	        </if>
 	
 	        <if test="sejong != null">
-	            AND filters LIKE CONCAT('%', #{sejong}, '%')
+	            OR filters LIKE CONCAT('%', #{sejong}, '%')
 	        </if>
 	
 	        <if test="largeCompany != null">
-	            AND filters LIKE CONCAT('%', #{largeCompany}, '%')
+	            OR filters LIKE CONCAT('%', #{largeCompany}, '%')
 	        </if>
 	
 	        <if test="smallMediumCompany != null ">
-	            AND filters LIKE CONCAT('%', #{smallMediumCompany}, '%')
+	            OR filters LIKE CONCAT('%', #{smallMediumCompany}, '%')
 	        </if>
 	
 	        <if test="startup != null ">
-	            AND filters LIKE CONCAT('%', #{startup}, '%')
+	            OR filters LIKE CONCAT('%', #{startup}, '%')
 	        </if>
 	
 	        <if test="regularEmployee != null">
-	            AND filters LIKE CONCAT('%', #{regularEmployee}, '%')
+	            OR filters LIKE CONCAT('%', #{regularEmployee}, '%')
 	        </if>
 	
 	        <if test="contractEmployee != null ">
-	            AND filters LIKE CONCAT('%', #{contractEmployee}, '%')
+	            OR filters LIKE CONCAT('%', #{contractEmployee}, '%')
 	        </if>
 	
 	        <if test="intern != null">
-	            AND filters LIKE CONCAT('%', #{intern}, '%')
+	            OR filters LIKE CONCAT('%', #{intern}, '%')
 	        </if>
 	    </where>
 </select>

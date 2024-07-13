@@ -111,6 +111,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 		// 필터 dto qhsorl
 		List<FilterDTO> searchList = jobPostingMapper.getSearchList(dto);
 		log.info("받아온 searchList{} :", searchList);
+		
 
 		return null;
 	}
