@@ -30,6 +30,10 @@ dependencies {
 //    JSTL (JavaServer Pages Standard Tag Library)을 사용하기 위함
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0'
+//    무결성 검사를 위함
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
+implementation 'org.hibernate.validator:hibernate-validator:7.0.0.Final'
+    
 
     implementation 'net.coobird:thumbnailator:0.4.20'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
