@@ -78,6 +78,10 @@ function searchFilter() {
 			success: function(data) {
 				console.log("성공:", data, jobList)
 				jobList.innerHTML=""
+				if(data.length==0) {
+					jobList.innerHTML="검색 결과가 없습니다."
+					return
+				}
 				for (let i = 0; i < data.length; i++) {
 					jobList.innerHTML += `<div class="list-group">
             <a href="#" class="list-group-item list-group-item-action">
