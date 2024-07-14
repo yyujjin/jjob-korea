@@ -19,7 +19,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 
 	@Autowired
 	JobPostingMapper jobPostingMapper;
-
+	
 	// 채용 정보 리스트 가져오기
 	@Override
 	public List<JobPostingDTO> getPostingList() {
@@ -108,10 +108,27 @@ public class JobPostingServiceImpl implements JobPostingService {
 			}
 		}
 
+		List<JobPostingDTO> getSearchList = jobPostingMapper.getSearchList(dto);
 		
+		// 현재 날짜 가져오기
+				LocalDate currentDate = LocalDate.now();
+				log.info("현재시간 : {}  ", currentDate);
+
+				for (JobPostingDTO post : getSearchList) {
+					log.info("deadline{} : ", post.getDeadline());
+
+					// 마감일 가져옴
+					LocalDate deadline = post.getDeadline();
+
+					// D-day 계산
+					long daysUntil = ChronoUnit.DAYS.between(currentDate, deadline);
+					// countdownDays DTO에 넣기
+					post.setCountdownDays(daysUntil);
+					log.info("D-DAY : {} ", post.getCountdownDays());
+				}
+
+				return getSearchList;
 		
-		
-		return jobPostingMapper.getSearchList(dto);
 	}
 
 }
