@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jjobkorea.dto.FilterDTO;
@@ -32,13 +33,16 @@ JobPostingService jobPostingService;
 		System.out.println("수신된 필터 리스트: " + filterList);
 
        // JSON 형식으로 응답 작성
-        response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write("{\"message\": \"필터 리스트 수신에 성공하였습니다\"}");  
         
     	List<JobPostingDTO> searchList = jobPostingService.getSearchList(filterList,dto);
     	log.info("받아온 서치 리스트 : {} ",searchList);
        
-    	JSONArray result = JSONArray.fromObject(searchList);
-    	log.info("제이슨 결과 = {}", result);
+    	
+    	JSONArray json = JSONArray.fromObject(searchList);
+    	String result = json.toString();
+    	log.info("제이슨 결과 = {}",result );
+    	
+    	response.setContentType("application/json;charset=utf-8");
+    	response.getWriter().write(result);  
 	}
 }
