@@ -108,6 +108,9 @@ public class JobPostingServiceImpl implements JobPostingService {
 			}
 		}
 
+		
+		
+		
 		return jobPostingMapper.getSearchList(dto);
 	}
 
