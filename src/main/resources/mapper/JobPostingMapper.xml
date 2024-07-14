@@ -27,7 +27,7 @@
 	    SELECT <include refid="jobPostingColums" /> 
 	    FROM jobposting
 	    <where>
-	       
+	       <trim prefix="(" suffix=")" prefixOverrides="OR">
 	        <if test="fullStack != null">
 	            OR filters LIKE CONCAT('%', #{fullStack}, '%')
 	        </if>
@@ -96,9 +96,10 @@
 	        <if test="intern != null">
 	            OR filters LIKE CONCAT('%', #{intern}, '%')
 	        </if>
-	        
+        </trim>
+        AND DEADLINE >= CURDATE()
 	    </where>
-	    AND DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
+	     ORDER BY DEADLINE ASC, COMPANYNAME ASC
 	    
 </select>
 
