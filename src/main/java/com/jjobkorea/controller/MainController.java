@@ -50,7 +50,7 @@ public class MainController {
 		log.info("메인 페이지 컨텐츠");
 
 		//채용 정보 리스트 가져오기 
-		List<JobPostingDTO> postingList = jobPostingService.getPostingList();
+		List<JobPostingDTO> postingList = jobPostingService.getJobPostingSToMain();
 		model.addAttribute("postingList", postingList);
 		String page = "main/main-content";
 

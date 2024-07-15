@@ -19,10 +19,19 @@ public class JobPostingServiceImpl implements JobPostingService {
 
 	@Autowired
 	JobPostingMapper jobPostingMapper;
-	
-	// 채용 정보 리스트 가져오기
+
+	//메인페이지 진입시 실행되는 코드
+	@Override
+	public List<JobPostingDTO> getJobPostingSToMain(){
+		log.info("메인페이지 진입시 실행되는 코드");
+		return jobPostingMapper.getPostingListToMain();
+	}
+
+	// 채용 정보 페이지 진입시 실행되는 코드
 	@Override
 	public List<JobPostingDTO> getPostingList() {
+		log.info("채용정보 진입시 실행되는 코드");
+		
 		// 채용 정보리스트 가져오기
 		List<JobPostingDTO> getPostingList = jobPostingMapper.getPostingList();
 

@@ -15,6 +15,11 @@
 		, hit
 	</sql>
 
+	<select id="getPostingListToMain" resultType="JobPostingDTO">
+		SELECT <include refid="jobPostingColums" />
+		FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
+	</select>
+
 
 	<select id="getPostingList" resultType="JobPostingDTO">
 		SELECT <include refid="jobPostingColums" /> 
