@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.jjobkorea.dto.FilterDTO;
 import com.jjobkorea.dto.JobPostingDTO;
@@ -53,4 +50,6 @@ JobPostingService jobPostingService;
     	response.setContentType("application/json;charset=utf-8");
     	response.getWriter().write(result);  
 	}
+
+
 }
