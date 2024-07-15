@@ -44,18 +44,8 @@ public class MainController {
 	@Autowired
 	private JobPostingDetailController jobPostingDetailController;
 
-	// 프로젝트 시작 페이지
-	@GetMapping(value = { "/", "/main" })
-	public String enterMain(Model model) {
-		log.info("메인 페이지 진입");
-
-		List<JobPostingDTO> postingList = jobPostingService.getPostingList();
-		model.addAttribute("postingList", postingList);
-		return "main/main";
-	}
-
 	// 메인 컨텐츠 페이지
-	@GetMapping("/mainContent")
+	@GetMapping(value = { "/", "/main" })
 	public String enterMainContent(Model model) {
 		log.info("메인 페이지 컨텐츠");
 
