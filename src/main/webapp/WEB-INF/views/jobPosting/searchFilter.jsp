@@ -21,11 +21,17 @@ pageEncoding="UTF-8"%>
         .btn {
             width: 180px; /* 버튼의 너비를 150px로 설정 */
         }
-        .filter-box-ul{
+        .filter-box{
             border: solid black 1px;
             width: 100%;
-            height: auto;  /*  줄 바꿈에 따라 높이가 자동으로 조정되도록 함 */
+            height: 100px;
             border-color:#eceff7 ;
+        }
+        .filter-box-ul{
+            /*border: solid black 1px;
+            width: 100%;
+            height: auto;  !*  줄 바꿈에 따라 높이가 자동으로 조정되도록 함 *!*/
+
             display: flex;
             flex-direction: row; /* 수평으로 배치 */
 			flex-wrap: wrap; /* 자동 줄 바꿈 설정 */
