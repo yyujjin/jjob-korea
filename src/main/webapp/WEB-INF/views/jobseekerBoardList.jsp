@@ -6,15 +6,109 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style>
-		.div_page ul{
-			display: flex;
-			list-style: none;
-		}
+    .div_page {
+        margin-top: 20px;
+        text-align: center; /* 페이지네이션을 가운데 정렬 */
+    }
+
+    .div_page ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .div_page ul li {
+        display: inline;
+        margin-right: 5px; /* 각 페이지네이션 항목 사이의 간격 */
+    }
+
+    .div_page ul li a {
+        display: inline-block;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: black;
+        border: 1px solid #f2f2f2;
+        background-color: #f2f2f2; /* 배경색 설정 */
+        border-radius: 3px;
+    }
+
+    .div_page ul li a:hover {
+        background-color: #0057ff;
+        color: white;
+    }
+
+	.button_container {
+    display: flex;
+    justify-content: flex-end; /* 검색 폼을 오른쪽으로 정렬 */
+	}
+
+	.search_button {
+		background-color: #0057ff;
+		color: white;
+		border: none;
+		padding: 5px 10px;
+		cursor: pointer;
+	}
+
+    .writebutton {
+        background-color: #0057ff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        margin-top: 10px; /* 글 작성 버튼의 상단 마진 조정 */
+    }
+
+    .table_list {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table_list th,
+    .table_list td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .table_list th {
+        background-color: #f2f2f2;
+        text-align: left;
+    }
+
+    .table_list tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table_header {
+        background-color: #0057ff;
+        color: white;
+        font-weight: bold;
+    }
 	</style>
-</head>
+</head>	
 <body>
-	<table width="500" border="1">
-		<tr>
+	<div class="button_container">
+		<form method="get" id="searchForm">
+			<select name="type">
+				<option value="" <c:out value="${pageMaker.cri.type == null ? 'selected':''}"/> >전체</option>
+				<option value="T" <c:out value="${pageMaker.cri.type eq 'T' ? 'selected':''}"/> >제목</option>
+				<option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected':''}"/> >내용</option>
+				<option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected':''}"/> >작성자</option>
+				<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected':''}"/> >제목 or 내용</option>
+				<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected':''}"/> >제목 or 작성자</option>
+				<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected':''}"/> >제목 or 내용 or 작성자</option>
+			</select>
+			<!-- 	Criteria 를 이용해서 키워드 값을 넘김 -->
+			<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
+			<input type="hidden" name="pageNum" value="1">
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+			<button class="search_button">검색</button>
+		</form>
+	</div>
+
+	<table class="table_list" width="500" border="1">
+		<tr class="table_header">
 			<td>번호</td>
 			<td>이름</td>
 			<td>제목</td>
@@ -38,14 +132,14 @@
 
 			</tr>
 		</c:forEach>
-		<tr>
-			<td colspan="5">
-<!-- 			write_view : 컨트롤러단 호출 -->
-				<a href="jobseekerWrite_view">글작성</a>
-			</td>
-		</tr>
 	</table>
-
+	<tr>
+		<td colspan="5">
+			 <button class="writebutton" 
+			 onclick="location.href='jobseekerWrite_view'">글작성</button>
+		</td>
+	</tr>
+			
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 	   <script>
 	       $(document).ready(function() {
@@ -70,31 +164,10 @@
 	           });
 	       });
 	   </script>
-	
-	<form method="get" id="searchForm">
-		<select name="type">
-			<option value="" <c:out value="${pageMaker.cri.type == null ? 'selected':''}"/> >전체</option>
-			<option value="T" <c:out value="${pageMaker.cri.type eq 'T' ? 'selected':''}"/> >제목</option>
-			<option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected':''}"/> >내용</option>
-			<option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected':''}"/> >작성자</option>
-			<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected':''}"/> >제목 or 내용</option>
-			<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected':''}"/> >제목 or 작성자</option>
-			<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected':''}"/> >제목 or 내용 or 작성자</option>
-		</select>
-		<!-- 	Criteria 를 이용해서 키워드 값을 넘김 -->
-		<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
-		<!-- <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"> -->
-		 <!-- 전체검색중 5페이지에서 22 키워드로 검색시 안나올때 처리 -->
-		<input type="hidden" name="pageNum" value="1">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-		<button>Search</button>
-	</form>
-	 <!--PageDTO(startpage=1, endpage=6, prev=false, next=false, total=52, cri=Criteria(pageNum=1, amount=10, type=null, keyword=null))-->
-	<h3>${pageMaker}</h3>
+
 	<div class="div_page">
 			<ul>
 				<c:if test="${pageMaker.prev}">
-					<!-- <li>[Previous]</li> -->
 					<li class="paginate_button">
 						<a href="${pageMaker.startpage - 1}">
 							[Previous]
@@ -102,18 +175,13 @@
 					</li>
 				</c:if>
 				<c:forEach var="num" begin="${pageMaker.startpage}" end="${pageMaker.endpage}">
-					<!-- <li>[${num}]</li> -->
-					<!-- <li ${pageMaker.cri.pageNum == num ? "style='color: red'" : ""}> -->
-						<!-- 				현재 페이지는 배경색 노란색으로 표시 -->
-					<li class="paginate_button" ${pageMaker.cri.pageNum == num ? "style='background-color: yellow'" : ""}>
-						<!-- [${num}] -->
+					<li class="paginate_button" ${pageMaker.cri.pageNum == num ? "style='background-color:#0057ff '" : ""}>
 						<a href="${num}">
-							[${num}]
+							${num}
 						</a>
 					</li>
 				</c:forEach>
 				<c:if test="${pageMaker.next}">
-					<!-- <li>[Next]</li> -->
 					<li class="paginate_button">
 						<a href="${pageMaker.endpage + 1}">
 							[Next]

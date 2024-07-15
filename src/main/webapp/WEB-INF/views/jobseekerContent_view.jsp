@@ -6,21 +6,51 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style>
-		.uploadResult{
-			width: 100%;
-			background-color: gray;
-		}
-		.uploadResult ul{
-			display: flex;
-			flex-flow: row;
-		}
-		.uploadResult ul li{
-			list-style: none;
-			padding: 10px;
-		}
-		.uploadResult ul li img{
-			width: 100px;
-		}
+	table {
+	    width: 500px;
+	    margin: auto;
+	    border-collapse: collapse;
+	    border: 1px solid #ccc;
+	}
+	th, td {
+	    padding: 10px;
+	    text-align: center;
+	    border: 1px solid #ccc;
+	}
+	.uploadResult {
+	    margin-top: 20px;
+	    background-color: #f0f0f0;
+	    padding: 10px;
+	}
+	.uploadResult ul {
+	    display: flex;
+	    flex-wrap: wrap;
+	    padding: 0;
+	    list-style-type: none;
+	}
+	.uploadResult ul li {
+	    margin: 5px;
+	    padding: 10px;
+	    border: 1px solid #ccc;
+	    background-color: #fff;
+	    text-align: center;
+	}
+	.uploadResult ul li img {
+	    max-width: 100px;
+	    height: auto;
+	}
+	#comment-list {
+	    margin-top: 20px;
+	}
+	#comment-list table {
+	    width: 100%;
+	    border-collapse: collapse;
+	}
+	#comment-list th, #comment-list td {
+	    border: 1px solid #ccc;
+	    padding: 8px;
+	    text-align: center;
+	}
 	</style>
 	 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 </head>
