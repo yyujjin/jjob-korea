@@ -25,11 +25,14 @@ public class JobPostingController {
 	// 채용 정보 페이지 진입
 	@GetMapping("jobPosting")
 	public String enterJobPosting(HttpServletRequest request, HttpServletResponse response, Model model) {
-		String pageNum="";
-		if(request==null) {
-			pageNum = "1";
+		int pageNum=0;
+		//리퀘스트 객체에서 요청에 대한 데이터 정보들이 같이 넘어온다.
+		//여기서 보이지 않을 뿐 디버깅 걸면 보임
+		//그러므로 request 자체가 null일 수 없다.
+		if(request.getParameter("pageNum")==null) {
+			pageNum =1;
 		}else{
-			pageNum =request.getParameter("pageNum");
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		}
 
 		log.info("요청받은 페이지: {}", pageNum);
