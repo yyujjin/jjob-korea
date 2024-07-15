@@ -41,15 +41,21 @@ public class MemController {
     @PostMapping("/login_yn")
     public String login_yn(@RequestParam HashMap<String, String> param, HttpServletRequest request, Model model) {
         log.info("@# login_yn");
+        String loginType = param.get("loginType"); // 사용자 유형(개인/기업)
         ArrayList<MemDTO> user = service.loginYn(param);
 
-        // 아이디로 사용자를 찾을 수 없는 경우
         if (user.isEmpty()) {
             log.info("사용자를 찾을 수 없습니다.");
             return "redirect:login?error=true";
         }
 
         MemDTO foundUser = user.get(0);
+
+        // 사용자 유형이 일치하는지 확인
+        if ((loginType.equals("individual") && foundUser.getUserType() != -1) || (loginType.equals("enterprise") && foundUser.getUserType() != 1)) {
+            log.info("로그인 유형이 일치하지 않습니다.");
+            return "redirect:login?error=true";
+        }
 
         // 입력된 비밀번호가 데이터베이스에 저장된 비밀번호와 일치하는지 확인
         if (!foundUser.getMemPwd().equals(param.get("memPwd"))) {
@@ -60,6 +66,7 @@ public class MemController {
         // 세션에 사용자 정보 저장
         HttpSession session = request.getSession();
         session.setAttribute("user", foundUser);
+        log.info("사용자 세션 저장 완료: " + foundUser.getMemId());
         return "redirect:main";
     }
 
@@ -147,6 +154,6 @@ public class MemController {
     public String logout(HttpSession session) {
         log.info("@# logout");
         session.invalidate();  // 세션 무효화
-        return "redirect:main";  // 메인 페이지로 리디렉션
+        return "redirect:login";  // 로그인 페이지로 리디렉션
     }
 }
