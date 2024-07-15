@@ -37,9 +37,12 @@
 	</style>
 </head>
 <body> 
+	<!--상세 조건 검색 -->
+	
  	      <div class="searchFilter">
  	          <jsp:include page="searchFilter.jsp" />
  	      </div>
+		  <!--채용 리스트-->
  	      <div class="jobList">
 			<jsp:include page="jobList.jsp" />
  	      </div>

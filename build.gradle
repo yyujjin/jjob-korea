@@ -51,7 +51,13 @@ dependencies {
 
     // Hibernate Core Dependency (JPA 구현체) 사용
     implementation 'org.hibernate.orm:hibernate-core:6.1.7.Final'
-
+    //json 라이브러리
+	implementation 'net.sf.json-lib:json-lib:2.4:jdk15@jar'
+	implementation 'commons-lang:commons-lang:2.6'
+	implementation 'commons-logging:commons-logging:1.2'
+	implementation 'commons-collections:commons-collections:3.2.2'
+	implementation 'commons-beanutils:commons-beanutils:1.9.4'
+	implementation 'net.sf.ezmorph:ezmorph:1.0.6'
   
 }
 
