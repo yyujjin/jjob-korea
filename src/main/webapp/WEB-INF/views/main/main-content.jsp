@@ -16,19 +16,14 @@
         href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css"
         rel="stylesheet"
     />
+
+
 	<style>
-		.hotPosting{
-			font-family: "NanumBarunGothicBold";
-			font-size: 25px;
-		}
 		.card-title {
 			font-family: "NanumBarunGothic";
 			font-size: 25px;
 			font-size: 25px; /* 글자 크기 조절 */
 			text-align: left; /* 왼쪽 정렬 */
-		}
-		#hot{
-			color:#dd0000;
 		}
 		/*사진 크기 조절*/
 		.fixed-size-image {
@@ -40,13 +35,25 @@
 		.card-text {
            	text-align: left;  /* 왼쪽 정렬 */
        	}
-
+        #top-posting{
+            font-family: "NanumBarunGothicBold";
+            font-size: 25px;
+        }
+        #top8{
+            color: rgb(17 26 253);
+        }
+        #updateTime{
+            color: #565e64;
+        }
 	</style>
 </head>
 <body>
     <!-- 반응형 -->
     <!-- //.row-cols-1한 열에 카드를 배치하고, .row-cols-md-3중간 중단점에서 위로 여러 행에 걸쳐 g-4 4장의 카드를 동일한 너비로 분할합니다. -->
     <!-- row-cols-md-3   중간 크기 화면(medium screen) 이상에서 한 행에 세 개의 열이 포함되도록 설정합니다. -->
+
+    <div> <span id="top-posting"> 지금 뜨는 채용공고 <span id="top8"> TOP 8</span> </span> </div>
+    <div id="updateTime" > 매일 오전 10:00 ~ 익일 오전 10:00 기준</div>
     <div class="row row-cols-2 row-cols-md-4 g-4 ">
 		
 		<c:forEach items="${postingList}" var="postingList" >
