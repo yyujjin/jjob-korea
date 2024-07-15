@@ -2,6 +2,8 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +71,7 @@ public class MainController {
 
 	// 요청 파라미터에 따라 해당 페이지 컨트롤러 작동
 	@GetMapping("requestPage/{page}")
-	public String requestPage(@PathVariable("page") String page, Model model,JobseekerCriteria cri) {
+	public String requestPage(@PathVariable("page") String page, Model model, JobseekerCriteria cri, HttpServletRequest request, HttpServletResponse response) {
 
 		log.info("요청 페이지 -> " + page);
 
@@ -85,7 +87,7 @@ public class MainController {
 			return memController.register(model);
 		// 채용 정보 페이지 진입
 		case "jobPosting":
-			return jobPostingController.enterJobPosting(model);
+			return jobPostingController.enterJobPosting(request,response,model);
 		// 구직자 게시판 페이지 진입
 		case "jobseekerBoard":
 			return jobseekerPageController.listWithPaging(cri, model);

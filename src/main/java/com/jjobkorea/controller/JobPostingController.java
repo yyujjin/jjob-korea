@@ -2,6 +2,8 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,15 @@ public class JobPostingController {
 
 	// 채용 정보 페이지 진입
 	@GetMapping("jobPosting")
-	public String enterJobPosting(Model model) {
+	public String enterJobPosting(HttpServletRequest request, HttpServletResponse response, Model model) {
+		String pageNum="";
+		if(request==null) {
+			pageNum = "1";
+		}else{
+			pageNum =request.getParameter("pageNum");
+		}
+
+		log.info("요청받은 페이지: {}", pageNum);
 		String page = "jobPosting/jobPostingMain";
 		model.addAttribute("page", page);
 
