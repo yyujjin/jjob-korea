@@ -141,9 +141,10 @@ function generatePagination() {
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="/searchFilter?pageNum=1">1</a></li>
-                <li class="page-item"><a class="page-link" href="/searchFilter?pageNum=2">2</a></li>
-                <li class="page-item"><a class="page-link" href="/searchFilter?pageNum=3">3</a></li>
+                
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
