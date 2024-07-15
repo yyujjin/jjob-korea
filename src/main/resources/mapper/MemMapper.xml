@@ -15,7 +15,8 @@
             cp.companyRepresentativeName,
             cp.companyName,
             cp.companyAddr,
-            cp.companyBusinessRegistration AS companyBusinessRegistrationNum
+            cp.companyBusinessRegistration AS companyBusinessRegistrationNum,
+            tb.userType
         FROM 
             signup_tb tb 
         LEFT JOIN 
@@ -44,18 +45,18 @@
         <!-- 개인 회원 정보 삽입 -->
         <if test="type == 'individual'">
             INSERT INTO signup_tb (
-                memId, memPwd, memName, memPhone, memAddr, memEmail, memBirth, memGender, memCreationDate
+                memId, memPwd, memName, memPhone, memAddr, memEmail, memBirth, memGender, memCreationDate, userType
             ) VALUES (
-                #{memId}, #{memPwd}, #{memName}, #{memPhone}, #{memAddr}, #{memEmail}, #{memBirth}, #{memGender}, CURRENT_TIMESTAMP
+                #{memId}, #{memPwd}, #{memName}, #{memPhone}, #{memAddr}, #{memEmail}, #{memBirth}, #{memGender}, CURRENT_TIMESTAMP, -1
             );
         </if>
 
         <!-- 기업 회원 정보 삽입 -->
         <if test="type == 'enterprise'">
             INSERT INTO signup_tb (
-                memId, memPwd, memName, memPhone, memAddr, memEmail, memCreationDate, cpId
+                memId, memPwd, memName, memPhone, memAddr, memEmail, memCreationDate, cpId, userType
             ) VALUES (
-                #{memId}, #{memPwd}, #{memName}, #{memPhone}, #{memAddr}, #{memEmail}, CURRENT_TIMESTAMP, #{cpId}
+                #{memId}, #{memPwd}, #{memName}, #{memPhone}, #{memAddr}, #{memEmail}, CURRENT_TIMESTAMP, #{cpId}, 1
             );
         </if>
     </insert>
@@ -66,7 +67,7 @@
     </select>
 
     <!-- cpId로 회원 조회 -->
-    <select id="selectByCpId" resultType="MemDTO">
+    <select id="selectByCpId" resultType="com.jjobkorea.dto.MemDTO">
         SELECT 
             tb.cpId,
             cp.companyType, 
