@@ -14,7 +14,6 @@ const searchFiltersButton = document.querySelector(".search-filters-button")
 const jobList = document.querySelector(".jobList")
 
 
-
 //필터 박스에 추가
 addToFilterBox()
 
@@ -162,7 +161,7 @@ function generatePagination() {
 anythingInList()
 
 function anythingInList() {
-    if (filterList.length==0){
-        filterBoxUl.innerHTML="<li>상세 조건을 클릭하세요.</li>"
+    if (filterList.length == 0) {
+        filterBoxUl.innerHTML = "<li>상세 조건을 클릭하세요.</li>"
     }
 }

@@ -19,29 +19,29 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class JobPostingController {
 
-	@Autowired
-	JobPostingService jobPostingService;
+    @Autowired
+    JobPostingService jobPostingService;
 
-	// 채용 정보 페이지 진입
-	@GetMapping("jobPosting")
-	public String enterJobPosting(HttpServletRequest request,Model model) {
-		int pageNum=0;
-		if(request.getParameter("pageNum")==null) {
-			pageNum =1;
-		}else{
-			pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		}
+    // 채용 정보 페이지 진입
+    @GetMapping("jobPosting")
+    public String enterJobPosting(HttpServletRequest request, Model model) {
+        int pageNum = 0;
+        if (request.getParameter("pageNum") == null) {
+            pageNum = 1;
+        } else {
+            pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        }
 
-		log.info("요청받은 페이지: {}", pageNum);
-		
-		//요청 받은 페이지 넘기기
-		List<JobPostingDTO> postingList = jobPostingService.getPostingList(pageNum);
-		model.addAttribute("postingList", postingList);
+        log.info("요청받은 페이지: {}", pageNum);
 
-		String page = "jobPosting/jobPostingMain";
-		model.addAttribute("page", page);
+        //요청 받은 페이지 넘기기
+        List<JobPostingDTO> postingList = jobPostingService.getPostingList(pageNum);
+        model.addAttribute("postingList", postingList);
 
-		return "main/main";
-	}
+        String page = "jobPosting/jobPostingMain";
+        model.addAttribute("page", page);
+
+        return "main/main";
+    }
 
 }

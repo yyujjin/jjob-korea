@@ -20,36 +20,36 @@ import net.sf.json.JSONArray;
 @RestController
 public class SearchFilterController {
 
-@Autowired	
-JobPostingService jobPostingService;
-	
+    @Autowired
+    JobPostingService jobPostingService;
 
-	@PostMapping("/searchFilter")
-	public void searchFilter(@RequestBody List<String> filterList, HttpServletRequest request, HttpServletResponse response, Model model, FilterDTO dto)
-			throws Exception {
-		// 수신된 데이터 처리 (여기서는 단순히 출력)
-		System.out.println("수신된 필터 리스트: " + filterList);
 
-		int pageNum=0;
-		if(request.getParameter("pageNum")==null) {
-			pageNum =1;
-		}else{
-			pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		}
-		log.info("요청받은 페이지: {}", pageNum);
+    @PostMapping("/searchFilter")
+    public void searchFilter(@RequestBody List<String> filterList, HttpServletRequest request, HttpServletResponse response, Model model, FilterDTO dto)
+            throws Exception {
+        // 수신된 데이터 처리 (여기서는 단순히 출력)
+        System.out.println("수신된 필터 리스트: " + filterList);
 
-		// JSON 형식으로 응답 작성
-		//요청 받은 페이지 넘기기
-    	List<JobPostingDTO> searchList = jobPostingService.getSearchList(filterList,dto,pageNum);
-    	log.info("받아온 서치 리스트 : {} ",searchList);
-    	
-    	JSONArray json = JSONArray.fromObject(searchList);
-    	String result = json.toString();
-    	log.info("제이슨 결과 = {}",result );
-    	
-    	response.setContentType("application/json;charset=utf-8");
-    	response.getWriter().write(result);  
-	}
+        int pageNum = 0;
+        if (request.getParameter("pageNum") == null) {
+            pageNum = 1;
+        } else {
+            pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        }
+        log.info("요청받은 페이지: {}", pageNum);
+
+        // JSON 형식으로 응답 작성
+        //요청 받은 페이지 넘기기
+        List<JobPostingDTO> searchList = jobPostingService.getSearchList(filterList, dto, pageNum);
+        log.info("받아온 서치 리스트 : {} ", searchList);
+
+        JSONArray json = JSONArray.fromObject(searchList);
+        String result = json.toString();
+        log.info("제이슨 결과 = {}", result);
+
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(result);
+    }
 
 
 }
