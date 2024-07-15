@@ -21,9 +21,9 @@
 	</select>
 
 
-	<select id="getPostingList" resultType="JobPostingDTO">
+	<select id="getPostingList" resultType="JobPostingDTO" parameterType="int">
 		SELECT <include refid="jobPostingColums" /> 
-		FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
+		FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC LIMIT 10 OFFSET ${pageNum};
 	</select>
 
 

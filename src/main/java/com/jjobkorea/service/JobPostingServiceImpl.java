@@ -29,11 +29,13 @@ public class JobPostingServiceImpl implements JobPostingService {
 
 	// 채용 정보 페이지 진입시 실행되는 코드
 	@Override
-	public List<JobPostingDTO> getPostingList() {
+	public List<JobPostingDTO> getPostingList(int pageNum) {
 		log.info("채용정보 진입시 실행되는 코드");
-		
+		//pageNum에서 1빼고
+		pageNum = (pageNum-1)*10;
+
 		// 채용 정보리스트 가져오기
-		List<JobPostingDTO> getPostingList = jobPostingMapper.getPostingList();
+		List<JobPostingDTO> getPostingList = jobPostingMapper.getPostingList(pageNum);
 
 		// 현재 날짜 가져오기
 		LocalDate currentDate = LocalDate.now();

@@ -33,7 +33,9 @@ public class JobPostingController {
 		}
 
 		log.info("요청받은 페이지: {}", pageNum);
-		List<JobPostingDTO> postingList = jobPostingService.getPostingList();
+		
+		//요청 받은 페이지 넘기기
+		List<JobPostingDTO> postingList = jobPostingService.getPostingList(pageNum);
 		model.addAttribute("postingList", postingList);
 
 		String page = "jobPosting/jobPostingMain";
