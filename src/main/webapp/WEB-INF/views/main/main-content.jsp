@@ -41,7 +41,7 @@
             font-size: xx-small;
         }
         #hotPosting-icon{
-            margin-left: -20px;
+            margin-left: -15px;
         }
 	</style>
 </head>
