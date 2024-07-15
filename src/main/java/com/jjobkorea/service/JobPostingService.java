@@ -14,7 +14,7 @@ public interface JobPostingService {
 	public List<JobPostingDTO> getPostingList(int pageNum);
 	
 	//상세 조건 검색 리스트 가져오기
-	public List<JobPostingDTO> getSearchList(List<String> filterList,FilterDTO dto);
+	public List<JobPostingDTO> getSearchList(List<String> filterList,FilterDTO dto,int pageNum);
 
 
 }

@@ -28,83 +28,83 @@
 
 
 
-	<select id="getSearchList" parameterType="FilterDTO" resultType="JobPostingDTO">
+	<select id="getSearchList" resultType="JobPostingDTO">
 	    SELECT <include refid="jobPostingColums" /> 
 	    FROM jobposting
 	    <where>
 	       <trim prefix="(" suffix=")" prefixOverrides="OR">
-	        <if test="fullStack != null">
-	            OR filters LIKE CONCAT('%', #{fullStack}, '%')
+	        <if test="filter.fullStack != null">
+	            OR filters LIKE CONCAT('%', #{filter.fullStack}, '%')
 	        </if>
 	
 	        
-	        <if test="frontEnd != null">
-	            OR filters LIKE CONCAT('%', #{frontEnd}, '%')
+	        <if test="filter.frontEnd != null">
+	            OR filters LIKE CONCAT('%', #{filter.frontEnd}, '%')
 	        </if>
 	
-	        <if test="backEnd != null">
-	            OR filters LIKE CONCAT('%', #{backEnd}, '%')
+	        <if test="filter.backEnd != null">
+	            OR filters LIKE CONCAT('%', #{filter.backEnd}, '%')
 	        </if>
 	
-	        <if test="seoul != null">
-	            OR filters LIKE CONCAT('%', #{seoul}, '%')
+	        <if test="filter.seoul != null">
+	            OR filters LIKE CONCAT('%', #{filter.seoul}, '%')
 	        </if>
 	
-	        <if test="busan != null">
-	            OR filters LIKE CONCAT('%', #{busan}, '%')
+	        <if test="filter.busan != null">
+	            OR filters LIKE CONCAT('%', #{filter.busan}, '%')
 	        </if>
 	
-	        <if test="daegu != null">
-	            OR filters LIKE CONCAT('%', #{daegu}, '%')
+	        <if test="filter.daegu != null">
+	            OR filters LIKE CONCAT('%', #{filter.daegu}, '%')
 	        </if>
 	
-	        <if test="incheon != null">
-	            OR filters LIKE CONCAT('%', #{incheon}, '%')
+	        <if test="filter.incheon != null">
+	            OR filters LIKE CONCAT('%', #{filter.incheon}, '%')
 	        </if>
 	
-	        <if test="gwangju != null">
-	            OR filters LIKE CONCAT('%', #{gwangju}, '%')
+	        <if test="filter.gwangju != null">
+	            OR filters LIKE CONCAT('%', #{filter.gwangju}, '%')
 	        </if>
 	
-	        <if test="daejeon != null">
-	            OR filters LIKE CONCAT('%', #{daejeon}, '%')
+	        <if test="filter.daejeon != null">
+	            OR filters LIKE CONCAT('%', #{filter.daejeon}, '%')
 	        </if>
 	
-	        <if test="ulsan != null">
-	            OR filters LIKE CONCAT('%', #{ulsan}, '%')
+	        <if test="filter.ulsan != null">
+	            OR filters LIKE CONCAT('%', #{filter.ulsan}, '%')
 	        </if>
 	
-	        <if test="sejong != null">
-	            OR filters LIKE CONCAT('%', #{sejong}, '%')
+	        <if test="filter.sejong != null">
+	            OR filters LIKE CONCAT('%', #{filter.sejong}, '%')
 	        </if>
 	
-	        <if test="largeCompany != null">
-	            OR filters LIKE CONCAT('%', #{largeCompany}, '%')
+	        <if test="filter.largeCompany != null">
+	            OR filters LIKE CONCAT('%', #{filter.largeCompany}, '%')
 	        </if>
 	
-	        <if test="smallMediumCompany != null ">
-	            OR filters LIKE CONCAT('%', #{smallMediumCompany}, '%')
+	        <if test="filter.smallMediumCompany != null ">
+	            OR filters LIKE CONCAT('%', #{filter.smallMediumCompany}, '%')
 	        </if>
 	
-	        <if test="startup != null ">
-	            OR filters LIKE CONCAT('%', #{startup}, '%')
+	        <if test="filter.startup != null ">
+	            OR filters LIKE CONCAT('%', #{filter.startup}, '%')
 	        </if>
 	
-	        <if test="regularEmployee != null">
-	            OR filters LIKE CONCAT('%', #{regularEmployee}, '%')
+	        <if test="filter.regularEmployee != null">
+	            OR filters LIKE CONCAT('%', #{filter.regularEmployee}, '%')
 	        </if>
 	
-	        <if test="contractEmployee != null ">
-	            OR filters LIKE CONCAT('%', #{contractEmployee}, '%')
+	        <if test="filter.contractEmployee != null ">
+	            OR filters LIKE CONCAT('%', #{filter.contractEmployee}, '%')
 	        </if>
 	
-	        <if test="intern != null">
-	            OR filters LIKE CONCAT('%', #{intern}, '%')
+	        <if test="filter.intern != null">
+	            OR filters LIKE CONCAT('%', #{filter.intern}, '%')
 	        </if>
         </trim>
         AND DEADLINE >= CURDATE()
 	    </where>
-	     ORDER BY DEADLINE ASC, COMPANYNAME ASC
+	     ORDER BY DEADLINE ASC, COMPANYNAME ASC LIMIT 10 OFFSET ${pageNum};
 	    
 </select>
 

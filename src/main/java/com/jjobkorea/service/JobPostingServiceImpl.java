@@ -59,7 +59,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 
 	// 조건 검색
 	@Override
-	public List<JobPostingDTO> getSearchList(List<String> filterList, FilterDTO dto) {
+	public List<JobPostingDTO> getSearchList(List<String> filterList, FilterDTO dto,int pageNum) {
 		log.info("getSearchList 서비스 실행됨!!");
 
 		for (String filter : filterList) {
@@ -119,7 +119,8 @@ public class JobPostingServiceImpl implements JobPostingService {
 			}
 		}
 
-		List<JobPostingDTO> getSearchList = jobPostingMapper.getSearchList(dto);
+		pageNum = (pageNum-1)*10;
+		List<JobPostingDTO> getSearchList = jobPostingMapper.getSearchList(dto,pageNum);
 		
 		// 현재 날짜 가져오기
 				LocalDate currentDate = LocalDate.now();

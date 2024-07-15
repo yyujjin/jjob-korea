@@ -24,7 +24,7 @@ public class JobPostingController {
 
 	// 채용 정보 페이지 진입
 	@GetMapping("jobPosting")
-	public String enterJobPosting(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String enterJobPosting(HttpServletRequest request,Model model) {
 		int pageNum=0;
 		if(request.getParameter("pageNum")==null) {
 			pageNum =1;
