@@ -101,7 +101,7 @@
             <div class="tab" data-tab="enterprise">기업회원</div>
         </div>
     </div>
-    <div id="individualForm" class="container">
+    <div id="individualForm" class="container02">
         <form id="signup-form" method="post" action="/registerOk">
             <input type="hidden" name="type" value="individual">
             <div class="form-group">
@@ -203,7 +203,7 @@
     </div>
 
     <!-- 기업 회원가입 -->
-<div id="enterpriseForm" class="container" style="display: none;">
+<div id="enterpriseForm" class="container02" style="display: none;">
     <form id="signup-form" method="post" action="/registerOk">
         <div class="form-group">
             <div class="cpinfo">
