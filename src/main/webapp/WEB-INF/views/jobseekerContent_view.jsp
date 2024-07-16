@@ -7,16 +7,41 @@
 <title>Insert title here</title>
 	<style>
 	table {
-	    width: 500px;
-	    margin: auto;
+	    width: 100%;
 	    border-collapse: collapse;
 	    border: 1px solid #ccc;
 	}
 	th, td {
-	    padding: 10px;
-	    text-align: center;
+	    padding-bottom: 20px;
+	    text-align: left;
 	    border: 1px solid #ccc;
 	}
+	.wide-name {
+        width: 25%;
+    }
+	.wide-title {
+        width: 50%;
+    }
+	.notContent {
+		padding: 5px;
+		margin: 5;
+	}
+	.BoardContent{
+		width: 85%;
+        height: 400px; /* 높이 조정 */
+        padding: 20px; /* 내부 여백 */
+        border: 1px solid #ccc; /* 테두리 */
+	}
+	.mld_button { /*수정/목록/삭제*/
+		background-color: #0057ff; /* 버튼 배경색 */
+        color: white; /* 텍스트 색상 */
+        padding: 5px 10px; /* 버튼 여백 */
+        border: none; /* 테두리 제거 */
+        cursor: pointer; /* 커서 변경 */
+		float: right;
+		margin: 10px;
+	}
+
 	.uploadResult {
 	    margin-top: 20px;
 	    background-color: #f0f0f0;
@@ -39,78 +64,105 @@
 	    max-width: 100px;
 	    height: auto;
 	}
+	/* 댓글 작성 버튼 스타일 */
+    #commentWriteButton {
+        background-color: #0057ff; /* 버튼 배경색 */
+        color: white; /* 텍스트 색상 */
+        padding: 5px 10px; /* 버튼 여백 */
+        border: none; /* 테두리 제거 */
+        cursor: pointer; /* 커서 변경 */
+		float: right;
+    }
+	 /* 댓글 작성 폼 스타일 */
+	 #commentForm {
+        display: flex;
+        justify-content: flex-end; /* 오른쪽 정렬 */
+        margin-top: 20px; /* 상단 여백 */
+    }
+    #commentForm input[type="text"] {
+        margin-right: 5px; /* 오른쪽 여백 */
+        padding: 5px; /* 내부 여백 */
+        border: 1px solid #ccc; /* 테두리 */
+
+    }
 	#comment-list {
-	    margin-top: 20px;
+	    margin-top: 10px;
 	}
 	#comment-list table {
 	    width: 100%;
 	    border-collapse: collapse;
 	}
+	#comment-list th {
+        background-color: #0057ff;
+        color: white;
+    }
+	#comment-list tr:nth-child(even) {
+        background-color:  #f9f9f9;
+    }
 	#comment-list th, #comment-list td {
-	    border: 1px solid #ccc;
+	    border: 1px solid  #f2f2f2;
 	    padding: 8px;
 	    text-align: center;
 	}
+
+
+	
+
 	</style>
 	 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 	<table width="500" border="1">
 		<form method="post" action="jobseekerModify">
-
 			<input type="hidden" name="jobseekerCommunityBoardNum" 
 			value="${content_view.jobseekerCommunityBoardNum}">
 			<input type="hidden" name="pageNum" value="${pageMaker.pageNum}">
 			<input type="hidden" name="amount" value="${pageMaker.amount}">
+
 			<tr>
-				<td>번호</td>
-				<td>
+				<td class="notContent">번호
 					${content_view.jobseekerCommunityBoardNum}
 				</td>
 			</tr>
 			<tr>
-				<td>조회수</td>
-				<td>
+				<td class="notContent">조회수
 					${content_view.jobseekerCommunityBoardHit}
 				</td>
 			</tr>
 			<tr>
-				<td>이름</td>
-				<td>
+				<td class="notContent">이름
 					<input type="text" name="jobseekerCommunityBoardName" 
-					value="${content_view.jobseekerCommunityBoardName}">
+					value="${content_view.jobseekerCommunityBoardName}" class="wide-name">
 				</td>
 			</tr>
 			<tr>
-				<td>제목</td>
-				<td>
-
+				<td class="notContent">제목
 					<input type="text" name="jobseekerCommunityBoardTitle" 
-					value="${content_view.jobseekerCommunityBoardTitle}">
+					value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
 				</td>
 			</tr>
-			<tr>
-				<td>내용</td>
-				<td>
 
-					<input type="text" name="jobseekerCommunityBoardContent" 
-					value="${content_view.jobseekerCommunityBoardContent}">
+			<tr>
+				<td class="BoardContent">
+					<!-- <input type="text" name="jobseekerCommunityBoardContent" 
+					value="${content_view.jobseekerCommunityBoardContent}"> -->
+					<textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}
+					</textarea>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
-					<input type="submit" value="수정">
-					&nbsp;&nbsp;<input type="submit" value="목록보기" formmethod="get" 
+				<td colspan="2" style="text-align: right;">
+					<input class="mld_button" type="submit" value="수정">
+					&nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get" 
 					formaction="/requestPage/jobseekerBoardList">
-					&nbsp;&nbsp;<input type="submit" value="삭제" formmethod="post"
+					&nbsp;&nbsp;<input class="mld_button" type="submit" value="삭제" formmethod="post"
 					formaction="delete">
 				</td>
 			</tr>
 		</form>
 	</table>
-
 	<!-- 첨부파일 출력 -->
-	Files
+	첨부파일
 	<div class="bigPicture">
 		<div class="bigPic">
 
@@ -122,10 +174,10 @@
 		</ul>
 	</div>
 
-	<div>
+	<div id="commentForm">
 		<input type="text" id="jobseekerCommentWriter" placeholder="작성자">
 		<input type="text" id="jobseekerCommentContent" placeholder="내용">
-		<button onclick="commentWrite()">댓글작성</button>
+		<button id="commentWriteButton" onclick="commentWrite()">댓글작성</button>
 	</div>
 
 	<div id="comment-list">
