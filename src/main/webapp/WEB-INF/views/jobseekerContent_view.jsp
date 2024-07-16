@@ -31,6 +31,7 @@
         height: 400px; /* 높이 조정 */
         padding: 20px; /* 내부 여백 */
         border: 1px solid #ccc; /* 테두리 */
+		margin: 10px;
 	}
 	.mld_button { /*수정/목록/삭제*/
 		background-color: #0057ff; /* 버튼 배경색 */
@@ -131,8 +132,7 @@
 			</tr>
 			<tr>
 				<td class="notContent">이름
-					<input type="text" name="jobseekerCommunityBoardName" 
-					value="${content_view.jobseekerCommunityBoardName}" class="wide-name">
+					${content_view.jobseekerCommunityBoardName}
 				</td>
 			</tr>
 			<tr>
@@ -152,11 +152,15 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: right;">
-					<input class="mld_button" type="submit" value="수정">
+					<c:if test="${user.memId == content_view.jobseekerCommunityBoardName}">
+					   <input class="mld_button" type="submit" value="수정">
+					</c:if>
 					&nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get" 
 					formaction="/requestPage/jobseekerBoardList">
-					&nbsp;&nbsp;<input class="mld_button" type="submit" value="삭제" formmethod="post"
-					formaction="delete">
+					&nbsp;&nbsp;
+					<c:if test="${user.memId == content_view.jobseekerCommunityBoardName}">
+					   <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
+					</c:if>
 				</td>
 			</tr>
 		</form>

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jjobkorea.dto.JobseekerBoardAttachDTO;
 import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.dto.JobseekerCommentDTO;
+import com.jjobkorea.dto.MemDTO;
 import com.jjobkorea.service.JobseekerBoardService;
 import com.jjobkorea.service.JobseekerCommentService;
 import com.jjobkorea.service.JobseekerUploadService;
@@ -40,6 +41,7 @@ public class JobseekerBoardController {
 	public String list (@RequestParam(value = "pageNum", required = false) String pageNum,
             			@RequestParam(value = "amount", required = false) String amount,
             																Model model) {
+
 		log.info("@# list");
 		
 		ArrayList<JobseekerBoardDTO> list = service.jobseekerBoardList();

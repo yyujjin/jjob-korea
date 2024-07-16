@@ -134,13 +134,13 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
 	<tr>
 		<td colspan="5">
 			 <button class="writebutton" 
 			 onclick="location.href='jobseekerWrite_view'">글작성</button>
 		</td>
-	</tr>
-			
+	</tr>		
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 	   <script>
 	       $(document).ready(function() {
