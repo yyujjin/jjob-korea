@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.jjobkorea.dto.ResumeInfoDTO;
 import com.jjobkorea.mapper.ResumeInfoMapper;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -19,6 +17,7 @@ public class ResumeInfoServiceImpl implements ResumeInfoService {
 
     @Autowired
     private ResumeInfoMapper resumeInfoMapper; // Repository 역할을 수행하는 Mapper
+    
     private List<ResumeInfoDTO> resumeInfoList = new ArrayList<>();
     @Override
     public List<ResumeInfoDTO> findAll() {

@@ -11,16 +11,16 @@
     </select>
 
     <insert id="insert">
-        INSERT INTO resume_user_information (
-           resumeUserName, resumeBirthDay, resumeGender, resumeUserEmail, resumeUserPhone, resumeUserCellPhone, resumeUserAddress, 
-    resumeProfilePhoto, resumeSkillName, resumePortfolio, resumePageUserId, resumeEduStage, 
-    resumeSchoolName, resumeCpName, resumeCpDept, resumeCpJoinDate, resumeCpLeaveDate, 
-    resumeCpPosition, resumeCpDuty, resumeCpSalary, resumeIntroduce
+		INSERT INTO resume_user_information (
+        resumeUserName, resumeBirthDay, resumeGender, resumeUserEmail, resumeUserPhone, resumeUserCellPhone, resumeUserAddress, 
+		resumeProfilePhoto, resumeSkillName, resumePortfolio, resumePageUserId, resumeEduStage, 
+		resumeSchoolName, resumeCpName, resumeCpDept, resumeCpJoinDate, resumeCpLeaveDate, 
+		resumeCpPosition, resumeCpDuty, resumeCpSalary, resumeIntroduce
         )
         VALUES (
             #{resumeUserName}, #{resumeBirthDay}, #{resumeGender}, #{resumeUserEmail}, #{resumeUserPhone}, #{resumeUserCellPhone},
-            #{resumeUserAddress}, #{resumeProfilePhoto}, #{resumeSkillName}, #{resumePortfolio}, #{resumePageUserId},#{resumeEduStage},
-            #{resumeSchoolName}, #{resumeCpName}, #{resumeCpDept}, #{resumeCpJoinDate}, #{resumeCpLeaveDate},
+            #{resumeUserAddress}, #{resumeFilePath}, #{resumeSkillName}, #{resumePortfolio}, #{resumePageUserId},#{resumeEduStage},
+            #{resumeSchoolName}, #{resumeCpName}, #{resumeCpDept}, #{resumeCpJoinDate},#{resumeCpLeaveDate}, 
             #{resumeCpPosition}, #{resumeCpDuty}, #{resumeCpSalary}, #{resumeIntroduce}
         )
     </insert>

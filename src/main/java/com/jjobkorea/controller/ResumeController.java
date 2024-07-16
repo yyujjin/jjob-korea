@@ -61,29 +61,28 @@ public class ResumeController {
    
    @PostMapping("/resume_write")
    public String saveResume(
-           @ModelAttribute ResumeInfoDTO resumeInfoDTO,	
-           @RequestParam("resumeBirthDay") String resumeBirthDay,
-           @RequestParam("resumeCpJoinDate") String resumeCpJoinDate,
-           @RequestParam("resumeCpLeaveDate") String resumeCpLeaveDate) throws ParseException {
+           @ModelAttribute ResumeInfoDTO resumeInfoDTO)	
+//           @RequestParam("resumeBirthDay") String resumeBirthDay,
+//           @RequestParam("resumeCpJoinDate") String resumeCpJoinDate,
+//           @RequestParam("resumeCpLeaveDate") String resumeCpLeaveDate) 
+        		   throws ParseException {
 
        log.info("@#saveResume");
-
-       // Convert String to java.util.Date
-       SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-
        // MultipartFile 설정
        MultipartFile file = resumeInfoDTO.getResumeProfilePhoto();
        if (file != null && !file.isEmpty()) {
            try {
                String fileName = file.getOriginalFilename();
-               String filePath = "D:\\dew\\upload" + fileName; // 실제 저장 경로로 변경
+               String filePath = "D:\\dev\\upload\\" + fileName; // 실제 저장 경로로 변경
                File dest = new File(filePath);
                file.transferTo(dest);
+               resumeInfoDTO.setResumeFilePath(filePath);
            } catch (IOException e) {
                log.error("Failed to save file", e);
            }
        }
-
+       
+       
        resumeInfoService.insert(resumeInfoDTO);
        return "redirect:/resume_write";
    }
