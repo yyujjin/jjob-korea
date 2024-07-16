@@ -58,7 +58,7 @@
 <img id="hotPosting-icon" src="../../resources/img/hotPosting_icon.jpg" width="320"
      height="70">
 
-<span id="updateTime">(매일 오전 10:00 ~ 익일 오전 10:00 기준)</span>
+<span id="updateTime">(매일 오전 09:00 ~ 익일 오전 09:00 기준)</span>
 <div class="row row-cols-2 row-cols-md-4 g-4 ">
 
     <c:forEach items="${postingList}" var="postingList">
