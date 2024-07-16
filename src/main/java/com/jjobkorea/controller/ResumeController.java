@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jjobkorea.dto.MemDTO;
 import com.jjobkorea.dto.ResumeInfoDTO;
 import com.jjobkorea.dto.ResumeWritePageDTO;
 import com.jjobkorea.service.ResumeInfoService;
@@ -61,21 +62,35 @@ public class ResumeController {
 		log.info("@#hello");
 		
 		model.addAttribute("@#message resister", "핼로~");
-		String memId = (String) session.getAttribute("memId");
-        if(memId == null) {
+        if(session.getAttribute("user") == null) {
         	System.out.println("로그인이 안됐습니다.");
         	return "redirect:/login";
         }
-        List<ResumeWritePageDTO> resumes = pageService.getAllResumes();
+        
+        // 저장된 이력서 가져오는 로직 
+        List<ResumeInfoDTO> resumes = resumeInfoService.findAll();
         model.addAttribute("resumes", resumes);
+        
+        for(ResumeInfoDTO test : resumes) {
+        	System.out.println(test.getResumeBirthDay());
+        }
+        
+        MemDTO dto = (MemDTO) session.getAttribute("user");
+        String userId = dto.getMemId();
+        model.addAttribute("userId", userId);
 		String page = "resume_page/resume_page";
 		model.addAttribute("page", page);
+		
 		return "main/main";
 	}
 	 @PostMapping("/resume")
 	    public String addResume(ResumeWritePageDTO resume, HttpSession session) {
-	        String memId = (String) session.getAttribute("memId");
-	        if (memId == null) {
+		 
+		 MemDTO user = (MemDTO) session.getAttribute("user");
+		 System.out.println(user.getClass());
+		 String memId = user.getMemId();
+		 
+	        if (session.getAttribute("user") == null) {
 	            return "redirect:/login";
 	        }
 	        resume.setResumePageUserId(memId);
@@ -85,8 +100,9 @@ public class ResumeController {
 
 
    @GetMapping("/resume_write")
-    public String resumeWrite(Model model) {
+    public String resumeWrite(Model model, HttpSession session) {
         log.info("@#resume_write");
+  
 
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
         return "resume_page/resume_write/resume_write";
@@ -94,13 +110,15 @@ public class ResumeController {
    
    @PostMapping("/resume_write")
    public String saveResume(
-           @ModelAttribute ResumeInfoDTO resumeInfoDTO)	
+           @ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session, Model model)	
 //           @RequestParam("resumeBirthDay") String resumeBirthDay,
 //           @RequestParam("resumeCpJoinDate") String resumeCpJoinDate,
 //           @RequestParam("resumeCpLeaveDate") String resumeCpLeaveDate) 
         		   throws ParseException {
 
        log.info("@#saveResume");
+
+
        // MultipartFile 설정
        MultipartFile file = resumeInfoDTO.getResumeProfilePhoto();
        if (file != null && !file.isEmpty()) {
@@ -114,9 +132,18 @@ public class ResumeController {
                log.error("Failed to save file", e);
            }
        }
+       //session 에서 작성자 ID 받아와서 DTO 에 바인딩 
+       MemDTO user = (MemDTO) session.getAttribute("user");
+       String userId = user.getMemId();
+       resumeInfoDTO.setResumePageUserId(userId);
        
-       
+//       model.addAttribute("userId", userId);
+//       // user 의 이력서를 가져오는 로직 
+//       List<ResumeInfoDTO> resumes = resumeInfoService.findAll();
+//       // 이력서를 model 에 담아주는 로직 
+//       model.addAttribute("resumes", resumes);
+//       
        resumeInfoService.insert(resumeInfoDTO);
-       return "redirect:/resume_write";
+       return "redirect:/resume";
    }
 }

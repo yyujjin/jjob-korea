@@ -7,38 +7,18 @@
 
 
     <select id="findAll" resultType="com.jjobkorea.dto.ResumeInfoDTO">
-        SELECT rw.resumePageUserId,
-ru.resumePageUserId,
-ru.resumeUserName,
-ru.resumeBirthDay,
-ru.resumeGender,
-ru.resumeUserEmail,
-ru.resumeUserPhone,
-ru.resumeUserCellPhone,
-ru.resumeUserAddress,
-ru.resumeSkillName,
-ru.resumePortfolio,
-ru.resumeEduStage,
-ru.resumeSchoolName,
-ru.resumeCpName,
-ru.resumeCpDept,
-ru.resumeCpJoinDate,
-ru.resumeCpLeaveDate,
-ru.resumeCpPosition,
-ru.resumeCpDuty,
-ru.resumeCpSalary,
-ru.resumeIntroduce FROM resume_user_information ru join resume_write_page rw where rw.resumePageUserId = ru.resumePageUserId
+        select * from resume_user_information 
     </select>
 
     <insert id="insert">
 		INSERT INTO resume_user_information (
-        resumeUserName, resumeBirthDay, resumeGender, resumeUserEmail, resumeUserPhone, resumeUserCellPhone, resumeUserAddress, 
+        resumePageTitle, resumeUserName, resumeBirthDay, resumeGender, resumeUserEmail, resumeUserPhone, resumeUserCellPhone, resumeUserAddress, 
 		resumeProfilePhoto, resumeSkillName, resumePortfolio, resumePageUserId, resumeEduStage, 
 		resumeSchoolName, resumeCpName, resumeCpDept, resumeCpJoinDate, resumeCpLeaveDate, 
 		resumeCpPosition, resumeCpDuty, resumeCpSalary, resumeIntroduce
         )
         VALUES (
-            #{resumeUserName}, #{resumeBirthDay}, #{resumeGender}, #{resumeUserEmail}, #{resumeUserPhone}, #{resumeUserCellPhone},
+            #{resumePageTitle}, #{resumeUserName}, #{resumeBirthDay}, #{resumeGender}, #{resumeUserEmail}, #{resumeUserPhone}, #{resumeUserCellPhone},
             #{resumeUserAddress}, #{resumeFilePath}, #{resumeSkillName}, #{resumePortfolio}, #{resumePageUserId},#{resumeEduStage},
             #{resumeSchoolName}, #{resumeCpName}, #{resumeCpDept}, #{resumeCpJoinDate},#{resumeCpLeaveDate}, 
             #{resumeCpPosition}, #{resumeCpDuty}, #{resumeCpSalary}, #{resumeIntroduce}

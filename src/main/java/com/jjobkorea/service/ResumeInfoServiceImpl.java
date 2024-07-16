@@ -22,7 +22,7 @@ public class ResumeInfoServiceImpl implements ResumeInfoService {
     @Override
     public List<ResumeInfoDTO> findAll() {
         log.info("Finding all ResumeInfoDTOs");
-        return resumeInfoList; // 재귀 호출을 방지하기 위해 변경
+        return resumeInfoMapper.findAll(); // 재귀 호출을 방지하기 위해 변경
     }
     @Override
     public void insert(ResumeInfoDTO resumeInfoDTO) {

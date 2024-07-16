@@ -14,6 +14,7 @@ public class ResumeInfoDTO {
     private String resumeUserName;
 //    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private String resumeBirthDay;
+    private String resumePageTitle;
     private int resumeGender;
     private String resumeUserEmail;
     private String resumeUserPhone;

@@ -7,7 +7,7 @@
 			SELECT tb.memId, rw.resumePageUserId, rw.resumePageTitle, rw.resumePageWriteDate 
 			FROM resume_write_page rw
 			join signup_tb tb 
-			where tb.memId=rw.resumePageUserId;
+			where tb.memId=rw.resumePageUserId
   		</select>
   		<insert id="insertResume">
   			INSERT INTO resume_write_page(resumePageTitle, resumePageWriteDate) VALUES(#{resumePageTitle}, #{now()}))
