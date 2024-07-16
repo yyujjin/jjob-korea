@@ -1,4 +1,4 @@
-# <img src="img/jjobkorea로고.png" width="150" height="70"> 짭코리아
+# <img src="README-images/main/jjobkorea로고.png" width="150" height="70"> 짭코리아
 
 ## 📄 목차
 
@@ -172,6 +172,6 @@
 
 ### 🖥️ 공고 등록 페이지 전체 화면
 
-<img src="">
+<img src="README-images/upLoadPosting/upLoadPosting-full.png">
 
 ## 📝기능 설명
