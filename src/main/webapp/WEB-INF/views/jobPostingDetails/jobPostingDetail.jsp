@@ -144,13 +144,27 @@
             width: 100%;
             height: auto; /* 이미지가 잘리지 않도록 설정 */
         }
+
+        .background-image {
+            height: 50%; /* 배경 이미지 높이 50% */
+            position: relative;
+        }
+
+        .image-text {
+            position: absolute;
+            top: 50%;
+            left: 0; /* 텍스트를 이미지의 왼쪽에 위치 */
+            transform: translateY(-50%);
+            color: black; /* 텍스트 색상 검정색 */
+            font-size: 2rem;
+            text-align: left;
+            padding-left: 1rem; /* 왼쪽 여백 추가 */
+        }
     </style>
 </head>
 <body>
 <div class="container-fixed mt-5">
     <h2 class="text-center mb-4">채용 정보 상세</h2>
-
-    
 
     <!-- 채용 제목 및 회사명, 지원 자격, 근무 조건 -->
     <div class="card full-border">
@@ -225,7 +239,7 @@
                 <div class="col-md-4 border-left">
                     <div class="company-info-container">
                         <div class="company-logo">
-                            <img src="<c:url value='${jobPostingDetail.companyLogoPath}' />" alt="Company Logo" class="img-fluid" />
+                            <img src="<c:url value='${jobPostingDetail.companyLogoPath}' />" alt="Company Logo" />
                         </div>
                         <div class="company-info">
                             <h4 class="section-title">기업 정보</h4>
@@ -259,27 +273,32 @@
             </div>
         </div>
     </div>
-	<!-- 이미지 섹션 -->
-	    <c:choose>
-	        <c:when test="${not empty jobPostingDetail.jobPostingImagePath}">
-	            <div class="image-container">
-	                <img src="<c:url value='${jobPostingDetail.jobPostingImagePath}' />" alt="Job Posting Image">
-	            </div>
-	        </c:when>
-	        <c:otherwise>
-	            <!-- 기본 배경 이미지 섹션 -->
-	            <div class="image-container">
-	                <img src="<c:url value='/resources/img/jobPostingDetail/background.png' />" alt="Background Image">
-	                <div class="image-text">
-	                    ${jobPostingDetail.companyName}<br>${jobPostingDetail.jobTitle}
-	                </div>
-	            </div>
-	        </c:otherwise>
-	    </c:choose>
 
-    <!-- 이미지가 없는 경우에만 아래 항목들 표시 -->
-    <c:if test="${empty jobPostingDetail.jobPostingImagePath}">
-        <!-- 회사 소개 섹션 -->
+    <!-- 이미지 섹션 -->
+    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
+        <div class="image-container background-image">
+            <img src="<c:url value='/resources/img/jobPostingDetail/background.png' />" alt="Background Image">
+            <div class="image-text">
+                ${jobPostingDetail.companyName}<br>${jobPostingDetail.jobTitle}
+            </div>
+        </div>
+    </c:if>
+
+    <c:if test="${not empty jobPostingDetail.additionalImagePaths}">
+        <div class="card full-border">
+            <div class="card-body">
+                <h4 class="section-title">채용정보 추가 이미지</h4>
+                <div class="image-container">
+                    <c:forEach var="imagePath" items="${jobPostingDetail.additionalImagePaths}">
+                        <img src="<c:url value='${imagePath}' />" alt="Additional Image" />
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </c:if>
+
+    <!-- 회사 소개 섹션 -->
+    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
             <div class="card-body">
                 <h4 class="section-title">회사 소개</h4>
@@ -287,8 +306,10 @@
                 <a href="${jobPostingDetail.companyWebsite}" target="_blank">${jobPostingDetail.companyWebsite}</a>
             </div>
         </div>
+    </c:if>
 
-        <!-- 포지션 및 자격요건 -->
+    <!-- 포지션 및 자격요건 -->
+    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
             <div class="card-body">
                 <h4 class="section-title">포지션 및 자격요건</h4>
@@ -315,8 +336,10 @@
                 </ul>
             </div>
         </div>
+    </c:if>
 
-        <!-- 근무 조건 -->
+    <!-- 근무 조건 -->
+    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
             <div class="card-body">
                 <h4 class="section-title">근무 조건</h4>
@@ -327,8 +350,10 @@
                 </ul>
             </div>
         </div>
+    </c:if>
 
-        <!-- 복지 및 혜택 -->
+    <!-- 복지 및 혜택 -->
+    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
             <div class="card-body">
                 <h4 class="section-title">복지 및 혜택</h4>
@@ -337,8 +362,10 @@
                 </ul>
             </div>
         </div>
+    </c:if>
 
-        <!-- 전형절차 -->
+    <!-- 전형절차 -->
+    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
             <div class="card-body">
                 <h4 class="section-title">전형절차</h4>
@@ -347,8 +374,10 @@
                 </ul>
             </div>
         </div>
+    </c:if>
 
-        <!-- 유의사항 -->
+    <!-- 유의사항 -->
+    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
             <div class="card-body">
                 <h4 class="section-title">유의사항</h4>

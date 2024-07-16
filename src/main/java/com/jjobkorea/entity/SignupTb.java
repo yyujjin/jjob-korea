@@ -32,7 +32,11 @@ public class SignupTb {
     @Column(name = "memEmail", nullable = false)
     private String memEmail;
 
-    // Removed memBirth and memGender fields
+    @Column(name = "memBirth")
+    private String memBirth;
+
+    @Column(name = "memGender")
+    private String memGender;
 
     @Column(name = "memCreationDate")
     private Timestamp memCreationDate;

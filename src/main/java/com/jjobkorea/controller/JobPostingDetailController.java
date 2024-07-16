@@ -18,6 +18,6 @@ public class JobPostingDetailController {
     public String getJobPostingDetail(@PathVariable("id") Long id, Model model) {
         JobPostingDetail jobPostingDetail = jobPostingDetailService.getJobPostingDetail(id);
         model.addAttribute("jobPostingDetail", jobPostingDetail);
-        return "jobPostingDetail";
+        return "jobPostingDetails/jobPostingDetail";
     }
 }

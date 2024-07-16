@@ -17,12 +17,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -55,7 +58,7 @@ public class AddJobPostingController {
             }
         }
         model.addAttribute("jobPostingDetail", new JobPostingDetail());
-        return "addJobPosting";  // JSP 파일 경로
+        return "jobPostingDetails/addJobPosting";  // JSP 파일 경로
     }
 
     @PostMapping
@@ -63,7 +66,8 @@ public class AddJobPostingController {
             @Valid JobPostingDetail jobPostingDetail, 
             BindingResult result, 
             HttpSession session, 
-            Model model) {
+            Model model,
+            @RequestParam("additionalImages") List<MultipartFile> additionalImages) {
 
         if (result.hasErrors()) {
             MemDTO user = (MemDTO) session.getAttribute("user");
@@ -76,21 +80,12 @@ public class AddJobPostingController {
                 }
                 if (signupTb.isPresent()) {
                     model.addAttribute("signupTb", signupTb.get());
+                    jobPostingDetail.setMemName(signupTb.get().getMemName());
+                    jobPostingDetail.setMemPhone(signupTb.get().getMemPhone());
+                    jobPostingDetail.setMemEmail(signupTb.get().getMemEmail());
                 }
             }
-            return "addJobPosting";
-        }
-
-        if (jobPostingDetail.getBenefits() == null || jobPostingDetail.getBenefits().isEmpty()) {
-            jobPostingDetail.setBenefits("기본 복지 혜택");
-        }
-
-        if (jobPostingDetail.getHiringProcess() == null || jobPostingDetail.getHiringProcess().isEmpty()) {
-            jobPostingDetail.setHiringProcess("기본 전형 절차");
-        }
-
-        if (jobPostingDetail.getNotes() == null || jobPostingDetail.getNotes().isEmpty()) {
-            jobPostingDetail.setNotes("기본 유의사항");
+            return "jobPostingDetails/addJobPosting";
         }
 
         try {
@@ -107,6 +102,19 @@ public class AddJobPostingController {
                 String jobPostingImageFilename = saveFile(jobPostingImage);
                 jobPostingDetail.setJobPostingImagePath(jobPostingImageFilename);
             }
+
+            // 추가 이미지 파일 저장
+            List<String> additionalImagePaths = new ArrayList<>();
+            if (additionalImages != null && !additionalImages.isEmpty()) {
+                for (MultipartFile additionalImage : additionalImages) {
+                    if (!additionalImage.isEmpty()) {
+                        String additionalImageFilename = saveFile(additionalImage);
+                        additionalImagePaths.add(additionalImageFilename);
+                    }
+                }
+            }
+            jobPostingDetail.setAdditionalImagePaths(additionalImagePaths);
+
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("errorMessage", "파일 업로드 중 오류가 발생했습니다.");
@@ -124,4 +132,6 @@ public class AddJobPostingController {
         Files.write(path, file.getBytes());
         return "/resources/img/jobPostingDetail/" + filename;
     }
+
+    
 }
