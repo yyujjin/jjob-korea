@@ -6,34 +6,70 @@
 <meta charset="UTF-8">
 <title>회원가입 양식</title>
 <link rel="stylesheet" href="../resources/css/login_style/loginstyle.css">
-<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script>
-	 $(document).ready(function() {
-	        console.log("JQuery Loaded");
-	        $('#id').on('blur', function() {
-	            var memId = $(this).val();
-	            console.log("memId:", memId);
-	            if (memId) {
-	                $.ajax({
-	                    type: 'POST',
-	                    url: '/checkId',
-	                    data: { memId: memId },
-	                    success: function(response) {
-	                        console.log("AJAX Response:", response);
-	                        if (response.exists) {
-	                            $('#idError').text('이미 존재하는 아이디입니다.');
-	                        } else {
-	                            $('#idError').text('');
-	                        }
-	                    },
-	                    error: function(xhr, status, error) {
-	                        console.error("AJAX Error:", status, error);
-	                    }
-	                });
-	            }
-	        });
-	    });
-	</script>
+	$(document).ready(function() {
+		        console.log("JQuery Loaded");
+		        $('#memId, #enterpriseMemId').on('blur', function() {
+		            var memId = $(this).val();
+		            console.log("memId:", memId);
+		            if (memId) {
+		                $.ajax({
+		                    type: 'POST',
+		                    url: '/checkId',
+		                    data: { memId: memId },
+		                    success: function(response) {
+		                        console.log("AJAX Response:", response);
+		                        if (response.exists) {
+		                            alert('이미 존재하는 아이디입니다.'); // 메시지 창 띄우기
+		                            $(this).val(''); // 입력 필드 초기화 (선택 사항)
+		                        }
+		                    },
+		                    error: function(xhr, status, error) {
+		                        console.error("AJAX Error:", status, error);
+		                    }
+		                });
+		            }
+		        });
+
+		        // 탭 전환 기능
+		        $('.tab').on('click', function() {
+		            var tabId = $(this).data('tab');
+		            $('.tab').removeClass('active');
+		            $(this).addClass('active');
+		            if (tabId === 'individual') {
+		                $('#individualForm').show();
+		                $('#enterpriseForm').hide();
+		            } else {
+		                $('#individualForm').hide();
+		                $('#enterpriseForm').show();
+		            }
+		        });
+		    });
+</script>
+<script>
+$(document).ready(function() {
+    $('#companyRegistrationNum').on('blur', function() {
+        var companyRegistrationNum = $(this).val();
+        if (companyRegistrationNum) {
+            $.ajax({
+                type: 'POST',
+                url: '/checkCompanyRegistrationNum',
+                data: { companyRegistrationNum: companyRegistrationNum },
+                success: function(response) {
+                    if (response.exists) {
+                        alert('이미 존재하는 사업자등록번호입니다.');
+                        $('#companyRegistrationNum').val('');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                }
+            });
+        }
+    });
+});
+</script>
 	<script>
 	    document.addEventListener('DOMContentLoaded', function() {
 	        const tabs = document.querySelectorAll('.tab');
@@ -105,7 +141,7 @@
         <form id="signup-form" method="post" action="/registerOk">
             <input type="hidden" name="type" value="individual">
             <div class="form-group">
-                <input type="text" id="id" name="memId" placeholder="아이디" required>
+                <input type="text" id="memId" name="memId" placeholder="아이디" required>
                 <div id="idError" class="error-message" style="color:red;"></div>
             </div>
             <div class="form-group">
@@ -203,67 +239,67 @@
     </div>
 
     <!-- 기업 회원가입 -->
-<div id="enterpriseForm" class="container02" style="display: none;">
-    <form id="signup-form" method="post" action="/registerOk">
-        <div class="form-group">
-            <div class="cpinfo">
-                <h4>기업정보</h4>
-            </div>
-            <div class="head-guide">
-                <li><span style="color: red;">*</span>필수정보</li>
-            </div>
-        </div>
-        <input type="hidden" name="type" value="enterprise">
-        <div class="form-group">
-            <select name="companyType" class="selectType" required>
-                <option value="" disabled selected style="display: none;">기업형태</option>
-                <option value="스타트기업">스타트기업</option>
-                <option value="중소기업">중소기업(300명이상)</option>
-                <option value="대기업">대기업</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <input type="text" id="companyRegistrationNum" name="companyRegistrationNum" placeholder="사업자등록번호*" required>
-        </div>
-        <div class="form-group">
-            <input type="text" id="companyName" name="companyName" placeholder="회사명*" required>
-        </div>
-        <div class="form-group">
-            <input type="text" id="companyRepresentativeName" name="companyRepresentativeName" placeholder="대표자명*" required>
-        </div>
-        <div class="form-group">
-            <input type="text" id="companyAddr" name="companyAddr" placeholder="회사주소*" required>
-        </div>
-        <div class="form-group">
-            <input type="text" id="companyBusinessRegistrationNum" name="companyBusinessRegistrationNum" placeholder="사업자등록증명원 발급번호*" required>
-        </div>
-        <div class="contactPerson">
-            <h3>인사담당자 정보</h3>
+    <div id="enterpriseForm" class="container02" style="display: none;">
+        <form id="signup-form" method="post" action="/registerOk">
             <div class="form-group">
-                <input type="text" name="memId" placeholder="아이디*" required>
-                <div id="idError" class="error-message" style="color:red;"></div>
+                <div class="cpinfo">
+                    <h4>기업정보</h4>
+                </div>
+                <div class="head-guide">
+                    <li><span style="color: red;">*</span>필수정보</li>
+                </div>
+            </div>
+            <input type="hidden" name="type" value="enterprise">
+            <div class="form-group">
+                <select name="companyType" class="selectType" required>
+                    <option value="" disabled selected style="display: none;">기업형태</option>
+                    <option value="스타트기업">스타트기업</option>
+                    <option value="중소기업">중소기업(300명이상)</option>
+                    <option value="대기업">대기업</option>
+                </select>
             </div>
             <div class="form-group">
-                <input type="password" name="memPwd" placeholder="비밀번호*" required>
+                <input type="text" id="companyRegistrationNum" name="companyRegistrationNum" placeholder="사업자등록번호*" required>
             </div>
             <div class="form-group">
-                <input type="text" name="memName" placeholder="가입자명*" required>
+                <input type="text" id="companyName" name="companyName" placeholder="회사명*" required>
             </div>
             <div class="form-group">
-                <input type="text" name="memPhone" placeholder="전화번호*" maxlength="13" required>
+                <input type="text" id="companyRepresentativeName" name="companyRepresentativeName" placeholder="대표자명*" required>
             </div>
             <div class="form-group">
-                <input type="text" name="memEmail" placeholder="이메일*" required>
+                <input type="text" id="companyAddr" name="companyAddr" placeholder="회사주소*" required>
             </div>
             <div class="form-group">
-                <input type="text" name="memAddr" placeholder="주소*" required>
+                <input type="text" id="companyBusinessRegistrationNum" name="companyBusinessRegistrationNum" placeholder="사업자등록증명원 발급번호*" required>
             </div>
-        </div>
-        <div class="terms-container">
-            <ul class="join_box">
-                <li class="checkBox check01">
-                    <ul class="clearfix">
-                        <li><span style="color: black;font-size: 15px;">
+            <div class="contactPerson">
+                <h3>인사담당자 정보</h3>
+                <div class="form-group">
+                    <input type="text" id="enterpriseMemId" name="memId" placeholder="아이디*" required>
+                    <div id="idError" class="error-message" style="color:red;"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="memPwd" placeholder="비밀번호*" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="memName" placeholder="가입자명*" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="memPhone" placeholder="전화번호*" maxlength="13" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="memEmail" placeholder="이메일*" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="memAddr" placeholder="주소*" required>
+                </div>
+            </div>
+            <div class="terms-container">
+                <ul class="join_box">
+                    <li class="checkBox check01">
+                        <ul class="clearfix">
+                            <li><span style="color: black;font-size: 15px;">
                         필수동의 항목 및 개인정보 수집 및 이용 동의(선택), 광고성 정보 수신
                         (선택)에 모두 동의합니다.</span></li>
                         <li class="checkA11btn">
