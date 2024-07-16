@@ -30,6 +30,7 @@ dependencies {
 //    JSTL (JavaServer Pages Standard Tag Library)을 사용하기 위함
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
 
     implementation 'net.coobird:thumbnailator:0.4.20'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
@@ -51,7 +52,13 @@ dependencies {
 
     // Hibernate Core Dependency (JPA 구현체) 사용
     implementation 'org.hibernate.orm:hibernate-core:6.1.7.Final'
-
+    //json 라이브러리
+	implementation 'net.sf.json-lib:json-lib:2.4:jdk15@jar'
+	implementation 'commons-lang:commons-lang:2.6'
+	implementation 'commons-logging:commons-logging:1.2'
+	implementation 'commons-collections:commons-collections:3.2.2'
+	implementation 'commons-beanutils:commons-beanutils:1.9.4'
+	implementation 'net.sf.ezmorph:ezmorph:1.0.6'
   
 }
 

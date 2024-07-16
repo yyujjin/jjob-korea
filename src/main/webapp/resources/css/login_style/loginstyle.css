@@ -1,33 +1,46 @@
   /* 0 */
-    body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    }
     .head-guide {
     font-size: 12px;
     float: right;
     list-style: none;
     margin-right: 10px;
-}
+    margin-top: 10px;
+    }
     .tab-container {
     margin: 30px auto;
     border: 1px solid black;
     overflow: hidden;
-}
-    .tabs { display: flex; cursor: pointer;
+    max-width: 100%;
+    width: 800px;  
+    text-align: center;
+    }
+    .tabs {
+    display: flex ;
+    cursor: pointer;
+    justify-content: space-between; /* 탭들 사이의 간격을 일정하게 설정 */
     }
     .tab { flex: 1; padding: 15px 20px; text-align: center; background-color: #f1f1f1; border-bottom: 2px solid transparent;
     }
-    .tab.active { background-color: #007bff; color: white; border-bottom: 2px solid #007bff;
+    .tab.active {
+        background-color: #007bff;
+        color: white;
+        border-bottom: 2px solid #007bff;
     }
-
-    .container {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    height: 100%;
-    max-width: 100%;
+    #individualForm,
+    #enterpriseForm {
+    width: 70%; 
+    max-width: 800px; 
+    margin: 0 auto; /* 수평 중앙 정렬 */
+    padding: 20px; 
+    border: 1px solid #ccc; /* 시각적으로 명확하게 하기 위해 테두리 추가 */
+    background-color: #fff; /* 흰색 배경 설정 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /
+}
+    .container02 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95%;
     }
 
     h1 {text-align: center; margin-bottom: 20px;
@@ -81,8 +94,28 @@
 
     button[type="submit"]:hover { background-color: #0057ff;
     }
-    .cpinfo{margin: 0 0 10px; padding:10px 0 0;float: left;}
-
+    .cpinfo {
+        margin: 10px 0; 
+        padding: 10px 0 0;
+        float: left; 
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .cpinfo h4 {
+        margin: 0; /* 기본 여백 제거 */
+    }
+    .head-guide {
+        float: right; 
+        margin: 0;
+        padding-right: 10px; 
+        font-size: 12px;
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
     select{
         width: 100%;
         padding: 10px;
@@ -95,9 +128,6 @@
         
     }
     
-    /* 약관동의 */
-    * { margin:  auto; padding: 0; box-sizing: border-box;
-    }
     ul>li { list-style: none;
     }
 
