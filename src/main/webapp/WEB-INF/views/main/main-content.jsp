@@ -46,6 +46,12 @@
         #hotPosting-icon {
             margin-left: -15px;
         }
+		
+		.col > a{
+		    text-decoration: none; /* 하이퍼링크의 밑줄 제거 */
+		}
+
+		
     </style>
 </head>
 <body>
@@ -62,16 +68,20 @@
 <div class="row row-cols-2 row-cols-md-4 g-4 ">
 
     <c:forEach items="${postingList}" var="postingList">
-        <div class="col">
-            <div class="card h-100 w-90 text-center">
-                <img src="<c:out value='${postingList.postingImage}'/>" class="card-img-top fixed-size-image"
-                     alt="..."/>
-                <div class="card-body">
-                    <h5 class="card-title"><c:out value='${postingList.companyName}'/></h5>
-                    <p class="card-text"><c:out value='${postingList.postingTitle}'/></p>
-                </div>
-            </div>
-        </div>
+		
+	        <div class="col">
+				<a href="/jobPostingDetails/${postingList.id}">
+		            <div class="card h-100 w-90 text-center">
+		                <img src="<c:out value='${postingList.postingImage}'/>" class="card-img-top fixed-size-image"
+		                     alt="..."/>
+		                <div class="card-body">
+		                    <h5 class="card-title"><c:out value='${postingList.companyName}'/></h5>
+		                    <p class="card-text"><c:out value='${postingList.postingTitle}'/></p>
+		                </div>
+		            </div>
+				</a>
+	        </div>
+		
     </c:forEach>
 
 
