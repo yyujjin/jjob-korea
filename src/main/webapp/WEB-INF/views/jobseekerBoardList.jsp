@@ -38,6 +38,7 @@
 
 	.button_container {
     display: flex;
+	margin-top: 20px;
     justify-content: flex-end; /* 검색 폼을 오른쪽으로 정렬 */
 	}
 
