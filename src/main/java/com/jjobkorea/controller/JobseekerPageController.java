@@ -33,7 +33,7 @@ public class JobseekerPageController {
 	
 	//이 페이지가 연결됨 
 //	@RequestMapping("/listWithPaging")
-	@RequestMapping("/jobseekerBoardList")
+	@RequestMapping("/requestPage/jobseekerBoardList")
 	public String listWithPaging(JobseekerCriteria cri, Model model) {
 		log.info("@# list");
 		log.info("@# cri=>"+cri);
@@ -41,7 +41,7 @@ public class JobseekerPageController {
 		ArrayList<JobseekerBoardDTO> list = service.listWithPaging(cri);
 		int total = service.getTotalCount(cri);
 		log.info("@# total=>"+total);
-		
+				
 		//메인페이지로 연결 
 		String page = "jobseekerBoardList";
 		model.addAttribute("page", page);

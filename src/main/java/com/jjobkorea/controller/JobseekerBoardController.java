@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jjobkorea.dto.JobseekerBoardAttachDTO;
 import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.dto.JobseekerCommentDTO;
+import com.jjobkorea.dto.JobseekerCriteria;
 import com.jjobkorea.service.JobseekerBoardService;
 import com.jjobkorea.service.JobseekerCommentService;
 import com.jjobkorea.service.JobseekerUploadService;
@@ -36,7 +37,9 @@ public class JobseekerBoardController {
 //이 메서드의 기능은 뭘까? 목록을 가져와요~
 //	@RequestMapping("/list")
 	@RequestMapping("/jobseekerBoardList_old")
-	public String list(Model model) {
+	public String list (@RequestParam(value = "pageNum", required = false) String pageNum,
+            			@RequestParam(value = "amount", required = false) String amount,
+            																Model model) {
 		log.info("@# list");
 		
 		ArrayList<JobseekerBoardDTO> list = service.jobseekerBoardList();
@@ -45,7 +48,7 @@ public class JobseekerBoardController {
 		return "jobseekerBoardList";
 	}
 	
-	// @RequestMapping("/jobseekerWrite")
+	//@RequestMapping("/jobseekerWrite")
 	@PostMapping("/jobseekerWrite")
 	public String write(JobseekerBoardDTO boardDTO) {
 		log.info("@# write");
@@ -58,7 +61,8 @@ public class JobseekerBoardController {
 //		service.write(param);
 		service.jobseekerWrite(boardDTO);
 		
-		return "redirect:jobseekerBoardList";
+		return "redirect:/requestPage/jobseekerBoardList";
+		
 	}
 	
 	@RequestMapping("/jobseekerWrite_view")
@@ -84,29 +88,44 @@ public class JobseekerBoardController {
 		
 		int jobseekerCommunityBoardNum = Integer.parseInt(param.get("jobseekerCommunityBoardNum"));
 	    service.jobseekerHit(jobseekerCommunityBoardNum);
-		
-		return "jobseekerContent_view";
+		//메인페이지로 연결 
+		String page = "jobseekerContent_view";
+		model.addAttribute("page", page);
+		// return "jobseekerContent_view";
+	    return "main/main";
 	}
+	
+	// requestPage/jobseekerContent_view~로 연결하는걸 다시 여기로 연결
+		@RequestMapping("/requestPage/jobseekerContent_view")
+		public String redirectToJobseekerContentView(@RequestParam(value = "pageNum", required = false) String pageNum,
+	                                                 @RequestParam(value = "amount", required = false) String amount,
+	                                                 @RequestParam(value = "type", required = false) String type,
+	                                                 @RequestParam(value = "keyword", required = false) String keyword,
+	                                                 @RequestParam(value = "jobseekerCommunityBoardNum") String jobseekerCommunityBoardNum) {
+			// URL을 구성합니다.
+			String redirectUrl = String.format("redirect:/jobseekerContent_view?pageNum=%s&amount=%s&type=%s&keyword=%s&jobseekerCommunityBoardNum=%s",
+	                                           pageNum, amount, type, keyword, jobseekerCommunityBoardNum);
+			return redirectUrl;
+		}
 	
 	// @RequestMapping("/jobseekerModify")
 	@PostMapping("/jobseekerModify")
-//	public String modify(@RequestParam HashMap<String, String> param) {
 	public String modify(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
 		log.info("@# modify");
 		log.info("@# param=>"+param);
 		
 		service.jobseekerModify(param);
 		
+		
 //		페이지 이동시 뒤에 페이지번호, 글 갯수 추가
 		rttr.addAttribute("pageNum", param.get("pageNum"));
 		rttr.addAttribute("amount", param.get("amount"));
 
-		return "redirect:/jobseekerBoardList";
+		return "redirect:/requestPage/jobseekerBoardList";
 	}
 	
-	// @RequestMapping("/jobseekerDelete")
-	@PostMapping("/jobseekerDelete")
-//	public String delete(@RequestParam HashMap<String, String> param) {
+
+	@PostMapping("/delete")
 	public String delete(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
 		log.info("@# delete");
 		log.info("@# param=>"+param);
@@ -122,7 +141,7 @@ public class JobseekerBoardController {
 		rttr.addAttribute("pageNum", param.get("pageNum"));
 		rttr.addAttribute("amount", param.get("amount"));
 		
-		return "redirect:/jobseekerBoardList";
+		return "redirect:/requestPage/jobseekerBoardList";
 	}
 	
 }

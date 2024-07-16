@@ -22,15 +22,11 @@ import jakarta.servlet.http.HttpSession;
 @Slf4j
 public class MainController {
 
-    
+    @Autowired
+    private AddJobPostingService addJobPostingService;
 
     @Autowired
     private JobPostingService jobPostingService;
-    @Autowired
-    private ResumeController resumeController;
-    
-    @Autowired
-    private AddJobPostingController	addJobPostingController;
 
     // 로그인, 회원가입 컨트롤러
     @Autowired
@@ -95,13 +91,9 @@ public class MainController {
             // 구직자 게시판 페이지 진입
             case "jobseekerBoard":
                 return jobseekerPageController.listWithPaging(cri, model);
-                
-                //이력서 등록 페이지 진입
-            case "resume":
-               return resumeController.resister(model);    
             //공고 등록 페이지 진입
             case "jobPostingResister":
-                return addJobPostingController.showAddJobPostingForm(model, session);
+                return "forward:/addJobPosting";
         }
         return "main/main";
     }

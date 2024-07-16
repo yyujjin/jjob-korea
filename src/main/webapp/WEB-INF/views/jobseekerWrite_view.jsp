@@ -31,10 +31,10 @@
 			$.ajax({
 				 type:"post"
 				,data:formData
-				,url:"write"
+				,url:"/jobseekerWrite"
 				,success: function(data){
 					alert("저장완료");
-					location.href="jobseekerlist";
+					location.href="jobseekerBoardList";
 				}
 				,error: function(){
 					alert("오류발생");
@@ -45,7 +45,7 @@
 </head>
 <body>
 	<table width="500" border="1">
-		<form id="frm" method="post" action="jobseekerWrite">
+		<form id="frm" method="post" action="/jobseekerWrite">
 			<tr>
 				<td>이름</td>
 				<td>
@@ -70,7 +70,7 @@
 					<!-- <input type="button" onclick="fn_submit()" value="입력"> -->
 					 <button type="submit">입력</button>
 					&nbsp;&nbsp;
-					<a href="jobseekerBoardList">목록보기</a>
+					<a href="/requestPage/jobseekerBoardList">목록보기</a>
 				</td>
 			</tr>
 		</form>
@@ -209,7 +209,7 @@
 						str + " ><div>";
 
 						str += "<span>"+obj.jobseekerBoardAttachFileName+"</span>";
-						str += "<img src='/display?fileName="+fileCallPath+"'>";//이미지 출력 처리(컨트롤러단)
+						str += "<img src='./display?fileName="+fileCallPath+"'>";//이미지 출력 처리(컨트롤러단)
 						str += "<span data-file=\'"+ fileCallPath +"\'data-type='image'> x </span>";
 						str += "</div></li>";
 					} else {

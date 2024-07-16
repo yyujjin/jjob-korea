@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjobkorea.mapper.JobPostingMapper">
 
-	<sql id="jobPostingColums">
-		id
-		, companyName
+    <sql id="jobPostingColums">
+        id
+        , companyName
 		, postingImage
 		, postingTitle
 		, jobTitle
@@ -13,12 +13,104 @@
 		, jobExperience
 		, deadline
 		, hit
-	</sql>
+    </sql>
 
-	<select id="getPostingList" resultType="JobPostingDTO">
-		SELECT <include refid="jobPostingColums" /> 
-		FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC
-	</select>
+    <select id="getPostingListToMain" resultType="JobPostingDTO">
+        SELECT
+        <include refid="jobPostingColums"/>
+        FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() order by hit desc, companyName asc limit 8;
+    </select>
+
+
+    <select id="getPostingList" resultType="JobPostingDTO" parameterType="int">
+        SELECT
+        <include refid="jobPostingColums"/>
+        FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC LIMIT 10 OFFSET
+        ${pageNum};
+    </select>
+
+
+    <select id="getSearchList" resultType="JobPostingDTO">
+        SELECT
+        <include refid="jobPostingColums"/>
+        FROM jobposting
+        <where>
+            <trim prefix="(" suffix=")" prefixOverrides="OR">
+                <if test="filter.fullStack != null">
+                    OR filters LIKE CONCAT('%', #{filter.fullStack}, '%')
+                </if>
+
+
+                <if test="filter.frontEnd != null">
+                    OR filters LIKE CONCAT('%', #{filter.frontEnd}, '%')
+                </if>
+
+                <if test="filter.backEnd != null">
+                    OR filters LIKE CONCAT('%', #{filter.backEnd}, '%')
+                </if>
+
+                <if test="filter.seoul != null">
+                    OR filters LIKE CONCAT('%', #{filter.seoul}, '%')
+                </if>
+
+                <if test="filter.busan != null">
+                    OR filters LIKE CONCAT('%', #{filter.busan}, '%')
+                </if>
+
+                <if test="filter.daegu != null">
+                    OR filters LIKE CONCAT('%', #{filter.daegu}, '%')
+                </if>
+
+                <if test="filter.incheon != null">
+                    OR filters LIKE CONCAT('%', #{filter.incheon}, '%')
+                </if>
+
+                <if test="filter.gwangju != null">
+                    OR filters LIKE CONCAT('%', #{filter.gwangju}, '%')
+                </if>
+
+                <if test="filter.daejeon != null">
+                    OR filters LIKE CONCAT('%', #{filter.daejeon}, '%')
+                </if>
+
+                <if test="filter.ulsan != null">
+                    OR filters LIKE CONCAT('%', #{filter.ulsan}, '%')
+                </if>
+
+                <if test="filter.sejong != null">
+                    OR filters LIKE CONCAT('%', #{filter.sejong}, '%')
+                </if>
+
+                <if test="filter.largeCompany != null">
+                    OR filters LIKE CONCAT('%', #{filter.largeCompany}, '%')
+                </if>
+
+                <if test="filter.smallMediumCompany != null ">
+                    OR filters LIKE CONCAT('%', #{filter.smallMediumCompany}, '%')
+                </if>
+
+                <if test="filter.startup != null ">
+                    OR filters LIKE CONCAT('%', #{filter.startup}, '%')
+                </if>
+
+                <if test="filter.regularEmployee != null">
+                    OR filters LIKE CONCAT('%', #{filter.regularEmployee}, '%')
+                </if>
+
+                <if test="filter.contractEmployee != null ">
+                    OR filters LIKE CONCAT('%', #{filter.contractEmployee}, '%')
+                </if>
+
+                <if test="filter.intern != null">
+                    OR filters LIKE CONCAT('%', #{filter.intern}, '%')
+                </if>
+            </trim>
+            AND DEADLINE >= CURDATE()
+        </where>
+        ORDER BY DEADLINE ASC, COMPANYNAME ASC LIMIT 10 OFFSET ${pageNum};
+
+    </select>
+
 
 </mapper>
 
