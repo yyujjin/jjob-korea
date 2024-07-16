@@ -18,6 +18,10 @@
 
     <div class="main-container">
         <div class="content">
+            <section>
+                <h3>이력서 제목</h3>
+                    <input type="text" placeholder="이력서 제목" name="resumePageTitle" id = "resumePageTitle" required>
+            </section>
             <section class="personal-info">
                 <h3>인적 사항</h3>
                 <div class="input-group">
