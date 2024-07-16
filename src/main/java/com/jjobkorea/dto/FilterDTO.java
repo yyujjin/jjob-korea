@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class FilterDTO {
 
-	private String fullStack;
+    private String fullStack;
     private String frontEnd;
     private String backEnd;
     private String seoul;
@@ -22,5 +22,5 @@ public class FilterDTO {
     private String regularEmployee;
     private String contractEmployee;
     private String intern;
-	
+
 }
