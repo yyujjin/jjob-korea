@@ -2,6 +2,7 @@ package com.jjobkorea.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 @Data
@@ -36,7 +37,7 @@ public class ResumeInfoDTO {
     private String resumeCpLeaveDate;
     private String resumeCpPosition;
     private String resumeCpDuty;
-    private int resumeCpSalary;
+    private String resumeCpSalary;
     // 포트폴리오와 자기소개서 작성란
     private String resumePortfolio;
     private String resumeIntroduce;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jjobkorea.dto.ResumeInfoDTO;
+import com.jjobkorea.dto.ResumeWritePageDTO;
 import com.jjobkorea.service.ResumeInfoService;
+import com.jjobkorea.service.ResumeWritePageService;
+import com.jjobkorea.service.ResumeWritePageServiceImpl;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -27,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ResumeController {
     @Autowired
     private ResumeInfoService resumeInfoService;
+    @Autowired
+    private ResumeWritePageService pageService;
 	@RequestMapping("/resume")
 	public String resume(Model model) {
 		log.info("@#hello");
@@ -35,26 +42,52 @@ public class ResumeController {
 
 		return "resume_page/resume_page";
 	}
-
 	// 메인에서 부를 경우 (샘플 용)
 	//헤더 부분 주석처리
 	//이력서 페이지 css, js 경로 상대경로로 걸려있던 거 ${pageContext.request.contextPath} 이용해서 절대 경로로 변경
 	//변경한 코드에는 주석 달았음
 	//해당 페이지 자체적으로 css가 걸려있어서 메인 css랑 충돌
-	public String resister(Model model) {
+//	public String resister(Model model) {
+//		log.info("@#hello");
+//
+//		model.addAttribute("message", "핼로~");
+//
+//		String page = "resume_page/resume_page";
+//		model.addAttribute("page", page);
+//		return "main/main";
+//	}
+    @GetMapping("/resume")
+	public String resister(Model model, HttpSession session) {
 		log.info("@#hello");
-
-		model.addAttribute("message", "핼로~");
-
+		
+		model.addAttribute("@#message resister", "핼로~");
+		String memId = (String) session.getAttribute("memId");
+        if(memId == null) {
+        	System.out.println("로그인이 안됐습니다.");
+        	return "redirect:/login";
+        }
+        List<ResumeWritePageDTO> resumes = pageService.getAllResumes();
+        model.addAttribute("resumes", resumes);
 		String page = "resume_page/resume_page";
 		model.addAttribute("page", page);
 		return "main/main";
 	}
+	 @PostMapping("/resume")
+	    public String addResume(ResumeWritePageDTO resume, HttpSession session) {
+	        String memId = (String) session.getAttribute("memId");
+	        if (memId == null) {
+	            return "redirect:/login";
+	        }
+	        resume.setResumePageUserId(memId);
+	        pageService.insertResume(resume);
+	        return "redirect:/requestPage/{page}";
+	    }
 
 
    @GetMapping("/resume_write")
     public String resumeWrite(Model model) {
         log.info("@#resume_write");
+
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
         return "resume_page/resume_write/resume_write";
     }

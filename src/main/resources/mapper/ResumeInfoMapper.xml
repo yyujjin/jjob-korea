@@ -7,7 +7,27 @@
 
 
     <select id="findAll" resultType="com.jjobkorea.dto.ResumeInfoDTO">
-        SELECT * FROM resume_user_information
+        SELECT rw.resumePageUserId,
+ru.resumePageUserId,
+ru.resumeUserName,
+ru.resumeBirthDay,
+ru.resumeGender,
+ru.resumeUserEmail,
+ru.resumeUserPhone,
+ru.resumeUserCellPhone,
+ru.resumeUserAddress,
+ru.resumeSkillName,
+ru.resumePortfolio,
+ru.resumeEduStage,
+ru.resumeSchoolName,
+ru.resumeCpName,
+ru.resumeCpDept,
+ru.resumeCpJoinDate,
+ru.resumeCpLeaveDate,
+ru.resumeCpPosition,
+ru.resumeCpDuty,
+ru.resumeCpSalary,
+ru.resumeIntroduce FROM resume_user_information ru join resume_write_page rw where rw.resumePageUserId = ru.resumePageUserId
     </select>
 
     <insert id="insert">

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jjobkorea.dto.JobPostingDTO;
 import com.jjobkorea.dto.JobseekerCriteria;
@@ -91,7 +92,7 @@ public class MainController {
 
             //이력서 등록 페이지 진입
             case "resume":
-                return resumeController.resister(model);
+                return resumeController.resister(model, session);
 
             //공고 등록 페이지 진입
             case "jobPostingResister":
