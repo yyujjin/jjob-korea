@@ -1,11 +1,19 @@
 package com.jjobkorea.service;
 
-import com.jjobkorea.entity.JobPostingDetail;
 import com.jjobkorea.entity.SignupCp;
-import java.util.List;
+import com.jjobkorea.repository.SignupCpRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface JobPostingCpService {
-    List<SignupCp> getAllCompanies();
-    SignupCp getCompanyById(int id);
-    void saveJobPosting(JobPostingDetail jobPostingDetail);
+import java.util.Optional;
+
+@Service
+public class JobPostingCpService {
+
+    @Autowired
+    private SignupCpRepository signupCpRepository;
+
+    public Optional<SignupCp> getSignupCpById(Long id) {
+        return signupCpRepository.findById(id);
+    }
 }

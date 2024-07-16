@@ -5,7 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SignupCpRepository extends JpaRepository<SignupCp, Integer> {
-    boolean existsByCompanyRegistrationNum(String companyRegistrationNum);
-    boolean existsByCompanyBusinessRegistration(String companyBusinessRegistration);
+public interface SignupCpRepository extends JpaRepository<SignupCp, Long> {
 }
