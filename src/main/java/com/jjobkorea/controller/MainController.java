@@ -2,8 +2,6 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,8 @@ import com.jjobkorea.dto.JobPostingDTO;
 import com.jjobkorea.dto.JobseekerCriteria;
 import com.jjobkorea.service.JobPostingService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -64,7 +64,8 @@ public class MainController {
     public String requestPage(@PathVariable("page") String page, Model model, JobseekerCriteria cri, HttpServletRequest request) {
 
         log.info("요청 페이지 -> " + page);
-
+        HttpSession session = request.getSession();
+        
         switch (page) {
             // 메인 페이지 진입
             case "main":
@@ -88,7 +89,18 @@ public class MainController {
 
             //공고 등록 페이지 진입
             case "jobPostingResister":
-                return null;
+            	return null;
+            	
+            // 글쓰기 페이지 진입 (로그인 필요)
+            case "jobseekerWrite_view":
+                if (!SessionUtilsController.isLoggedIn(session)) {
+                    return "redirect:/login";
+                }
+                return "jobseekerWrite_view";	
+                
+            // 로그아웃 처리
+            case "logout":
+                return "redirect:/logout";  // 로그아웃 메서드로 리디렉션
         }
         return "main/main";
     }

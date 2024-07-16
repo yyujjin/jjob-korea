@@ -90,6 +90,14 @@ public class MemController {
         return "login_ok";
     }
 
+    @PostMapping("/checkId")
+    @ResponseBody
+    public Map<String, Boolean> checkId(@RequestParam("memId") String memId) {
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("exists", signupService.isMemIdExists(memId));
+        return response;
+    }
+
     @RequestMapping("/register")
     public String register(Model model) {
         log.info("@# register");
@@ -98,14 +106,6 @@ public class MemController {
         model.addAttribute("page", page);
 
         return "main/main";
-    }
-
-    @PostMapping("/checkId")
-    @ResponseBody
-    public Map<String, Boolean> checkId(@RequestParam("memId") String memId) {
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("exists", signupService.isMemIdExists(memId));
-        return response;
     }
 
     @PostMapping("/registerOk")
@@ -154,6 +154,6 @@ public class MemController {
     public String logout(HttpSession session) {
         log.info("@# logout");
         session.invalidate();  // 세션 무효화
-        return "redirect:login";  // 로그인 페이지로 리디렉션
+        return "redirect:main";  // 로그인 페이지로 리디렉션
     }
 }
