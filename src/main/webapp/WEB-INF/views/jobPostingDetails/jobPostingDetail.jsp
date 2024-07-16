@@ -142,7 +142,7 @@
 
         .image-container img {
             width: 100%;
-            height: auto; /* 이미지가 잘리지 않도록 설정 */
+            height: 50%; /* 이미지가 잘리지 않도록 설정 */
         }
 
         .background-image {

@@ -38,6 +38,7 @@
 
 	.button_container {
     display: flex;
+	margin-top: 20px;
     justify-content: flex-end; /* 검색 폼을 오른쪽으로 정렬 */
 	}
 
@@ -133,13 +134,13 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
 	<tr>
 		<td colspan="5">
 			 <button class="writebutton" 
 			 onclick="location.href='jobseekerWrite_view'">글작성</button>
 		</td>
-	</tr>
-			
+	</tr>		
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 	   <script>
 	       $(document).ready(function() {

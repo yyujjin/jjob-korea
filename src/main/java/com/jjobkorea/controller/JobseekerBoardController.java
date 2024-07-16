@@ -15,11 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jjobkorea.dto.JobseekerBoardAttachDTO;
 import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.dto.JobseekerCommentDTO;
-import com.jjobkorea.dto.JobseekerCriteria;
+import com.jjobkorea.dto.MemDTO;
 import com.jjobkorea.service.JobseekerBoardService;
 import com.jjobkorea.service.JobseekerCommentService;
 import com.jjobkorea.service.JobseekerUploadService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -40,6 +41,7 @@ public class JobseekerBoardController {
 	public String list (@RequestParam(value = "pageNum", required = false) String pageNum,
             			@RequestParam(value = "amount", required = false) String amount,
             																Model model) {
+
 		log.info("@# list");
 		
 		ArrayList<JobseekerBoardDTO> list = service.jobseekerBoardList();
@@ -48,29 +50,34 @@ public class JobseekerBoardController {
 		return "jobseekerBoardList";
 	}
 	
-	//@RequestMapping("/jobseekerWrite")
-	@PostMapping("/jobseekerWrite")
-	public String write(JobseekerBoardDTO boardDTO) {
-		log.info("@# write");
-		log.info("@# boardDTO=>"+boardDTO);
-		
-		if (boardDTO.getAttachList() != null) {
-			boardDTO.getAttachList().forEach(attach -> log.info("@# attach=>"+attach));
-		}
-		
-//		service.write(param);
-		service.jobseekerWrite(boardDTO);
-		
-		return "redirect:/requestPage/jobseekerBoardList";
-		
-	}
+	 @PostMapping("/jobseekerWrite")
+	    public String write(JobseekerBoardDTO boardDTO, HttpSession session) {
+	        log.info("@# write");
+	        log.info("@# boardDTO=>" + boardDTO);
+
+	        if (session.getAttribute("user") == null) {
+	            return "redirect:/login";
+	        }
+
+	        if (boardDTO.getAttachList() != null) {
+	            boardDTO.getAttachList().forEach(attach -> log.info("@# attach=>" + attach));
+	        }
+
+	        service.jobseekerWrite(boardDTO);
+
+	        return "redirect:/requestPage/jobseekerBoardList";
+	    }
 	
-	@RequestMapping("/jobseekerWrite_view")
-	public String write_view() {
-		log.info("@# write_view");
-		
-		return "jobseekerWrite_view";
-	}
+	 @RequestMapping("/jobseekerWrite_view")
+	    public String write_view(HttpSession session) {
+	        log.info("@# write_view");
+
+	        if (session.getAttribute("user") == null) {
+	            return "redirect:/login";
+	        }
+
+	        return "jobseekerWrite_view";
+	    }
 	
 	@RequestMapping("/jobseekerContent_view")
 	public String content_view(@RequestParam HashMap<String, String> param, Model model) {
@@ -108,40 +115,44 @@ public class JobseekerBoardController {
 			return redirectUrl;
 		}
 	
-	// @RequestMapping("/jobseekerModify")
-	@PostMapping("/jobseekerModify")
-	public String modify(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
-		log.info("@# modify");
-		log.info("@# param=>"+param);
-		
-		service.jobseekerModify(param);
-		
-		
-//		페이지 이동시 뒤에 페이지번호, 글 갯수 추가
-		rttr.addAttribute("pageNum", param.get("pageNum"));
-		rttr.addAttribute("amount", param.get("amount"));
+		@PostMapping("/jobseekerModify")
+	    public String modify(@RequestParam HashMap<String, String> param, RedirectAttributes rttr, HttpSession session) {
+	        log.info("@# modify");
+	        log.info("@# param=>" + param);
 
-		return "redirect:/requestPage/jobseekerBoardList";
-	}
+	        if (session.getAttribute("user") == null) {
+	            return "redirect:/login";
+	        }
+
+	        service.jobseekerModify(param);
+
+	        rttr.addAttribute("pageNum", param.get("pageNum"));
+	        rttr.addAttribute("amount", param.get("amount"));
+
+	        return "redirect:/requestPage/jobseekerBoardList";
+	    }
 	
 
-	@PostMapping("/delete")
-	public String delete(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
-		log.info("@# delete");
-		log.info("@# param=>"+param);
-		log.info("@# jobseekerCommunityBoardNum=>"+param.get("jobseekerCommunityBoardNum"));
-		
-		List<JobseekerBoardAttachDTO> fileList = uploadService.getFileList(Integer.parseInt(param.get("jobseekerCommunityBoardNum")));
-		log.info("@# fileList=>"+fileList);
-		
-		service.jobseekerDelete(param);
-		uploadService.deleteFiles(fileList);
-		
-//		페이지 이동시 뒤에 페이지번호, 글 갯수 추가
-		rttr.addAttribute("pageNum", param.get("pageNum"));
-		rttr.addAttribute("amount", param.get("amount"));
-		
-		return "redirect:/requestPage/jobseekerBoardList";
-	}
+		 @PostMapping("/delete")
+		    public String delete(@RequestParam HashMap<String, String> param, RedirectAttributes rttr, HttpSession session) {
+		        log.info("@# delete");
+		        log.info("@# param=>" + param);
+		        log.info("@# jobseekerCommunityBoardNum=>" + param.get("jobseekerCommunityBoardNum"));
+
+		        if (session.getAttribute("user") == null) {
+		            return "redirect:/login";
+		        }
+
+		        List<JobseekerBoardAttachDTO> fileList = uploadService.getFileList(Integer.parseInt(param.get("jobseekerCommunityBoardNum")));
+		        log.info("@# fileList=>" + fileList);
+
+		        service.jobseekerDelete(param);
+		        uploadService.deleteFiles(fileList);
+
+		        rttr.addAttribute("pageNum", param.get("pageNum"));
+		        rttr.addAttribute("amount", param.get("amount"));
+
+		        return "redirect:/requestPage/jobseekerBoardList";
+		    }
 	
 }
