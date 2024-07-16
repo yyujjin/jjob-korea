@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,11 @@ public class MainController {
 
     @Autowired
     private JobPostingService jobPostingService;
+    @Autowired
+    private HttpSession session;
+    
+    @Autowired
+    private AddJobPostingController addJobPostingController;
 
     // 로그인, 회원가입 컨트롤러
     @Autowired
@@ -88,7 +95,7 @@ public class MainController {
 
             //공고 등록 페이지 진입
             case "jobPostingResister":
-                return null;
+                return addJobPostingController.showAddJobPostingForm(model,session);
         }
         return "main/main";
     }
