@@ -217,9 +217,9 @@
 
 ## 📝기능 설명
 
-<img src="README-images/resume/resume-alert.png">
-
 ### 📌기술 스택 선택
+
+<img src="README-images/resume/resume-alert.png">
 
 - 기술 스택을 3개까지 선택할 수 있으며,이를 초과하여 선택하려고 하면 알림창이 표시됩니다.
 
