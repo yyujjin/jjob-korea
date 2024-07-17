@@ -6,14 +6,14 @@
 - 개발 기간
 - 개발 방식 및 팀원 소개
 - 페이지 설명
-    - [메인 페이지](#)
-    - [로그인 페이지](#)
-    - [회원 가입 페이지](#)
-    - [채용 정보 페이지](#)
-    - [채용 공고 상세 조회 페이지](#)
-    - [취업 톡톡 페이지](#)
-    - [이력서 등록 페이지](#)
-    - [공고 등록 페이지](#)
+    - [메인 페이지](#-메인-페이지)
+    - [로그인 페이지](#-로그인-페이지)
+    - [회원 가입 페이지](#-회원가입-페이지)
+    - [채용 정보 페이지](#-채용-정보-페이지)
+    - [채용 공고 상세 조회 페이지](#-채용-공고-상세-조회-페이지)
+    - [구직자 게시판 페이지](#-구직자-게시판-메인-페이지)
+    - [이력서 페이지](#-이력서-메인-페이지)
+    - [공고 등록 페이지](#-공고-등록-페이지)
 
 ## 🚀 프로젝트 소개
 
@@ -281,6 +281,39 @@
 
 ### 🖥️ 공고 등록 페이지 전체 화면
 
-<img src="README-images/upLoadPosting/upLoadPosting-full.png">
+<img src="README-images/upLoadPosting/upLoad-JobPosting-full.png">
 
-## 📝기능 설명
+- 기업 유저로 로그인하여 채용 공고를 등록할 수 있는 페이지 입니다.
+
+## 📝페이지 구성 요소
+
+### 📌 회사 정보
+<img src="README-images/upLoadPosting/upLoad-JobPosting-1.png">
+
+### 📌 사용자 정보
+
+<img src="README-images/upLoadPosting/upLoad-JobPosting-2.png">
+
+### 📌 포지션 및 자격 요건
+
+<img src="README-images/upLoadPosting/upLoad-JobPosting-3.png">
+
+### 📌 근무 조건
+
+<img src="README-images/upLoadPosting/upLoad-JobPosting-4.png">
+
+### 📌 복지 및 혜택
+
+<img src="README-images/upLoadPosting/upLoad-JobPosting-5.png">
+
+### 📌 전형절차
+
+<img src="README-images/upLoadPosting/upLoad-JobPosting-6.png">
+
+### 📌 유의사항
+
+<img src="README-images/upLoadPosting/upLoad-JobPosting-7.png">
+
+### 📌 이미지 업로드
+
+<img src="README-images/upLoadPosting/upLoad-JobPosting-8.png">
