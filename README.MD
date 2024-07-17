@@ -85,13 +85,44 @@
 
 ## 📝기능 설명
 
+### 📌 로그인 화면
+<img src="README-images/login/login-jobseeker.png">
+<img src="README-images/login/login-company.png">
+
+- 탭 인터페이스를 사용하여 개인과 기업회원을 선택할 수 있습니다.
+
+<img src="README-images/login/login-alert.png">
+
+- 아이디와 비밀번호가 틀렸을 경우, 알림창이 출력됩니다.
+
+### 📌로그인 성공 시 메인 화면 표시
+
+<img src="README-images/login/login-ok.png">
+
+- 화면 상단 오른쪽에 유저의 이름이 표시되고, 로그아웃 버튼이 생성됩니다.
+- 세션을 적용하여 각 페이지에서 로그인 상태를 유지할 수 있습니다.
+- 로그아웃을 클릭하면 세션이 무효화됩니다.
+
 ## 🚀 회원가입 페이지
 
 ### 🖥️ 회원가입 페이지 전체 화면
 
-<img src="README-images/signUp/signUp-full.png">
+<img src="README-images/signUp/signUp.png">
 
 ## 📝기능 설명
+
+<img src="README-images/signUp/signUp-tap.png">
+
+- 탭 인터페이스를 통해 개인과 기업회원 선택이 가능합니다.
+
+<img src="README-images/signUp/signUp-alert.png">
+
+
+- 데이터베이스에 이미 존재하는 아이디로 가입 시 알림창이 표시됩니다.
+
+<img src="README-images/signUp/signUp-ok.png">
+
+- 회원가입 폼을 작성한 후 가입하기 버튼을 클릭하면 성공 메시지가 표시되며, 메인 화면으로 돌아갑니다.
 
 ## 🚀 채용 정보 페이지
 
@@ -147,9 +178,18 @@
 
 ### 🖥️ 채용 공고 상세 조회 페이지 전체 화면
 
-<img src="">
+<img src="README-images/upLoadPosting/upLoadPosting-full.png">
 
 ## 📝기능 설명
+
+- 채용 공고의 이미지와 함께 제목, 포지션 및 자격 요건, 근무 조건, 복지 및 혜택, 전형 절차, 유의 사항 등의 핵심 정보를 표시합니다.
+    - 기본 이미지 표시: 이미지가 제공되지 않은 경우 기본 이미지가 표시됩니다.
+    - 채용 제목: 채용 공고의 제목이 표시됩니다.
+    - 포지션 및 자격 요건: 채용 포지션과 필요한 자격 요건이 상세히 설명됩니다.
+    - 근무 조건: 근무 시간, 장소 및 기타 조건이 안내됩니다.
+    - 복지 및 혜택: 제공되는 복지 및 추가 혜택이 나열됩니다.
+    - 전형 절차: 채용 절차와 각 단계별 상세 설명이 제공됩니다.
+    - 유의 사항: 지원 시 유의해야 할 사항이 안내됩니다.
 
 ## 🚀 구직자 게시판 페이지
 
