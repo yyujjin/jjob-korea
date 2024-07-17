@@ -1,6 +1,6 @@
 package com.jjobkorea.mapper;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -8,5 +8,7 @@ import com.jjobkorea.dto.ResumeWritePageDTO;
 
 @Mapper
 public interface ResumeWritePageMapper {
-	public ArrayList<ResumeWritePageDTO> list();
-}
+	    List<ResumeWritePageDTO> getAllResumes();
+
+	    void insertResume(ResumeWritePageDTO resume);
+	}

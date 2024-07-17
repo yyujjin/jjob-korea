@@ -17,7 +17,7 @@ pageEncoding="UTF-8"%>
                     <div class="v-line"></div>
                     <a class="file_mng" href="#2">첨부파일 관리</a>
                 <div class="resume">
-                    <a id="rsjoin" href="#3">이력서 등록</a>
+                    <a id="rsjoin" href="<%=request.getContextPath()%>/resume_write">이력서 등록</a>
                 </div>
                 <div class="resumesave">
                     <div class="resumetitle">
