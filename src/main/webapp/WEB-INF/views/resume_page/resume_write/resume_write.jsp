@@ -129,6 +129,7 @@
     
     function saveResume() {
         const resumeData = {
+            resumePageTitle: document.getElementById('resumePageTitle').value,
             resumeUserName: document.getElementById('resumeUserName').value,
             resumeBirthDay: document.getElementById('resumeBirthDay').value,
             resumeGender: document.getElementById('resumeGender').value,
