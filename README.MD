@@ -191,13 +191,67 @@
     - 전형 절차: 채용 절차와 각 단계별 상세 설명이 제공됩니다.
     - 유의 사항: 지원 시 유의해야 할 사항이 안내됩니다.
 
-## 🚀 구직자 게시판 페이지
+## 🚀 구직자 게시판 메인 페이지
 
-### 🖥️ 구직자 게시판 페이지 전체 화면
+### 🖥️ 구직자 게시판 메인 페이지 전체 화면
 
 <img src="README-images/board/board-full.png">
 
 ## 📝기능 설명
+
+### 📌 검색 기능 구현
+
+<img src="README-images/board/board-dropdown.png">
+
+- 드롭다운에서 선택한 조건에 맞게 검색할 수 있습니다.
+
+### 📌 페이징 기능 구현
+
+<img src="README-images/board/board-writebutton.png">
+
+- 한 페이지에 10개의 항목씩 표시됩니다.
+
+
+## 🚀 구직자 게시판 작성 페이지
+
+### 🖥️ 구직자 게시판 작성 페이지 전체 화면
+
+<img src="README-images/board/board-write.png">
+
+## 📝기능 설명
+
+### 📌  사용자 정보 표시
+
+- 현재 로그인한 사용자의 아이디가 상단에 표시됩니다.
+
+### 📌 첨부 파일
+
+- 원하는 사진을 선택하여 첨부할 수 있습니다.
+- 첨부한 파일을 클릭하면 크게 볼 수 있습니다.
+- x 표시를 클릭하면 삭제됩니다.
+
+<img src="README-images/board/board-uploadFile.png">
+
+- 첨부한 파일을 클릭하면 크게 볼 수 있습니다.
+- 첨부한 파일을 다른 사용자가 다운로드 받을 수 있습니다.
+
+### 📌댓글 작성 기능
+
+<img src="README-images/board/board-comment.png">
+
+- 사용자는 게시판에 댓글을 달 수 있습니다.
+
+### 📌 권한 관리 기능
+
+<img src="README-images/board/board-checkLogin1.png">
+
+- 글의 작성자와 로그인한 사용자의 아이디가 일치할 경우
+    - 게시판의 수정 및 삭제가 가능합니다.
+
+<img src="README-images/board/board-checkLogin2.png">
+    
+- 글의 작성자와 로그인한 사용자의 아이디가 일치하지 않을 경우
+   - 게시판의 수정 및 삭제가 불가능합니다.
 
 
 ## 🚀 이력서 메인 페이지
