@@ -219,16 +219,23 @@
 
 <img src="README-images/resume/resume-alert.png">
 
+### 📌기술 스택 선택
+
 - 기술 스택을 3개까지 선택할 수 있으며,이를 초과하여 선택하려고 하면 알림창이 표시됩니다.
+
+### 📌유효성 검사
 
 <img src="README-images/resume/resume-required.png">
 
 - 필수 입력 항목이 누락된 상태에서 이력서 저장 버튼을 클릭하면 유효성 검사 오류 메시지가 출력됩니다.
 
+### 📌이력서 저장
+
 <img src="README-images/resume/resume-temp.png">
 
 - [이력서 임시 저장] 버튼을 클릭시 알림창이 뜨며 이력서가 임시저장됩니다.
 - [이력서 저장] 버튼을 누르면 이력서가 저장됩니다.
+
 
 ## 🚀 공고 등록 페이지
 
