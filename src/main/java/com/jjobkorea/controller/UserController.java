@@ -2,13 +2,18 @@ package com.jjobkorea.controller;
 
 import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     public final UserService userService;
 
     public UserController(UserService userService) {
@@ -23,14 +28,16 @@ public class UserController {
     }
 
     //로그인
-    @GetMapping("/login")
-    public String login(UserDTO userDTO) {
+    @PostMapping("/login")
+    public String login(UserDTO userDTO, Model model) {
+        log.info("넘어온 userDTO : {}",userDTO);
         String userName = userService.findUsernameByLoginInfo(userDTO);
 
         if (userName != null){ //로그인 성공
-            return "main/main";
+            return "redirect:/";
         }else { //로그인 실패
-            return "redirect:user/login";
+            model.addAttribute("page","user/login");
+            return "main/main";
         }
     }
 }
