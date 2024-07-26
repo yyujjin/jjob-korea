@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
 
 @SpringBootTest
@@ -27,6 +28,7 @@ public class UserMapperTest {
         userDTO.setUserId("abcd");
         userDTO.setPassword("1234");
         String userName = userMapper.findUsernameByLoginInfo(userDTO);
+        assertNotNull(userName,"유저 이름이 null이 아니어야 합니다.");
         log.info("로그인 성공, 유저네임 : {}",userName);
     }
 }
