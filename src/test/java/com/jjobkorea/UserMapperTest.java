@@ -44,4 +44,14 @@ public class UserMapperTest {
         String userName = userMapper.findUsernameByLoginInfo(userDTO);
         assertNull(userName,"유저 이름이 null이어야 합니다.");
     }
+
+    @Test
+    public void 로그인실패_비밀번호_불일치() {
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId("abcd");
+        userDTO.setPassword("1111");
+        String userName = userMapper.findUsernameByLoginInfo(userDTO);
+        assertNull(userName,"유저 이름이 null이어야 합니다.");
+    }
 }
