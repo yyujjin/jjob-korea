@@ -18,7 +18,6 @@
 
     .div_page ul li {
         display: inline;
-        margin-right: 5px; /* 각 페이지네이션 항목 사이의 간격 */
     }
 
     .div_page ul li a {
@@ -35,6 +34,11 @@
         background-color: #0057ff;
         color: white;
     }
+	
+	.div_page ul li.current-page a {
+	     background-color: #0057ff; /* 현재 페이지 배경색 */
+	     color: white; /* 현재 페이지 글자색 */
+	}
 
 	.button_container {
     display: flex;
@@ -171,12 +175,14 @@
 				<c:if test="${pageMaker.prev}">
 					<li class="paginate_button">
 						<a href="${pageMaker.startpage - 1}">
-							[Previous]
+							<<
 						</a>
 					</li>
 				</c:if>
 				<c:forEach var="num" begin="${pageMaker.startpage}" end="${pageMaker.endpage}">
-					<li class="paginate_button" ${pageMaker.cri.pageNum == num ? "style='background-color:#0057ff '" : ""}>
+				<!-- <li class="paginate_button" ${pageMaker.cri.pageNum == num ? "style='background-color:#0057ff '" : ""}> -->
+					<!-- 현재페이지 색 지정 --> 
+					<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'current-page' : ''}">			
 						<a href="${num}">
 							${num}
 						</a>
@@ -185,7 +191,7 @@
 				<c:if test="${pageMaker.next}">
 					<li class="paginate_button">
 						<a href="${pageMaker.endpage + 1}">
-							[Next]
+							>>
 						</a>
 					</li>
 				</c:if>

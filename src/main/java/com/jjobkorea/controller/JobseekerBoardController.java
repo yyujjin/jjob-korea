@@ -34,22 +34,7 @@ public class JobseekerBoardController {
 
 	@Autowired
 	private JobseekerUploadService uploadService;
-	
-//이 메서드의 기능은 뭘까? 목록을 가져와요~
-//	@RequestMapping("/list")
-	@RequestMapping("/jobseekerBoardList_old")
-	public String list (@RequestParam(value = "pageNum", required = false) String pageNum,
-            			@RequestParam(value = "amount", required = false) String amount,
-            																Model model) {
-
-		log.info("@# list");
 		
-		ArrayList<JobseekerBoardDTO> list = service.jobseekerBoardList();
-		model.addAttribute("list", list);
-
-		return "jobseekerBoardList";
-	}
-	
 	 @PostMapping("/jobseekerWrite")
 	    public String write(JobseekerBoardDTO boardDTO, HttpSession session) {
 	        log.info("@# write");
@@ -153,6 +138,6 @@ public class JobseekerBoardController {
 		        rttr.addAttribute("amount", param.get("amount"));
 
 		        return "redirect:/requestPage/jobseekerBoardList";
-		    }
-	
+		}
+		 	
 }

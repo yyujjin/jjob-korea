@@ -119,6 +119,9 @@
 			value="${content_view.jobseekerCommunityBoardNum}">
 			<input type="hidden" name="pageNum" value="${pageMaker.pageNum}">
 			<input type="hidden" name="amount" value="${pageMaker.amount}">
+			<!-- 수정시 작성자 아이디 기억 -->
+			<input type="hidden" name="jobseekerCommunityBoardName" 
+			value="${content_view.jobseekerCommunityBoardName}"> 
 
 			<tr>
 				<td class="notContent">번호
@@ -179,8 +182,8 @@
 	</div>
 
 	<div id="commentForm">
-		<input type="text" id="jobseekerCommentWriter" placeholder="작성자">
-		<input type="text" id="jobseekerCommentContent" placeholder="내용">
+		<input type="hidden" id="jobseekerCommentWriter" value="${user.memId}">
+		<input type="text" id="jobseekerCommentContent" placeholder="댓글을 작성해주세요">
 		<button id="commentWriteButton" onclick="commentWrite()">댓글작성</button>
 	</div>
 
@@ -206,6 +209,14 @@
 	<script>
 		const commentWrite = () => {
 			const writer = document.getElementById("jobseekerCommentWriter").value;
+			
+			//로그인 확인후 경고창 띄우고 링크연결
+			if(!writer){
+				alert("로그인이 필요합니다.");
+				window.location.href = "${pageContext.request.contextPath}/login";
+				return;
+			}
+			
 			const content = document.getElementById("jobseekerCommentContent").value;
 			const no = "${content_view.jobseekerCommunityBoardNum}";
 

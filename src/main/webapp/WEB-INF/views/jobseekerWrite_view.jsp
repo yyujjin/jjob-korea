@@ -32,19 +32,22 @@
         padding: 20px; /* 내부 여백 */
         border: 1px solid #ccc; /* 테두리 */
 	}
-    .button-container {
-        text-align: right;
-        margin-top: 10px;
-    }
-    .button-container button,
-    .button-container a {
-        background-color: #0057ff;
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        cursor: pointer;
-		text-decoration: none; /* 밑줄 제거 */
-    }
+	.upload-list {
+	    text-align: right;
+	    margin-top: 10px;
+	}
+	.upload-list button,
+	.upload-list a {
+	    background-color: #0057ff;
+	    color: white;
+	    padding: 5px 10px;
+	    border: none;
+	    cursor: pointer;
+	    text-decoration: none; /* 밑줄 제거 */
+	    display: inline-block; /* 버튼과 앵커 태그를 동일하게 inline-block으로 설정 */
+	    font-size: 14px; /* 글씨 크기 조정 */
+	    margin: 5px; /* 여백 조정 */
+	}
     .button-container a {
         display: inline-block;
         margin-left: 10px;
@@ -128,7 +131,7 @@
 					name="jobseekerCommunityBoardContent"></textarea></td>
 				</tr>
 			</table>
-			<div class="button-container">
+			<div class="upload-list">
 				<button type="submit">입력</button>
 				<a href="/requestPage/jobseekerBoardList">목록보기</a>
 			</div>
@@ -264,8 +267,9 @@ $(document).ready(function (e){
 					  "' data-type='" + obj.jobseekerBoardAttachImage + "'"
 					str + " ><div>";
 
+					// 이미지 파일 깨짐 수정
 					str += "<span>"+obj.jobseekerBoardAttachFileName+"</span>";
-					str += "<img src='./display?fileName="+fileCallPath+"'>";//이미지 출력 처리(컨트롤러단)
+					str += "<img src='/display?fileName="+fileCallPath+"'>";//이미지 출력 처리(컨트롤러단)
 					str += "<span data-file=\'"+ fileCallPath +"\'data-type='image'> x </span>";
 					str += "</div></li>";
 				} else {
@@ -283,7 +287,8 @@ $(document).ready(function (e){
 					str + " ><div>";
 
 					str += "<span>"+obj.jobseekerBoardAttachFileName+"</span>";
-					str += "<img src='./resources/img/attach.png'>";
+					// 첨부파일 이미지 깨지는 이슈 절대 경로로 수정
+					str += "<img src='${pageContext.request.contextPath}/resources/img/attach.png'>";
 					str += "<span data-file=\'"+ fileCallPath +"\'data-type='file'> x </span>";
 					str += "</div></li>";
 				}
