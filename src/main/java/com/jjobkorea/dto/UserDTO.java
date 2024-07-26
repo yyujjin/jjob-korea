@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class userDTO {
+public class UserDTO {
 
 	private int id;
 	//유저 아이디
