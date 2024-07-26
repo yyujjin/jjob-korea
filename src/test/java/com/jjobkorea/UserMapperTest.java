@@ -21,7 +21,7 @@ public class UserMapperTest {
     private UserMapper userMapper;
 
     @Test
-    public void checkUser() {
+    public void 로그인_성공() {
 
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId("abcd");
