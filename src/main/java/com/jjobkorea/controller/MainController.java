@@ -32,6 +32,10 @@ public class MainController {
     // 로그인, 회원가입 컨트롤러
     @Autowired
     private MemController memController;
+    
+    //리팩토링 코드
+    @Autowired
+    private UserController userController;
 
     // 채용 정보 컨트롤러
     @Autowired
@@ -66,20 +70,25 @@ public class MainController {
     }
 
     // 요청 파라미터에 따라 해당 페이지 컨트롤러 작동
-    @GetMapping("requestPage/{page}")
-    public String requestPage(@PathVariable("page") String page, Model model, JobseekerCriteria cri, HttpServletRequest request) {
+    @GetMapping("requestPage/{requestPage}")
+    public String requestPage(@PathVariable("requestPage") String requestPage, Model model, JobseekerCriteria cri, HttpServletRequest request) {
 
-        log.info("요청 페이지 -> " + page);
+        log.info("요청 페이지 -> " + requestPage);
 
         HttpSession session = request.getSession();
-        
-        switch (page) {
+        String page = "";
+
+        switch (requestPage) {
             // 메인 페이지 진입
             case "main":
                 return enterMainContent(model);
+
             // 로그인 페이지 진입
             case "login":
-                return memController.login(model);
+                page = userController.showLoginPage();
+                log.info("페이지 : {}",page);
+                break;
+
             // 회원가입 페이지 진입
             case "register":
                 return memController.register(model);
@@ -89,7 +98,7 @@ public class MainController {
             // 구직자 게시판 페이지 진입
             case "jobseekerBoard":
                 return jobseekerPageController.listWithPaging(cri, model);
-
+                
             //이력서 등록 페이지 진입
             case "resume":
                 return resumeController.resister(model, session);
@@ -110,6 +119,7 @@ public class MainController {
                 return "redirect:/logout";  // 로그아웃 메서드로 리디렉션     
                 
         }
+        model.addAttribute("page",page);
         return "main/main";
     }
 
