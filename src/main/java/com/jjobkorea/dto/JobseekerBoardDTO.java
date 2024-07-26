@@ -17,6 +17,10 @@ public class JobseekerBoardDTO {
 	private String jobseekerCommunityBoardContent;
 	private Timestamp jobseekerCommunityBoardDate;
 	private int jobseekerCommunityBoardHit;
-	
 	private List<JobseekerBoardAttachDTO> attachList;
+	
+	// 좋아요
+	private int likes;
+	private String likedBy;
+	
 }
