@@ -15,6 +15,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    //로그인 페이지 로드
+    @GetMapping("/login")
+    public String showLoginPage() {
+
+        return "user/login";
+    }
+
     //로그인
     @GetMapping("/login")
     public String login(UserDTO userDTO) {
