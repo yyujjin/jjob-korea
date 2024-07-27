@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(UserDTO userDTO, Model model) {
         log.info("넘어온 userDTO : {}",userDTO);
-        String userName = userService.findUsernameByLoginInfo(userDTO);
+        UserDTO userName = userService.login(userDTO);
 
         if (userName != null){ //로그인 성공
             return "redirect:/";

@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService{
 
     //로그인
     @Override
-    public UserDTO findUsernameByLoginInfo(UserDTO userDTO) {
-        return userMapper.findUsernameByLoginInfo(userDTO);
+    public UserDTO login(UserDTO userDTO) {
+        return userMapper.login(userDTO);
     }
 }

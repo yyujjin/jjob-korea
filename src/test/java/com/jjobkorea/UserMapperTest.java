@@ -30,7 +30,7 @@ public class UserMapperTest {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId("abcd");
         userDTO.setPassword("1234");
-        String userName = userMapper.findUsernameByLoginInfo(userDTO);
+        userDTO userName = userMapper.findUsernameByLoginInfo(userDTO);
         assertNotNull(userName,"유저 이름이 null이 아니어야 합니다.");
         log.info("로그인 성공, 유저네임 : {}",userName);
     }
