@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-	private int id;
+	private long id;
 	//유저 아이디
 	private String userId;
 	//패스워드
