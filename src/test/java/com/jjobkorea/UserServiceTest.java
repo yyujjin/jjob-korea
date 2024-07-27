@@ -22,7 +22,7 @@ public class UserServiceTest {
         userDTO.setUserId("abcd");
         userDTO.setPassword("1234");
 
-        String findUsernameByLoginInfo = userService.findUsernameByLoginInfo(userDTO);
+        UserDTO findUsernameByLoginInfo = userService.findUsernameByLoginInfo(userDTO);
 
         assertEquals("세일러문", findUsernameByLoginInfo, "사용자 이름이 일치하지 않습니다.");
 
