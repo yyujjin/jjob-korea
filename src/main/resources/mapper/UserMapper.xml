@@ -3,7 +3,7 @@
 <mapper namespace="com.jjobkorea.mapper.UserMapper">
 
 
-    <select id="findUsernameByLoginInfo" parameterType="UserDTO" resultType="UserDTO">
+    <select id="login" parameterType="UserDTO" resultType="UserDTO">
         select * from team_db.user_info where userId=#{userId} AND password=#{password};
     </select>
 
