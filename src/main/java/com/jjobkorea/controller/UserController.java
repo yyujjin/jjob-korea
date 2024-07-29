@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Controller
 public class UserController {
 
@@ -31,13 +33,19 @@ public class UserController {
     @PostMapping("/login")
     public String login(UserDTO userDTO, Model model) {
 
-        boolean isAuthenticated = userService.login(userDTO);
+        Optional<UserDTO> optionalUser = Optional.ofNullable(userDTO);
 
-        if (isAuthenticated) {
+        if(optionalUser.isPresent()) {
+            boolean isAuthenticated = userService.login(userDTO);
+            if (isAuthenticated) {
+                model.addAttribute("page",showLoginPage());
+                return "main/main";
+            } else {
+                return "redirect:/";
+            }
+        }else {
             model.addAttribute("page",showLoginPage());
             return "main/main";
-        } else {
-            return "redirect:/";
         }
     }
 }
