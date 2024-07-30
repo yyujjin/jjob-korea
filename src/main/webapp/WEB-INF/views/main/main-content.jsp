@@ -51,6 +51,8 @@
 		    text-decoration: none; /* 하이퍼링크의 밑줄 제거 */
 		}
 
+
+
 		
     </style>
 </head>
@@ -59,12 +61,11 @@
 <!-- //.row-cols-1한 열에 카드를 배치하고, .row-cols-md-3중간 중단점에서 위로 여러 행에 걸쳐 g-4 4장의 카드를 동일한 너비로 분할합니다. -->
 <!-- row-cols-md-3   중간 크기 화면(medium screen) 이상에서 한 행에 세 개의 열이 포함되도록 설정합니다. -->
 
-<%-- <div> <span id="top-posting"> 지금 뜨는 채용공고 <span id="top8"> TOP 8</span> </span> </div>--%>
+ <div style="font-weight: bold;"> 지금 <span style="color: #00FF00;">HOT</span>한 채용공고 <span style="color: blue;">TOP8</span> 
+    <span id="updateTime">(매일 오전 09:00 ~ 익일 오전 09:00 기준)</span>
+</div>
+<br>
 
-<img id="hotPosting-icon" src="../../resources/img/hotPosting_icon.jpg" width="320"
-     height="70">
-
-<span id="updateTime">(매일 오전 09:00 ~ 익일 오전 09:00 기준)</span>
 <div class="row row-cols-2 row-cols-md-4 g-4 ">
 
     <c:forEach items="${postingList}" var="postingList">
