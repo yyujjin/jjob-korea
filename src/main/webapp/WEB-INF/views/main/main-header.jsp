@@ -92,11 +92,11 @@
             <div class="text-end log-container">
                 <ul class="nav">
                     <c:choose>
-                        <c:when test="${not empty sessionScope.user}">
+                        <c:when test="${not empty sessionScope.user.name}">
                             <li class="nav-item">
                                         <span class="nav-link px-2 text-secondary">
 
-                                                ${sessionScope.userName}
+                                                ${sessionScope.user.name}
 
                                         </span>
                             </li>
