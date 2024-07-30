@@ -10,37 +10,37 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+<style>
+    .text-body-secondary a{
+        font-size: 18px; 
+        color: black;
+        font-weight: bold;
+        text-decoration: none; /* 밑줄 제거 */
+    }
+    .text-body-secondary a:hover{
+        color: blue;
+        text-decoration: underline; /* 밑줄 추가 */
+    }
+
+</style>
 <body>
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        
         <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-                <svg class="bi" width="30" height="24">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-            </a>
-            <span class="mb-3 mb-md-0 text-body-secondary"><font style="vertical-align: inherit;"><font
-                    style="vertical-align: inherit;">
-					© 2024 Inc.JJobKorea Corporation</font></font></span>
+            <span class="mb-3 mb-md-0 text-body-secondary">
+                <a href="https://www.notion.so/2-00b302e4e6964d91b05737af8ba58004" target="_blank">회사소개</a>&nbsp;
+                <a href="https://www.notion.so/2-00b302e4e6964d91b05737af8ba58004" target="_blank">브랜드스토리</a>&nbsp;
+                <a href="https://www.notion.so/2-00b302e4e6964d91b05737af8ba58004" target="_blank">이용약관</a>&nbsp;
+                <a href="https://www.notion.so/2-00b302e4e6964d91b05737af8ba58004" target="_blank">고객센터</a><br>
+                대표 : 박유진<br> 
+                팀원 : 한도훈 조해욱 문균호 차혜영 서민정<br>
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">© 2024 Inc.JJobKorea Corporation</font>
+                </font>
+            </span>
         </div>
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-body-secondary" href="#">
-                <svg class="bi" width="24" height="24">
-                    <use xlink:href="#twitter"></use>
-                </svg>
-            </a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="#">
-                <svg class="bi" width="24" height="24">
-                    <use xlink:href="#instagram"></use>
-                </svg>
-            </a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="#">
-                <svg class="bi" width="24" height="24">
-                    <use xlink:href="#facebook"></use>
-                </svg>
-            </a></li>
-        </ul>
     </footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
