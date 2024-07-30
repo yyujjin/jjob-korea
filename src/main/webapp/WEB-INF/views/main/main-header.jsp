@@ -85,7 +85,7 @@
                         <c:when test="${not empty sessionScope.user}">
                             <li class="nav-item">
                                         <span class="nav-link px-2 text-secondary">
-                                                ${sessionScope.user.memName}
+                                                ${sessionScope.user}
                                         </span>
                             </li>
                             <li class="nav-item">

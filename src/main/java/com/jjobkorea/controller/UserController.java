@@ -2,6 +2,8 @@ package com.jjobkorea.controller;
 
 import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
@@ -31,21 +33,25 @@ public class UserController {
 
     //로그인
     @PostMapping("/login")
-    public String login(UserDTO userDTO, Model model) {
+    public String login(UserDTO userDTO, Model model, HttpServletRequest request) {
 
         Optional<UserDTO> optionalUser = Optional.ofNullable(userDTO);
 
         if(optionalUser.isPresent()) {
-            boolean isAuthenticated = userService.login(userDTO);
-            if (isAuthenticated) {
+            UserDTO isAuthenticated = userService.login(userDTO);
+            if (isAuthenticated==null) {
                 model.addAttribute("page",showLoginPage());
                 return "main/main";
-            } else {
-                return "redirect:/";
             }
+            HttpSession session = request.getSession();
+            session.setAttribute("user",isAuthenticated.getName() );
+            String username = (String) session.getAttribute("user");
+            log.info("사용자 세션 :{} ",username);
         }else {
             model.addAttribute("page",showLoginPage());
             return "main/main";
         }
+
+        return "redirect:/";
     }
 }
