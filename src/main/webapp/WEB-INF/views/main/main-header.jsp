@@ -63,6 +63,7 @@
                 />
             </a>
 
+            <c:set var="userType" value="${user.userType}"/>
 
             <div class="nav col-12 col-lg-auto mb-2 justify-content:flex-start mb-md-0 navigation">
                 <div class="form">
@@ -71,18 +72,31 @@
                 <div class="form">
                     <a href="/requestPage/jobseekerBoard" class="nav-link px-4 text-dark">취업 톡톡</a>
                 </div>
-                
 
+               <c:choose>
+                   <c:when test="${sessionScope.user.userType == 1}">
+                       <div class="form">
+                           <a href="/requestPage/resume" class="nav-link px-4 text-dark">이력서 등록</a>
+                       </div>
+                   </c:when>
+
+                   <c:when test="${sessionScope.user.userType == 2}">
+                       <div class="form">
+                           <a href="/requestPage/jobPostingResister" class="nav-link px-4 text-dark">공고 등록</a>
+                       </div>
+                   </c:when>
+
+               </c:choose>
             </div>
-            
+
             <div class="text-end log-container">
                 <ul class="nav">
                     <c:choose>
-                        <c:when test="${not empty sessionScope.user.name}">
+                        <c:when test="${not empty sessionScope.user}">
                             <li class="nav-item">
                                         <span class="nav-link px-2 text-secondary">
 
-                                                ${sessionScope.user.name}
+                                                ${sessionScope.userName}
 
                                         </span>
                             </li>
