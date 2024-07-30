@@ -44,10 +44,12 @@ public class UserController {
                 return "main/main";
             }
             HttpSession session = request.getSession();
-            session.setAttribute("userName",isAuthenticated.getName() );
-            session.setAttribute("userId",isAuthenticated.getUserId());
-           String userName = (String) session.getAttribute("userName");
-            log.info("사용자 세션 :{} ",userName);
+
+            session.setAttribute("user",isAuthenticated );
+            //session.setAttribute("userName",isAuthenticated.getName() );
+            //session.setAttribute("userId",isAuthenticated.getUserId());
+           UserDTO user = (UserDTO) session.getAttribute("user");
+            log.info("사용자 세션 :{} ",user);
         }else {
             model.addAttribute("page",showLoginPage());
             return "main/main";
