@@ -84,21 +84,29 @@ public class JobseekerBoardController {
 	 			
 	 		
 	 		
-	 		
+
 	 		// 로그인한 사용자 정보를 얻는다
-	 		UserDTO  userObj = session.getAttribute("user");
+		 	//유저 아이디 가져오기
+		 	String userId = (String) session.getAttribute("userId");
+			 log.info("게시판 접근 -> 유저 아이디 : {} ",userId);
+	 		/*UserDTO  userObj = session.getAttribute("user");
 	        UserDTO loggedInUser = null;
 	        if (userObj instanceof UserDTO) {
 	            loggedInUser = (UserDTO) userObj;
 	        } else {
 	            log.error("세션에서 UserDTO 객체를 가져오지 못했습니다. 현재 객체 타입: {}", userObj != null ? userObj.getClass().getName() : "null");
-	        }
+	        }*/
 
 	        // 로그인 상태인지 확인하고 사용자 이름을 얻는다
-	        String userName = null;
+
+		 	//유저 이름 가져오기
+		 	String userName = (String) session.getAttribute("userName");
+			 log.info("게시판 접근 -> 유저 이름 : {} ",userName);
+
+	        /*String userName = null;
 	        if (loggedInUser != null) {
 	            userName = loggedInUser.getName(); // UserDTO 객체에서 이름을 가져온다
-	        }
+	        }*/
 
 	        // 게시글 작성자 ID 얻기
 	        String jobseekerCommunityBoardName = dto.getJobseekerCommunityBoardName(); // DTO에서 작성자 ID를 가져온다
