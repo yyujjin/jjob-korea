@@ -16,6 +16,7 @@ import com.jjobkorea.dto.JobseekerBoardAttachDTO;
 import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.dto.JobseekerCommentDTO;
 import com.jjobkorea.dto.MemDTO;
+import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.service.JobseekerBoardService;
 import com.jjobkorea.service.JobseekerCommentService;
 import com.jjobkorea.service.JobseekerUploadService;
@@ -39,7 +40,7 @@ public class JobseekerBoardController {
 	    public String write(JobseekerBoardDTO boardDTO, HttpSession session) {
 	        log.info("@# write");
 	        log.info("@# boardDTO=>" + boardDTO);
-
+	        
 	        if (session.getAttribute("user") == null) {
 	            return "redirect:/login";
 	        }
@@ -53,40 +54,71 @@ public class JobseekerBoardController {
 	        return "redirect:/requestPage/jobseekerBoardList";
 	    }
 	
-	 @RequestMapping("/jobseekerWrite_view")
-	    public String write_view(HttpSession session) {
+	 @RequestMapping("/requestPage/jobseekerWrite_view")
+	    public String write_view(HttpSession session, Model model) {
 	        log.info("@# write_view");
 
 	        if (session.getAttribute("user") == null) {
-	            return "redirect:/login";
+	            return "redirect:/requestPage/login";
 	        }
-
-	        return "jobseekerWrite_view";
+	        String page = "jobseekerWrite_view";
+			model.addAttribute("page", page);
+		    return "main/main";
 	    }
 	
-	@RequestMapping("/jobseekerContent_view")
-	public String content_view(@RequestParam HashMap<String, String> param, Model model) {
-		log.info("@# content_view");
-		
-		JobseekerBoardDTO dto = service.jobseekerContentView(param);
-		model.addAttribute("content_view", dto);
-		
-//		content_view.jsp 에서 pageMaker 를 가지고 페이징 처리
-		model.addAttribute("pageMaker", param);
-		
-		// 해당 게시글에 작성된 댓글 리스트를 가져옴
-		ArrayList<JobseekerCommentDTO> commentList = commentService.findAll(param);
-		model.addAttribute("commentList", commentList);
-		
-		int jobseekerCommunityBoardNum = Integer.parseInt(param.get("jobseekerCommunityBoardNum"));
-	    service.jobseekerHit(jobseekerCommunityBoardNum);
-		//메인페이지로 연결 
-		String page = "jobseekerContent_view";
-		model.addAttribute("page", page);
-		// return "jobseekerContent_view";
-	    return "main/main";
-	}
+	// 여기서부터 문제임
+	// JobseekerBoardController.java content_view 메서드
+	 @RequestMapping("/jobseekerContent_view")
+	 	public String content_view(@RequestParam HashMap<String, String> param, Model model, HttpSession session) {
+	 		log.info("글 보기");
+	 			
+	 		JobseekerBoardDTO dto = service.jobseekerContentView(param);
+	 		model.addAttribute("content_view", dto);
+	 		
+//	 		content_view.jsp 에서 pageMaker 를 가지고 페이징 처리
+	 		model.addAttribute("pageMaker", param);
+	 			
+	 		// 해당 게시글에 작성된 댓글 리스트를 가져옴
+	 		ArrayList<JobseekerCommentDTO> commentList = commentService.findAll(param);
+	 		model.addAttribute("commentList", commentList);
+	 			
+	 		
+	 		
+	 		
+	 		// 로그인한 사용자 정보를 얻는다
+	 		UserDTO  userObj = session.getAttribute("user");
+	        UserDTO loggedInUser = null;
+	        if (userObj instanceof UserDTO) {
+	            loggedInUser = (UserDTO) userObj;
+	        } else {
+	            log.error("세션에서 UserDTO 객체를 가져오지 못했습니다. 현재 객체 타입: {}", userObj != null ? userObj.getClass().getName() : "null");
+	        }
+
+	        // 로그인 상태인지 확인하고 사용자 이름을 얻는다
+	        String userName = null;
+	        if (loggedInUser != null) {
+	            userName = loggedInUser.getName(); // UserDTO 객체에서 이름을 가져온다
+	        }
+
+	        // 게시글 작성자 ID 얻기
+	        String jobseekerCommunityBoardName = dto.getJobseekerCommunityBoardName(); // DTO에서 작성자 ID를 가져온다
+
+	        // 조회수 증가 로직
+	        if (!userName.equals(jobseekerCommunityBoardName)) { // 본인 글이 아닐 때
+	            int jobseekerCommunityBoardNum = dto.getJobseekerCommunityBoardNum(); // DTO에서 게시글 번호를 가져온다
+	            service.jobseekerHit(jobseekerCommunityBoardNum);
+	        }
+	 		//메인페이지로 연결 
+	 		String page = "jobseekerContent_view";
+	 		model.addAttribute("page", page);
+	 		// return "jobseekerContent_view";
+	 	    return "main/main";
+	 		}
 	
+	 // 여기까지 문제임
+	 
+	 
+	 
 	// requestPage/jobseekerContent_view~로 연결하는걸 다시 여기로 연결
 		@RequestMapping("/requestPage/jobseekerContent_view")
 		public String redirectToJobseekerContentView(@RequestParam(value = "pageNum", required = false) String pageNum,
