@@ -176,10 +176,19 @@ public class ResumeController {
                log.error("Failed to save file", e);
            }
        }
-       //session 에서 작성자 ID 받아와서 DTO 에 바인딩 
-       MemDTO user = (MemDTO) session.getAttribute("user");
-       String userId = user.getMemId();
+       //session 에서 작성자 ID 받아와서 DTO 에 바인딩
+       //세션 저장 로직 수정 전
+       //MemDTO user = (MemDTO) session.getAttribute("user");
+       //String userId = user.getMemId();
+       //resumeInfoDTO.setResumePageUserId(userId);
+
+
+       //세션 저장 로직 수정 후
+       UserDTO user = (UserDTO) session.getAttribute("user");
+       String userId = user.getUserId();
        resumeInfoDTO.setResumePageUserId(userId);
+
+
        
 //       model.addAttribute("userId", userId);
 //       // user 의 이력서를 가져오는 로직 
