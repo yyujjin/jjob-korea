@@ -118,8 +118,8 @@
 		<form id="frm" method="post" action="/jobseekerWrite">
 			<table>
 				<tr>
-					<td class="notContent" class="width-name">아이디 : ${user.memId}</td>
-					<input type="hidden" name="jobseekerCommunityBoardName" value="${user.memId}">
+					<td class="notContent" class="width-name">아이디 : ${user}</td>
+					<input type="hidden" name="jobseekerCommunityBoardName" value="${user}">
 				<tr>
 					<td class="notContent">
 					<input  placeholder="제목을 입력하세요" type="text" 
