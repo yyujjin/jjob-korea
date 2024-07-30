@@ -21,12 +21,10 @@ public class UserServiceImpl implements UserService{
 
     //로그인
     @Override
-    public boolean login(UserDTO userDTO) {
+    public UserDTO login(UserDTO userDTO) {
 
         log.info("넘어온 userDTO : {}",userDTO);
 
-        //세션 로직 추가하기
-
-        return userMapper.login(userDTO).isEmpty();
+        return userMapper.login(userDTO);
     }
 }
