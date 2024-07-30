@@ -87,7 +87,8 @@ public class JobseekerBoardController {
 
 	 		// 로그인한 사용자 정보를 얻는다
 		 	//유저 아이디 가져오기
-		 	String userId = (String) session.getAttribute("userId");
+		 	UserDTO user = (UserDTO) session.getAttribute("user");
+		 	String userId = user.getUserId();
 			 log.info("게시판 접근 -> 유저 아이디 : {} ",userId);
 	 		/*UserDTO  userObj = session.getAttribute("user");
 	        UserDTO loggedInUser = null;
@@ -100,7 +101,7 @@ public class JobseekerBoardController {
 	        // 로그인 상태인지 확인하고 사용자 이름을 얻는다
 
 		 	//유저 이름 가져오기
-		 	String userName = (String) session.getAttribute("userName");
+		 	String userName = user.getName();
 			 log.info("게시판 접근 -> 유저 이름 : {} ",userName);
 
 	        /*String userName = null;
