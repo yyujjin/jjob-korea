@@ -155,13 +155,13 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: right;">
-					<c:if test="${user.memId == content_view.jobseekerCommunityBoardName}">
+					<c:if test="${user == content_view.jobseekerCommunityBoardName}">
 					   <input class="mld_button" type="submit" value="수정">
 					</c:if>
 					&nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get" 
 					formaction="/requestPage/jobseekerBoardList">
 					&nbsp;&nbsp;
-					<c:if test="${user.memId == content_view.jobseekerCommunityBoardName}">
+					<c:if test="${user == content_view.jobseekerCommunityBoardName}">
 					   <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
 					</c:if>
 				</td>
@@ -182,7 +182,7 @@
 	</div>
 
 	<div id="commentForm">
-		<input type="hidden" id="jobseekerCommentWriter" value="${user.memId}">
+		<input type="hidden" id="jobseekerCommentWriter" value="${user}">
 		<input type="text" id="jobseekerCommentContent" placeholder="댓글을 작성해주세요">
 		<button id="commentWriteButton" onclick="commentWrite()">댓글작성</button>
 	</div>
