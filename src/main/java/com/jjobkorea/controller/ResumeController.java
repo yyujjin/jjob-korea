@@ -111,15 +111,33 @@ public class ResumeController {
 
 	 @PostMapping("/resume")
 	    public String addResume(ResumeWritePageDTO resume, HttpSession session) {
-		 
-		 MemDTO user = (MemDTO) session.getAttribute("user");
-		 System.out.println(user.getClass());
-		 String memId = user.getMemId();
+
+         //수정 전 세션 저장 로직
+		 //MemDTO user = (MemDTO) session.getAttribute("user");
+         //System.out.println(user.getClass());
+         //String memId = user.getMemId();
+
+
+         //수정 후 세션 저장 로직
+         UserDTO user = (UserDTO) session.getAttribute("user");
+         String userId = user.getUserId();
+         log.info("저장된 유저 정보 :  {} ",user);
+
 		 
 	        if (session.getAttribute("user") == null) {
-	            return "redirect:/login";
+                //수정 전
+	            //return "redirect:/login";
+
+                //수정 후
+                return "redirect:/requestPage/login";
 	        }
-	        resume.setResumePageUserId(memId);
+            
+            //수정 전
+	        //resume.setResumePageUserId(memId);
+
+            //수정 후
+            resume.setResumePageUserId(userId);
+
 	        pageService.insertResume(resume);
 	        return "redirect:/requestPage/{page}";
 	    }
