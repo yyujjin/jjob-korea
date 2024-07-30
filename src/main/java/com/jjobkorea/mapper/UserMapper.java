@@ -8,5 +8,5 @@ import java.util.Optional;
 @Mapper
 public interface UserMapper {
     //아이디, 비번이 일치하면 유저의 이름을 가져오는 기능
-    public Optional<UserDTO> login(UserDTO userDTO);
+    public UserDTO login(UserDTO userDTO);
 }

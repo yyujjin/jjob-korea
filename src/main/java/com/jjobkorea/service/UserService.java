@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface UserService {
     //로그인
-    public boolean login(UserDTO userDTO);
+    public UserDTO login(UserDTO userDTO);
 }
