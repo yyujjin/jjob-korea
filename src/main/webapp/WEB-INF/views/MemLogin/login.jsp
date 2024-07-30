@@ -22,13 +22,11 @@
         flex: 1;
         padding: 15px 20px;
         text-align: center;
-        background-color: #f1f1f1;
-        border-bottom: 2px solid transparent;
+        color: #aaa0a0;
     }
     .tab.active {
-        background-color: #007bff;
-        color: white;
-        border-bottom: 2px solid #007bff;
+        background-color: white;
+        color: black;
     }
     #loginForm {
         width: 400px;
@@ -64,7 +62,7 @@
         margin-top: 10px;
         cursor: pointer;
         color: blue;
-        text-decoration: underline;
+        text-decoration: none;
     }
 </style>
 </head>
@@ -79,10 +77,10 @@
         <form id="individualForm" method="post" action="/login_yn">
             <input type="hidden" name="loginType" value="individual">
             <div class="input-container">
-                <input type="text" name="memId" placeholder="아이디" required>
+                아이디<input type="text" name="memId" placeholder="아이디" required>
             </div>
             <div class="input-container">
-                <input type="password" name="memPwd" placeholder="비밀번호" required>
+                비밀번호<input type="password" name="memPwd" placeholder="비밀번호" required>
             </div>
             <button type="submit">로그인</button>
             <span class="register-link" data-type="individual">회원가입</span>
