@@ -30,10 +30,21 @@
             margin-left: 380px;
         }
 
-        .form:hover{
+        .nav .form {
+            display: inline-block;
+            margin: 5px; /* 여백이 균일하게 유지되도록 설정 */
+        }
+        .nav .form a {
+            display: block;
+            text-decoration: none;
+            border: solid 4px white;
+            color: #000;
+            padding: 10px; /* 패딩을 사용하여 클릭 영역 확대 */
+            transition: background-color 0.3s; /* 배경색 전환에 대한 부드러운 전환 효과 */
+        }
+        .nav .form a:hover {
             border: solid 4px blue;
         }
-
     </style>
 </head>
 <body>
