@@ -45,6 +45,7 @@ public class UserController {
             }
             HttpSession session = request.getSession();
             session.setAttribute("user",isAuthenticated.getName() );
+            session.setAttribute("userId",isAuthenticated.getUserId());
 //            String username = (String) session.getAttribute("user");
             String username = isAuthenticated.getName();
             log.info("사용자 세션 :{} ",username);
