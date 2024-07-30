@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import com.jjobkorea.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -35,14 +36,19 @@ public class ResumeController {
     private ResumeInfoService resumeInfoService;
     @Autowired
     private ResumeWritePageService pageService;
-	@RequestMapping("/resume")
+
+    //사용안하는 메서드인거 같아 일단 주석처리 했습니다.
+	/*@RequestMapping("/resume")
 	public String resume(Model model) {
 		log.info("@#hello");
 
 		model.addAttribute("message", "핼로~");
 
 		return "resume_page/resume_page";
-	}
+	}*/
+    
+    
+    
 	// 메인에서 부를 경우 (샘플 용)
 	//헤더 부분 주석처리
 	//이력서 페이지 css, js 경로 상대경로로 걸려있던 거 ${pageContext.request.contextPath} 이용해서 절대 경로로 변경
@@ -57,6 +63,8 @@ public class ResumeController {
 //		model.addAttribute("page", page);
 //		return "main/main";
 //	}
+    
+    //네비게이션 헤더에서 이력서등록 항목 클릭시 실행되는 로직
     @GetMapping("/resume")
 	public String resister(Model model, HttpSession session) {
 		log.info("@#hello");
@@ -64,7 +72,12 @@ public class ResumeController {
 		model.addAttribute("@#message resister", "핼로~");
         if(session.getAttribute("user") == null) {
         	System.out.println("로그인이 안됐습니다.");
-        	return "redirect:/login";
+
+            //수정 전
+            /*return "redirect:/login";*/
+            //수정 후
+            return "redirect:/requestPage/login";
+
         }
         
         // 저장된 이력서 가져오는 로직 
@@ -75,14 +88,27 @@ public class ResumeController {
         	System.out.println(test.getResumeBirthDay());
         }
         
-        MemDTO dto = (MemDTO) session.getAttribute("user");
-        String userId = dto.getMemId();
-        model.addAttribute("userId", userId);
+        //수정 전 세션 저장 로직
+        /*MemDTO dto = (MemDTO) session.getAttribute("user");
+        String userId = dto.getMemId();*/
+
+        //수정 후 세션 저장 로직
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        String userId = user.getUserId();
+
+        //수정 전
+       /* model.addAttribute("userId", userId);
 		String page = "resume_page/resume_page";
-		model.addAttribute("page", page);
+		model.addAttribute("page", page);*/
+
+        //수정 후
+        model.addAttribute("userId", userId);
+        model.addAttribute("page", "resume_page/resume_page");
 		
 		return "main/main";
 	}
+
+
 	 @PostMapping("/resume")
 	    public String addResume(ResumeWritePageDTO resume, HttpSession session) {
 		 
