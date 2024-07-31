@@ -85,7 +85,7 @@
             <div class="tab" data-tab="enterprise">기업회원</div>
         </div>
     </div>
-    <!-- 스타일 지우기 -->
+    
     <div id="loginForm">
         <form id="individualForm" method="post" action="/login_yn">
             <input type="hidden" name="loginType" value="individual">
@@ -106,8 +106,6 @@
         </form>
     </div>
 
-        <!-- -----------다시 -->
-
         <form id="companyForm" method="post" action="/login_yn" style="display: none;">
             <input type="hidden" name="loginType" value="enterprise">
             <div class="input-container">
@@ -116,8 +114,8 @@
             <div class="input-container">
                 <input type="password" name="memPwd" placeholder="비밀번호" required>
             </div>
-            <!-- <button type="submit">로그인</button> -->
-            <!-- <span class="register-link" data-type="enterprise">회원가입</span> -->
+            <button type="submit">로그인</button> -->
+            <span class="register-link" data-type="enterprise">회원가입</span>
         </form>
     </div>
 
