@@ -1,28 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjobkorea.mapper.ResumeInfoMapper">
 
-
-    <select id="findAll" resultType="com.jjobkorea.dto.ResumeInfoDTO">
-        select * from resume_user_information 
+    <select id="findByUserId" resultType="com.jjobkorea.dto.ResumeInfoDTO">
+        SELECT * FROM resume_user_information WHERE resumePageUserId = #{resumePageUserId}
+    </select>
+    
+    <select id="findByIdAndUserId" resultType="com.jjobkorea.dto.ResumeInfoDTO">
+        SELECT * FROM resume_user_information WHERE id = #{id} AND resumePageUserId = #{resumePageUserId}
     </select>
 
-    <insert id="insert">
-		INSERT INTO resume_user_information (
-        resumePageTitle, resumeUserName, resumeBirthDay, resumeGender, resumeUserEmail, resumeUserPhone, resumeUserCellPhone, resumeUserAddress, 
-		resumeProfilePhoto, resumeSkillName, resumePortfolio, resumePageUserId, resumeEduStage, 
-		resumeSchoolName, resumeCpName, resumeCpDept, resumeCpJoinDate, resumeCpLeaveDate, 
-		resumeCpPosition, resumeCpDuty, resumeCpSalary, resumeIntroduce
+    <insert id="insert" parameterType="com.jjobkorea.dto.ResumeInfoDTO">
+        INSERT INTO resume_user_information (
+            resumePageTitle, resumeUserName, resumeBirthDay, resumeGender, resumeUserEmail, resumeUserPhone, resumeUserCellPhone, resumeUserAddress, 
+            resumeProfilePhoto, resumeSkillName, resumePortfolio, resumePageUserId, resumeEduStage, 
+            resumeSchoolName, resumeCpName, resumeCpDept, resumeCpJoinDate, resumeCpLeaveDate, 
+            resumeCpPosition, resumeCpDuty, resumeCpSalary, resumeIntroduce
         )
         VALUES (
             #{resumePageTitle}, #{resumeUserName}, #{resumeBirthDay}, #{resumeGender}, #{resumeUserEmail}, #{resumeUserPhone}, #{resumeUserCellPhone},
-            #{resumeUserAddress}, #{resumeFilePath}, #{resumeSkillName}, #{resumePortfolio}, #{resumePageUserId},#{resumeEduStage},
-            #{resumeSchoolName}, #{resumeCpName}, #{resumeCpDept}, #{resumeCpJoinDate},#{resumeCpLeaveDate}, 
+            #{resumeUserAddress}, #{resumeFilePath}, #{resumeSkillName}, #{resumePortfolio}, #{resumePageUserId}, #{resumeEduStage},
+            #{resumeSchoolName}, #{resumeCpName}, #{resumeCpDept}, #{resumeCpJoinDate}, #{resumeCpLeaveDate}, 
             #{resumeCpPosition}, #{resumeCpDuty}, #{resumeCpSalary}, #{resumeIntroduce}
         )
     </insert>
+
+    <update id="update" parameterType="com.jjobkorea.dto.ResumeInfoDTO">
+        UPDATE resume_user_information
+        SET resumePageTitle = #{resumePageTitle},
+            resumeUserName = #{resumeUserName},
+            resumeBirthDay = #{resumeBirthDay},
+            resumeGender = #{resumeGender},
+            resumeUserEmail = #{resumeUserEmail},
+            resumeUserPhone = #{resumeUserPhone},
+            resumeUserCellPhone = #{resumeUserCellPhone},
+            resumeUserAddress = #{resumeUserAddress},
+            resumeProfilePhoto = #{resumeFilePath},
+            resumeSkillName = #{resumeSkillName},
+            resumePortfolio = #{resumePortfolio},
+            resumeEduStage = #{resumeEduStage},
+            resumeSchoolName = #{resumeSchoolName},
+            resumeCpName = #{resumeCpName},
+            resumeCpDept = #{resumeCpDept},
+            resumeCpJoinDate = #{resumeCpJoinDate},
+            resumeCpLeaveDate = #{resumeCpLeaveDate},
+            resumeCpPosition = #{resumeCpPosition},
+            resumeCpDuty = #{resumeCpDuty},
+            resumeCpSalary = #{resumeCpSalary},
+            resumeIntroduce = #{resumeIntroduce}
+        WHERE id = #{id} AND resumePageUserId = #{resumePageUserId}
+    </update>
 
 </mapper>

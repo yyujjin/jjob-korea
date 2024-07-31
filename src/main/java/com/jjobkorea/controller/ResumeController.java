@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jjobkorea.dto.MemDTO;
 import com.jjobkorea.dto.ResumeInfoDTO;
@@ -68,7 +69,9 @@ public class ResumeController {
         }
         
         // 저장된 이력서 가져오는 로직 
-        List<ResumeInfoDTO> resumes = resumeInfoService.findAll();
+        MemDTO dtol = (MemDTO) session.getAttribute("user");
+        String finduserId = dtol.getMemId();
+        List<ResumeInfoDTO> resumes = resumeInfoService.findByUserId(finduserId);
         model.addAttribute("resumes", resumes);
         
         for(ResumeInfoDTO test : resumes) {
@@ -145,5 +148,43 @@ public class ResumeController {
 //       
        resumeInfoService.insert(resumeInfoDTO);
        return "redirect:/resume";
+   }
+   @GetMapping("/resume_write/edit")
+   public String editResume(@RequestParam("id") Long id, Model model, HttpSession session) {
+	   log.info("@#resume edit");
+	   MemDTO user = (MemDTO) session.getAttribute("user");
+	   if(user == null) {
+		   return "redirect:/login";
+	   }
+	   ResumeInfoDTO resumeInfoDTO = resumeInfoService.findByIdAndUserId(id, user.getMemId());
+	   if(resumeInfoDTO == null) {
+		   return "redirect:/resume";
+	   }
+	   model.addAttribute("resumeInfoDTO", resumeInfoDTO);
+	   return "resume_page/resume_edit";
+   }
+   @PostMapping("/resume_write/edit")
+   public String updateResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session) {
+	   log.info("resumeUpdate");
+	   MemDTO user = (MemDTO) session.getAttribute("user");
+	   if(user == null) {
+		   return "redirect:/login";
+	   }
+	   MultipartFile file = resumeInfoDTO.getResumeProfilePhoto();
+       if (file != null && !file.isEmpty()) {
+           try {
+               String fileName = file.getOriginalFilename();
+               String filePath = "D:\\dev\\upload\\" + fileName; // 실제 저장 경로로 변경
+               File dest = new File(filePath);
+               file.transferTo(dest);
+               resumeInfoDTO.setResumeFilePath(filePath);
+           } catch (IOException e) {
+               log.error("Failed to save file", e);
+           }
+       }
+       
+       resumeInfoDTO.setResumePageUserId(user.getMemId());
+       resumeInfoService.update(resumeInfoDTO);
+	   return "redirect:/resume";
    }
 }
