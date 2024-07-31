@@ -72,33 +72,31 @@
                 <div class="form">
                     <a href="/requestPage/jobseekerBoard" class="nav-link px-4 text-dark">취업 톡톡</a>
                 </div>
-                
-                <c:choose>
-                    
-                    <c:when test="${userType == 1}">
-                        <div class="form">
-                            <a href="/requestPage/resume" class="nav-link px-4 text-dark">이력서 등록</a>
-                        </div>
-                    </c:when>
-                    
-                    <c:when test="${userType == 2}">
-                        <div class="form">
-                            <a href="/requestPage/jobPostingResister" class="nav-link px-4 text-dark">공고 등록</a>
-                        </div>
-                    </c:when>
-                </c:choose>
+
+               <c:choose>
+                   <c:when test="${sessionScope.user.userType == 1}">
+                       <div class="form">
+                           <a href="/requestPage/resume" class="nav-link px-4 text-dark">이력서 등록</a>
+                       </div>
+                   </c:when>
+
+                   <c:when test="${sessionScope.user.userType == 2}">
+                       <div class="form">
+                           <a href="/requestPage/jobPostingResister" class="nav-link px-4 text-dark">공고 등록</a>
+                       </div>
+                   </c:when>
+
+               </c:choose>
             </div>
-            
+
             <div class="text-end log-container">
                 <ul class="nav">
                     <c:choose>
-                        <c:when test="${not empty sessionScope.user}">
+                        <c:when test="${not empty sessionScope.user.name}">
                             <li class="nav-item">
                                         <span class="nav-link px-2 text-secondary">
 
-                                               
-
-                                                ${sessionScope.user}
+                                                ${sessionScope.user.name}
 
                                         </span>
                             </li>
