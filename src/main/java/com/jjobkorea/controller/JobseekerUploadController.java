@@ -47,7 +47,14 @@ public class JobseekerUploadController {
 		
 		String uploadFolder = "D:\\dev\\upload";
 		String uploadFolderPath = getFolder();
-//		"D:\\dev\\upload"+년월일 폴더
+		
+	    // dev 폴더가 없으면 생성
+	    File devFolder = new File("D:\\dev");
+	    if (!devFolder.exists()) {
+	        devFolder.mkdirs();
+	    }
+
+//		"D:\\dev\\upload"+년월일 폴더 생성
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 		log.info("@# uploadPath=>"+uploadPath);
 		
