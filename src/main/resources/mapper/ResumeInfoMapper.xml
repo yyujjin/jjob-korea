@@ -3,11 +3,11 @@
 <mapper namespace="com.jjobkorea.mapper.ResumeInfoMapper">
 
     <select id="findByUserId" resultType="com.jjobkorea.dto.ResumeInfoDTO">
-        SELECT * FROM resume_user_information WHERE resumePageUserId = #{resumePageUserId}
+        SELECT * FROM resume_user_information WHERE resumePageUserId = #{userId}
     </select>
     
-    <select id="findByIdAndUserId" resultType="com.jjobkorea.dto.ResumeInfoDTO">
-        SELECT * FROM resume_user_information WHERE id = #{id} AND resumePageUserId = #{resumePageUserId}
+    <select id="findByIdAndUserId" parameterType="hashMap" resultType="com.jjobkorea.dto.ResumeInfoDTO">
+        SELECT * FROM resume_user_information WHERE id = #{arg0} AND resumePageUserId = #{arg1}
     </select>
 
     <insert id="insert" parameterType="com.jjobkorea.dto.ResumeInfoDTO">

@@ -3,6 +3,7 @@ package com.jjobkorea.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class ResumeInfoServiceImpl implements ResumeInfoService {
         resumeInfoMapper.insert(resumeInfoDTO); // Mapper의 insert() 메서드 호출
     }
 	@Override
-	public ResumeInfoDTO findByIdAndUserId(Long id, String userId) {
+	public ResumeInfoDTO findByIdAndUserId(@Param("id") Long id, String userId) {
 		log.info("resumefindByIdAndUserId");
 		return resumeInfoMapper.findByIdAndUserId(id, userId);
 	}

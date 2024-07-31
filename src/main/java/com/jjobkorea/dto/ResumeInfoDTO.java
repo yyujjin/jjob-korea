@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 //이력서 작성 페이지 DTO
 public class ResumeInfoDTO {
     // 인적사항란
-    private int Id;
+    private Long id;
     private String resumeUserName;
 //    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private String resumeBirthDay;
