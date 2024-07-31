@@ -32,6 +32,7 @@
 
             .tab.active {
                 color: black;
+
             }
 
             #loginForm {
@@ -61,6 +62,8 @@
                 width: 200px;
                 padding: 5px;
                 border-radius: 3px;
+                border: solid 1px black;
+                font-size: 13px;
             }
 
             .form-row {
@@ -152,13 +155,14 @@
                         </div>
                     </div>
                     <button type="submit">로그인</button>
-                    <div class="link-container">
-                        <span class="register-link" data-type="">아이디 찾기</span>
-                        <span class="register-link" data-type="">비밀번호 찾기</span>
-                        <span class="register-link" data-type="enterprise">회원가입</span>
-                    </div>
                 </div>
-            </form>
+                <div class="link-container">
+                    <span class="register-link" data-type="">아이디 찾기</span>
+                    <span class="register-link" data-type="">비밀번호 찾기</span>
+                    <span class="register-link" data-type="enterprise">회원가입</span>
+                </div>
+        </div>
+        </form>
 
         </div>
 
