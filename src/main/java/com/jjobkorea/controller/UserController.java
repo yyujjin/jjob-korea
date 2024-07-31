@@ -1,18 +1,23 @@
 package com.jjobkorea.controller;
 
-import com.jjobkorea.dto.UserDTO;
-import com.jjobkorea.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Optional;
+import com.jjobkorea.dto.UserDTO;
+import com.jjobkorea.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -56,5 +61,35 @@ public class UserController {
         }
 
         return "redirect:/";
+    }
+    
+  //회원가입 페이지 로드
+    @RequestMapping("/register")
+    public String register(Model model) {
+    	String page = "user/register";
+    	
+    	model.addAttribute("page",page);
+    	
+    	return "main/main";
+    }
+    //개인과 기업을 구분하여 회원가입 
+    @PostMapping("/registerOk")
+    public String registerOk(@RequestParam HashMap<String, String> param, Model model) {
+    		if("enterprise".equals(param.get("type"))) {
+    			userService.companyUser(param);
+    		}else {
+				userService.registerUser(param);
+			}
+			return "user/registerOk";
+    }
+    
+ // 아이디 중복 체크
+    @PostMapping("/checkId")
+    @ResponseBody
+    public HashMap<String, Boolean> checkId(@RequestParam("userId") String userId) {
+        HashMap<String, Boolean> response = new HashMap<>();
+        response.put("exists", userService.userIdExists(new HashMap<String, String>()
+        	{{ put("userId", userId); }}));
+        return response;
     }
 }

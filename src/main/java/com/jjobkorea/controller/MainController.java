@@ -28,6 +28,7 @@ public class MainController {
     
     @Autowired
     private AddJobPostingController addJobPostingController;
+
     
     //리팩토링 코드
     @Autowired
@@ -87,7 +88,9 @@ public class MainController {
 
             // 회원가입 페이지 진입
             case "register":
-               return userController.register(model);
+
+                return userController.register(model);
+
             // 채용 정보 페이지 진입
             case "jobPosting":
                 return jobPostingController.enterJobPosting(request, model);
