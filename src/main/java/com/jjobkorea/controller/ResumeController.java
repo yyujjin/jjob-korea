@@ -36,33 +36,6 @@ public class ResumeController {
     private ResumeInfoService resumeInfoService;
     @Autowired
     private ResumeWritePageService pageService;
-
-    //사용안하는 메서드인거 같아 일단 주석처리 했습니다.
-	/*@RequestMapping("/resume")
-	public String resume(Model model) {
-		log.info("@#hello");
-
-		model.addAttribute("message", "핼로~");
-
-		return "resume_page/resume_page";
-	}*/
-    
-    
-    
-	// 메인에서 부를 경우 (샘플 용)
-	//헤더 부분 주석처리
-	//이력서 페이지 css, js 경로 상대경로로 걸려있던 거 ${pageContext.request.contextPath} 이용해서 절대 경로로 변경
-	//변경한 코드에는 주석 달았음
-	//해당 페이지 자체적으로 css가 걸려있어서 메인 css랑 충돌
-//	public String resister(Model model) {
-//		log.info("@#hello");
-//
-//		model.addAttribute("message", "핼로~");
-//
-//		String page = "resume_page/resume_page";
-//		model.addAttribute("page", page);
-//		return "main/main";
-//	}
     
     //네비게이션 헤더에서 이력서등록 항목 클릭시 실행되는 로직
     @GetMapping("/resume")
@@ -73,9 +46,6 @@ public class ResumeController {
         if(session.getAttribute("user") == null) {
         	System.out.println("로그인이 안됐습니다.");
 
-            //수정 전
-            /*return "redirect:/login";*/
-            //수정 후
             return "redirect:/requestPage/login";
 
         }
@@ -87,21 +57,10 @@ public class ResumeController {
         for(ResumeInfoDTO test : resumes) {
         	System.out.println(test.getResumeBirthDay());
         }
-        
-        //수정 전 세션 저장 로직
-        /*MemDTO dto = (MemDTO) session.getAttribute("user");
-        String userId = dto.getMemId();*/
 
-        //수정 후 세션 저장 로직
         UserDTO user = (UserDTO) session.getAttribute("user");
         String userId = user.getUserId();
 
-        //수정 전
-       /* model.addAttribute("userId", userId);
-		String page = "resume_page/resume_page";
-		model.addAttribute("page", page);*/
-
-        //수정 후
         model.addAttribute("userId", userId);
         model.addAttribute("page", "resume_page/resume_page");
 		
@@ -112,30 +71,16 @@ public class ResumeController {
 	 @PostMapping("/resume")
 	    public String addResume(ResumeWritePageDTO resume, HttpSession session) {
 
-         //수정 전 세션 저장 로직
-		 //MemDTO user = (MemDTO) session.getAttribute("user");
-         //System.out.println(user.getClass());
-         //String memId = user.getMemId();
-
-
-         //수정 후 세션 저장 로직
          UserDTO user = (UserDTO) session.getAttribute("user");
          String userId = user.getUserId();
          log.info("저장된 유저 정보 :  {} ",user);
 
 		 
 	        if (session.getAttribute("user") == null) {
-                //수정 전
-	            //return "redirect:/login";
 
-                //수정 후
                 return "redirect:/requestPage/login";
 	        }
-            
-            //수정 전
-	        //resume.setResumePageUserId(memId);
 
-            //수정 후
             resume.setResumePageUserId(userId);
 
 	        pageService.insertResume(resume);
@@ -176,18 +121,10 @@ public class ResumeController {
                log.error("Failed to save file", e);
            }
        }
-       //session 에서 작성자 ID 받아와서 DTO 에 바인딩
-       //세션 저장 로직 수정 전
-       //MemDTO user = (MemDTO) session.getAttribute("user");
-       //String userId = user.getMemId();
-       //resumeInfoDTO.setResumePageUserId(userId);
 
-
-       //세션 저장 로직 수정 후
        UserDTO user = (UserDTO) session.getAttribute("user");
        String userId = user.getUserId();
        resumeInfoDTO.setResumePageUserId(userId);
-
 
        
 //       model.addAttribute("userId", userId);
