@@ -44,6 +44,7 @@
     .input-container label {
         width: 60px;
         margin-right: 10px;
+        font-size: 13px;
     }
     .input-container input {
         flex: 1;
@@ -65,7 +66,7 @@
         border: none;
         cursor: pointer;
         margin-left: 10px;
-        height: 65px;
+        height: 80px;
         margin-bottom: 10px;
     }
     .register-link {
@@ -107,17 +108,22 @@
 
         <form id="companyForm" method="post" action="/login" style="display: none;">
             <input type="hidden" name="loginType" value="enterprise">
-            <div class="input-container">
-                <label>아이디</label>
-                <input type="text" name="userId" placeholder="기업회원아이디" required>
+            <div class="form-row">
+                <div class="input-group">
+                    <div class="input-container">
+                        <label>아이디</label>
+                        <input type="text" name="userId" placeholder="아이디를 입력해주세요" required>
+                    </div>
+                    <div class="input-container">
+                        <label>비밀번호</label>
+                        <input type="password" name="password" placeholder="비밀번호를 입력해주세요" required>
+                    </div>
+                </div>
+                <button type="submit">로그인</button>
             </div>
-            <div class="input-container">
-                <label>비밀번호</label>
-                <input type="password" name="password" placeholder="비밀번호" required>
-            </div>
-            <button type="submit">로그인</button>
             <span class="register-link" data-type="enterprise">회원가입</span>
         </form>
+
     </div>
 
     <script>
