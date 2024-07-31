@@ -27,7 +27,7 @@
                 padding: 15px 20px;
                 text-align: center;
                 color: black;
-                border-width: 1px 1px 0 1px; //
+                border-width: 1px 1px 0 1px;
             }
 
             .tab.active {
@@ -60,6 +60,7 @@
                 flex: 1;
                 width: 200px;
                 padding: 5px;
+                border-radius: 3px;
             }
 
             .form-row {
@@ -81,6 +82,7 @@
                 margin-left: 10px;
                 height: 80px;
                 margin-bottom: 10px;
+                border-radius: 3px;
             }
 
             .register-link {
@@ -99,7 +101,7 @@
                 justify-content: center;
                 gap: 50px;
                 /* 링크 사이의 간격 설정 */
-                margin: 20px 0;
+                margin: 15px 0;
                 /* 링크 컨테이너의 위아래 여백 설정 */
             }
         </style>
