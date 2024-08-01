@@ -23,13 +23,12 @@
                     padding: 10px 0;
                     display: flex;
                     justify-content: center;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 }
 
                 .main-container {
                     display: flex;
                     width: 100%;
-                    max-width: 1200px;
+                    max-width: 1100px;
                     margin: 20px;
                     border: 1px solid black;
                 }
@@ -39,7 +38,6 @@
                     padding: 20px;
                     background: white;
                     border-radius: 5px;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                     margin-right: 20px;
                 }
 
@@ -51,6 +49,7 @@
                     padding: 20px;
                     margin-left: 20px;
                     text-align: center;
+                    margin-top: 10px;
                 }
 
                 h3 {
@@ -58,16 +57,9 @@
                     margin-bottom: 10px;
                 }
 
-                .input-group {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 10px;
-                }
-
                 input,
                 select,
-                textarea,
-                button {
+                textarea {
                     padding: 10px;
                     margin: 5px 0;
                     border: 1px solid black;
@@ -101,12 +93,15 @@
                 }
 
                 .btn-upload {
-                    background-color: white;
-                    padding: 10px 20px;
-                    border-radius: 5px;
+                    background-color: blue;
+                    color: white;
+                    padding: 5px 15px;
+                    border-radius: 3px;
                     cursor: pointer;
                     display: inline-block;
+                    font-size: 13px;
                     margin-top: 10px;
+                    margin-left: 65px;
                 }
 
                 #file {
@@ -119,9 +114,8 @@
                 }
 
                 #output {
-                    margin-top: 10px;
-                    border: 1px solid black;
-                    border-radius: 5px;
+                    border-radius: 3px;
+                    border: none;
                 }
 
                 .skill-item {
@@ -160,6 +154,29 @@
                 .b {
                     color: red;
                 }
+
+                .btn {
+                    display: flex;
+                    justify-content: center;
+                    width: 250px;
+                    height: 30px;
+                    text-align: center;
+                    gap: 10px;
+                }
+
+                .btn button {
+                    width: 100%;
+                    height: 100%;
+                    background-color: white;
+                    cursor: pointer;
+                    border: solid 1px black;
+                    border-radius: 3px;
+                }
+
+                #photo-instructions {
+                    font-size: 12px;
+                    margin-top: 75px;
+                }
             </style>
             <script type="text/javascript"
                 src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
@@ -174,22 +191,53 @@
                         width="200px">
                 </div>
             </header>
-            <form method="post" action="/resume_write" enctype="multipart/form-data">
 
+            <form method="post" action="/resume_write" enctype="multipart/form-data">
                 <div class="main-container">
+                <div class="photo">
+                    <div class="profilephoto">
+                        <div id="photo-instructions" style="color: gray;">
+                            사진 크기는<br>
+                            150x210만 <br>
+                            가능합니다.
+                        </div>
+                        <img id="output" src="" alt="uploaded image" width="150" height="210"
+                            style="display:none;">
+                    </div>
+                    <label for="file">
+                        <div class="btn-upload">사진 업로드</div>
+                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
+                            onchange="loadFile(event)" style="display: none;" required>
+                    </label>
+                </div>
+                
+                <script>
+                    function loadFile(event) {
+                        var output = document.getElementById('output');
+                        var instructions = document.getElementById('photo-instructions');
+                        instructions.style.display = 'none';
+                        output.style.display = 'block';
+                        output.src = URL.createObjectURL(event.target.files[0]);
+                        output.onload = function () {
+                            URL.revokeObjectURL(output.src) // free memory
+                        }
+                    }
+                </script>
+                
                     <div class="content">
                         <section>
-                            <h3>이력서 제목</h3>
+                            <b>이력서 제목</b>
                             <input type="text" placeholder="이력서 제목을 입력해주세요" name="resumePageTitle" id="resumePageTitle"
                                 required>
                         </section>
+
                         <section class="personal-info">
-                            <h3>인적 사항 <a style="color: gray; font-size: 11px;"><b class="b">*</b>은 필수항목
-                                    입니다.</a>
+                            <h3>인적 사항 <a style="color: gray; font-size: 11px;">
+                                    <b class="b">*</b>은 필수항목 입니다.</a>
                                 <div class="input-group">
                                     이름<b class="b">*</b>
                                     <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName"
-                                        required>
+                                        required><br>
                                     생년월일<b class="b">*</b>
                                     <input type="text" placeholder="생년월일" name="resumeBirthDay" id="resumeBirthDay"
                                         required>
@@ -197,15 +245,16 @@
                                         <option value="0" selected disabled>성별<b class="b">*</b></option>
                                         <option value="1">남자</option>
                                         <option value="2">여자</option>
-                                    </select>
+                                    </select><br>
                                     이메일<b class="b">*</b>
                                     <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
-                                        required>
-                                    전화번호<input type="text" placeholder="전화번호" name="resumeUserPhone"
-                                        id="resumeUserPhone" required>
+                                        required><br>
+                                    전화번호
+                                    <input type="text" placeholder="전화번호" name="resumeUserPhone" id="resumeUserPhone"
+                                        required><br>
                                     휴대번호<b class="b">*</b>
                                     <input type="text" placeholder="휴대번호" name="resumeUserCellPhone"
-                                        id="resumeUserCellPhone" required>
+                                        id="resumeUserCellPhone" required><br>
                                     주소<b class="b">*</b>
                                     <input type="text" placeholder="주소" name="resumeUserAddress" id="resumeUserAddress"
                                         required>
@@ -286,12 +335,14 @@
                         </section>
                         <section class="portfolio">
                             <h3>포트폴리오</h3>
-                            <input type="url" placeholder="URL을 입력하세요" name="resumePortfolio" id="resumePortfolio"
+                            <input type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
                                 required>
                         </section>
                         <section class="education">
                             <h3>학력란</h3>
                             <div class="input-group">
+                                <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
+                                    required>
                                 <select name="resumeEduStage" id="resumeEduStage" required>
                                     <option selected disabled>학교구분</option>
                                     <option value="고등학교">고등학교</option>
@@ -299,8 +350,6 @@
                                     <option value="대학교(4년)">대학교(4년)</option>
                                     <option value="대학원">대학원</option>
                                 </select>
-                                <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
-                                    required>
                             </div>
                         </section>
                         <section class="career">
@@ -323,33 +372,18 @@
                             <textarea placeholder="1000자 이내로 작성해주세요" cols="50" rows="20" name="resumeIntroduce"
                                 id="resumeIntroduce" required></textarea>
                         </section>
-                    </div>
-                    <div class="profilephoto">
-                        <div style="color: gray;">
-                            사진 크기는<br>
-                            150x210만 <br>가능합니다.
+
+                        <div class="btn">
+                            <button type="submit"
+                                style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
+                            <button type="button" onclick="saveResume()">임시저장</button>
+                            <button type="button" onclick="">수정</button>
                         </div>
-                        <label for="file">
-                            <div class="btn-upload">사진 업로드</div>
-                            <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
-                                onchange="loadFile(event)" style="display: none;" required>
-                        </label>
-                        <img id="output" src="" alt="uploaded image" width="150" height="210">
                     </div>
                 </div>
-                <button type="submit">이력서 저장</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" onclick="saveResume()">임시 저장하기</button>
             </form>
 
             <script>
-
-                var loadFile = function (event) {
-                    var image = document.getElementById('output');
-                    image.src = URL.createObjectURL(event.target.files[0]);
-                };
-                document.addEventListener('DOMContentLoaded', (event) => {
-                    loadResume();
-                });
 
                 function saveResume() {
                     const resumeData = {
@@ -413,6 +447,7 @@
                     return true;
                 }
             </script>
+
         </body>
 
         </html>
