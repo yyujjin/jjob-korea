@@ -269,7 +269,7 @@ $(document).ready(function() {
                 <input type="text" id="salary" name="salary" placeholder="연봉*" required>
             </div>
             <div class="form-group">
-                <input type="text" id="businessNum" name="businessNum" placeholder="사업자등록번호*" required>
+                <input type="text" id="businssNum" name="businssNum" placeholder="사업자등록번호*" required>
             </div>
             <div class="form-group">
                 <input type="text" id="companyName" name="name" placeholder="회사명*" required>
