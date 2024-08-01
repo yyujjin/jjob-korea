@@ -162,6 +162,7 @@
                     height: 30px;
                     text-align: center;
                     gap: 10px;
+                    margin-left: 74%;
                 }
 
                 .btn button {
@@ -373,12 +374,22 @@
                                 id="resumeIntroduce" required></textarea>
                         </section>
 
-                        <div class="btn">
+                        <!-- <div class="btn">
                             <button type="submit"
                                 style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
                             <button type="button" onclick="saveResume()">임시저장</button>
                             <button type="button" onclick="">수정</button>
-                        </div>
+                        </div> -->
+
+<div class="btn">
+    <c:if test="${resumePageUserId == sessionScope.user.userId}">
+        <button type="button" id="editButton" onclick="editResume()">수정</button>
+    </c:if>
+    <c:if test="${resumePageUserId != sessionScope.user.userId}">
+        <button type="submit" id="saveButton" style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
+    </c:if>
+    <button type="button" onclick="saveResume()">임시저장</button>
+</div>
                     </div>
                 </div>
             </form>
