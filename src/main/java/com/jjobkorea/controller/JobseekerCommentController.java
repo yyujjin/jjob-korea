@@ -37,7 +37,7 @@ public class JobseekerCommentController {
 		log.info("@# param=>"+param);
 		// 로그인 안했을때 예외처리
 		if (session.getAttribute("user") == null) {
-            throw new IllegalStateException("로그인 페이지로 이동합니다.");
+            throw new IllegalStateException();
         }
 		service.save(param);
 		
