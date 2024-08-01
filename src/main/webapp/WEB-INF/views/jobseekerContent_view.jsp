@@ -140,29 +140,39 @@
 			</tr>
 			<tr>
 				<td class="notContent">제목
-					<input type="text" name="jobseekerCommunityBoardTitle" 
-					value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
+					<c:choose>
+						<c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
+							<input type="text" name="jobseekerCommunityBoardTitle" 
+							value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
+						</c:when>
+						<c:otherwise>
+							${content_view.jobseekerCommunityBoardTitle}
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
-
 			<tr>
 				<td class="BoardContent">
-					<!-- <input type="text" name="jobseekerCommunityBoardContent" 
-					value="${content_view.jobseekerCommunityBoardContent}"> -->
-					<textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}
-					</textarea>
+				<c:choose>
+					<c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
+						<textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}</textarea>
+					</c:when>
+					<c:otherwise>
+						<div class="BoardContent">${content_view.jobseekerCommunityBoardContent}</div>
+					</c:otherwise>
+				</c:choose>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: right;">
-					<c:if test="${user == content_view.jobseekerCommunityBoardName}">
-					   <input class="mld_button" type="submit" value="수정">
+					<c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
+						<input class="mld_button" type="submit" value="수정">
 					</c:if>
 					&nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get" 
 					formaction="/requestPage/jobseekerBoardList">
 					&nbsp;&nbsp;
-					<c:if test="${user == content_view.jobseekerCommunityBoardName}">
-					   <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
+					<c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
+						<input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
 					</c:if>
 				</td>
 			</tr>
