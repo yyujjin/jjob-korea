@@ -7,7 +7,7 @@
         select * from team_db.user_info where userId=#{userId} AND password=#{password};
     </select>
 
-
+	<!-- 개인 회원가입 -->
 	<insert id="individualUser" parameterType="map">
         INSERT INTO user_info (
             userId, password, name, phone, addr, email, birthd, gender, registrationDate, userType
@@ -15,7 +15,8 @@
             #{userId}, #{password}, #{name}, #{phone}, #{addr}, #{email}, #{birthd}, #{gender}, CURRENT_TIMESTAMP, 1
         );
     </insert>
-
+    
+	<!-- 기업 회원가입 -->
     <insert id="companyUser" parameterType="map">
         INSERT INTO user_info (
             userId, password, name, phone, addr, email, birthd, gender, registrationDate, userType
@@ -24,6 +25,7 @@
         );
     </insert>
 
+	<!-- 기업 추가 정보  -->
     <insert id="insertCompanyInfo" parameterType="map">
         INSERT INTO companyinfo (
             id, res, employeeCount, companyType, salary, ceo, name, birthd, addr, businssNum
@@ -32,7 +34,7 @@
         );
     </insert>
 	
-	
+	<!-- UserId 확인 작업 -->
 	<select id="checkUserId" parameterType="String" resultType="int">
 			SELECT COUNT(*) FROM user_info WHERE userId = #{userId}
 	</select>

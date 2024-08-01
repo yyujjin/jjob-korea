@@ -396,69 +396,54 @@
 
             <script>
 
-                function saveResume() {
-                    const resumeData = {
-                        resumePageTitle: document.getElementById('resumePageTitle').value,
-                        resumeUserName: document.getElementById('resumeUserName').value,
-                        resumeBirthDay: document.getElementById('resumeBirthDay').value,
-                        resumeGender: document.getElementById('resumeGender').value,
-                        resumeUserEmail: document.getElementById('resumeUserEmail').value,
-                        resumeUserPhone: document.getElementById('resumeUserPhone').value,
-                        resumeUserCellPhone: document.getElementById('resumeUserCellPhone').value,
-                        resumeUserAddress: document.getElementById('resumeUserAddress').value,
-                        resumeSkillName: selectedSkills,
-                        resumePortfolio: document.getElementById('resumePortfolio').value,
-                        resumeEduStage: document.getElementById('resumeEduStage').value,
-                        resumeSchoolName: document.getElementById('resumeSchoolName').value,
-                        resumeCpName: document.getElementById('resumeCpName').value,
-                        resumeCpDept: document.getElementById('resumeCpDept').value,
-                        resumeCpJoinDate: document.getElementById('resumeCpJoinDate').value,
-                        resumeCpLeaveDate: document.getElementById('resumeCpLeaveDate').value,
-                        resumeCpPosition: document.getElementById('resumeCpPosition').value,
-                        resumeCpSalary: document.getElementById('resumeCpSalary').value,
-                        resumeCpDuty: document.getElementById('resumeCpDuty').value,
-                        resumeIntroduce: document.getElementById('resumeIntroduce').value,
-                    };
-                    localStorage.setItem('resumeData', JSON.stringify(resumeData));
-                    alert('이력서가 임시 저장되었습니다.');
-                }
+                // function saveResume() {
+                //     const resumeData = {
+                //         resumePageTitle: document.getElementById('resumePageTitle').value,
+                //         resumeUserName: document.getElementById('resumeUserName').value,
+                //         resumeBirthDay: document.getElementById('resumeBirthDay').value,
+                //         resumeGender: document.getElementById('resumeGender').value,
+                //         resumeUserEmail: document.getElementById('resumeUserEmail').value,
+                //         resumeUserPhone: document.getElementById('resumeUserPhone').value,
+                //         resumeUserCellPhone: document.getElementById('resumeUserCellPhone').value,
+                //         resumeUserAddress: document.getElementById('resumeUserAddress').value,
+                //         resumeSkillName: selectedSkills,
+                //         resumePortfolio: document.getElementById('resumePortfolio').value,
+                //         resumeEduStage: document.getElementById('resumeEduStage').value,
+                //         resumeSchoolName: document.getElementById('resumeSchoolName').value,
+                //         resumeCpName: document.getElementById('resumeCpName').value,
+                //         resumeCpDept: document.getElementById('resumeCpDept').value,
+                //         resumeCpJoinDate: document.getElementById('resumeCpJoinDate').value,
+                //         resumeCpLeaveDate: document.getElementById('resumeCpLeaveDate').value,
+                //         resumeCpPosition: document.getElementById('resumeCpPosition').value,
+                //         resumeCpSalary: document.getElementById('resumeCpSalary').value,
+                //         resumeCpDuty: document.getElementById('resumeCpDuty').value,
+                //         resumeIntroduce: document.getElementById('resumeIntroduce').value,
+                //     };
+                //     localStorage.setItem('resumeData', JSON.stringify(resumeData));
+                //     alert('이력서가 임시 저장되었습니다.');
+                // }
 
-                function loadResume() {
-                    const savedResumeData = localStorage.getItem('resumeData');
-                    if (savedResumeData) {
-                        const resumeData = JSON.parse(savedResumeData);
-                        document.getElementById('resumeUserName').value = resumeData.resumeUserName;
-                        document.getElementById('resumeBirthDay').value = resumeData.resumeBirthDay;
-                        document.getElementById('resumeGender').value = resumeData.resumeGender;
-                        document.getElementById('resumeUserEmail').value = resumeData.resumeUserEmail;
-                        document.getElementById('resumeUserPhone').value = resumeData.resumeUserPhone;
-                        document.getElementById('resumeUserCellPhone').value = resumeData.resumeUserCellPhone;
-                        document.getElementById('resumeUserAddress').value = resumeData.resumeUserAddress;
-                        selectedSkills = resumeData.resumeSkillName;
-                        document.getElementById('resumeSkillName').value = selectedSkills.join(',');
-                        document.getElementById('resumePortfolio').value = resumeData.resumePortfolio;
-                        document.getElementById('resumeEduStage').value = resumeData.resumeEduStage;
-                        document.getElementById('resumeSchoolName').value = resumeData.resumeSchoolName;
-                        document.getElementById('resumeCpName').value = resumeData.resumeCpName;
-                        document.getElementById('resumeCpDept').value = resumeData.resumeCpDept;
-                        document.getElementById('resumeCpJoinDate').value = resumeData.resumeCpJoinDate;
-                        document.getElementById('resumeCpLeaveDate').value = resumeData.resumeCpLeaveDate;
-                        document.getElementById('resumeCpPosition').value = resumeData.resumeCpPosition;
-                        document.getElementById('resumeCpSalary').value = resumeData.resumeCpSalary;
-                        document.getElementById('resumeCpDuty').value = resumeData.resumeCpDuty;
-                        document.getElementById('resumeIntroduce').value = resumeData.resumeIntroduce;
-                    }
-                }
-                function validateForm() {
-                    var salary = document.getElementById('resumeCpSalary').value;
-                    if (isNaN(salary) || salary.trim() === "") {
-                        alert('연봉 필드는 숫자여야 합니다.');
-                        return false;
-                    }
-                    return true;
-                }
-            </script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
 
-        </body>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        loadResume();
+    });
 
-        </html>
+    function addResume(){
+        alert('이력서가 저장되었습니다.')
+    }
+
+    function validateForm() {
+        var salary = document.getElementById('resumeCpSalary').value;
+        if (isNaN(salary) || salary.trim() === "") {
+            alert('연봉 필드는 숫자여야 합니다.');
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
