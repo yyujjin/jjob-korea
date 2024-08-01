@@ -6,9 +6,14 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8">
     <title>Resume Management</title>
+    <script type="text/javascript">
+        // 이력서 등록 후 localStorage를 지우는 스크립트
+        <c:if test="${not empty clearLocalStorage}">
+            localStorage.removeItem('resumeData');
+        </c:if>
+    </script>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/resume" method="post">
         <c:choose>
             <c:when test="${empty resumes}">
                 <p>등록된 이력서가 없습니다.</p>
@@ -24,8 +29,18 @@ pageEncoding="UTF-8"%>
                             <tr>
                                 <td>${resume.id}</td>
                                 <td>${resume.resumePageTitle}</td>
-                                <td><button>수정</button></td>
-                                <td><button>삭제</button></td>
+                                <td>
+                                    <form action="${pageContext.request.contextPath}/resume_write/edit" method="get" style="display:inline;">
+                                        <input type="hidden" name="id" value="${resume.id}">
+                                        <button type="submit">수정</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="${pageContext.request.contextPath}/resume/delete" method="post" style="display:inline;">
+                                        <input type="hidden" name="id" value="${resume.id}">
+                                        <button type="submit">삭제</button>
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -33,6 +48,5 @@ pageEncoding="UTF-8"%>
             </c:otherwise>
         </c:choose>
     </form>
-    </body>
-    </html>
-    
+</body>
+</html>
