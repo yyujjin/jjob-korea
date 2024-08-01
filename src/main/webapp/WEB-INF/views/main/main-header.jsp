@@ -99,7 +99,7 @@
                                                 </span>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="" class="nav-link link-body-emphasis px-2 text-secondary">회원정보
+                                                <a href="/userInfo" class="nav-link link-body-emphasis px-2 text-secondary">회원정보
                                                     수정</a>
                                             </li>
                                             <li class="nav-item">
