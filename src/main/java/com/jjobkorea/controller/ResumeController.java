@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jjobkorea.dto.ResumeInfoDTO;
 import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.service.ResumeInfoService;
-import com.jjobkorea.service.ResumeWritePageService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ResumeController {
     @Autowired
     private ResumeInfoService resumeInfoService;
-    @Autowired
-    private ResumeWritePageService pageService;
+
     
     // 이력서 목록 페이지 로직
     @GetMapping("/resume")
