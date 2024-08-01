@@ -18,6 +18,6 @@ public interface UserMapper {
     public void individualUser(HashMap<String, String> param);
     //기업 회원가입
     public void companyUser(HashMap<String, String> param);
-
+    //기업 추가정보 
     public void insertCompanyInfo(HashMap<String, String> param);
 }

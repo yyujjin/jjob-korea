@@ -35,11 +35,13 @@ public class UserServiceImpl implements UserService{
 		
 		return userMapper.checkUserId(param.get("userId")) > 0;
 	}
+    
     //개인 회원가입-데이터 베이스 연결 
 	@Override
 	public void registerUser(HashMap<String, String> param) {
 		userMapper.individualUser(param);
 	}
+	
 	//기업 회원가입-데이터베이스 연결
 	@Override
 	public void companyUser(HashMap<String, String> param) {
