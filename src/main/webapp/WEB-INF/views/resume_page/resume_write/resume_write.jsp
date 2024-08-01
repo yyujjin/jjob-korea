@@ -31,6 +31,7 @@
                     width: 100%;
                     max-width: 1200px;
                     margin: 20px;
+                    border: 1px solid black;
                 }
 
                 .content {
@@ -72,6 +73,7 @@
                     border: 1px solid black;
                     border-radius: 5px;
                     width: calc(50% - 10px);
+                    gap: 10px;
                 }
 
                 button {
@@ -97,7 +99,6 @@
                     text-decoration: none;
                     color: #000;
                 }
-
 
                 .btn-upload {
                     background-color: white;
@@ -136,10 +137,14 @@
                     color: white;
                     border: none;
                     cursor: pointer;
-                    margin-left: 10px;
-                    padding: 2px 2px;
-                    line-height: 1;
-                    width: 10px;
+                    margin-left: 5px;
+                    padding: 0;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
 
                 .remove-skill-btn:hover {
@@ -149,7 +154,7 @@
                 #selectedSkills {
                     display: flex;
                     flex-wrap: wrap;
-                    gap: 10px;
+                    gap: 7px;
                 }
 
                 .b {
@@ -182,21 +187,26 @@
                             <h3>인적 사항 <a style="color: gray; font-size: 11px;"><b class="b">*</b>은 필수항목
                                     입니다.</a>
                                 <div class="input-group">
+                                    이름<b class="b">*</b>
                                     <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName"
                                         required>
+                                    생년월일<b class="b">*</b>
                                     <input type="text" placeholder="생년월일" name="resumeBirthDay" id="resumeBirthDay"
                                         required>
                                     <select name="resumeGender" id="resumeGender">
-                                        <option value="0" selected disabled>성별</option>
+                                        <option value="0" selected disabled>성별<b class="b">*</b></option>
                                         <option value="1">남자</option>
                                         <option value="2">여자</option>
                                     </select>
+                                    이메일<b class="b">*</b>
                                     <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
                                         required>
-                                    <input type="text" placeholder="전화번호" name="resumeUserPhone" id="resumeUserPhone"
-                                        required>
-                                    <input type="text" placeholder="휴대폰번호" name="resumeUserCellPhone"
+                                    전화번호<input type="text" placeholder="전화번호" name="resumeUserPhone"
+                                        id="resumeUserPhone" required>
+                                    휴대번호<b class="b">*</b>
+                                    <input type="text" placeholder="휴대번호" name="resumeUserCellPhone"
                                         id="resumeUserCellPhone" required>
+                                    주소<b class="b">*</b>
                                     <input type="text" placeholder="주소" name="resumeUserAddress" id="resumeUserAddress"
                                         required>
                                 </div>
@@ -247,7 +257,7 @@
                                         const currentSkillCount = selectedSkills.getElementsByClassName('skill-item').length;
 
                                         if (currentSkillCount >= 3) {
-                                            alert("You can only select up to 3 skills.");
+                                            alert("기술은 최대 3개까지 선택 가능합니다.");
                                             return;
                                         }
 
@@ -310,14 +320,14 @@
                         </section>
                         <section class="self-intro">
                             <h3>자기소개서란</h3>
-                            <textarea placeholder="1000자 이내로 작성하세요" cols="50" rows="20" name="resumeIntroduce"
+                            <textarea placeholder="1000자 이내로 작성해주세요" cols="50" rows="20" name="resumeIntroduce"
                                 id="resumeIntroduce" required></textarea>
                         </section>
                     </div>
                     <div class="profilephoto">
                         <div style="color: gray;">
                             사진 크기는<br>
-                            150x210만 가능합니다.
+                            150x210만 <br>가능합니다.
                         </div>
                         <label for="file">
                             <div class="btn-upload">사진 업로드</div>
@@ -327,26 +337,11 @@
                         <img id="output" src="" alt="uploaded image" width="150" height="210">
                     </div>
                 </div>
-                <button type="submit">이력서 저장</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"
-                    onclick="saveResume()">임시 저장하기</button>
+                <button type="submit">이력서 저장</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" onclick="saveResume()">임시 저장하기</button>
             </form>
 
             <script>
-                var selectedSkills = [];
-
-                function toggleSkill(skill) {
-                    var index = selectedSkills.indexOf(skill);
-                    if (index === -1) {
-                        if (selectedSkills.length < 3) {
-                            selectedSkills.push(skill);
-                        } else {
-                            alert('최대 3개까지 선택할 수 있습니다.');
-                        }
-                    } else {
-                        selectedSkills.splice(index, 1);
-                    }
-                    document.getElementById('resumeSkillName').value = selectedSkills.join(',');
-                }
 
                 var loadFile = function (event) {
                     var image = document.getElementById('output');
