@@ -277,18 +277,18 @@
                                     <option value="Express">Express</option>
                                 </select>
                             </div>
-
+                            
                             <div id="selectedSkills" class="p-3">
                                 <!-- 추가된 스킬을 보여줄 공간 -->
                             </div>
 
-
+                            
                             <script>
                                 function toggleSkill(skill) {
                                     const select = document.getElementById('skills');
                                     const options = Array.from(select.options);
                                     const selectedOption = options.find(option => option.value === skill);
-
+                                    
                                     if (selectedOption) {
                                         selectedOption.selected = !selectedOption.selected;
                                     }
@@ -298,19 +298,19 @@
                                     const skillSelect = document.getElementById("skills");
                                     const selectedOption = skillSelect.options[skillSelect.selectedIndex];
                                     const selectedSkills = document.getElementById("selectedSkills");
-
+                                    
                                     const skillId = 'skill-' + selectedOption.value.replace(/\s+/g, '-');
-
+                                    
                                     // Check if the skill already exists
                                     if (!document.getElementById(skillId)) {
                                         // Check the number of currently selected skills
                                         const currentSkillCount = selectedSkills.getElementsByClassName('skill-item').length;
-
+                                        
                                         if (currentSkillCount >= 3) {
                                             alert("기술은 최대 3개까지 선택 가능합니다.");
                                             return;
                                         }
-
+                                        
                                         const skillElement = document.createElement("div");
                                         skillElement.setAttribute("id", skillId);
                                         skillElement.className = 'skill-item';
@@ -323,7 +323,7 @@
                                     // Reset the select element to default value
                                     skillSelect.selectedIndex = 0;
                                 }
-
+                                
                                 function removeSkill(skillId) {
                                     const skillElement = document.getElementById(skillId);
                                     if (skillElement) {
@@ -332,18 +332,19 @@
                                 }
                             </script>
 
-                            <input type="hidden" name="resumeSkillName" id="resumeSkillName" value="" required>
-                        </section>
-                        <section class="portfolio">
-                            <h3>포트폴리오</h3>
-                            <input type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
-                                required>
-                        </section>
-                        <section class="education">
-                            <h3>학력란</h3>
-                            <div class="input-group">
-                                <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
-                                    required>
+                        <input type="hidden" name="resumeSkillName" id="resumeSkillName" value="" required>
+
+</section>
+<section class="portfolio">
+    <h3>포트폴리오</h3>
+    <input type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
+    required>
+</section>
+<section class="education">
+    <h3>학력란</h3>
+    <div class="input-group">
+        <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
+        required>
                                 <select name="resumeEduStage" id="resumeEduStage" required>
                                     <option selected disabled>학교구분</option>
                                     <option value="고등학교">고등학교</option>
@@ -381,69 +382,85 @@
                             <button type="button" onclick="">수정</button>
                         </div> -->
 
-<div class="btn">
-    <c:if test="${resumePageUserId == sessionScope.user.userId}">
-        <button type="button" id="editButton" onclick="editResume()">수정</button>
-    </c:if>
-    <c:if test="${resumePageUserId != sessionScope.user.userId}">
-        <button type="submit" id="saveButton" style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
-    </c:if>
-    <button type="button" onclick="saveResume()">임시저장</button>
-</div>
+                        <div class="btn">
+                            <c:if test="${resumePageUserId == sessionScope.user.userId}">
+                                <button type="button" id="editButton" onclick="editResume()">수정</button>
+                            </c:if>
+                            <c:if test="${resumePageUserId != sessionScope.user.userId}">
+                                <button type="submit" id="saveButton"
+                                    style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
+                            </c:if>
+                            <button type="button" onclick="saveResume()">임시저장</button>
+                        </div>
                     </div>
                 </div>
             </form>
 
             <script>
 
-                // function saveResume() {
-                //     const resumeData = {
-                //         resumePageTitle: document.getElementById('resumePageTitle').value,
-                //         resumeUserName: document.getElementById('resumeUserName').value,
-                //         resumeBirthDay: document.getElementById('resumeBirthDay').value,
-                //         resumeGender: document.getElementById('resumeGender').value,
-                //         resumeUserEmail: document.getElementById('resumeUserEmail').value,
-                //         resumeUserPhone: document.getElementById('resumeUserPhone').value,
-                //         resumeUserCellPhone: document.getElementById('resumeUserCellPhone').value,
-                //         resumeUserAddress: document.getElementById('resumeUserAddress').value,
-                //         resumeSkillName: selectedSkills,
-                //         resumePortfolio: document.getElementById('resumePortfolio').value,
-                //         resumeEduStage: document.getElementById('resumeEduStage').value,
-                //         resumeSchoolName: document.getElementById('resumeSchoolName').value,
-                //         resumeCpName: document.getElementById('resumeCpName').value,
-                //         resumeCpDept: document.getElementById('resumeCpDept').value,
-                //         resumeCpJoinDate: document.getElementById('resumeCpJoinDate').value,
-                //         resumeCpLeaveDate: document.getElementById('resumeCpLeaveDate').value,
-                //         resumeCpPosition: document.getElementById('resumeCpPosition').value,
-                //         resumeCpSalary: document.getElementById('resumeCpSalary').value,
-                //         resumeCpDuty: document.getElementById('resumeCpDuty').value,
-                //         resumeIntroduce: document.getElementById('resumeIntroduce').value,
-                //     };
-                //     localStorage.setItem('resumeData', JSON.stringify(resumeData));
-                //     alert('이력서가 임시 저장되었습니다.');
-                // }
+                function saveResume() {
+                    const resumeData = {
+                        resumePageTitle: document.getElementById('resumePageTitle').value,
+                        resumeUserName: document.getElementById('resumeUserName').value,
+                        resumeBirthDay: document.getElementById('resumeBirthDay').value,
+                        resumeGender: document.getElementById('resumeGender').value,
+                        resumeUserEmail: document.getElementById('resumeUserEmail').value,
+                        resumeUserPhone: document.getElementById('resumeUserPhone').value,
+                        resumeUserCellPhone: document.getElementById('resumeUserCellPhone').value,
+                        resumeUserAddress: document.getElementById('resumeUserAddress').value,
+                        resumeSkillName: selectedSkills,
+                        resumePortfolio: document.getElementById('resumePortfolio').value,
+                        resumeEduStage: document.getElementById('resumeEduStage').value,
+                        resumeSchoolName: document.getElementById('resumeSchoolName').value,
+                        resumeCpName: document.getElementById('resumeCpName').value,
+                        resumeCpDept: document.getElementById('resumeCpDept').value,
+                        resumeCpJoinDate: document.getElementById('resumeCpJoinDate').value,
+                        resumeCpLeaveDate: document.getElementById('resumeCpLeaveDate').value,
+                        resumeCpPosition: document.getElementById('resumeCpPosition').value,
+                        resumeCpSalary: document.getElementById('resumeCpSalary').value,
+                        resumeCpDuty: document.getElementById('resumeCpDuty').value,
+                        resumeIntroduce: document.getElementById('resumeIntroduce').value,
+                    };
+                    localStorage.setItem('resumeData', JSON.stringify(resumeData));
+                    alert('이력서가 임시 저장되었습니다.');
+                }
 
-    var loadFile = function(event) {
-        var image = document.getElementById('output');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
+                function loadResume() {
+                    const savedResumeData = localStorage.getItem('resumeData');
+                    if (savedResumeData) {
+                        const resumeData = JSON.parse(savedResumeData);
+                        document.getElementById('resumeUserName').value = resumeData.resumeUserName;
+                        document.getElementById('resumeBirthDay').value = resumeData.resumeBirthDay;
+                        document.getElementById('resumeGender').value = resumeData.resumeGender;
+                        document.getElementById('resumeUserEmail').value = resumeData.resumeUserEmail;
+                        document.getElementById('resumeUserPhone').value = resumeData.resumeUserPhone;
+                        document.getElementById('resumeUserCellPhone').value = resumeData.resumeUserCellPhone;
+                        document.getElementById('resumeUserAddress').value = resumeData.resumeUserAddress;
+                        selectedSkills = resumeData.resumeSkillName;
+                        document.getElementById('resumeSkillName').value = selectedSkills.join(',');
+                        document.getElementById('resumePortfolio').value = resumeData.resumePortfolio;
+                        document.getElementById('resumeEduStage').value = resumeData.resumeEduStage;
+                        document.getElementById('resumeSchoolName').value = resumeData.resumeSchoolName;
+                        document.getElementById('resumeCpName').value = resumeData.resumeCpName;
+                        document.getElementById('resumeCpDept').value = resumeData.resumeCpDept;
+                        document.getElementById('resumeCpJoinDate').value = resumeData.resumeCpJoinDate;
+                        document.getElementById('resumeCpLeaveDate').value = resumeData.resumeCpLeaveDate;
+                        document.getElementById('resumeCpPosition').value = resumeData.resumeCpPosition;
+                        document.getElementById('resumeCpSalary').value = resumeData.resumeCpSalary;
+                        document.getElementById('resumeCpDuty').value = resumeData.resumeCpDuty;
+                        document.getElementById('resumeIntroduce').value = resumeData.resumeIntroduce;
+                    }
+                }
+                function validateForm() {
+                    var salary = document.getElementById('resumeCpSalary').value;
+                    if (isNaN(salary) || salary.trim() === "") {
+                        alert('연봉 필드는 숫자여야 합니다.');
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
 
-    document.addEventListener('DOMContentLoaded', (event) => {
-        loadResume();
-    });
+        </body>
 
-    function addResume(){
-        alert('이력서가 저장되었습니다.')
-    }
-
-    function validateForm() {
-        var salary = document.getElementById('resumeCpSalary').value;
-        if (isNaN(salary) || salary.trim() === "") {
-            alert('연봉 필드는 숫자여야 합니다.');
-            return false;
-        }
-        return true;
-    }
-</script>
-</body>
-</html>
+        </html>
