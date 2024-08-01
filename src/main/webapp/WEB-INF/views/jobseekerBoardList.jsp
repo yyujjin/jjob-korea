@@ -119,6 +119,7 @@
 			<td>제목</td>
 			<td>날짜</td>
 			<td>조회수</td>
+			<td>좋아요</td>
 
 		</tr>
 <!-- 		list : 모델객체에서 보낸 이름 -->
@@ -134,6 +135,9 @@
 				<td class="boardDate">${dto.jobseekerCommunityBoardDate}</td>
 					
 				<td>${dto.jobseekerCommunityBoardHit}</td>
+				<td>
+					<span id="likeCount-${dto.jobseekerCommunityBoardNum}">${dto.likes}</span>
+				</td>
 
 			</tr>
 		</c:forEach>

@@ -164,15 +164,22 @@
 				</td>
 			</tr>
 			<tr>
+				<td style="text-align: center;">
+				   <input class="like_button" type="button" value="좋아요" 
+				   onclick="handleLike(${content_view.jobseekerCommunityBoardNum})">
+				   <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2" style="text-align: right;">
 					<c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
-						<input class="mld_button" type="submit" value="수정">
+					   <input class="mld_button" type="submit" value="수정">
 					</c:if>
 					&nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get" 
 					formaction="/requestPage/jobseekerBoardList">
 					&nbsp;&nbsp;
 					<c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
-						<input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
+					   <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
 					</c:if>
 				</td>
 			</tr>
@@ -192,7 +199,7 @@
 	</div>
 
 	<div id="commentForm">
-		<input type="hidden" id="jobseekerCommentWriter" value="${user}">
+		<input type="hidden" id="jobseekerCommentWriter" value="${user.name}">
 		<input type="text" id="jobseekerCommentContent" placeholder="댓글을 작성해주세요">
 		<button id="commentWriteButton" onclick="commentWrite()">댓글작성</button>
 	</div>
@@ -217,6 +224,35 @@
 	</div>
 </body>
 	<script>
+
+const handleLike = (boardNum) => {
+    $.ajax({
+        type: "post",
+       	url: "${pageContext.request.contextPath}/like",
+        data: { jobseekerCommunityBoardNum: boardNum },
+        success: function(response) {
+            if (response.redirectUrl) {
+                alert("로그인 후 이용해 주세요.");
+                window.location.href = response.redirectUrl;
+            } else {
+                alert("좋아요!");
+                $("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
+            }
+        },
+        error: function(xhr) {
+            if (xhr.status === 401) { // 401 상태 코드 확인
+                const redirectUrl = xhr.responseJSON.redirectUrl;
+                if (redirectUrl) {
+                    alert("로그인 후 이용해 주세요");
+                    window.location.href = redirectUrl; // 로그인 페이지로 리다이렉트
+                }
+            } else {
+                alert("좋아요 반영에 실패");
+            }
+        }
+    });
+};
+
 		const commentWrite = () => {
 			const writer = document.getElementById("jobseekerCommentWriter").value;
 			

@@ -40,12 +40,14 @@
 						 , jobseekerCommunityBoardContent
 						 , jobseekerCommunityBoardDate
 						 , jobseekerCommunityBoardHit 
+						 , likes
 			 from (select rownum, jobseekerCommunityBoardNum
 			 					, jobseekerCommunityBoardName
 			 					, jobseekerCommunityBoardTitle
 			 					, jobseekerCommunityBoardContent
 			 					, jobseekerCommunityBoardDate
 			 					, jobseekerCommunityBoardHit
+			 					, likes
 			  from (select row_number() over(order by jobseekerCommunityBoardNum desc) as rownum
 							 , jobseekerCommunityBoardNum
 							 , jobseekerCommunityBoardName
@@ -53,6 +55,7 @@
 							 , jobseekerCommunityBoardContent
 							 , jobseekerCommunityBoardDate
 							 , jobseekerCommunityBoardHit
+							 , likes
 						  from jobseekerCommunityBoard
 						  ]]>
 						  <include refid="criteria"></include>

@@ -9,6 +9,7 @@
         	  ,jobseekerCommunityBoardContent
         	  ,jobseekerCommunityBoardDate
         	  ,jobseekerCommunityBoardHit 
+        	  ,likes
           from jobseekerCommunityBoard
     </select>
     <insert id="jobseekerWrite">
@@ -22,11 +23,13 @@
 				   ,jobseekerCommunityBoardTitle
 				   ,jobseekerCommunityBoardContent
 				   ,jobseekerCommunityBoardHit) 
+				   ,likes
 		select ifnull(max(jobseekerCommunityBoardNum),0)+1,
 				   #{jobseekerCommunityBoardName}
 				  ,#{jobseekerCommunityBoardTitle}
 				  ,#{jobseekerCommunityBoardContent}
 				  ,0 
+				  ,0
 			from jobseekerCommunityBoard
     </insert>
 				
@@ -37,6 +40,7 @@
         	  ,jobseekerCommunityBoardContent
         	  ,jobseekerCommunityBoardDate
         	  ,jobseekerCommunityBoardHit 
+        	  ,likes
            from jobseekerCommunityBoard
        	where jobseekerCommunityBoardNum=#{jobseekerCommunityBoardNum}
     </select>
@@ -60,4 +64,18 @@
 	    set jobseekerCommunityBoardHit = jobseekerCommunityBoardHit + 1
 	    where jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
 	</update>
+	
+<!-- 	좋아요 -->
+  <update id="likes" parameterType="int">
+        update jobseekerCommunityBoard
+        set likes = likes + 1 
+        where jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
+  </update>
+    
+  <select id="getLikeCount" parameterType="int" resultType="int">
+	    select likes
+	    from jobseekerCommunityBoard 
+	    where jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
+  </select>
+	
 </mapper>

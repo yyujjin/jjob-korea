@@ -3,13 +3,17 @@ package com.jjobkorea.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jjobkorea.dto.JobseekerBoardAttachDTO;
@@ -166,5 +170,27 @@ public class JobseekerBoardController {
 
 		        return "redirect:/requestPage/jobseekerBoardList";
 		}
-		 	
+		 @PostMapping("/like")
+		 @ResponseBody
+		 public ResponseEntity<Map<String, Object>> like(@RequestParam("jobseekerCommunityBoardNum") int jobseekerCommunityBoardNum, HttpSession session) {
+		     log.info("@# like");
+		     log.info("@# boardNum => " + jobseekerCommunityBoardNum);
+
+		     Map<String, Object> response = new HashMap<>();
+
+		     // 로그인 여부 확인
+		     if (session.getAttribute("user") == null) {
+		         log.info("좋아요 로그인 요청");
+		         response.put("redirectUrl", "/login");
+		         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED); // 401 상태 코드 반환
+		     }
+
+		     // 좋아요 처리
+		     service.likes(jobseekerCommunityBoardNum);
+		     
+		     // 좋아요 수 반환
+		     int likeCount = service.getLikeCount(jobseekerCommunityBoardNum);
+		     response.put("likeCount", likeCount);
+		     return ResponseEntity.ok(response); // 200 상태 코드 반환
+		 }
 }
