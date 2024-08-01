@@ -94,5 +94,18 @@ public class JobseekerBoardServiceImpl implements JobseekerBoardService{
         JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
         dao.jobseekerHit(jobseekerCommunityBoardNum);
     }
-    
+
+    @Override
+    public void likes(int jobseekerCommunityBoardNum) {
+    	log.info("좋아요");
+        JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
+        dao.likes(jobseekerCommunityBoardNum);
+    }
+
+    @Override
+    public int getLikeCount(int jobseekerCommunityBoardNum) {
+    	log.info("좋아요 카운트");
+        JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
+        return dao.getLikeCount(jobseekerCommunityBoardNum);
+    }
 }
