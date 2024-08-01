@@ -1,5 +1,6 @@
 package com.jjobkorea.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -8,7 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +28,8 @@ public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     public final UserService userService;
+    
+   
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -99,4 +105,28 @@ public class UserController {
         }}));
         return response;
     }
+    
+    //개인회원 정보 리스트
+    @RequestMapping("/userInfo")
+    public String userInfo(Model model){
+    	
+    	//임의 값
+    	 String userId = "abcd";
+    	
+    	UserDTO userInfo = userService.userInfo(userId);
+    	log.info("가져온 userInfo : {}",userInfo);
+    	model.addAttribute("userInfo",userInfo);
+    	
+    	return "user/userInfo";
+    }
 }
+
+
+
+
+
+
+
+
+
+

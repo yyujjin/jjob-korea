@@ -36,4 +36,9 @@
 	<select id="checkUserId" parameterType="String" resultType="int">
 			SELECT COUNT(*) FROM user_info WHERE userId = #{userId}
 	</select>
+	
+	<select id="userInfo" parameterType="String" resultType="com.jjobkorea.dto.UserDTO">
+        select * from user_info where userId = #{userId}
+    </select>
+	
 </mapper>

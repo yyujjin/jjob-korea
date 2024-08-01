@@ -1,5 +1,6 @@
 package com.jjobkorea.mapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,11 +14,15 @@ public interface UserMapper {
     
     //아이디 존재 여부 확인
     public int checkUserId(String userId);
+//    public int userIdExists(String userId);
     
     //구직자 회원 가입
     public void individualUser(HashMap<String, String> param);
     //기업 회원가입
     public void companyUser(HashMap<String, String> param);
-
+    //기업 추가 정보
     public void insertCompanyInfo(HashMap<String, String> param);
+    
+    //개인 회원 정보 조회
+    public UserDTO userInfo(String userId);
 }
