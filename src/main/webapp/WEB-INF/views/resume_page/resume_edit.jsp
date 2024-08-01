@@ -16,6 +16,8 @@
 </header>
 <form method="post" action="${pageContext.request.contextPath}/resume_write/edit" enctype="multipart/form-data" onsubmit="return validateForm();">
     <input type="hidden" name="id" value="${resumeInfoDTO.id}">
+	<input type="hidden" name="resumeFilePath" value="${resumeInfoDTO.resumeFilePath}">
+
 
 	<div class="main-container">
 	        <div class="content">
@@ -97,10 +99,10 @@
 	                <div class="btn-upload">사진 업로드</div>
 	                <input type="file" name="resumeProfilePhoto" id="file" accept="image/*" onchange="loadFile(event)" style="display: none;" required>
 	            </label>
-	            <img id="output" src="${resumeInfoDTO.resumeFilePath}" alt="uploaded image" width="150" height="210">
+	            <img id="output" src="${pageContext.request.contextPath}/${resumeInfoDTO.resumeFilePath}" alt="uploaded image" width="150" height="210">
 	        </div>
 	    </div>
-	    <button type="submit">이력서 저장</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="saveResume()">임시 저장하기</button>
+	    <button type="submit">이력서 저장</button>
 	</form>
 
 <script>

@@ -28,7 +28,7 @@ public class ResumeController {
     private ResumeInfoService resumeInfoService;
 
     
-    // 이력서 목록 페이지 로직
+    // 이력서 관리 메인 페이지 로직
     @GetMapping("/resume")
     public String resister(Model model, HttpSession session) {
         log.info("@#hello");
@@ -53,30 +53,7 @@ public class ResumeController {
         
         return "main/main";
     }
-
-    // 이력서 등록 로직
-    @PostMapping("/resume")
-    public String addResume(@ModelAttribute ResumeInfoDTO resume, HttpSession session) {
-        if (session.getAttribute("user") == null) {
-            return "redirect:/requestPage/login";
-        }
-
-        UserDTO user = (UserDTO) session.getAttribute("user");
-        log.info("저장된 유저 정보 : {}", user);
-
-        String userId = user.getUserId();
-        resume.setResumePageUserId(userId);
-
-        // 필수 필드 유효성 검사
-        if (resume.getResumePageTitle() == null || resume.getResumePageTitle().isEmpty()) {
-            log.error("이력서가 존재하지 않습니다.");
-            return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
-        }
-
-        resumeInfoService.insert(resume);
-        return "redirect:/requestPage/{page}";
-    }
-
+    
     // 이력서 작성 페이지 로직
     @GetMapping("/resume_write")
     public String resumeWrite(Model model, HttpSession session) {
@@ -92,7 +69,7 @@ public class ResumeController {
 
     // 이력서 저장 로직
     @PostMapping("/resume_write")
-    public String saveResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session) throws ParseException {
+    public String addResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session, Model model) throws ParseException {
         log.info("@#saveResume");
 
         if (session.getAttribute("user") == null) {
@@ -121,13 +98,15 @@ public class ResumeController {
             } catch (IOException e) {
                 log.error("파일을 저장하지 못했습니다.", e);
             }
+        }else {
+            // 기존 파일 경로 유지
+            resumeInfoDTO.setResumeFilePath(resumeInfoDTO.getResumeFilePath());
         }
-
         resumeInfoService.insert(resumeInfoDTO);
         return "redirect:/resume";
     }
 
-    // 이력서 수정 페이지 로직
+    // 이력서 수정 페이지 접속 로직
     @GetMapping("/resume_write/edit")
     public String editResume(@RequestParam("id") Long id, Model model, HttpSession session) {
         log.info("@#resume edit");
@@ -147,7 +126,7 @@ public class ResumeController {
         return "resume_page/resume_edit";
     }
 
-    // 이력서 업데이트 로직
+    // 이력서 수정 완료 업데이트 로직
     @PostMapping("/resume_write/edit")
     public String updateResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session) {
         log.info("resumeUpdate");
@@ -176,11 +155,16 @@ public class ResumeController {
             } catch (IOException e) {
                 log.error("파일을 저장하지 못했습니다.", e);
             }
+
+        }else {
+            // 기존 파일 경로 유지
+            resumeInfoDTO.setResumeFilePath(resumeInfoDTO.getResumeFilePath());
         }
        
         resumeInfoService.update(resumeInfoDTO);
         return "redirect:/resume";
     }
+    // 이력서 삭제 로직
     @PostMapping("/resume/delete")
     public String delete(@RequestParam("id") Long id, HttpSession session) {
     	log.info("@#delete");
