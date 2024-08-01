@@ -1,6 +1,5 @@
 package com.jjobkorea.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -37,5 +36,10 @@ public class ResumeInfoServiceImpl implements ResumeInfoService {
 	@Override
 	public void update(ResumeInfoDTO resumeInfoDTO) {
 		resumeInfoMapper.update(resumeInfoDTO);
+	}
+	@Override
+	public void delete(Long id, String userId) {
+		resumeInfoMapper.delete(id, userId);
+		
 	}
 }

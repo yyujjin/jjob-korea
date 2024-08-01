@@ -71,7 +71,7 @@ public class ResumeController {
 
         // 필수 필드 유효성 검사
         if (resume.getResumePageTitle() == null || resume.getResumePageTitle().isEmpty()) {
-            log.error("Resume title cannot be null or empty");
+            log.error("이력서가 존재하지 않습니다.");
             return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
         }
 
@@ -107,7 +107,7 @@ public class ResumeController {
 
         // 필수 필드 유효성 검사
         if (resumeInfoDTO.getResumePageTitle() == null || resumeInfoDTO.getResumePageTitle().isEmpty()) {
-            log.error("Resume title cannot be null or empty");
+            log.error("이력서가 존재하지 않습니다.");
             return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
         }
 
@@ -121,7 +121,7 @@ public class ResumeController {
                 file.transferTo(dest);
                 resumeInfoDTO.setResumeFilePath(filePath);
             } catch (IOException e) {
-                log.error("Failed to save file", e);
+                log.error("파일을 저장하지 못했습니다.", e);
             }
         }
 
@@ -163,7 +163,7 @@ public class ResumeController {
         log.info("Received ID: {}", resumeInfoDTO.getId());
         // 필수 필드 유효성 검사
         if (resumeInfoDTO.getResumePageTitle() == null || resumeInfoDTO.getResumePageTitle().isEmpty()) {
-            log.error("Resume title cannot be null or empty");
+            log.error("이력서가 존재하지 않습니다.");
             return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
         }
 
@@ -176,11 +176,24 @@ public class ResumeController {
                 file.transferTo(dest);
                 resumeInfoDTO.setResumeFilePath(filePath);
             } catch (IOException e) {
-                log.error("Failed to save file", e);
+                log.error("파일을 저장하지 못했습니다.", e);
             }
         }
        
         resumeInfoService.update(resumeInfoDTO);
         return "redirect:/resume";
     }
+    @PostMapping("/resume/delete")
+    public String delete(@RequestParam("id") Long id, HttpSession session) {
+    	log.info("@#delete");
+    	UserDTO userId = (UserDTO) session.getAttribute("user");
+    	
+    	if (userId == null) {
+            return "redirect:/requestPage/login";
+        }
+
+    	resumeInfoService.delete(id, userId.getUserId());
+        
+		return "redirect:/resume";
+	}
 }

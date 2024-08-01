@@ -50,5 +50,8 @@
             resumeIntroduce = #{resumeIntroduce}
         WHERE id = #{id} AND resumePageUserId = #{resumePageUserId}
     </update>
-
+	<delete id="delete" parameterType="com.jjobkorea.dto.ResumeInfoDTO">
+		DELETE FROM resume_user_information
+		WHERE id = #{arg0} AND resumePageUserId = #{arg1}
+	</delete>
 </mapper>

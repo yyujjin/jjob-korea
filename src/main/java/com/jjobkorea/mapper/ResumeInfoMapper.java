@@ -13,4 +13,5 @@ public interface ResumeInfoMapper {
     ResumeInfoDTO findByIdAndUserId(Long id, String userId);
     void insert(ResumeInfoDTO resumeInfoDTO);
     void update(ResumeInfoDTO resumeInfoDTO);
+    void delete(Long id, String userId);
 }
