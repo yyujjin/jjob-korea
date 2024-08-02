@@ -35,7 +35,7 @@
             resumeUserPhone = #{resumeUserPhone},
             resumeUserCellPhone = #{resumeUserCellPhone},
             resumeUserAddress = #{resumeUserAddress},
-            resumeProfilePhoto = #{resumeFilePath},
+            resumeProfilePhoto = CASE WHEN #{resumeFilePath} IS NOT NULL THEN #{resumeFilePath} ELSE resumeProfilePhoto END,
             resumeSkillName = #{resumeSkillName},
             resumePortfolio = #{resumePortfolio},
             resumeEduStage = #{resumeEduStage},

@@ -180,7 +180,7 @@
     </style>
     <script type="text/javascript"
         src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/resume_css/write.css">
+<!--    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/resume_css/write.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
@@ -191,39 +191,39 @@
         </div>
     </header>
 
-    <form method="post" action="${pageContext.request.contextPath}/resume_write/edit" enctype="multipart/form-data" onsubmit="return validateForm();">
-        <input type="hidden" name="id" value="${resumeInfoDTO.id}">
-        <input type="hidden" name="resumeFilePath" value="${resumeInfoDTO.resumeFilePath}">
-        <div class="main-container">
-                <div class="photo">
-                    <div class="profilephoto">
-                        <div id="photo-instructions" style="color: gray;">
-                            사진 크기는<br>
-                            150x210만 <br>
-                            가능합니다.
-                        </div>
-                   <img id="output" src="" alt="uploaded image" width="150" height="210"
-                            style="display:none;">
-                </div>
-                    <label for="file">
-                        <div class="btn-upload">사진 업로드</div>
-                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
-                            onchange="loadFile(event)" style="display: none;" required>
-                    </label>
-                </div>
-            
-            <script>
-                function loadFile(event) {
-                    var output = document.getElementById('output');
-                    var instructions = document.getElementById('photo-instructions');
-                    instructions.style.display = 'none';
-                    output.style.display = 'block';
-                    output.src = URL.createObjectURL(event.target.files[0]);
-                    output.onload = function () {
-                        URL.revokeObjectURL(output.src) // free memory
-                    }
-                }
-            </script>
+	<form method="post" action="${pageContext.request.contextPath}/resume_write/edit" enctype="multipart/form-data" onsubmit="return validateForm();">
+	        <input type="hidden" name="id" value="${resumeInfoDTO.id}">
+	        <input type="hidden" name="resumeFilePath" value="${resumeInfoDTO.resumeFilePath}">
+	        <div class="main-container">
+	                <div class="photo">
+	                    <div class="profilephoto">
+	                        <div id="photo-instructions" style="color: gray; display:${resumeInfoDTO.resumeFilePath != null ? 'none' : 'block'};">
+	                            사진 크기는<br>
+	                            150x210만 <br>
+	                            가능합니다.
+	                        </div>
+	                        <img id="output" src="${pageContext.request.contextPath}/resume_write/edit/image/${resumeInfoDTO.resumeFilePath}" alt="uploaded image" width="150" height="210"
+	                             style="display:${resumeInfoDTO.resumeFilePath != null ? 'block' : 'none'};">
+	                    </div>
+	                    <label for="file">
+	                        <div class="btn-upload">사진 업로드</div>
+	                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
+	                            onchange="loadFile(event)" style="display: none;" required>
+	                    </label>
+	                </div>
+	            
+	            <script>
+	                function loadFile(event) {
+	                    var output = document.getElementById('output');
+	                    var instructions = document.getElementById('photo-instructions');
+	                    instructions.style.display = 'none';
+	                    output.style.display = 'block';
+	                    output.src = URL.createObjectURL(event.target.files[0]);
+	                    output.onload = function () {
+	                        URL.revokeObjectURL(output.src) // free memory
+	                    }
+	                }
+	            </script>
             
             <div class="content">
                 <section>
@@ -277,67 +277,91 @@
                             <option value="Express">Express</option>
                         </select>
                     </div>
-					
+                    <input type="hidden" name="resumeSkillName" id="resumeSkillName" value="${resumeInfoDTO.resumeSkillName}" required>
+                    
                     <div id="selectedSkills" class="p-3">
-						
-						
-					</div>
-					
+                        <!-- 추가된 스킬을 보여줄 공간 -->
+                    </div>
+                
                     <script>
-
                         var selectedSkills = [];
-
-						function toggleSkill(skill) {
-                            const select = document.getElementById('skills');
-                            const options = Array.from(select.options);
-                            const selectedOption = options.find(option => option.value === skill);
-							
-                            if (selectedOption) {
-                                selectedOption.selected = !selectedOption.selected;
-                            }
+                
+                        function updateHiddenInput() {
+                            const resumeSkillNameInput = document.getElementById("resumeSkillName");
+                            resumeSkillNameInput.value = selectedSkills.join(',');
                         }
-						
+                
                         function addSkill() {
-							const skillSelect = document.getElementById("skills");
+                            const skillSelect = document.getElementById("skills");
                             const selectedOption = skillSelect.options[skillSelect.selectedIndex];
-                            const selectedSkills = document.getElementById("selectedSkills");
-							
+                            const selectedSkillsDiv = document.getElementById("selectedSkills");
+                
                             const skillId = 'skill-' + selectedOption.value.replace(/\s+/g, '-');
-							
+                
                             // Check if the skill already exists
                             if (!document.getElementById(skillId)) {
-								// Check the number of currently selected skills
-                                const currentSkillCount = selectedSkills.getElementsByClassName('skill-item').length;
-								
+                                // Check the number of currently selected skills
+                                const currentSkillCount = selectedSkillsDiv.getElementsByClassName('skill-item').length;
+                
                                 if (currentSkillCount >= 3) {
-									alert("기술은 최대 3개까지 선택 가능합니다.");
+                                    alert("기술은 최대 3개까지 선택 가능합니다.");
                                     return;
                                 }
-								
+                
                                 const skillElement = document.createElement("div");
                                 skillElement.setAttribute("id", skillId);
                                 skillElement.className = 'skill-item';
-                                skillElement.innerHTML = selectedOption.value + " <button class='remove-skill-btn' onclick='removeSkill(\"" + skillId + "\")'>x</button>";
-                                selectedSkills.appendChild(skillElement);
+                                skillElement.innerHTML = selectedOption.value + " <button class='remove-skill-btn' onclick='removeSkill(\"" + skillId + "\", \"" + selectedOption.value + "\")'>x</button>";
+                                selectedSkillsDiv.appendChild(skillElement);
+                
+                                // Add the skill to the selectedSkills array
+                                selectedSkills.push(selectedOption.value);
+                                updateHiddenInput();
                             } else {
-								alert("이미 선택된 기술입니다.");
+                                alert("이미 선택된 기술입니다.");
                             }
-							
                             // Reset the select element to default value
                             skillSelect.selectedIndex = 0;
                         }
-						
-                        function removeSkill(skillId) {
-							const skillElement = document.getElementById(skillId);
+                
+                        function removeSkill(skillId, skillValue) {
+                            const skillElement = document.getElementById(skillId);
                             if (skillElement) {
-								skillElement.remove();
+                                skillElement.remove();
+                
+                                // Remove the skill from the selectedSkills array
+                                const index = selectedSkills.indexOf(skillValue);
+                                if (index > -1) {
+                                    selectedSkills.splice(index, 1);
+                                }
+                                updateHiddenInput();
                             }
                         }
+                
+                        function loadExistingSkills() {
+                            const existingSkills = "${resumeInfoDTO.resumeSkillName}".split(',');
+                
+                            existingSkills.forEach(skill => {
+                                if (skill && skill !== '선택안함') {
+                                    selectedSkills.push(skill);
+                                    
+                                    const skillId = 'skill-' + skill.replace(/\s+/g, '-');
+                                    const selectedSkillsDiv = document.getElementById("selectedSkills");
+                                    const skillElement = document.createElement("div");
+                                    skillElement.setAttribute("id", skillId);
+                                    skillElement.className = 'skill-item';
+                                    skillElement.innerHTML = skill + " <button class='remove-skill-btn' onclick='removeSkill(\"" + skillId + "\", \"" + skill + "\")'>x</button>";
+                                    selectedSkillsDiv.appendChild(skillElement);
+                                }
+                            });
+                
+                            updateHiddenInput();
+                        }
+                
+                        document.addEventListener("DOMContentLoaded", loadExistingSkills);
                     </script>
-
-				<input type="hidden" name="resumeSkillName" id="resumeSkillName" value="${resumeInfoDTO.resumeSkillName}" required>
-
                 </section>
+                
                 <section class="portfolio">
 					<h3>포트폴리오</h3>
                     <input type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"

@@ -2,16 +2,30 @@ package com.jjobkorea.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jjobkorea.dto.ResumeInfoDTO;
@@ -26,7 +40,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ResumeController {
     @Autowired
     private ResumeInfoService resumeInfoService;
-
+    @Value("${spring.servlet.multipart.location}")
+	private String filepath;
     
     // 이력서 관리 메인 페이지 로직
     @GetMapping("/resume")
@@ -79,6 +94,7 @@ public class ResumeController {
         UserDTO user = (UserDTO) session.getAttribute("user");
         String userId = user.getUserId();
         resumeInfoDTO.setResumePageUserId(userId);
+        UUID uuid = UUID.randomUUID();
 
         // 필수 필드 유효성 검사
         if (resumeInfoDTO.getResumePageTitle() == null || resumeInfoDTO.getResumePageTitle().isEmpty()) {
@@ -90,7 +106,7 @@ public class ResumeController {
         MultipartFile file = resumeInfoDTO.getResumeProfilePhoto();
         if (file != null && !file.isEmpty()) {
             try {
-                String fileName = file.getOriginalFilename();
+                String fileName = uuid+"_"+file.getOriginalFilename();
                 String filePath = "D:\\dev\\upload\\" + fileName; // 실제 저장 경로로 변경
                 File dest = new File(filePath);
                 file.transferTo(dest);
@@ -103,7 +119,7 @@ public class ResumeController {
         return "redirect:/resume";
     }
 
-    // 이력서 수정 페이지 접속 로직
+//     이력서 수정 페이지 접속 로직
     @GetMapping("/resume_write/edit")
     public String editResume(@RequestParam("id") Long id, Model model, HttpSession session) {
         log.info("@#resume edit");
@@ -122,12 +138,29 @@ public class ResumeController {
         model.addAttribute("resumeInfoDTO", resumeInfoDTO);
         return "resume_page/resume_edit";
     }
-
+    
+    @GetMapping("/resume_write/edit/image/{filename}")
+    public ResponseEntity<Resource> showImage(@PathVariable("filename") String filename, ResumeInfoDTO resumeInfoDTO) throws IOException {
+    	UUID uuid = UUID.fromString(filename);
+    	filename = filename.substring(filename.indexOf("_")+1);
+    	System.out.println(filename);
+    	
+    	String str = URLEncoder.encode(filename, "UTF-8");
+    	str = str.replaceAll("\\+", "%20");
+    	
+    	Path path = Paths.get(uuid+"_"+filename);
+    	Resource resource = new InputStreamResource(Files.newInputStream(path));
+    	
+    	return ResponseEntity.ok()
+    			.header(HttpHeaders.CONTENT_TYPE, "application/octet-stream")
+    			.header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename="+str+";")
+    			.body(resource);
+    }
     // 이력서 수정 완료 업데이트 로직
     @PostMapping("/resume_write/edit")
     public String updateResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session) {
         log.info("resumeUpdate");
-
+        UUID uuid = UUID.randomUUID();
         if (session.getAttribute("user") == null) {
             return "redirect:/requestPage/login";
         }
@@ -140,11 +173,16 @@ public class ResumeController {
             log.error("이력서가 존재하지 않습니다.");
             return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
         }
+        ResumeInfoDTO existingResume = resumeInfoService.findByIdAndUserId(resumeInfoDTO.getId(), user.getUserId());
+        if (existingResume == null) {
+            log.error("존재하지 않는 이력서입니다.");
+            return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
+        }
 
         MultipartFile file = resumeInfoDTO.getResumeProfilePhoto();
         if (file != null && !file.isEmpty()) {
             try {
-                String fileName = file.getOriginalFilename();
+            	String fileName = uuid+"_"+file.getOriginalFilename();
                 String filePath = "D:\\dev\\upload\\" + fileName; // 실제 저장 경로로 변경
                 File dest = new File(filePath);
                 file.transferTo(dest);
@@ -152,6 +190,9 @@ public class ResumeController {
             } catch (IOException e) {
                 log.error("파일을 저장하지 못했습니다.", e);
             }
+        }else {
+            // 새로운 파일이 업로드되지 않았으면 기존 파일 경로를 유지합니다.
+            resumeInfoDTO.setResumeFilePath(existingResume.getResumeFilePath());
         }
        
         resumeInfoService.update(resumeInfoDTO);
@@ -170,4 +211,5 @@ public class ResumeController {
         
 		return "redirect:/resume";
 	}
+    
 }
