@@ -195,36 +195,35 @@
 
             <form method="post" action="/resume_write" enctype="multipart/form-data">
                 <div class="main-container">
-                <div class="photo">
-                    <div class="profilephoto">
-                        <div id="photo-instructions" style="color: gray;">
-                            사진 크기는<br>
-                            150x210만 <br>
-                            가능합니다.
+                    <div class="photo">
+                        <div class="profilephoto">
+                            <div id="photo-instructions" style="color: gray;">
+                                사진 크기는<br>
+                                150x210만 <br>
+                                가능합니다.
+                            </div>
+                            <img id="output" src="" alt="uploaded image" width="150" height="210" style="display:none;">
                         </div>
-                        <img id="output" src="" alt="uploaded image" width="150" height="210"
-                            style="display:none;">
+                        <label for="file">
+                            <div class="btn-upload">사진 업로드</div>
+                            <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
+                                onchange="loadFile(event)" style="display: none;" required>
+                        </label>
                     </div>
-                    <label for="file">
-                        <div class="btn-upload">사진 업로드</div>
-                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
-                            onchange="loadFile(event)" style="display: none;" required>
-                    </label>
-                </div>
-                
-                <script>
-                    function loadFile(event) {
-                        var output = document.getElementById('output');
-                        var instructions = document.getElementById('photo-instructions');
-                        instructions.style.display = 'none';
-                        output.style.display = 'block';
-                        output.src = URL.createObjectURL(event.target.files[0]);
-                        output.onload = function () {
-                            URL.revokeObjectURL(output.src) // free memory
+
+                    <script>
+                        function loadFile(event) {
+                            var output = document.getElementById('output');
+                            var instructions = document.getElementById('photo-instructions');
+                            instructions.style.display = 'none';
+                            output.style.display = 'block';
+                            output.src = URL.createObjectURL(event.target.files[0]);
+                            output.onload = function () {
+                                URL.revokeObjectURL(output.src) // free memory
+                            }
                         }
-                    }
-                </script>
-                
+                    </script>
+
                     <div class="content">
                         <section>
                             <b>이력서 제목</b>
@@ -277,18 +276,20 @@
                                     <option value="Express">Express</option>
                                 </select>
                             </div>
-                            
+
                             <div id="selectedSkills" class="p-3">
                                 <!-- 추가된 스킬을 보여줄 공간 -->
                             </div>
 
-                            
+
                             <script>
+                                var selectedSkills = [];
+
                                 function toggleSkill(skill) {
                                     const select = document.getElementById('skills');
                                     const options = Array.from(select.options);
                                     const selectedOption = options.find(option => option.value === skill);
-                                    
+
                                     if (selectedOption) {
                                         selectedOption.selected = !selectedOption.selected;
                                     }
@@ -298,19 +299,19 @@
                                     const skillSelect = document.getElementById("skills");
                                     const selectedOption = skillSelect.options[skillSelect.selectedIndex];
                                     const selectedSkills = document.getElementById("selectedSkills");
-                                    
+
                                     const skillId = 'skill-' + selectedOption.value.replace(/\s+/g, '-');
-                                    
+
                                     // Check if the skill already exists
                                     if (!document.getElementById(skillId)) {
                                         // Check the number of currently selected skills
                                         const currentSkillCount = selectedSkills.getElementsByClassName('skill-item').length;
-                                        
+
                                         if (currentSkillCount >= 3) {
                                             alert("기술은 최대 3개까지 선택 가능합니다.");
                                             return;
                                         }
-                                        
+
                                         const skillElement = document.createElement("div");
                                         skillElement.setAttribute("id", skillId);
                                         skillElement.className = 'skill-item';
@@ -323,7 +324,7 @@
                                     // Reset the select element to default value
                                     skillSelect.selectedIndex = 0;
                                 }
-                                
+
                                 function removeSkill(skillId) {
                                     const skillElement = document.getElementById(skillId);
                                     if (skillElement) {
@@ -332,19 +333,19 @@
                                 }
                             </script>
 
-                        <input type="hidden" name="resumeSkillName" id="resumeSkillName" value="" required>
+                            <input type="hidden" name="resumeSkillName" id="resumeSkillName" value="" required>
 
-</section>
-<section class="portfolio">
-    <h3>포트폴리오</h3>
-    <input type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
-    required>
-</section>
-<section class="education">
-    <h3>학력란</h3>
-    <div class="input-group">
-        <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
-        required>
+                        </section>
+                        <section class="portfolio">
+                            <h3>포트폴리오</h3>
+                            <input type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
+                                required>
+                        </section>
+                        <section class="education">
+                            <h3>학력란</h3>
+                            <div class="input-group">
+                                <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
+                                    required>
                                 <select name="resumeEduStage" id="resumeEduStage" required>
                                     <option selected disabled>학교구분</option>
                                     <option value="고등학교">고등학교</option>

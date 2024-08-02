@@ -195,23 +195,22 @@
         <input type="hidden" name="id" value="${resumeInfoDTO.id}">
         <input type="hidden" name="resumeFilePath" value="${resumeInfoDTO.resumeFilePath}">
         <div class="main-container">
-            <div class="photo">
-                <div class="profilephoto">
-                    <div id="photo-instructions" style="color: gray;">
-                        사진 크기는<br>
-                        150x210만 <br>
-                        가능합니다.
-                    </div>
-                    <c:if test="${!empty resumeInfoDTO.resumeProfilePhoto}">
-                        <img id="output" src="${pageContext.request.contextPath}/resources/upload/${resumeInfoDTO.resumeProfilePhoto}" alt="uploaded image" width="150" height="210">
-                    </c:if>
+                <div class="photo">
+                    <div class="profilephoto">
+                        <div id="photo-instructions" style="color: gray;">
+                            사진 크기는<br>
+                            150x210만 <br>
+                            가능합니다.
+                        </div>
+                   <img id="output" src="" alt="uploaded image" width="150" height="210"
+                            style="display:none;">
                 </div>
-                <label for="file">
-                    <div class="btn-upload">사진 업로드</div>
-                    <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
-                        onchange="loadFile(event)" style="display: none;">
-                </label>
-            </div>
+                    <label for="file">
+                        <div class="btn-upload">사진 업로드</div>
+                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
+                            onchange="loadFile(event)" style="display: none;" required>
+                    </label>
+                </div>
             
             <script>
                 function loadFile(event) {
@@ -285,6 +284,9 @@
 					</div>
 					
                     <script>
+
+                        var selectedSkills = [];
+
 						function toggleSkill(skill) {
                             const select = document.getElementById('skills');
                             const options = Array.from(select.options);
