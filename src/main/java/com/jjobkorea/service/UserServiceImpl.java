@@ -57,4 +57,11 @@ public class UserServiceImpl implements UserService{
 		
 		return userMapper.userInfo(userId);
 	}
+	
+	//회원정보 수정
+	@Override
+	public void updateUser(UserDTO userDTO){
+
+		userMapper.updateUser(userDTO);
+	}
 }
