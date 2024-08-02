@@ -15,4 +15,6 @@ public interface UserService {
     public void registerUser(HashMap<String, String> param);
     //기업 회원가입
     public void companyUser(HashMap<String, String> param);
+    //마이페이지-개인 회원 정보 조회
+    public UserDTO userInfo(String userId);
 }

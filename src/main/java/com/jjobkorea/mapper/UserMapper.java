@@ -20,4 +20,6 @@ public interface UserMapper {
     public void companyUser(HashMap<String, String> param);
     //기업 추가정보 
     public void insertCompanyInfo(HashMap<String, String> param);
+    //회원(개인, 기업) 정보 조회
+    public UserDTO userInfo(String userId);
 }

@@ -2,8 +2,10 @@ package com.jjobkorea.service;
 
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jjobkorea.controller.UserController;
@@ -47,5 +49,12 @@ public class UserServiceImpl implements UserService{
 	public void companyUser(HashMap<String, String> param) {
 		userMapper.companyUser(param);
 		userMapper.insertCompanyInfo(param);
+	}
+	
+	//회원 정보 조회
+	@Override
+	public UserDTO userInfo(String userId) {
+		
+		return userMapper.userInfo(userId);
 	}
 }
