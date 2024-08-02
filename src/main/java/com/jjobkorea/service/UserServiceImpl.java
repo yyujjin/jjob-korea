@@ -55,8 +55,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDTO userInfo(String userId) {
 		
-		userMapper.userInfo(userId);
-		
 		return userMapper.userInfo(userId);
 	}
 }
