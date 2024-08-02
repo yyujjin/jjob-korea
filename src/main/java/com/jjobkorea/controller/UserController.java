@@ -122,12 +122,10 @@ public class UserController {
     
     //회원정보 수정
     @PostMapping("/user/updateUserInfo")
-    public String updateUser(UserDTO userDTO,HttpSession session) {
+    public String updateUser(UserDTO userDTO) {
     	
     	userService.updateUser(userDTO);
     	log.info("업데이트 된 userDTO : {}",userDTO);
-    	session.setAttribute("user", userDTO);
-    	
     	
     	return "user/updateSuccess";
     }
