@@ -15,9 +15,6 @@ import com.jjobkorea.mapper.UserMapper;
 @Service
 public class UserServiceImpl implements UserService{
 
-	@Autowired
-	private SqlSession sqlSession;
-	
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private  final UserMapper userMapper;
 
@@ -54,13 +51,12 @@ public class UserServiceImpl implements UserService{
 		userMapper.insertCompanyInfo(param);
 	}
 	
+	//회원 정보 조회
 	@Override
 	public UserDTO userInfo(String userId) {
 		
-		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		userMapper.userInfo(userId);
 		
-		UserDTO userInfo = mapper.userInfo(userId);
-		
-		return userInfo;
+		return userMapper.userInfo(userId);
 	}
 }

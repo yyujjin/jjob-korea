@@ -80,7 +80,7 @@ public class UserController {
 
     //개인과 기업을 구분하여 회원가입
     @PostMapping("/registerOk")
-    public String registerOk(@RequestParam HashMap<String, String> param, Model model) {
+    public String registerOk(@RequestParam HashMap<String, String> param) {
         if ("enterprise".equals(param.get("type"))) {
             userService.companyUser(param);
         } else {
@@ -100,11 +100,12 @@ public class UserController {
         return response;
     }
     
-  //개인회원 정보 리스트
-    @RequestMapping("/user/userInfo")
+  //회원 정보(개인,기업) 조회
+    @GetMapping("/user/userInfo")
     public String userInfo(Model model){
     	
     	//임의 값
+    	//현재 세션을 가져올 수 없어 임의로 값을 넣어 결과를 확인해봄 -> 추후에 작업이 필요함
     	 String userId = "abcd";
     	
     	UserDTO userInfo = userService.userInfo(userId);
