@@ -98,9 +98,6 @@ public class ResumeController {
             } catch (IOException e) {
                 log.error("파일을 저장하지 못했습니다.", e);
             }
-        }else {
-            // 기존 파일 경로 유지
-            resumeInfoDTO.setResumeFilePath(resumeInfoDTO.getResumeFilePath());
         }
         resumeInfoService.insert(resumeInfoDTO);
         return "redirect:/resume";
@@ -155,10 +152,6 @@ public class ResumeController {
             } catch (IOException e) {
                 log.error("파일을 저장하지 못했습니다.", e);
             }
-
-        }else {
-            // 기존 파일 경로 유지
-            resumeInfoDTO.setResumeFilePath(resumeInfoDTO.getResumeFilePath());
         }
        
         resumeInfoService.update(resumeInfoDTO);
@@ -173,7 +166,6 @@ public class ResumeController {
     	if (userId == null) {
             return "redirect:/requestPage/login";
         }
-
     	resumeInfoService.delete(id, userId.getUserId());
         
 		return "redirect:/resume";
