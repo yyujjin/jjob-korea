@@ -88,8 +88,11 @@ public class MainController {
 
             // 회원가입 페이지 진입
             case "register":
-
                 return userController.register(model);
+                
+            //회원정보 수정 페이지 진입
+            case "user/userInfo":
+            	return userController.userInfo(model);
 
             // 채용 정보 페이지 진입
             case "jobPosting":

@@ -22,4 +22,6 @@ public interface UserMapper {
     public void insertCompanyInfo(HashMap<String, String> param);
     //회원(개인, 기업) 정보 조회
     public UserDTO userInfo(String userId);
+    //조회된 회원 정보 수정
+    public void updateUser(UserDTO userDTO);
 }
