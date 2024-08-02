@@ -99,4 +99,20 @@ public class UserController {
         }}));
         return response;
     }
+    
+  //개인회원 정보 리스트
+    @RequestMapping("/user/userInfo")
+    public String userInfo(Model model){
+    	
+    	//임의 값
+    	 String userId = "abcd";
+    	
+    	UserDTO userInfo = userService.userInfo(userId);
+    	log.info("가져온 userInfo : {}",userInfo);
+    	model.addAttribute("userInfo",userInfo);
+    	
+    	return "user/userInfo";
+    	
+    }
+    
 }

@@ -2,8 +2,10 @@ package com.jjobkorea.service;
 
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jjobkorea.controller.UserController;
@@ -13,6 +15,9 @@ import com.jjobkorea.mapper.UserMapper;
 @Service
 public class UserServiceImpl implements UserService{
 
+	@Autowired
+	private SqlSession sqlSession;
+	
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private  final UserMapper userMapper;
 
@@ -47,5 +52,15 @@ public class UserServiceImpl implements UserService{
 	public void companyUser(HashMap<String, String> param) {
 		userMapper.companyUser(param);
 		userMapper.insertCompanyInfo(param);
+	}
+	
+	@Override
+	public UserDTO userInfo(String userId) {
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		
+		UserDTO userInfo = mapper.userInfo(userId);
+		
+		return userInfo;
 	}
 }
