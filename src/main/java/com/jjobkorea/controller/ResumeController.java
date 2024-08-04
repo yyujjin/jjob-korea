@@ -55,7 +55,7 @@ public class ResumeController {
     }
     
     // 이력서 작성 페이지 로직
-    @GetMapping("/resume_write")
+    @GetMapping("/resume/create")
     public String resumeWrite(Model model, HttpSession session) {
         log.info("@#resume_write");
 
@@ -68,7 +68,7 @@ public class ResumeController {
     }
 
     // 이력서 저장 로직
-    @PostMapping("/resume_write")
+    @PostMapping("/resume/create")
     public String addResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session, Model model) throws ParseException {
         log.info("@#saveResume");
 
@@ -104,7 +104,7 @@ public class ResumeController {
     }
 
     // 이력서 수정 페이지 접속 로직
-    @GetMapping("/resume_write/edit")
+    @GetMapping("/resume/update")
     public String editResume(@RequestParam("id") Long id, Model model, HttpSession session) {
         log.info("@#resume edit");
         
@@ -124,7 +124,7 @@ public class ResumeController {
     }
 
     // 이력서 수정 완료 업데이트 로직
-    @PostMapping("/resume_write/edit")
+    @PostMapping("/resume/update")
     public String updateResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session) {
         log.info("resumeUpdate");
 
