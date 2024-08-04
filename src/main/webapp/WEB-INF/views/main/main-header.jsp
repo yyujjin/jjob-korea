@@ -66,7 +66,7 @@
                                 <a href="/jobPosts" class="nav-link px-4 text-dark">채용 정보</a>
                             </div>
                             <div class="form">
-                                <a href="/requestPage/jobseekerBoard" class="nav-link px-4 text-dark">취업 톡톡</a>
+                                <a href="/board" class="nav-link px-4 text-dark">취업 톡톡</a>
                             </div>
 
                             <c:choose>
