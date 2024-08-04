@@ -103,7 +103,7 @@
                                                     수정</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="logout"
+                                                <a href="/logout"
                                                     class="nav-link link-body-emphasis px-2 text-secondary">로그아웃</a>
                                             </li>
                                         </c:when>
