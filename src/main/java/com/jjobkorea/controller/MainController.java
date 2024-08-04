@@ -68,13 +68,6 @@ public class MainController {
 
         switch (requestPage) {
 
-            // 글쓰기 페이지 진입 (로그인 필요)
-            case "jobseekerWrite_view":
-                if (!SessionUtilsController.isLoggedIn(session)) {
-                    return "redirect:/login";
-                }
-                return "jobseekerWrite_view";	
-
             // 로그아웃 처리
             case "logout":
                 return "redirect:/logout";  // 로그아웃 메서드로 리디렉션     

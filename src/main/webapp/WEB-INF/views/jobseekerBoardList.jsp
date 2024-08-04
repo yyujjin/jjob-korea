@@ -146,7 +146,7 @@
 	<tr>
 		<td colspan="5">
 			 <button class="writebutton" 
-			 onclick="location.href='jobseekerWrite_view'">글작성</button>
+			 onclick="location.href='/board/create'">글작성</button>
 		</td>
 	</tr>		
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
@@ -260,7 +260,7 @@
 
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		// actionForm.submit();
-		actionForm.attr("action","jobseekerBoardList").submit();
+		actionForm.attr("action","board").submit();
 	});//end of paginate_button clcik
 
 	// 	게시글 처리

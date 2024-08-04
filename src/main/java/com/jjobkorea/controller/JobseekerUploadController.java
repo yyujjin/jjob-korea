@@ -59,7 +59,7 @@ public class JobseekerUploadController {
 		log.info("@# uploadPath=>"+uploadPath);
 		
 		if (uploadPath.exists() == false) {
-			// make yyyy/MM/dd folder
+			// make yyyy/MM/dd folderjobseekerBoardList
 			uploadPath.mkdirs();
 		}
 		

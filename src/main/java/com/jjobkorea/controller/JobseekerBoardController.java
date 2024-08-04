@@ -39,12 +39,13 @@ public class JobseekerBoardController {
 
 	@Autowired
 	private JobseekerUploadService uploadService;
-		
+	
+	//글 작성
 	 @PostMapping("/jobseekerWrite")
 	    public String write(JobseekerBoardDTO boardDTO, HttpSession session) {
 	        log.info("@# write");
 	        log.info("@# boardDTO=>" + boardDTO);
-	        
+
 	        if (session.getAttribute("user") == null) {
 	            return "redirect:/login";
 	        }
@@ -55,21 +56,22 @@ public class JobseekerBoardController {
 
 	        service.jobseekerWrite(boardDTO);
 
-	        return "redirect:/requestPage/jobseekerBoardList";
+	        return "redirect:/board";
 	    }
-	
-	 @RequestMapping("/requestPage/jobseekerWrite_view")
+
+		//글작성
+	 @RequestMapping("/board/create")
 	    public String write_view(HttpSession session, Model model) {
 	        log.info("@# write_view");
-
 	        if (session.getAttribute("user") == null) {
-	            return "redirect:/requestPage/login";
+	            return "redirect:/login";
 	        }
-	        String page = "jobseekerWrite_view";
-			model.addAttribute("page", page);
+
+			model.addAttribute("page","jobseekerWrite_view");
 		    return "main/main";
 	    }
-	
+
+		
 	 @RequestMapping("/jobseekerContent_view")
 	 	public String content_view(@RequestParam HashMap<String, String> param, Model model, HttpSession session) {
 	 		log.info("글 보기");
@@ -111,10 +113,9 @@ public class JobseekerBoardController {
 			    int jobseekerCommunityBoardNum = dto.getJobseekerCommunityBoardNum(); // DTO에서 게시글 번호를 가져온다
 			    service.jobseekerHit(jobseekerCommunityBoardNum);
 		} // end of 로그인 안해도 글 조회수 증가
-	 		//메인페이지로 연결 
-	 		String page = "jobseekerContent_view";
-	 		model.addAttribute("page", page);
-	 		// return "jobseekerContent_view";
+
+	 		//메인페이지로 연결
+	 		model.addAttribute("page", "jobseekerContent_view");
 	 	    return "main/main";
 	 		}
 	 
