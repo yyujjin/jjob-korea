@@ -72,7 +72,7 @@
                             <c:choose>
                                 <c:when test="${sessionScope.user.userType == 1}">
                                     <div class="form">
-                                        <a href="/requestPage/resume" class="nav-link px-4 text-dark">이력서 등록</a>
+                                        <a href="/resume" class="nav-link px-4 text-dark">이력서 등록</a>
                                     </div>
                                 </c:when>
 

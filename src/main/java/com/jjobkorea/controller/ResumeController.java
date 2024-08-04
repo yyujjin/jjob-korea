@@ -28,7 +28,7 @@ public class ResumeController {
     private ResumeInfoService resumeInfoService;
 
     
-    // 이력서 관리 메인 페이지 로직
+    // 이력서 메인
     @GetMapping("/resume")
     public String resister(Model model, HttpSession session) {
         log.info("@#hello");

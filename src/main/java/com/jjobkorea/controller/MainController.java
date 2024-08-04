@@ -76,10 +76,6 @@ public class MainController {
             case "user/userInfo":
             	return userController.userInfo(model);
 
-            //이력서 등록 페이지 진입
-            case "resume":
-                return resumeController.resister(model, session);
-
             //공고 등록 페이지 진입
             case "jobPostingResister":
                 return addJobPostingController.showAddJobPostingForm(model,session);
