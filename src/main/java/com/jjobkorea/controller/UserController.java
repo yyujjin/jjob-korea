@@ -31,9 +31,9 @@ public class UserController {
 
     //로그인 페이지 로드
     @GetMapping("/login")
-    public String showLoginPage() {
-
-        return "user/login";
+    public String showLoginPage(Model model) {
+        model.addAttribute("page","user/login");
+        return "main/main";
     }
 
     //로그인
@@ -45,7 +45,7 @@ public class UserController {
         if (optionalUser.isPresent()) {
             UserDTO isAuthenticated = userService.login(userDTO);
             if (isAuthenticated == null) {
-                model.addAttribute("page", showLoginPage());
+                model.addAttribute("page", showLoginPage(model));
                 return "main/main";
             }
             HttpSession session = request.getSession();
@@ -54,7 +54,7 @@ public class UserController {
             UserDTO user = (UserDTO) session.getAttribute("user");
             log.info("사용자 세션 :{} ", user);
         } else {
-            model.addAttribute("page", showLoginPage());
+            model.addAttribute("page", showLoginPage(model));
             return "main/main";
         }
 

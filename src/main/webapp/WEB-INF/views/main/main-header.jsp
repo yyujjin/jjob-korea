@@ -109,7 +109,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <li class="nav-item">
-                                                <a href="/requestPage/login"
+                                                <a href="/login"
                                                     class="nav-link link-body-emphasis px-2 text-secondary">로그인</a>
                                             </li>
                                             <li class="nav-item">

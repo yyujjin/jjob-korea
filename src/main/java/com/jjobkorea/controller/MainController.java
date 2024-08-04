@@ -80,12 +80,6 @@ public class MainController {
             case "main":
                 return enterMainContent(model);
 
-            // 로그인 페이지 진입
-            case "login":
-                page = userController.showLoginPage();
-                log.info("페이지 : {}",page);
-                break;
-
             // 회원가입 페이지 진입
             case "register":
                 return userController.register(model);
