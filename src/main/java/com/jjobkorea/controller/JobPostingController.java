@@ -22,8 +22,8 @@ public class JobPostingController {
     @Autowired
     JobPostingService jobPostingService;
 
-    // 채용 정보 페이지 진입
-    @GetMapping("jobPosting")
+    // 채용 정보 리스트
+    @GetMapping("jobPosts")
     public String enterJobPosting(HttpServletRequest request, Model model) {
         int pageNum = 0;
         if (request.getParameter("pageNum") == null) {
@@ -37,9 +37,7 @@ public class JobPostingController {
         //요청 받은 페이지 넘기기
         List<JobPostingDTO> postingList = jobPostingService.getPostingList(pageNum);
         model.addAttribute("postingList", postingList);
-
-        String page = "jobPosting/jobPostingMain";
-        model.addAttribute("page", page);
+        model.addAttribute("page", "jobPosting/jobPostingMain");
 
         return "main/main";
     }

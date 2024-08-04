@@ -63,7 +63,7 @@
 
                         <div class="nav col-12 col-lg-auto mb-2 justify-content:flex-start mb-md-0 navigation">
                             <div class="form">
-                                <a href="/requestPage/jobPosting" class="nav-link px-4 text-dark">채용 정보</a>
+                                <a href="/jobPosts" class="nav-link px-4 text-dark">채용 정보</a>
                             </div>
                             <div class="form">
                                 <a href="/requestPage/jobseekerBoard" class="nav-link px-4 text-dark">취업 톡톡</a>
