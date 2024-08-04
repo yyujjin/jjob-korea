@@ -54,7 +54,7 @@
             <header class="p-0 text-bg-white">
                 <div class="container">
                     <div class="d-flex flex-wrap align-items-center ">
-                        <a href="/requestPage/main"
+                        <a href="/"
                             class="d-flex align-items-center mb-2 mb-lg-0 text-black text-decoration-none">
                             <img src="../../resources/img/jjobkorea_logo.png" alt="Logo" width="220" height="110" />
                         </a>

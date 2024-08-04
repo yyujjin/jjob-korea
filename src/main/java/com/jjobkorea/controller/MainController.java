@@ -51,18 +51,14 @@ public class MainController {
     @Autowired
     private JobPostingDetailController jobPostingDetailController;
 
-    // 메인 컨텐츠 페이지
-    @GetMapping(value = {"/", "/main"})
+    // 메인
+    @GetMapping("/")
     public String enterMainContent(Model model) {
-        log.info("메인 페이지 컨텐츠");
 
         //채용 정보 리스트 가져오기
         List<JobPostingDTO> postingList = jobPostingService.getJobPostingSToMain();
         model.addAttribute("postingList", postingList);
-        String page = "main/main-content";
-
-        model.addAttribute("page", page);
-
+        model.addAttribute("page","main/main-content");
         return "main/main";
     }
 
@@ -76,10 +72,6 @@ public class MainController {
         String page = "";
 
         switch (requestPage) {
-            // 메인 페이지 진입
-            case "main":
-                return enterMainContent(model);
-
             // 회원가입 페이지 진입
             case "register":
                 return userController.register(model);
