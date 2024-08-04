@@ -146,7 +146,7 @@ public class JobseekerBoardController {
 	        rttr.addAttribute("pageNum", param.get("pageNum"));
 	        rttr.addAttribute("amount", param.get("amount"));
 
-	        return "redirect:/requestPage/jobseekerBoardList";
+	        return "redirect:/board";
 	    }
 	
 
@@ -169,7 +169,7 @@ public class JobseekerBoardController {
 		        rttr.addAttribute("pageNum", param.get("pageNum"));
 		        rttr.addAttribute("amount", param.get("amount"));
 
-		        return "redirect:/requestPage/jobseekerBoardList";
+		        return "redirect:/board";
 		}
 		 @PostMapping("/like")
 		 @ResponseBody

@@ -104,7 +104,7 @@
 			,url:"/jobseekerWrite"
 			,success: function(data){
 				alert("저장완료");
-				location.href="jobseekerBoardList";
+				location.href="board";
 			}
 			,error: function(){
 				alert("오류발생");

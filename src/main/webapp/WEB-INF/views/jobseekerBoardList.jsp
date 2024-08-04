@@ -301,7 +301,7 @@
 			alert("키워드를 입력하세요.");
 			return false;
 		}
-		searchForm.attr("action","jobseekerBoardList").submit();
+		searchForm.attr("action","board").submit();
 	});//end of searchForm click
 
 	// 	type 콤보박스 변경

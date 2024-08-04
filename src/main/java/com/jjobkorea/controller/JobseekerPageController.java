@@ -37,8 +37,6 @@ public class JobseekerPageController {
 		log.info("@# list");
 		log.info("@# cri=>"+cri);
 		
-		log.info("냐미");
-		
 		ArrayList<JobseekerBoardDTO> list = service.listWithPaging(cri);
 		int total = service.getTotalCount(cri);
 		log.info("@# total=>"+total);
