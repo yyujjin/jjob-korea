@@ -71,10 +71,7 @@ public class UserController {
     //회원가입 페이지 로드
     @RequestMapping("/register")
     public String register(Model model) {
-        String page = "user/register";
-
-        model.addAttribute("page", page);
-
+        model.addAttribute("page", "user/register");
         return "main/main";
     }
 

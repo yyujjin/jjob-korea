@@ -72,10 +72,6 @@ public class MainController {
         String page = "";
 
         switch (requestPage) {
-            // 회원가입 페이지 진입
-            case "register":
-                return userController.register(model);
-                
             //회원정보 수정 페이지 진입
             case "user/userInfo":
             	return userController.userInfo(model);
