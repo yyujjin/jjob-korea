@@ -69,14 +69,14 @@ public class UserController {
     }
 
     //회원가입 페이지 로드
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("page", "user/register");
         return "main/main";
     }
 
     //개인과 기업을 구분하여 회원가입
-    @PostMapping("/registerOk")
+    @PostMapping("/register")
     public String registerOk(@RequestParam HashMap<String, String> param) {
         if ("enterprise".equals(param.get("type"))) {
             userService.companyUser(param);
@@ -86,7 +86,7 @@ public class UserController {
         return "user/registerOk";
     }
 
-    // 아이디 중복 체크
+    /*// 아이디 중복 체크
     @PostMapping("/checkId")
     @ResponseBody
     public HashMap<String, Boolean> checkId(@RequestParam("userId") String userId) {
@@ -95,7 +95,7 @@ public class UserController {
             put("userId", userId);
         }}));
         return response;
-    }
+    }*/
     
     //회원 정보(개인,기업) 조회
     @GetMapping("/user")
@@ -114,7 +114,7 @@ public class UserController {
     } 
     
     //회원정보 수정
-    @PostMapping("/user/updateUserInfo")
+    @PostMapping("/user/update")
     public String updateUser(UserDTO userDTO) {
     	
     	userService.updateUser(userDTO);

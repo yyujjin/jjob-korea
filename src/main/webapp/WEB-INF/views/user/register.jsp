@@ -139,7 +139,7 @@ $(document).ready(function() {
         </div>
     </div>
     <div id="individualForm" class="container02">
-        <form id="signup-form" method="post" action="/registerOk">
+        <form id="signup-form" method="post" action="/register">
             <input type="hidden" name="type" value="individual">
             <div class="form-group">
                 <input type="text" id="userId" name="userId" placeholder="아이디" required>
