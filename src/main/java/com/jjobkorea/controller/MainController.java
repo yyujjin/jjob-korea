@@ -21,30 +21,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MainController {
 
-    @Autowired
-    private JobPostingService jobPostingService;
-    @Autowired
-    private HttpSession session;
-    
-    @Autowired
-    private AddJobPostingController addJobPostingController;
+    private final JobPostingService jobPostingService;
 
-    
-    //리팩토링 코드
-    @Autowired
-    private UserController userController;
-
-    // 채용 정보 컨트롤러
-    @Autowired
-    private JobPostingController jobPostingController;
-
-    //구직자 게시판 컨트롤러
-    @Autowired
-    private JobseekerPageController jobseekerPageController;
-
-    //이력서 컨트롤러
-    @Autowired
-    private ResumeController resumeController;
+    public MainController(JobPostingService jobPostingService) {
+        this.jobPostingService = jobPostingService;
+    }
 
     // 메인
     @GetMapping("/")
@@ -56,25 +37,4 @@ public class MainController {
         model.addAttribute("page","main/main-content");
         return "main/main";
     }
-
-    // 요청 파라미터에 따라 해당 페이지 컨트롤러 작동
-    @GetMapping("requestPage/{requestPage}")
-    public String requestPage(@PathVariable("requestPage") String requestPage, Model model, JobseekerCriteria cri, HttpServletRequest request) {
-
-        log.info("요청 페이지 -> " + requestPage);
-
-        HttpSession session = request.getSession();
-        String page = "";
-
-        switch (requestPage) {
-
-            // 로그아웃 처리
-            case "logout":
-                return "redirect:/logout";  // 로그아웃 메서드로 리디렉션     
-                
-        }
-        model.addAttribute("page",page);
-        return "main/main";
-    }
-
 }

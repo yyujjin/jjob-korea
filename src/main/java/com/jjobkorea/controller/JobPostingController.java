@@ -20,8 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class JobPostingController {
 
-    @Autowired
-    JobPostingService jobPostingService;
+    private final JobPostingService jobPostingService;
+
+    public JobPostingController(JobPostingService jobPostingService) {
+        this.jobPostingService = jobPostingService;
+    }
 
     // 채용 정보 리스트
     @GetMapping("jobPosts")
