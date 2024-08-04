@@ -98,20 +98,16 @@ public class UserController {
     }
     
     //회원 정보(개인,기업) 조회
-    @GetMapping("user/userInfo")
+    @GetMapping("/user")
     public String userInfo(Model model){
-    	
-    	String page = "user/userInfo";
-    	model.addAttribute("page", page);
-    	//임의 값 - 현재 세션을 가져올 수 없어 임의로 값을 넣어 결과를 확인해봄 -> 추후에 작업이 필요함
-    	//String userId = "abcd";
-    	
+
     	//수정 test를 위한 userId="user02" 데이터 사용
     	 String userId = "user02";
     	
     	UserDTO userInfo = userService.userInfo(userId);
     	log.info("가져온 userInfo : {}",userInfo);
     	model.addAttribute("userInfo",userInfo);
+        model.addAttribute("page","user/userInfo");
     	
     	return "main/main";
     	

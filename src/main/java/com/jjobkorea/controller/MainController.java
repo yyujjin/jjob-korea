@@ -67,10 +67,7 @@ public class MainController {
         String page = "";
 
         switch (requestPage) {
-            //회원정보 수정 페이지 진입
-            case "user/userInfo":
-            	return userController.userInfo(model);
-                
+
             // 글쓰기 페이지 진입 (로그인 필요)
             case "jobseekerWrite_view":
                 if (!SessionUtilsController.isLoggedIn(session)) {
