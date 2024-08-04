@@ -46,11 +46,6 @@ public class MainController {
     @Autowired
     private ResumeController resumeController;
 
-
-    //공고 등록 컨트롤러
-    @Autowired
-    private JobPostingDetailController jobPostingDetailController;
-
     // 메인
     @GetMapping("/")
     public String enterMainContent(Model model) {
@@ -75,10 +70,6 @@ public class MainController {
             //회원정보 수정 페이지 진입
             case "user/userInfo":
             	return userController.userInfo(model);
-
-            //공고 등록 페이지 진입
-            case "jobPostingResister":
-                return addJobPostingController.showAddJobPostingForm(model,session);
                 
             // 글쓰기 페이지 진입 (로그인 필요)
             case "jobseekerWrite_view":

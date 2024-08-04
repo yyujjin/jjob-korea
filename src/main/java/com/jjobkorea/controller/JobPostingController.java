@@ -2,6 +2,7 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
+import com.jjobkorea.service.JobPostingDetailService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,14 @@ public class JobPostingController {
 
         return "main/main";
     }
+
+    //공고 등록 페이지
+    @GetMapping("/jobPost/create")
+    public String createJobPost(Model model) {
+
+        model.addAttribute("page","jobPostingDetails/addJobPosting");
+        return "main/main";
+    }
+
 
 }

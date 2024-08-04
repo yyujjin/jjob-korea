@@ -78,7 +78,7 @@
 
                                 <c:when test="${sessionScope.user.userType == 2}">
                                     <div class="form">
-                                        <a href="/requestPage/jobPostingResister" class="nav-link px-4 text-dark">공고
+                                        <a href="/jobPost/create" class="nav-link px-4 text-dark">공고
                                             등록</a>
                                     </div>
                                 </c:when>
