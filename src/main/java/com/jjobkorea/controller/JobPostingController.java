@@ -47,7 +47,7 @@ public class JobPostingController {
     }
 
     //공고 등록 페이지
-    @GetMapping("/jobPost/new")
+    @GetMapping("/jobPost/create")
     public String createJobPost(Model model) {
 
         model.addAttribute("page","jobPostingDetails/addJobPosting");
