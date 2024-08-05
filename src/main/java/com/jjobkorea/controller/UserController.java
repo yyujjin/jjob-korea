@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.service.UserService;
@@ -78,6 +76,7 @@ public class UserController {
     //개인과 기업을 구분하여 회원가입
     @PostMapping("/register")
     public String registerOk(@RequestParam HashMap<String, String> param) {
+        log.info("넘어온 값 : {}",param);
         if ("enterprise".equals(param.get("type"))) {
             userService.companyUser(param);
         } else {
