@@ -241,7 +241,7 @@ $(document).ready(function() {
 
     <!-- 기업 회원가입 -->
     <div id="enterpriseForm" class="container02" style="display: none;">
-        <form id="signup-form" method="post" action="/registerOk">
+        <form id="signup-form" method="post" action="/register">
             <div class="form-group">
                 <div class="cpinfo">
                     <h4>기업정보</h4>
