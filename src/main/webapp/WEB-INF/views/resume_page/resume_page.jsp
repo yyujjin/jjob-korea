@@ -75,7 +75,7 @@
                     margin-left: 250px;
                     margin-top: 50px;
                     overflow: hidden;
-                    height: 700px;
+                    height: 715px;
                     /* border: solid 1px black; */
                 }
 
@@ -158,6 +158,7 @@
                     border-collapse: collapse;
                     margin: 20px 0;
                     font-size: 15px;
+                    text-align: center;
                 }
 
                 .resume_list th,
@@ -171,26 +172,27 @@
                     border: none;
                     border-radius: 3px;
                     cursor: pointer;
+                    align-items: end;
                 }
 
-                .resume_list button.edit {
+                .resume_list button .edit {
                     background-color: white;
                     color: black;
                     transition: background-color 0.3s ease, color 0.3s ease;
                 }
 
-                .resume_list button.delete {
+                .resume_list button .delete {
                     background-color: white;
                     color: black;
                     transition: background-color 0.3s ease, color 0.3s ease;
                 }
 
-                .resume_list button.edit:hover {
+                .resume_list button .edit:hover {
                     background-color: blue;
                     color: white;
                 }
 
-                .resume_list button.delete:hover {
+                .resume_list button .delete:hover {
                     background-color: blue;
                     color: white;
                 }
