@@ -10,6 +10,7 @@ pageEncoding="UTF-8"%>
         // 이력서 등록 후 localStorage를 지우는 스크립트
         <c:if test="${not empty clearLocalStorage}">
             localStorage.removeItem('resumeData');
+            localStorage.removeItem('resumeData');
         </c:if>
     </script>
 </head>
@@ -30,7 +31,7 @@ pageEncoding="UTF-8"%>
                                 <td>${resume.id}</td>
                                 <td>${resume.resumePageTitle}</td>
                                 <td>
-                                    <form action="${pageContext.request.contextPath}/resume_write/edit" method="get" style="display:inline;">
+                                    <form action="${pageContext.request.contextPath}/resume/update" method="get" style="display:inline;">
                                         <input type="hidden" name="id" value="${resume.id}">
                                         <button type="submit">수정</button>
                                     </form>

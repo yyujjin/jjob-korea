@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 			<ul>
                 <h3>이력서 관리</h3>
 				<div class="underbar-line"></div>
-				<p><li><a href="<%=request.getContextPath()%>/resume_write">이력서 등록</a></li><br>
+				<p><li><a href="<%=request.getContextPath()%>/resume/create">이력서 등록</a></li><br>
 				<li><a href="#">이력서 현황</a></li><br>
 				<li><a href="#">첨부파일 관리</a></li></p>
 			</ul>

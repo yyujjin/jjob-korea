@@ -10,6 +10,8 @@ import com.jjobkorea.service.JobPostingTbService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,7 @@ import java.util.Optional;
 @RequestMapping("/addJobPosting")
 public class AddJobPostingController {
 
+    private static final Logger log = LoggerFactory.getLogger(AddJobPostingController.class);
     @Autowired
     private JobPostingDetailService jobPostingDetailService;
 
@@ -43,7 +46,7 @@ public class AddJobPostingController {
 
     private static final String UPLOAD_DIR = "src/main/webapp/resources/img/jobPostingDetail/";
 
-    @GetMapping
+    /* 현재 이 메서드 안쓴느 걸로 보여짐
     public String showAddJobPostingForm(Model model, HttpSession session) {
         MemDTO user = (MemDTO) session.getAttribute("user");
         if (user != null) {
@@ -58,8 +61,9 @@ public class AddJobPostingController {
             }
         }
         model.addAttribute("jobPostingDetail", new JobPostingDetail());
-        return "jobPostingDetails/addJobPosting";  // JSP 파일 경로
-    }
+        model.addAttribute("page","jobPostingDetails/addJobPosting");
+        return "main/main";
+    }*/
 
     @PostMapping
     public String saveJobPostingDetail(

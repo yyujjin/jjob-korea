@@ -14,23 +14,25 @@
     </select>
     <insert id="jobseekerWrite">
     	<selectKey keyProperty="jobseekerCommunityBoardNum" order="BEFORE" resultType="int">
-    		select ifnull(max(jobseekerCommunityBoardNum),0)+1 
-    		  from jobseekerCommunityBoard
-    	</selectKey>
-		insert into jobseekerCommunityBoard(
-					jobseekerCommunityBoardNum
-				   ,jobseekerCommunityBoardName
-				   ,jobseekerCommunityBoardTitle
-				   ,jobseekerCommunityBoardContent
-				   ,jobseekerCommunityBoardHit) 
-				   ,likes
-		select ifnull(max(jobseekerCommunityBoardNum),0)+1,
-				   #{jobseekerCommunityBoardName}
-				  ,#{jobseekerCommunityBoardTitle}
-				  ,#{jobseekerCommunityBoardContent}
-				  ,0 
-				  ,0
-			from jobseekerCommunityBoard
+            select ifnull(max(jobseekerCommunityBoardNum),0)+1 
+              from jobseekerCommunityBoard
+        </selectKey>
+        insert into jobseekerCommunityBoard(
+            jobseekerCommunityBoardNum,
+            jobseekerCommunityBoardName,
+            jobseekerCommunityBoardTitle,
+            jobseekerCommunityBoardContent,
+            jobseekerCommunityBoardHit,
+            likes
+        ) 
+        values (
+            #{jobseekerCommunityBoardNum},
+            #{jobseekerCommunityBoardName},
+            #{jobseekerCommunityBoardTitle},
+            #{jobseekerCommunityBoardContent},
+            0,
+            0
+        )
     </insert>
 				
     <select id="jobseekerContentView" resultType="com.jjobkorea.dto.JobseekerBoardDTO">

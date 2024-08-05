@@ -191,7 +191,7 @@
         </div>
     </header>
 
-    <form method="post" action="${pageContext.request.contextPath}/resume_write/edit" enctype="multipart/form-data" onsubmit="return validateForm();">
+    <form method="post" action="${pageContext.request.contextPath}/resume/update" enctype="multipart/form-data" onsubmit="return validateForm();">
         <input type="hidden" name="id" value="${resumeInfoDTO.id}">
         <input type="hidden" name="resumeFilePath" value="${resumeInfoDTO.resumeFilePath}">
         <div class="main-container">
