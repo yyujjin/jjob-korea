@@ -8,8 +8,6 @@ import com.jjobkorea.dto.UserDTO;
 
 @Mapper
 public interface UserMapper {
-    //아이디, 비번이 일치하면 유저의 이름을 가져오는 기능
-    public UserDTO login(UserDTO userDTO);
     
     //아이디 존재 여부 확인
     public int checkUserId(String userId);
