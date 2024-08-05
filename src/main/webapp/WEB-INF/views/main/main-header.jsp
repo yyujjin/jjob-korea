@@ -54,7 +54,7 @@
             <header class="p-0 text-bg-white">
                 <div class="container">
                     <div class="d-flex flex-wrap align-items-center ">
-                        <a href="/requestPage/main"
+                        <a href="/"
                             class="d-flex align-items-center mb-2 mb-lg-0 text-black text-decoration-none">
                             <img src="../../resources/img/jjobkorea_logo.png" alt="Logo" width="220" height="110" />
                         </a>
@@ -63,22 +63,22 @@
 
                         <div class="nav col-12 col-lg-auto mb-2 justify-content:flex-start mb-md-0 navigation">
                             <div class="form">
-                                <a href="/requestPage/jobPosting" class="nav-link px-4 text-dark">채용 정보</a>
+                                <a href="/jobPosts" class="nav-link px-4 text-dark">채용 정보</a>
                             </div>
                             <div class="form">
-                                <a href="/requestPage/jobseekerBoard" class="nav-link px-4 text-dark">취업 톡톡</a>
+                                <a href="/board" class="nav-link px-4 text-dark">취업 톡톡</a>
                             </div>
 
                             <c:choose>
                                 <c:when test="${sessionScope.user.userType == 1}">
                                     <div class="form">
-                                        <a href="/requestPage/resume" class="nav-link px-4 text-dark">이력서 등록</a>
+                                        <a href="/resume" class="nav-link px-4 text-dark">이력서 등록</a>
                                     </div>
                                 </c:when>
 
                                 <c:when test="${sessionScope.user.userType == 2}">
                                     <div class="form">
-                                        <a href="/requestPage/jobPostingResister" class="nav-link px-4 text-dark">공고
+                                        <a href="/jobPost/create" class="nav-link px-4 text-dark">공고
                                             등록</a>
                                     </div>
                                 </c:when>
@@ -99,21 +99,21 @@
                                                 </span>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="/user/userInfo" class="nav-link link-body-emphasis px-2 text-secondary">회원정보
+                                                <a href="/user" class="nav-link link-body-emphasis px-2 text-secondary">회원정보
                                                     수정</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="logout"
+                                                <a href="/logout"
                                                     class="nav-link link-body-emphasis px-2 text-secondary">로그아웃</a>
                                             </li>
                                         </c:when>
                                         <c:otherwise>
                                             <li class="nav-item">
-                                                <a href="/requestPage/login"
+                                                <a href="/login"
                                                     class="nav-link link-body-emphasis px-2 text-secondary">로그인</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="/requestPage/register"
+                                                <a href="/register"
                                                     class="nav-link link-body-emphasis px-2 text-secondary">회원가입</a>
                                             </li>
                                         </c:otherwise>
