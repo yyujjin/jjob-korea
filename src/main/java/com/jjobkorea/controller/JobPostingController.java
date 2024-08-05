@@ -2,6 +2,7 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
+import com.jjobkorea.service.JobPostingDetailService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class JobPostingController {
 
-    @Autowired
-    JobPostingService jobPostingService;
+    private final JobPostingService jobPostingService;
 
-    // 채용 정보 페이지 진입
-    @GetMapping("jobPosting")
+    public JobPostingController(JobPostingService jobPostingService) {
+        this.jobPostingService = jobPostingService;
+    }
+
+    // 채용 정보 리스트
+    @GetMapping("jobPosts")
     public String enterJobPosting(HttpServletRequest request, Model model) {
         int pageNum = 0;
         if (request.getParameter("pageNum") == null) {
@@ -37,11 +41,18 @@ public class JobPostingController {
         //요청 받은 페이지 넘기기
         List<JobPostingDTO> postingList = jobPostingService.getPostingList(pageNum);
         model.addAttribute("postingList", postingList);
-
-        String page = "jobPosting/jobPostingMain";
-        model.addAttribute("page", page);
+        model.addAttribute("page", "jobPosting/jobPostingMain");
 
         return "main/main";
     }
+
+    //공고 등록 페이지
+    @GetMapping("/jobPost/create")
+    public String createJobPost(Model model) {
+
+        model.addAttribute("page","jobPostingDetails/addJobPosting");
+        return "main/main";
+    }
+
 
 }

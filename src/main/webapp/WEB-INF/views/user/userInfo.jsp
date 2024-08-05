@@ -52,7 +52,7 @@
 <body>
     <div class="mypage">
         <h2>회원 정보 수정</h2>
-        <form id="user-info-form" method="post" action="${pageContext.request.contextPath}/user/updateUserInfo">
+        <form id="user-info-form" method="post" action="/user/update">
             <div class="form-group">
                 <label for="userId">User ID:</label>
                 <input type="text" id="userId" name="userId" value="${userInfo.userId}" readonly>
