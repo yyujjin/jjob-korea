@@ -60,11 +60,12 @@ public class ResumeController {
         log.info("@#resume_write");
 
         if(session.getAttribute("user") == null) {
-            return "redirect:/requestPage/login";
+            return "redirect:/login";
         }
 
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
-        return "resume_page/resume_write/resume_write";
+        model.addAttribute("page", "resume_page/resume_write/resume_write");
+        return "main/main";
     }
 
     // 이력서 저장 로직
@@ -120,7 +121,8 @@ public class ResumeController {
         }
 
         model.addAttribute("resumeInfoDTO", resumeInfoDTO);
-        return "resume_page/resume_edit";
+        model.addAttribute("resumeInfoDTO", "resume_page/resume_edit");
+        return "main/main";
     }
 
     // 이력서 수정 완료 업데이트 로직
