@@ -22,4 +22,7 @@ public interface UserMapper {
     public UserDTO userInfo(String userId);
     //조회된 회원 정보 수정
     public void updateUser(UserDTO userDTO);
+    //유저 확인
+    public UserDTO findByUserId(String username);
+
 }

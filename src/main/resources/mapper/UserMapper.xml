@@ -50,5 +50,9 @@
 		   ,gender = #{gender}
   		WHERE userId = #{userId}
 	</update>
-    
+
+    <!-- 아이디로 유저 확인 -->
+    <select id="findByUserId" parameterType="String" resultType="UserDTO">
+        select * from user_info where userId = #{username}
+    </select>
 </mapper>
