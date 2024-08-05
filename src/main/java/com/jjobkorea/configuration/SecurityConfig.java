@@ -20,7 +20,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/WEB-INF/views/**").permitAll()
+                .requestMatchers("/WEB-INF/views/**").permitAll()//jsp
+                .requestMatchers("/resources/**").permitAll()
                 .requestMatchers("/", "/login", "/register").permitAll() //메인, 로그인, 회원가입
                 .requestMatchers("/jobPosts", "/searchFilter").permitAll() //채용 정보
                 .requestMatchers(
