@@ -27,6 +27,12 @@ public class SecurityConfig {
 
                 .anyRequest().authenticated()
         );
+
+        //접근이 거부되면 로그인 페이지로 이동
+        httpSecurity.formLogin((auth) -> auth.loginPage("/login")
+                .loginProcessingUrl("/login").permitAll()
+        );
+
         //csrf 사용 x
         httpSecurity.csrf((auth) -> auth.disable());
         return httpSecurity.build();
