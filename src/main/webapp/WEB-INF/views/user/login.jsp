@@ -116,7 +116,7 @@
                 <div class="input-group">
                     <div class="input-container">
                         <label>아이디</label>
-                        <input type="text" name="userId" placeholder="아이디를 입력해주세요" required>
+                        <input type="text" name="username" placeholder="아이디를 입력해주세요" required>
                     </div>
                     <div class="input-container">
                         <label>비밀번호</label>
@@ -138,7 +138,7 @@
                 <div class="input-group">
                     <div class="input-container">
                         <label>아이디</label>
-                        <input type="text" name="userId" placeholder="아이디를 입력해주세요" required>
+                        <input type="text" name="username" placeholder="아이디를 입력해주세요" required>
                     </div>
                     <div class="input-container">
                         <label>비밀번호</label>
