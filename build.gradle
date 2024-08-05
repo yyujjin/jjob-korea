@@ -59,7 +59,10 @@ dependencies {
 	implementation 'commons-collections:commons-collections:3.2.2'
 	implementation 'commons-beanutils:commons-beanutils:1.9.4'
 	implementation 'net.sf.ezmorph:ezmorph:1.0.6'
-  
+
+    //스프링 시큐리티
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
