@@ -20,15 +20,6 @@ public class UserServiceImpl implements UserService{
         this.userMapper = userMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
-
-    //로그인
-    @Override
-    public UserDTO login(UserDTO userDTO) {
-
-        log.info("넘어온 userDTO : {}",userDTO);
-
-        return userMapper.login(userDTO);
-    }
     
     //아이디 중복 체크
     @Override
