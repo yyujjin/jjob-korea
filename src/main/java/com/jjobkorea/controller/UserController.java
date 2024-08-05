@@ -34,31 +34,6 @@ public class UserController {
         return "main/main";
     }
 
-    //로그인
-    @PostMapping("/login")
-    public String login(UserDTO userDTO, Model model, HttpServletRequest request) {
-
-        Optional<UserDTO> optionalUser = Optional.ofNullable(userDTO);
-
-        if (optionalUser.isPresent()) {
-            UserDTO isAuthenticated = userService.login(userDTO);
-            if (isAuthenticated == null) {
-                model.addAttribute("page", showLoginPage(model));
-                return "main/main";
-            }
-            HttpSession session = request.getSession();
-
-            session.setAttribute("user", isAuthenticated);
-            UserDTO user = (UserDTO) session.getAttribute("user");
-            log.info("사용자 세션 :{} ", user);
-        } else {
-            model.addAttribute("page", showLoginPage(model));
-            return "main/main";
-        }
-
-        return "redirect:/";
-    }
-
     //로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
