@@ -32,10 +32,7 @@
                     line-height: 50px;
                     height: 50px;
                     /* border: solid 1px; */
-                }
-                
-                .nav .form :hover {
-                    color: blue;
+                    width: auto;
                 }
 
                 .nav .form {
@@ -55,6 +52,18 @@
                     margin-top: 25px;
                     line-height: 25px;
                 }
+
+                /* transition을 위한 디자인 */
+
+                .nav .form a {
+                    transition: color 0.5s;
+                    transition-timing-function: steps(5, end);
+                }
+
+                .nav .form a:hover {
+                    color: #9eec2a;
+                    font-size: 19px;
+                }   
 
             </style>
         </head>
