@@ -139,7 +139,7 @@ $(document).ready(function() {
         </div>
     </div>
     <div id="individualForm" class="container02">
-        <form id="signup-form" method="post" action="/registerOk">
+        <form id="signup-form" method="post" action="/register">
             <input type="hidden" name="type" value="individual">
             <div class="form-group">
                 <input type="text" id="userId" name="userId" placeholder="아이디" required>
@@ -241,7 +241,7 @@ $(document).ready(function() {
 
     <!-- 기업 회원가입 -->
     <div id="enterpriseForm" class="container02" style="display: none;">
-        <form id="signup-form" method="post" action="/registerOk">
+        <form id="signup-form" method="post" action="/register">
             <div class="form-group">
                 <div class="cpinfo">
                     <h4>기업정보</h4>
