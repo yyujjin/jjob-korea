@@ -149,25 +149,21 @@
                 }
 
                 .resume_list {
-                    /* border: solid; */
                     height: 428px;
+                    margin: 20px;
                 }
 
-                .resume_list li {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 10px;
-                    width: 475px;
-                    margin-left: 130px;
+                .resume_list table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 20px 0;
                     font-size: 15px;
-                    height: 30px;
-                    /* border: 1px solid #000; */
                 }
 
-                .button_container {
-                    display: flex;
-                    gap: 5px;
+                .resume_list th,
+                .resume_list td {
+                    /* border: 1px solid #ddd; */
+                    padding: 8px;
                 }
 
                 .resume_list button {
@@ -177,28 +173,28 @@
                     cursor: pointer;
                 }
 
-
                 .resume_list button.edit {
                     background-color: white;
                     color: black;
+                    transition: background-color 0.3s ease, color 0.3s ease;
                 }
 
                 .resume_list button.delete {
                     background-color: white;
                     color: black;
+                    transition: background-color 0.3s ease, color 0.3s ease;
                 }
 
                 .resume_list button.edit:hover {
                     background-color: blue;
                     color: white;
-                    border-radius: 3px;
                 }
 
                 .resume_list button.delete:hover {
                     background-color: blue;
                     color: white;
-                    border-radius: 3px;
                 }
+
 
                 .resume_img {
                     width: 800px;
@@ -219,7 +215,7 @@
                             이력서 관리
                         </li>
                         <li class="resume-item">
-                            <a class="resume-link" href="<%=request.getContextPath()%>/resume_write">이력서 등록</a>
+                            <a class="resume-link" href="<%=request.getContextPath()%>/resume/create">이력서 등록</a>
                         </li>
                         <li class="resume-item">
                             <a class="resume-link" href="#">이력서 리스트</a>
@@ -235,101 +231,55 @@
                         <div class="tab active" href="#1">이력서 관리 </div>
                         <div class="tab" href="#2">첨부파일 관리</div>
                         <button id="add_resume_button"
-                            onclick="location.href='<%=request.getContextPath()%>/resume_write'">이력서 등록</button>
-
+                            onclick="location.href='<%=request.getContextPath()%>/resume/create'">이력서 등록</button>
                     </div>
 
                     <div class="resume_title">
                         <p>이력서 제목</p>
                         <p>이력서 관리</p>
                     </div>
-                    <ul class="resume_list">
-                        <!-- Resume items will be inserted here -->
-                        <!-- <li>
-                            <a href="#">이력서 1</a>
-                            <div class="button_container">
-                                <button class="edit">수정</button>
-                                <button class="delete">삭제</button>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#">이력서 2</a>
-                            <div class="button_container">
-                                <button class="edit">수정</button>
-                                <button class="delete">삭제</button>
-                            </div>
-                        </li> -->
-                    </ul>
-                    <!-- 예시임 나중에 지워야됨 -->
 
-                    <script>
-                        const maxResumes = 5;
-                        let resumeCount = 0;
-                        const resumeList = document.querySelector('.resume_list');
-                        const addResumeButton = document.getElementById('add_resume_button');
-                        const loggedInUserId = 'user123'; // 예시로 사용된 로그인한 사용자 ID
-
-                        // 이력서를 리스트에 추가하는 함수
-                        function addResume(title, resumeId) {
-                            if (resumeCount < maxResumes) {
-                                resumeCount++;
-
-                                const listItem = document.createElement('li');
-
-                                const linkItem = document.createElement('a');
-                                linkItem.href = '#';
-                                linkItem.textContent = title;
-
-                                const buttonContainer = document.createElement('div');
-                                buttonContainer.className = 'button_container';
-
-                                const editButton = document.createElement('button');
-                                editButton.textContent = '수정';
-                                editButton.onclick = function () {
-                                    // Add edit functionality here
-                                    alert(`Editing resume ${resumeId}`);
-                                };
-
-                                const deleteButton = document.createElement('button');
-                                deleteButton.textContent = '삭제';
-                                deleteButton.onclick = function () {
-                                    // Add delete functionality here
-                                    resumeList.removeChild(listItem);
-                                    resumeCount--;
-                                };
-
-                                buttonContainer.appendChild(editButton);
-                                buttonContainer.appendChild(deleteButton);
-                                listItem.appendChild(linkItem);
-                                listItem.appendChild(buttonContainer);
-                                resumeList.appendChild(listItem);
-                            } else {
-                                alert('최대 5개의 이력서를 생성할 수 있습니다.');
-                            }
-                        }
-
-                        // 서버에서 이력서를 가져오는 함수
-                        async function fetchResumes() {
-                            try {
-                                const response = await fetch(`/api/resumes?userId=${loggedInUserId}`);
-                                const resumes = await response.json();
-                                resumes.forEach(resume => {
-                                    addResume(resume.title, resume.id);
-                                });
-                            } catch (error) {
-                                console.error('Error fetching resumes:', error);
-                            }
-                        }
-
-                        // 페이지 로드 시 이력서 가져오기
-                        window.onload = fetchResumes;
-
-                        // 새 이력서를 추가하는 이벤트 리스너
-                        addResumeButton.addEventListener('click', () => {
-                            const title = `이력서 ${resumeCount + 1}`;
-                            addResume(title, `new_${resumeCount + 1}`);
-                        });
+                    <script type="text/javascript">
+                        // 이력서 등록 후 localStorage를 지우는 스크립트
+                        <c:if test="${not empty clearLocalStorage}">
+                            localStorage.removeItem('resumeData');
+                        </c:if>
                     </script>
+
+                    <ul class="resume_list">
+                        <c:choose>
+                            <c:when test="${empty resumes}">
+                                <p style="text-align: center;">등록된 이력서가 없습니다.</p>
+                            </c:when>
+                            <c:otherwise>
+                                <table>
+                                    <!-- <thead>
+                                        <tr>
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        <c:forEach var="resume" items="${resumes}">
+                                            <tr>
+                                                <td>${resume.id}&nbsp;${resume.resumePageTitle}</td>
+                                                <td>
+                                                    <form action="${pageContext.request.contextPath}/resume/update"
+                                                        method="get" style="display:inline;">
+                                                        <input type="hidden" name="id" value="${resume.id}">
+                                                        <button type="submit">수정</button>
+                                                    </form>
+                                                    <form action="${pageContext.request.contextPath}/resume/delete"
+                                                        method="post" style="display:inline;">
+                                                        <input type="hidden" name="id" value="${resume.id}">
+                                                        <button type="submit">삭제</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
 
                     <div>
                         <img class="resume_img" src="../../resources/img/이력서를부탁해.png">
