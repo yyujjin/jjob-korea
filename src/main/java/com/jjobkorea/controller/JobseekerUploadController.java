@@ -37,7 +37,7 @@ public class JobseekerUploadController {
 	@Autowired
 	private JobseekerUploadService service;
 	
-	@PostMapping("/requestPage/uploadAjaxAction")
+	@PostMapping("board/uploadAjaxAction")
 //	public void uploadAjaxPost(MultipartFile[] uploadFile) {
 //	ResponseEntity : 파일 정보를 넘기기위해서 사용
 	public ResponseEntity<List<JobseekerBoardAttachDTO>> uploadAjaxPost(@RequestParam("uploadFile") MultipartFile[] uploadFile) {
@@ -182,7 +182,7 @@ public class JobseekerUploadController {
 		return result;
 	}
 	
-	@PostMapping("/requestPage/deleteFile")
+	@PostMapping("board/deleteFile")
 	public ResponseEntity<String> deleteFile(@RequestParam("fileName") String fileName, @RequestParam("type") String type) {
 		log.info("@# deleteFile fileName=>"+fileName);
 		File file;
