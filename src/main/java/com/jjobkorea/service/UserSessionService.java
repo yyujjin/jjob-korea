@@ -42,9 +42,7 @@ public class UserSessionService {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iter = authorities.iterator();
         GrantedAuthority auth = iter.next();
-
+        log.info("사용자 권한 : {}",auth.getAuthority());
         return auth.getAuthority();
     }
-    //세션 현재 사용자 role
-
 }
