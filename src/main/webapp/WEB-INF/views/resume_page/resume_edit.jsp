@@ -191,26 +191,47 @@
         </div>
     </header>
 
-	<form method="post" action="${pageContext.request.contextPath}/resume_write/edit" enctype="multipart/form-data" onsubmit="return validateForm();">
-	        <input type="hidden" name="id" value="${resumeInfoDTO.id}">
-	        <input type="hidden" name="resumeFilePath" value="${resumeInfoDTO.resumeFilePath}">
-	        <div class="main-container">
-	                <div class="photo">
-	                    <div class="profilephoto">
-	                        <div id="photo-instructions" style="color: gray; display:${resumeInfoDTO.resumeFilePath != null ? 'none' : 'block'};">
-	                            사진 크기는<br>
-	                            150x210만 <br>
-	                            가능합니다.
-	                        </div>
-	                        <img id="output" src="${pageContext.request.contextPath}/resume_write/edit/image/${resumeInfoDTO.resumeFilePath}" alt="uploaded image" width="150" height="210"
-	                             style="display:${resumeInfoDTO.resumeFilePath != null ? 'block' : 'none'};">
-	                    </div>
-	                    <label for="file">
-	                        <div class="btn-upload">사진 업로드</div>
-	                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
-	                            onchange="loadFile(event)" style="display: none;" required>
-	                    </label>
-	                </div>
+    <form method="post" action="${pageContext.request.contextPath}/resume_write/edit" enctype="multipart/form-data" onsubmit="return validateForm();">
+        <input type="hidden" name="id" value="${resumeInfoDTO.id}">
+        <input type="hidden" name="resumeFilePath" value="${resumeInfoDTO.resumeFilePath}">
+        <div class="main-container">
+            <div class="photo">
+                <div class="profilephoto">
+                    <c:choose>
+                        <c:when test="${resumeInfoDTO.resumeFilePath != null}">
+                            <div id="photo-instructions" style="color: gray; display:none;">
+                                사진 크기는<br>
+                                150x210만 <br>
+                                가능합니다.
+                            </div>
+                            <img id="output" src="${pageContext.request.contextPath}/resume_write/edit/image/${resumeInfoDTO.resumeFilePath}" alt="uploaded image" width="150" height="210" style="display:block;">
+                        </c:when>
+                        <c:otherwise>
+                            <div id="photo-instructions" style="color: gray; display:block;">
+                                사진 크기는<br>
+                                150x210만 <br>
+                                가능합니다.
+                            </div>
+                            <img id="output" src="" alt="uploaded image" width="150" height="210" style="display:none;">
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <label for="file">
+                    <div class="btn-upload">사진 업로드</div>
+                    <input type="file" name="resumeProfilePhoto" id="file" accept="image/*" onchange="loadFile(event)" style="display: none;" required>
+                </label>
+            </div>
+        </div>
+    
+    <script>
+        function loadFile(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.style.display = 'block';
+            document.getElementById('photo-instructions').style.display = 'none';
+        }
+    </script>
+    
 	            
 	            <script>
 	                function loadFile(event) {
