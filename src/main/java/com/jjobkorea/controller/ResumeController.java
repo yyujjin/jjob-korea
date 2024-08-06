@@ -50,7 +50,7 @@ public class ResumeController {
         
         if(session.getAttribute("user") == null) {
             log.info("로그인이 안됐습니다.");
-            return "redirect:/requestPage/login";
+            return "redirect:/login";
         }
         
         // 저장된 이력서 가져오는 로직 
@@ -89,7 +89,7 @@ public class ResumeController {
         log.info("@#saveResume");
 
         if (session.getAttribute("user") == null) {
-            return "redirect:/requestPage/login";
+            return "redirect:/login";
         }
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -126,7 +126,7 @@ public class ResumeController {
         log.info("@#resume edit");
         
         if (session.getAttribute("user") == null) {
-            return "redirect:/requestPage/login";
+            return "redirect:/login";
         }
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -137,8 +137,8 @@ public class ResumeController {
         }
 
         model.addAttribute("resumeInfoDTO", resumeInfoDTO);
-        model.addAttribute("resumeInfoDTO", "resume_page/resume_edit");
-        return "main/main";
+//        model.addAttribute("resumeInfoDTO", "resume_page/resume_edit");
+        return "resume_page/resume_edit";
     }
     
     @GetMapping("/resume_write/edit/image/{filename}")
@@ -164,7 +164,7 @@ public class ResumeController {
         log.info("resumeUpdate");
         UUID uuid = UUID.randomUUID();
         if (session.getAttribute("user") == null) {
-            return "redirect:/requestPage/login";
+            return "redirect:/login";
         }
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -207,7 +207,7 @@ public class ResumeController {
     	UserDTO userId = (UserDTO) session.getAttribute("user");
     	
     	if (userId == null) {
-            return "redirect:/requestPage/login";
+            return "redirect:/login";
         }
     	resumeInfoService.delete(id, userId.getUserId());
         
