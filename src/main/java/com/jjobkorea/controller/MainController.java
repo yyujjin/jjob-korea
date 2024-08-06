@@ -2,6 +2,7 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
+import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,11 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 
     private final JobPostingService jobPostingService;
+    private final UserSessionService userSessionService;
 
-    public MainController(JobPostingService jobPostingService) {
+    public MainController(JobPostingService jobPostingService, UserSessionService userSessionService) {
         this.jobPostingService = jobPostingService;
+        this.userSessionService = userSessionService;
     }
 
     // 메인
@@ -35,6 +38,8 @@ public class MainController {
         List<JobPostingDTO> postingList = jobPostingService.getJobPostingSToMain();
         model.addAttribute("postingList", postingList);
         model.addAttribute("page","main/main-content");
+        log.info("사용자 id : {}",userSessionService.getUserId());
+        log.info("사용자 이름 : {}",userSessionService.getUserName());
         return "main/main";
     }
 }
