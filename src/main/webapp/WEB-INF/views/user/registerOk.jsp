@@ -6,7 +6,6 @@
 <title>회원가입 성공</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
         background-color: #f7f7f7;
         display: flex;
         justify-content: center;

@@ -12,11 +12,9 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                 crossorigin="anonymous" />
-            <!-- 글꼴 설정 -->
-            <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet" />
+           
             <style>
                 .navigation {
-                    font-family: "NanumBarunGothicBold";
                     font-size: 18px;
                 }
 
@@ -42,6 +40,7 @@
                     /* border: solid; */
                     margin-top: 15px;
                     line-height: 15px;
+                    font-weight: bold;
                 }
 
                 .nav-item {
@@ -89,13 +88,13 @@
                       <c:when test="${sessionScope.user.userType == 1}">
                         <div class="form">
                           <a href="/resume" class="nav-link px-4">이력서 관리</a>
-                        </div> <!-- 닫는 div 추가 -->
+                        </div> 
                       </c:when>
           
                       <c:when test="${sessionScope.user.userType == 2}">
                         <div class="form">
                           <a href="/jobPost/create" class="nav-link px-4">공고 등록</a>
-                        </div> <!-- 닫는 div 추가 -->
+                        </div> 
                       </c:when>
                     </c:choose>
           
@@ -104,7 +103,7 @@
                         <c:choose>
                           <c:when test="${not empty sessionScope.user.name}">
                             <li class="nav-item">
-                              <span class="nav-link" style="color: black;">
+                              <span class="nav-link" style="color: black; font-weight: bold;">
                                 안녕하세요!
                                 <a style="color: blue; text-decoration: underline;">
                                   ${sessionScope.user.name}

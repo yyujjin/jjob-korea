@@ -6,15 +6,11 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dropdowns</title>
-    <link
-            href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css"
-            rel="stylesheet"
-    />
+
     <style>
         .navbar-nav {
             display: flex;
             gap: 80px; /* 드롭다운 사이의 간격 설정 */
-            font-family: "NanumBarunGothicBold"; /* 글꼴 설정 */
             font-size: 18px;
         }
 
