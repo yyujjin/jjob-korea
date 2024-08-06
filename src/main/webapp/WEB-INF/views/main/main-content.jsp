@@ -57,10 +57,16 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    /* 세로 중앙 정렬 */
+                    border: solid 1px white;
+                    
                 }
 
-                .adv-images {
+                .adv-images1 {
+                    width: 820px;
+                    height: 200px;
+                    /* border: solid 1px #00FF00; */
+                }
+                .adv-images2 {
                     width: 410px;
                     height: 200px;
                     /* border: solid 1px #00FF00; */
@@ -72,11 +78,10 @@
             <!-- 반응형 -->
             <!-- //.row-cols-1한 열에 카드를 배치하고, .row-cols-md-3중간 중단점에서 위로 여러 행에 걸쳐 g-4 4장의 카드를 동일한 너비로 분할합니다. -->
             <!-- row-cols-md-3   중간 크기 화면(medium screen) 이상에서 한 행에 세 개의 열이 포함되도록 설정합니다. -->
-
+            
             <div class="main-adv">
-                <img src="../../resources/img/main_adv/류선재1.jpg" class="adv-images">
-                <img src="../../resources/img/main_adv/손석구1.jpg" class="adv-images">
-                <img src="../../resources/img/main_adv/이제훈1.png" class="adv-images">
+                <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images1">
+                <img src="../../resources/img/main_adv/류선재1.jpg" class="adv-images2">
             </div>
 
             <!-- <script>
