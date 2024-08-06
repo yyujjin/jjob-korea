@@ -4,8 +4,12 @@ import com.jjobkorea.dto.CustomUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 @Service
 public class UserSessionService {
@@ -30,4 +34,17 @@ public class UserSessionService {
         // 혹시 CustomUserDetails가 아닌 경우를 대비한 기본 반환값
         return null;
     }
+
+    //사용자 권환
+    public String getRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        Iterator<? extends GrantedAuthority> iter = authorities.iterator();
+        GrantedAuthority auth = iter.next();
+
+        return auth.getAuthority();
+    }
+    //세션 현재 사용자 role
+
 }
