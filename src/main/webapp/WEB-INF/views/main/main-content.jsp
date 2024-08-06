@@ -57,19 +57,21 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    border: solid 1px white;
-                    
+                    /* border: solid 1px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
                 }
 
                 .adv-images1 {
                     width: 820px;
-                    height: 200px;
-                    /* border: solid 1px #00FF00; */
+                    height: 180px;
+                    border: solid 1px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 }
                 .adv-images2 {
                     width: 410px;
-                    height: 200px;
-                    /* border: solid 1px #00FF00; */
+                    height: 180px;
+                    border: solid 1px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 }
             </style>
         </head>
