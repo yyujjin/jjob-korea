@@ -75,7 +75,7 @@
                     margin-left: 250px;
                     margin-top: 50px;
                     overflow: hidden;
-                    height: 715px;
+                    height: 660px;
                     /* border: solid 1px black; */
                 }
 
@@ -126,45 +126,27 @@
                     text-align: center;
                 }
 
-                .resume_title {
-                    display: flex;
-                    justify-content: space-around;
-                    /* 가로 중앙 정렬 */
-                    align-items: center;
-                    /* 세로 중앙 정렬 */
-                    background-color: rgb(242, 241, 241);
-                    /* border: solid 1px black; */
-                    height: 50px;
-                }
-
-                .resume_title p {
-                    padding: 5px;
-                    font-size: 15px;
-                    font-weight: bold;
-                    text-align: center;
-                    line-height: 1.5;
-                    /* 적절한 줄 간격 설정 */
-                    margin: 0;
-                    /* 여백 제거 */
-                }
-
                 .resume_list {
                     height: 428px;
-                    margin: 20px;
+                }
+
+                .resume_title {
+                    font-weight: bold;
+                    background-color: rgb(245, 243, 243);
                 }
 
                 .resume_list table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin: 20px 0;
-                    font-size: 15px;
                     text-align: center;
+                    width: 810px;
+                    border-collapse: collapse;
+                    font-size: 15px;
+                    margin-left: -34px;
                 }
 
                 .resume_list th,
                 .resume_list td {
-                    /* border: 1px solid #ddd; */
-                    padding: 8px;
+                    padding: 10px;
+                    width: 100px;
                 }
 
                 .resume_list button {
@@ -172,31 +154,13 @@
                     border: none;
                     border-radius: 3px;
                     cursor: pointer;
-                    align-items: end;
-                }
-
-                .resume_list button .edit {
+                    align-items: center;
                     background-color: white;
-                    color: black;
-                    transition: background-color 0.3s ease, color 0.3s ease;
                 }
-
-                .resume_list button .delete {
-                    background-color: white;
-                    color: black;
-                    transition: background-color 0.3s ease, color 0.3s ease;
-                }
-
-                .resume_list button .edit:hover {
-                    background-color: blue;
+                .resume_list button:hover {
                     color: white;
-                }
-
-                .resume_list button .delete:hover {
                     background-color: blue;
-                    color: white;
                 }
-
 
                 .resume_img {
                     width: 800px;
@@ -236,18 +200,12 @@
                             onclick="location.href='<%=request.getContextPath()%>/resume/create'">이력서 등록</button>
                     </div>
 
-                    <div class="resume_title">
-                        <p>이력서 제목</p>
-                        <p>이력서 관리</p>
-                    </div>
-
                     <script type="text/javascript">
                         // 이력서 등록 후 localStorage를 지우는 스크립트
                         <c:if test="${not empty clearLocalStorage}">
                             localStorage.removeItem('resumeData');
                         </c:if>
                     </script>
-
                     <ul class="resume_list">
                         <c:choose>
                             <c:when test="${empty resumes}">
@@ -255,14 +213,16 @@
                             </c:when>
                             <c:otherwise>
                                 <table>
-                                    <!-- <thead>
+                                    <thead class="resume_title">
                                         <tr>
+                                            <td>이력서 제목</td>
+                                            <td>이력서 관리</td>
                                         </tr>
-                                    </thead> -->
+                                    </thead>
                                     <tbody>
                                         <c:forEach var="resume" items="${resumes}">
                                             <tr>
-                                                <td>${resume.id}&nbsp;${resume.resumePageTitle}</td>
+                                                <td>${resume.resumePageTitle}</td>
                                                 <td>
                                                     <form action="${pageContext.request.contextPath}/resume/update"
                                                         method="get" style="display:inline;">
@@ -279,6 +239,7 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
+
                             </c:otherwise>
                         </c:choose>
                     </ul>
