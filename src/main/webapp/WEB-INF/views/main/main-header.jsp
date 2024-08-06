@@ -75,7 +75,7 @@
                     <img src="../../resources/img/jjobkorea_logo.png" alt="Logo" width="220" height="110" />
                   </a>
           
-                  <c:set var="userType" value="${user.userType}" />
+                  <c:set var="role" value="${user.role}" />
           
                   <div class="nav col-12 col-lg-auto mb-2 justify-content:flex-start mb-md-0 navigation">
                     <div class="form">

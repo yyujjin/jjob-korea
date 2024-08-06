@@ -5,7 +5,7 @@
 	<!-- 개인 회원가입 -->
 	<insert id="individualUser" parameterType="map">
         INSERT INTO user_info (
-            userId, password, name, phone, addr, email, birthd, gender, registrationDate, userType
+            userId, password, name, phone, addr, email, birthd, gender, registrationDate, role
         ) VALUES (
             #{userId}, #{password}, #{name}, #{phone}, #{addr}, #{email}, #{birthd}, #{gender}, CURRENT_TIMESTAMP, 1
         );
@@ -14,7 +14,7 @@
 	<!-- 기업 회원가입 -->
     <insert id="companyUser" parameterType="map">
         INSERT INTO user_info (
-            userId, password, name, phone, addr, email, birthd, gender, registrationDate, userType
+            userId, password, name, phone, addr, email, birthd, gender, registrationDate, role
         ) VALUES (
             #{userId}, #{password}, #{name}, #{phone}, #{addr}, #{email}, #{birthd}, #{gender}, CURRENT_TIMESTAMP, 2
         );
