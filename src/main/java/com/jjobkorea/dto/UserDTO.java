@@ -26,6 +26,6 @@ public class UserDTO {
 	private String gender;
 	//회원 가입 일자
 	private Date registrationDate;
-	//유저 타입 => 구직자(1), 기업(2)로 구분
+	//권한
 	private String role;
 }
