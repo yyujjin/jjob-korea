@@ -164,11 +164,11 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="text-align: center;">
-				   <input class="like_button" type="button" value="좋아요" 
-				   onclick="handleLike(${content_view.jobseekerCommunityBoardNum})">
-				   <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
-				</td>
+			    <td style="text-align: center;">
+			       <input class="like_button" type="button" value="좋아요" 
+				   		  onclick="handleLike(${content_view.jobseekerCommunityBoardNum})">
+			       <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
+			    </td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: right;">
@@ -224,206 +224,193 @@
 	</div>
 </body>
 	<script>
-
-const handleLike = (boardNum) => {
-    $.ajax({
-        type: "post",
-       	url: "${pageContext.request.contextPath}/like",
-        data: { jobseekerCommunityBoardNum: boardNum },
-        success: function(response) {
-            if (response.redirectUrl) {
-                alert("로그인 후 이용해 주세요.");
-                window.location.href = response.redirectUrl;
-            } else {
-                alert("좋아요!");
-                $("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
-            }
-        },
-        error: function(xhr) {
-            if (xhr.status === 401) { // 401 상태 코드 확인
-                const redirectUrl = xhr.responseJSON.redirectUrl;
-                if (redirectUrl) {
-                    alert("로그인 후 이용해 주세요");
-                    window.location.href = redirectUrl; // 로그인 페이지로 리다이렉트
-                }
-            } else {
-                alert("좋아요 반영에 실패");
-            }
-        }
-    });
-};
-
-		const commentWrite = () => {
-			const writer = document.getElementById("jobseekerCommentWriter").value;
-			
-			//로그인 확인후 경고창 띄우고 링크연결
-			if(!writer){
-				alert("로그인이 필요합니다.");
-				window.location.href = "${pageContext.request.contextPath}/login";
-				return;
-			}
-			
-			const content = document.getElementById("jobseekerCommentContent").value;
-			const no = "${content_view.jobseekerCommunityBoardNum}";
-
-			$.ajax({
-				 type: "post"
-				,data: {
-					jobseekerCommentCommentWriter: writer
-				   ,jobseekerCommunityCommentContent: content
-				   ,jobseekerCommunityBoardNum: no
-				}
-				,url: "${pageContext.request.contextPath}/jobseekercomment/jobseekerSave"
-				,success: function(commentList){
-					console.log("작성성공");
-					console.log(commentList);
-
-					let output = "<table>";
-						output += "<tr><th>댓글번호</th>";
-						output += "<th>작성자</th>";
-						output += "<th>내용</th>";
-						output += "<th>작성시간</th></tr>";
-						for (let i in commentList){
-							output += "<tr>";
-							output += "<td>"+commentList[i].jobseekerCommentBoardNum+"</td>";
-							output += "<td>"+commentList[i].jobseekerCommentCommentWriter+"</td>";
-							output += "<td>"+commentList[i].jobseekerCommunityCommentContent+"</td>";
-						let jobseekerCommentTime = commentList[i].jobseekerCommentTime.substring(0, 10)+" ";
-							jobseekerCommentTime += parseInt(commentList[i].jobseekerCommentTime.substring(12, 13))+10;
-							jobseekerCommentTime += commentList[i].jobseekerCommentTime.substring(13, 16);
-							output += "<td>"+jobseekerCommentTime+"</td>";
-							output += "</tr>";
-											}
-						output += "</table>";
-						console.log("@# output=>"+output);
-
-						document.getElementById("comment-list").innerHTML = output;
-						document.getElementById("jobseekerBoardListCommentWriter").value = "";
-						document.getElementById("jobseekerBoardListCommentContent").value = "";
-				}
-				,error: function(){
-					console.log("실패");
-				}
-			});//end of ajax
-		}//end of script
-	</script>
-	<script>
-		$(document).ready(function (){
-			const boardNum = "${content_view.jobseekerCommunityBoardNum}";
-
-			const loadComments = () => {
-				$.ajax({
-					url: "${pageContext.request.contextPath}/jobseekercomment/getComments",
-					method: "GET",
-					data: { jobseekerCommunityBoardNum: boardNum },
-					success: function(commentList) {
-						let output = "<table>";
-						output += "<tr><th>댓글번호</th>";
-						output += "<th>작성자</th>";
-						output += "<th>내용</th>";
-						output += "<th>작성시간</th></tr>";
-						for (let i in commentList){
-							output += "<tr>";
-							output += "<td>"+commentList[i].jobseekerCommentBoardNum+"</td>";
-							output += "<td>"+commentList[i].jobseekerCommentCommentWriter+"</td>";
-							output += "<td>"+commentList[i].jobseekerCommunityCommentContent+"</td>";
-							let jobseekerCommentTime = commentList[i].jobseekerCommentTime.substring(0, 10)+" ";
-							jobseekerCommentTime += parseInt(commentList[i].jobseekerCommentTime.substring(12, 13))+10;
-							jobseekerCommentTime += commentList[i].jobseekerCommentTime.substring(13, 16);
-							output += "<td>"+jobseekerCommentTime+"</td>";
-							output += "</tr>";
-						}
-						output += "</table>";
-						document.getElementById("comment-list").innerHTML = output;
-					},
-					error: function() {
-						console.log("댓글 불러오기 실패");
+		const handleLike = (boardNum) => {
+		        $.ajax({
+		            type: "post",
+		            url: "${pageContext.request.contextPath}/like",
+		            data: {
+		                jobseekerCommunityBoardNum: boardNum
+		            },
+		            success: function(response) {
+		                if (response.redirectUrl) {
+		                    alert("로그인 후 이용해 주세요.");
+		                    window.location.href = response.redirectUrl;
+		                } else {
+		                    const hasLiked = response.hasLiked; // 서버에서 좋아요 상태를 받아옴
+		                    alert(hasLiked ? "좋아요!" : "좋아요 취소!");
+		                    $("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
+		                }
+		            },
+		            error: function(xhr) {
+		                if (xhr.status === 401) {
+		                    const redirectUrl = xhr.responseJSON.redirectUrl;
+		                    if (redirectUrl) {
+		                        alert("로그인 후 이용해 주세요");
+		                        window.location.href = redirectUrl;
+		                    }
+		                } else {
+		                    alert("좋아요 실패");
+		                }
+		            }
+		        });
+		    };
+				
+				const commentWrite = () => {
+					const writer = document.getElementById("jobseekerCommentWriter").value;
+					
+					//로그인 확인후 경고창 띄우고 링크연결
+					if(!writer){
+						alert("로그인이 필요합니다.");
+						window.location.href = "${pageContext.request.contextPath}/login";
+						return;
 					}
-				});
-			};
+					
+					const content = document.getElementById("jobseekerCommentContent").value;
+					const no = "${content_view.jobseekerCommunityBoardNum}";
 
-			// 페이지 로드 시 댓글을 불러옵니다.
-			loadComments();
+					$.ajax({
+						 type: "post"
+						,data: {
+							jobseekerCommentCommentWriter: writer
+						   ,jobseekerCommunityCommentContent: content
+						   ,jobseekerCommunityBoardNum: no
+						}
+						,url: "${pageContext.request.contextPath}/jobseekercomment/jobseekerSave"
+						,success: function(commentList){
+							console.log("작성성공");
+							console.log(commentList);
+							updateCommentList(commentList); // updateCommentList 함수 호출
+							document.getElementById("jobseekerCommentWriter").value = "";
+							document.getElementById("jobseekerCommentContent").value = "";
+						}
+						,error: function(){
+							console.log("실패");
+						}
+					});//end of ajax
+				} // end of commentWrite script
 
-			(function(){
-				console.log("@# document ready");
+				const updateCommentList = (commentList) => {
+					let output = "<table>";
+					output += "<tr><th>댓글번호</th>";
+					output += "<th>작성자</th>";
+					output += "<th>내용</th>";
+					output += "<th>작성시간</th></tr>";
+					for (let i in commentList){
+						output += "<tr>";
+						output += "<td>"+commentList[i].jobseekerCommentBoardNum+"</td>";
+						output += "<td>"+commentList[i].jobseekerCommentCommentWriter+"</td>";
+						output += "<td>"+commentList[i].jobseekerCommunityCommentContent+"</td>";
+					let jobseekerCommentTime = commentList[i].jobseekerCommentTime.substring(0, 10)+" ";
+						jobseekerCommentTime += parseInt(commentList[i].jobseekerCommentTime.substring(12, 13))+10;
+						jobseekerCommentTime += commentList[i].jobseekerCommentTime.substring(13, 16);
+						output += "<td>"+jobseekerCommentTime+"</td>";
+						output += "</tr>";
+					}
+					output += "</table>";
+					console.log("@# output=>"+output);
 
-				if (boardNum.trim() !== "") {
-					console.log("@# boardNum=>"+boardNum);
-					$.getJSON("${pageContext.request.contextPath}/getFileList", {jobseekerCommunityBoardNum: boardNum}, function (arr){
-						console.log("@# arr=>"+arr);
+					document.getElementById("comment-list").innerHTML = output;
+				} // end of updateCommentList script
+			
+				$(document).ready(function (){
+					const boardNum = "${content_view.jobseekerCommunityBoardNum}";
 
-						let str="";
-
-						$(arr).each(function (i, attach){
-							if (attach.jobseekerBoardAttachImage) {
-								const fileCallPath = encodeURIComponent(attach.jobseekerBoardAttachUploadPath +"/s_"+ attach.jobseekerBoardAttachUuid + "_" + attach.jobseekerBoardAttachFileName);
-								str += "<li data-path='" + attach.jobseekerBoardAttachUploadPath + "'";
-								str += " data-uuid='" + attach.jobseekerBoardAttachUuid + "' data-filename='" + attach.jobseekerBoardAttachFileName + "' data-type='" + attach.jobseekerBoardAttachImage + "'"
-								str + " ><div>";
-								str += "<span>"+attach.jobseekerBoardAttachFileName+"</span>";
-								str += "<img src='/display?fileName="+fileCallPath+"'>";
-								str += "</div></li>";
-							} else {
-								str += "<li data-path='" + attach.jobseekerBoardAttachUploadPath + "'";
-								str += " data-uuid='" + attach.jobseekerBoardAttachUuid + "' data-filename='" + attach.jobseekerBoardAttachFileName + "' data-type='" + attach.jobseekerBoardAttachImage + "'"
-								str + " ><div>";
-								str += "<span>"+attach.jobseekerBoardAttachFileName+"</span>";
-								str += "<img src='./resources/img/attach.png'>";
-								str += "</div></li>";			
+					const loadComments = () => {
+						$.ajax({
+							url: "${pageContext.request.contextPath}/jobseekercomment/getComments",
+							method: "GET",
+							data: { jobseekerCommunityBoardNum: boardNum },
+							success: function(commentList) {
+								updateCommentList(commentList); // updateCommentList 함수 호출
+							},
+							error: function() {
+								console.log("댓글 불러오기 실패");
 							}
 						});
+					};
 
-						$(".uploadResult ul").html(str);
-					});
-				}
+					// 페이지 로드 시 댓글을 불러옵니다.
+					loadComments();
 
-				$(".uploadResult").on("click", "li", function (e){
-					console.log("@# uploadResult click");
-					
-					var liObj = $(this);
-					console.log("@# path 01=>",liObj.data("path"));
-					console.log("@# uuid=>",liObj.data("uuid"));
-					console.log("@# filename=>",liObj.data("filename"));
-					console.log("@# type=>",liObj.data("type"));
-					
-					var path = encodeURIComponent(liObj.data("path") +"/"+ liObj.data("uuid") + "_" + liObj.data("filename"));
-					console.log("@# path 02=>",path);
+					(function(){
+						console.log("@# document ready");
 
-					if (liObj.data("type")) {
-						console.log("@# 01");
-						console.log("@# view");
+						if (boardNum.trim() !== "") {
+							console.log("@# boardNum=>"+boardNum);
+							$.getJSON("${pageContext.request.contextPath}/getFileList", {jobseekerCommunityBoardNum: boardNum}, function (arr){
+								console.log("@# arr=>"+arr);
 
-						showImage(path);
-					} else {
-						console.log("@# 02");
-						console.log("@# download");
+								let str="";
 
-						//컨트롤러의 download 호출
-						self.location="/download?fileName="+path;
-					}
-				});//end of uploadResult click
+								$(arr).each(function (i, attach){
+									if (attach.jobseekerBoardAttachImage) {
+										const fileCallPath = encodeURIComponent(attach.jobseekerBoardAttachUploadPath +"/s_"+ attach.jobseekerBoardAttachUuid + "_" + attach.jobseekerBoardAttachFileName);
+										str += "<li data-path='" + attach.jobseekerBoardAttachUploadPath + "'";
+										str += " data-uuid='" + attach.jobseekerBoardAttachUuid + "' data-filename='" + attach.jobseekerBoardAttachFileName + "' data-type='" + attach.jobseekerBoardAttachImage + "'"
+										str + " ><div>";
+										str += "<span>"+attach.jobseekerBoardAttachFileName+"</span>";
+										str += "<img src='/display?fileName="+fileCallPath+"'>";
+										str += "</div></li>";
+									} else {
+										str += "<li data-path='" + attach.jobseekerBoardAttachUploadPath + "'";
+										str += " data-uuid='" + attach.jobseekerBoardAttachUuid + "' data-filename='" + attach.jobseekerBoardAttachFileName + "' data-type='" + attach.jobseekerBoardAttachImage + "'"
+										str + " ><div>";
+										str += "<span>"+attach.jobseekerBoardAttachFileName+"</span>";
+										str += "<img src='./resources/img/attach.png'>";
+										str += "</div></li>";			
+									}
+								});
 
-				function showImage(fileCallPath){
-					// alert(fileCallPath);
+								$(".uploadResult ul").html(str);
+							});
+						}
 
-					$(".bigPicture").css("display","flex").show();
-					$(".bigPic")
-						.html("<img src='/display?fileName="+fileCallPath+"'>")
-						.animate({width: "100%", height: "100%"}, 1000);
-				}
+						$(".uploadResult").on("click", "li", function (e){
+							console.log("@# uploadResult click");
+							
+							var liObj = $(this);
+							console.log("@# path 01=>",liObj.data("path"));
+							console.log("@# uuid=>",liObj.data("uuid"));
+							console.log("@# filename=>",liObj.data("filename"));
+							console.log("@# type=>",liObj.data("type"));
+							
+							var path = encodeURIComponent(liObj.data("path") +"/"+ liObj.data("uuid") + "_" + liObj.data("filename"));
+							console.log("@# path 02=>",path);
 
-				$(".bigPicture").on("click", function (e){
-					$(".bigPic")
-						.animate({width: "0%", height: "0%"}, 1000);
-					setTimeout(function (){
-						$(".bigPicture").hide();
-					}, 1000);//end of setTimeout
-				});//end of bigPicture click
-			})();
-		}); // end of document ready
-	</script>
-</html>
+							if (liObj.data("type")) {
+								console.log("@# 01");
+								console.log("@# view");
+
+								showImage(path);
+							} else {
+								console.log("@# 02");
+								console.log("@# download");
+
+								//컨트롤러의 download 호출
+								self.location="/download?fileName="+path;
+							}
+						});//end of uploadResult click
+
+						function showImage(fileCallPath){
+							// alert(fileCallPath);
+
+							$(".bigPicture").css("display","flex").show();
+							$(".bigPic")
+								.html("<img src='/display?fileName="+fileCallPath+"'>")
+								.animate({width: "100%", height: "100%"}, 1000);
+						}
+
+						$(".bigPicture").on("click", function (e){
+							$(".bigPic")
+								.animate({width: "0%", height: "0%"}, 1000);
+							setTimeout(function (){
+								$(".bigPicture").hide();
+							}, 1000);//end of setTimeout
+						});//end of bigPicture click
+					})();
+				}); // end of document ready
+			</script>
+		</html>
 
 
 
