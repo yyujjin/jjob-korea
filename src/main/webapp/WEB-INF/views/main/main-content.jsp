@@ -13,6 +13,7 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                 crossorigin="anonymous">
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
             <style>
                 .card-title {
@@ -65,7 +66,6 @@
                     border: solid 1px rgba(0, 0, 0, 0.1);
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 }
-
             </style>
         </head>
 
@@ -73,14 +73,30 @@
             <!-- 반응형 -->
             <!-- //.row-cols-1한 열에 카드를 배치하고, .row-cols-md-3중간 중단점에서 위로 여러 행에 걸쳐 g-4 4장의 카드를 동일한 너비로 분할합니다. -->
             <!-- row-cols-md-3   중간 크기 화면(medium screen) 이상에서 한 행에 세 개의 열이 포함되도록 설정합니다. -->
-            
+
             <div class="main-adv">
                 <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images">
             </div>
+            <script>
+                $(document).ready(function () {
+                    var images = [
+                        "../../resources/img/main_adv/검사무료체험.png",
+                        "../../resources/img/main_adv/디지털유닛.png",
+                        "../../resources/img/main_adv/반도체설계.png",
+                        "../../resources/img/main_adv/아카데미훈련생모집.png",
+                        "../../resources/img/main_adv/이력서서비스.png",
+                        "../../resources/img/main_adv/채용지원서비스.png"
+                    ];
 
-            <!-- <script>
-                $(".main-adv > img")
-            </script> -->
+                    var index = 0;
+
+                    setInterval(function () {
+                        index = (index + 1) % images.length; // 다음 이미지 인덱스
+                        $(".main-adv > img").attr("src", images[index]);
+                    }, 3000); // 1000ms = 1초
+                });
+            </script>
+
 
             <div style="font-weight: bold;"> 지금 <span style="color: #00FF00;">HOT</span>한 채용공고 <span
                     style="color: blue;">TOP8</span>
