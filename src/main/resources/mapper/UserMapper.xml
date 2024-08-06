@@ -56,4 +56,9 @@
   		WHERE userId = #{userId}
 	</update>
     
+    <!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="string">
+		DELETE FROM user_info WHERE userId = #{userId}
+	</delete>
+	
 </mapper>

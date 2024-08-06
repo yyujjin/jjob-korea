@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -102,7 +102,9 @@ public class UserController {
     public String userInfo(Model model){
 
     	//수정 test를 위한 userId="user02" 데이터 사용
-    	 String userId = "user02";
+//    	 String userId = "user02";
+    	
+    	String userId = "1313";
     	
     	UserDTO userInfo = userService.userInfo(userId);
     	log.info("가져온 userInfo : {}",userInfo);
@@ -121,5 +123,19 @@ public class UserController {
     	log.info("업데이트 된 userDTO : {}",userDTO);
     	
     	return "user/updateSuccess";
+    }
+    
+    //회원 탈퇴
+    @DeleteMapping("/deleteUser")
+    @ResponseBody
+    public String deleteUser(@RequestParam("userId") String userId) {
+    	
+    	UserDTO userDTO = new UserDTO();
+    	userDTO.setUserId(userId);
+    	log.info("@#userId"+userId);
+    	userService.deleteUser(userDTO);
+    	log.info("삭제 된 userDTO : {}",userDTO);
+    	
+    	return "success";
     }
 }
