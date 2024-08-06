@@ -17,9 +17,11 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,6 +59,7 @@ public class ResumeController {
         UserDTO user = (UserDTO) session.getAttribute("user");
         String userId = user.getUserId();
         List<ResumeInfoDTO> resumes = resumeInfoService.findByUserId(userId);
+        System.out.println("@#@##@#@#@#@#@#@#@#@############################" + resumes);
         model.addAttribute("resumes", resumes);
         
         for(ResumeInfoDTO test : resumes) {
@@ -141,25 +144,30 @@ public class ResumeController {
         return "resume_page/resume_edit";
     }
     
-    @GetMapping("/resume_write/edit/image/{filename}")
-    public ResponseEntity<Resource> showImage(@PathVariable("filename") String filename, ResumeInfoDTO resumeInfoDTO) throws IOException {
-    	UUID uuid = UUID.fromString(filename);
-    	filename = filename.substring(filename.indexOf("_")+1);
-    	System.out.println(filename);
-    	
-    	String str = URLEncoder.encode(filename, "UTF-8");
-    	str = str.replaceAll("\\+", "%20");
-    	
-    	Path path = Paths.get(uuid+"_"+filename);
-    	Resource resource = new InputStreamResource(Files.newInputStream(path));
-    	
-    	return ResponseEntity.ok()
-    			.header(HttpHeaders.CONTENT_TYPE, "application/octet-stream")
-    			.header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename="+str+";")
-    			.body(resource);
+    @GetMapping("/resume_write/edit/image/{fileName}")
+    public ResponseEntity<byte[]> showImage(@PathVariable("fileName") String fileName, ResumeInfoDTO resumeInfoDTO) {
+		log.info("@# display fileName=>"+fileName);
+		
+//		업로드 파일경로+이름
+		File file = new File("D:\\dev\\upload\\"+fileName);
+		log.info("@# file=>"+file);
+		
+		ResponseEntity<byte[]> result=null;
+		HttpHeaders headers=new HttpHeaders();
+		
+		try {
+//			파일타입을 헤더에 추가
+			headers.add("Content-Type", Files.probeContentType(file.toPath()));
+//			파일정보를 byte 배열로 복사+헤더정보+http상태 정상을 결과에 저장
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
     }
     // 이력서 수정 완료 업데이트 로직
-    @PostMapping("/resume/update")
+    @PostMapping("/resume_write/edit")
     public String updateResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session) {
         log.info("resumeUpdate");
         UUID uuid = UUID.randomUUID();
@@ -196,6 +204,11 @@ public class ResumeController {
             // 새로운 파일이 업로드되지 않았으면 기존 파일 경로를 유지합니다.
             resumeInfoDTO.setResumeFilePath(existingResume.getResumeFilePath());
         }
+        System.out.println("file값이 들어오는가?"+file);
+        System.out.println("file값이 들어오는가?"+file);
+        System.out.println("file값이 들어오는가?"+file);
+        System.out.println("file값이 들어오는가?"+file);
+        System.out.println("file값이 들어오는가?"+file);
        
         resumeInfoService.update(resumeInfoDTO);
         return "redirect:/resume";

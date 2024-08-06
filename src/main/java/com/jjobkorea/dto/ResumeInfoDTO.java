@@ -21,7 +21,7 @@ public class ResumeInfoDTO {
     private String resumeUserCellPhone;
     private String resumeUserAddress;
     // 이거 자체로 받아서 디비에 들어갈 때 시리얼라이즈가 안된다. 라는 문제가 있었어. 
-    private transient MultipartFile resumeProfilePhoto;
+    private MultipartFile resumeProfilePhoto;
     // 이 필드를 생성하고 스트링 파일 PATH 를 넣어주는 필드를 생성했음. 
     private String resumeFilePath;
     private String resumeSkillName;
