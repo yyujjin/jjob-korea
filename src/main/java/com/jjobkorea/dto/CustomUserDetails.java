@@ -3,6 +3,7 @@ package com.jjobkorea.dto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,11 +14,17 @@ public class CustomUserDetails implements UserDetails {
     public CustomUserDetails(UserDTO userDTO) {
         this.userDTO = userDTO;
     }
-
-    //현재 사용 안함
+    //사용자 권한
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        Collection<GrantedAuthority> collection = new ArrayList<>();
+        collection.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return userDTO.getRole();
+            }
+        });
+        return collection;
     }
     //유저 비밀번호
     @Override
