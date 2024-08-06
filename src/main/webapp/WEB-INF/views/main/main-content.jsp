@@ -57,22 +57,15 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    /* border: solid 1px rgba(0, 0, 0, 0.1);
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
                 }
 
-                .adv-images1 {
-                    width: 820px;
-                    height: 180px;
+                .adv-images {
+                    width: 1260px;
+                    height: 160px;
                     border: solid 1px rgba(0, 0, 0, 0.1);
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 }
-                .adv-images2 {
-                    width: 410px;
-                    height: 180px;
-                    border: solid 1px rgba(0, 0, 0, 0.1);
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                }
+
             </style>
         </head>
 
@@ -82,8 +75,7 @@
             <!-- row-cols-md-3   중간 크기 화면(medium screen) 이상에서 한 행에 세 개의 열이 포함되도록 설정합니다. -->
             
             <div class="main-adv">
-                <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images1">
-                <img src="../../resources/img/main_adv/류선재1.jpg" class="adv-images2">
+                <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images">
             </div>
 
             <!-- <script>
