@@ -23,9 +23,11 @@ public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     public final UserService userService;
+    public final UserSessionService userSessionService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserSessionService userSessionService) {
         this.userService = userService;
+        this.userSessionService = userSessionService;
     }
 
     //로그인 페이지 로드
@@ -75,11 +77,7 @@ public class UserController {
     //회원 정보(개인,기업) 조회
     @GetMapping("/user")
     public String userInfo(Model model){
-
-    	//수정 test를 위한 userId="user02" 데이터 사용
-    	 String userId = "user02";
-    	
-    	UserDTO userInfo = userService.userInfo(userId);
+    	UserDTO userInfo = userService.userInfo(userSessionService.getUserId());
     	log.info("가져온 userInfo : {}",userInfo);
     	model.addAttribute("userInfo",userInfo);
         model.addAttribute("page","user/userInfo");
