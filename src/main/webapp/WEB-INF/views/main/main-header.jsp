@@ -85,19 +85,19 @@
                       <a href="/board" class="nav-link px-4">취업 톡톡</a>
                     </div>
           
-                    <c:choose>
-                      <c:when test="${sessionScope.user.userType == 1}">
+
+
                         <div class="form">
                           <a href="/resume" class="nav-link px-4">이력서 관리</a>
                         </div> <!-- 닫는 div 추가 -->
-                      </c:when>
+
           
-                      <c:when test="${sessionScope.user.userType == 2}">
+
                         <div class="form">
                           <a href="/jobPost/create" class="nav-link px-4">공고 등록</a>
                         </div> <!-- 닫는 div 추가 -->
-                      </c:when>
-                    </c:choose>
+
+
           
                     <div class="text-end log-container">
                       <ul class="nav" style="font-size: 14px;">
