@@ -13,7 +13,7 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                 crossorigin="anonymous">
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
             <style>
                 .card-title {
@@ -65,6 +65,21 @@
                     height: 160px;
                     border: solid 1px rgba(0, 0, 0, 0.1);
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+                    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+                    /* 1초 동안 부드러운 페이드 효과와 visibility 변경 */
+                }
+
+                .fade-out {
+                    opacity: 0;
+                    visibility: hidden;
+                    /* 이미지가 사라질 때 보이지 않도록 설정 */
+                }
+
+                .fade-in {
+                    opacity: 1;
+                    visibility: visible;
+                    /* 이미지가 나타날 때 보이도록 설정 */
                 }
             </style>
         </head>
@@ -77,6 +92,7 @@
             <div class="main-adv">
                 <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images">
             </div>
+
             <script>
                 $(document).ready(function () {
                     var images = [
@@ -87,13 +103,21 @@
                         "../../resources/img/main_adv/이력서서비스.png",
                         "../../resources/img/main_adv/채용지원서비스.png"
                     ];
-
+            
                     var index = 0;
-
-                    setInterval(function () {
-                        index = (index + 1) % images.length; // 다음 이미지 인덱스
-                        $(".main-adv > img").attr("src", images[index]);
-                    }, 3000); // 1000ms = 1초
+            
+                    function changeImage() {
+                        var $img = $(".main-adv > img");
+                        $img.addClass('fade-out'); // 현재 이미지를 페이드 아웃
+                        
+                        setTimeout(function () {
+                            index = (index + 1) % images.length;
+                            $img.attr("src", images[index]);
+                            $img.removeClass('fade-out').addClass('fade-in'); // 새로운 이미지를 페이드 인
+                        }, 700); 
+                    }
+            
+                    setInterval(changeImage, 3000); // 3초마다 이미지 변경
                 });
             </script>
 
