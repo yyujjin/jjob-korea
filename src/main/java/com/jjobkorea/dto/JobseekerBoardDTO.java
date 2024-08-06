@@ -19,8 +19,5 @@ public class JobseekerBoardDTO {
 	private int jobseekerCommunityBoardHit;
 	private List<JobseekerBoardAttachDTO> attachList;
 	
-	// 좋아요
-	private int likes;
-	private String likedBy;
-	
+	private int likes; // 좋아요 수를 저장하는 필드
 }
