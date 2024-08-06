@@ -38,8 +38,11 @@ public class MainController {
         List<JobPostingDTO> postingList = jobPostingService.getJobPostingSToMain();
         model.addAttribute("postingList", postingList);
         model.addAttribute("page","main/main-content");
+        model.addAttribute("username",userSessionService.getUserName());
+
         log.info("사용자 id : {}",userSessionService.getUserId());
         log.info("사용자 이름 : {}",userSessionService.getUserName());
+
         return "main/main";
     }
 }

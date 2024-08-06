@@ -102,12 +102,12 @@
                     <div class="text-end log-container">
                       <ul class="nav" style="font-size: 14px;">
                         <c:choose>
-                          <c:when test="${not empty sessionScope.user.name}">
+                          <c:when test="${not empty username}">
                             <li class="nav-item">
                               <span class="nav-link" style="color: black;">
                                 안녕하세요!
                                 <a style="color: blue; text-decoration: underline;">
-                                  ${sessionScope.user.name}
+                                  ${username}
                                 </a> 님
                               </span>
                             </li>
