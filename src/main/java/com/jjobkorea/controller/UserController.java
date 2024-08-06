@@ -23,17 +23,15 @@ public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     public final UserService userService;
-    private final UserSessionService userSessionService;
-    public UserController(UserService userService, UserSessionService userSessionService) {
+
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userSessionService = userSessionService;
     }
 
     //로그인 페이지 로드
     @GetMapping("/login")
     public String showLoginPage(Model model) {
         model.addAttribute("page","user/login");
-        model.addAttribute("username",userSessionService.getUserName());
         return "main/main";
     }
 
@@ -48,7 +46,6 @@ public class UserController {
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("page", "user/register");
-        model.addAttribute("username",userSessionService.getUserName());
         return "main/main";
     }
 
@@ -86,7 +83,7 @@ public class UserController {
     	log.info("가져온 userInfo : {}",userInfo);
     	model.addAttribute("userInfo",userInfo);
         model.addAttribute("page","user/userInfo");
-        model.addAttribute("username",userSessionService.getUserName());
+
     	return "main/main";
     	
     } 

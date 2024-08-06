@@ -41,12 +41,6 @@ public class JobseekerBoardController {
 	@Autowired
 	private JobseekerUploadService uploadService;
 
-	private final UserSessionService userSessionService;
-
-    public JobseekerBoardController(UserSessionService userSessionService) {
-        this.userSessionService = userSessionService;
-    }
-
     //글 작성
 	 @PostMapping("/jobseekerWrite")
 	    public String write(JobseekerBoardDTO boardDTO, HttpSession session) {
@@ -75,7 +69,7 @@ public class JobseekerBoardController {
 	        }
 
 			model.addAttribute("page","jobseekerWrite_view");
-		 model.addAttribute("username",userSessionService.getUserName());
+
 		    return "main/main";
 	    }
 
@@ -124,7 +118,7 @@ public class JobseekerBoardController {
 
 	 		//메인페이지로 연결
 	 		model.addAttribute("page", "jobseekerContent_view");
-		 model.addAttribute("username",userSessionService.getUserName());
+
 	 	    return "main/main";
 	 		}
 	 

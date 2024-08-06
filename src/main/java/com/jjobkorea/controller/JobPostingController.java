@@ -22,10 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 public class JobPostingController {
 
     private final JobPostingService jobPostingService;
-    private final UserSessionService userSessionService;
+
     public JobPostingController(JobPostingService jobPostingService, UserSessionService userSessionService) {
         this.jobPostingService = jobPostingService;
-        this.userSessionService = userSessionService;
     }
 
     // 채용 정보 리스트
@@ -44,7 +43,7 @@ public class JobPostingController {
         List<JobPostingDTO> postingList = jobPostingService.getPostingList(pageNum);
         model.addAttribute("postingList", postingList);
         model.addAttribute("page", "jobPosting/jobPostingMain");
-        model.addAttribute("username",userSessionService.getUserName());
+
         return "main/main";
     }
 
@@ -53,7 +52,7 @@ public class JobPostingController {
     public String createJobPost(Model model) {
 
         model.addAttribute("page","jobPostingDetails/addJobPosting");
-        model.addAttribute("username",userSessionService.getUserName());
+       
         return "main/main";
     }
 

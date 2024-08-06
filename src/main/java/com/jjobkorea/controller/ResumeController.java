@@ -27,11 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ResumeController {
     @Autowired
     private ResumeInfoService resumeInfoService;
-    private final UserSessionService userSessionService;
-
-    public ResumeController(UserSessionService userSessionService) {
-        this.userSessionService = userSessionService;
-    }
 
     // 이력서 메인
     @GetMapping("/resume")
@@ -55,7 +50,7 @@ public class ResumeController {
 
         model.addAttribute("userId", userId);
         model.addAttribute("page", "resume_page/resume_page");
-        model.addAttribute("username",userSessionService.getUserName());
+
         return "main/main";
     }
     
@@ -70,7 +65,7 @@ public class ResumeController {
 
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
         model.addAttribute("page", "resume_page/resume_write/resume_write");
-        model.addAttribute("username",userSessionService.getUserName());
+
         return "main/main";
     }
 
@@ -128,7 +123,7 @@ public class ResumeController {
 
         model.addAttribute("resumeInfoDTO", resumeInfoDTO);
         model.addAttribute("resumeInfoDTO", "resume_page/resume_edit");
-        model.addAttribute("username",userSessionService.getUserName());
+
         return "main/main";
     }
 

@@ -23,11 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 
     private final JobPostingService jobPostingService;
-    private final UserSessionService userSessionService;
 
     public MainController(JobPostingService jobPostingService, UserSessionService userSessionService) {
         this.jobPostingService = jobPostingService;
-        this.userSessionService = userSessionService;
     }
 
     // 메인
@@ -38,10 +36,6 @@ public class MainController {
         List<JobPostingDTO> postingList = jobPostingService.getJobPostingSToMain();
         model.addAttribute("postingList", postingList);
         model.addAttribute("page","main/main-content");
-        model.addAttribute("username",userSessionService.getUserName());
-
-        log.info("사용자 id : {}",userSessionService.getUserId());
-        log.info("사용자 이름 : {}",userSessionService.getUserName());
 
         return "main/main";
     }
