@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 			<ul>
                 <h3>회원정보 관리</h3>
 				<div class="underbar-line"></div>
-				<p><li><a href="#">회원정보 수정</a></li><br>
+				<p><li><a href="/resume/update">회원정보 수정</a></li><br>
 				<li><a href="#">비밀번호 변경</a></li><br>
 				<li><a href="#">MyPage 이동</a></li></p>
 			</ul>

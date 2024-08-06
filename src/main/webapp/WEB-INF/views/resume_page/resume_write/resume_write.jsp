@@ -193,7 +193,7 @@
                 </div>
             </header>
 
-            <form method="post" action="/resume_write" enctype="multipart/form-data">
+            <form method="post" action="/resume/create" enctype="multipart/form-data">
                 <div class="main-container">
                     <div class="photo">
                         <div class="profilephoto">

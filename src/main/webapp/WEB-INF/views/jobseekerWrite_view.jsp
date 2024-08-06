@@ -104,7 +104,7 @@
 			,url:"/jobseekerWrite"
 			,success: function(data){
 				alert("저장완료");
-				location.href="jobseekerBoardList";
+				location.href="board";
 			}
 			,error: function(){
 				alert("오류발생");
@@ -133,7 +133,7 @@
 			</table>
 			<div class="upload-list">
 				<button type="submit">입력</button>
-				<a href="/requestPage/jobseekerBoardList">목록보기</a>
+				<a href="/board">목록보기</a>
 			</div>
 		</form>
 		<div class="uploadDiv">

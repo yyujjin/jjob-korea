@@ -43,7 +43,7 @@ public class ResumeController {
     @Value("${spring.servlet.multipart.location}")
 	private String filepath;
     
-    // 이력서 관리 메인 페이지 로직
+    // 이력서 메인
     @GetMapping("/resume")
     public String resister(Model model, HttpSession session) {
         log.info("@#hello");
@@ -70,20 +70,21 @@ public class ResumeController {
     }
     
     // 이력서 작성 페이지 로직
-    @GetMapping("/resume_write")
+    @GetMapping("/resume/create")
     public String resumeWrite(Model model, HttpSession session) {
         log.info("@#resume_write");
 
         if(session.getAttribute("user") == null) {
-            return "redirect:/requestPage/login";
+            return "redirect:/login";
         }
 
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
-        return "resume_page/resume_write/resume_write";
+        model.addAttribute("page", "resume_page/resume_write/resume_write");
+        return "main/main";
     }
 
     // 이력서 저장 로직
-    @PostMapping("/resume_write")
+    @PostMapping("/resume/create")
     public String addResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session, Model model) throws ParseException {
         log.info("@#saveResume");
 
@@ -136,7 +137,8 @@ public class ResumeController {
         }
 
         model.addAttribute("resumeInfoDTO", resumeInfoDTO);
-        return "resume_page/resume_edit";
+        model.addAttribute("resumeInfoDTO", "resume_page/resume_edit");
+        return "main/main";
     }
     
     @GetMapping("/resume_write/edit/image/{filename}")
@@ -157,7 +159,7 @@ public class ResumeController {
     			.body(resource);
     }
     // 이력서 수정 완료 업데이트 로직
-    @PostMapping("/resume_write/edit")
+    @PostMapping("/resume/update")
     public String updateResume(@ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session) {
         log.info("resumeUpdate");
         UUID uuid = UUID.randomUUID();
