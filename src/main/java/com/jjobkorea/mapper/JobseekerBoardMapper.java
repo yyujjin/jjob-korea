@@ -2,7 +2,6 @@ package com.jjobkorea.mapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,9 +17,6 @@ public interface JobseekerBoardMapper {
 	public void jobseekerDelete(HashMap<String, String> param);
 	public void jobseekerHit(int jobseekerCommunityBoardNum);
 	
-	public boolean hasLiked(HashMap<String, String> param);
-    public void updateLikeStatus(HashMap<String, String> param);
-    public int getLikeCount(int jobseekerCommunityBoardNum);
-	public void updateLikeCount(HashMap<String, String> param);
-	
+	public void likes(int jobseekerCommunityBoardNum);
+	public int getLikeCount(int jobseekerCommunityBoardNum);
 }
