@@ -47,6 +47,10 @@ public class SecurityConfig {
                         .maxSessionsPreventsLogin(false)); //초과 시 기존 세션 삭제후 새로운 로그인 진행
 
 
+        httpSecurity
+                .sessionManagement((auth) -> auth
+                .sessionFixation().changeSessionId());
+
         //csrf 사용 x
         httpSecurity.csrf((auth) -> auth.disable());
         return httpSecurity.build();
