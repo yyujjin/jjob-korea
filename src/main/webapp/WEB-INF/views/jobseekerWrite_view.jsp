@@ -153,6 +153,23 @@ $(document).ready(function (e){
 
 	$("button[type='submit']").on("click", function(e){
 		e.preventDefault();
+
+		var title = $("input[name='jobseekerCommunityBoardTitle']").val().trim();
+        var content = $("textarea[name='jobseekerCommunityBoardContent']").val().trim();
+
+        // 제목과 내용이 비어 있는지 확인
+        if (title === "" && content === "") {
+            alert("제목과 내용을 입력해 주세요.");
+            return; // 폼 제출 막기
+
+        }else if (title === "") {
+			alert("제목을 입력해 주세요.");
+            return; // 폼 제출 막기
+
+		}else if (content === "") {
+			alert("내용을 입력해 주세요.");
+            return; // 폼 제출 막기
+		}
 		console.log("submit clicked");
 
 		var str="";
