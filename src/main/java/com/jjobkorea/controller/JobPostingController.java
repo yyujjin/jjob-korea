@@ -57,7 +57,7 @@ public class JobPostingController {
     }
 
     //공고 상세보기 페이지
-    @GetMapping ("jobPost")
+    @GetMapping ("jobPosting")
     public String view_jobPosting (Model model) {
 
         model.addAttribute("page","jobPosting/view-jobPosting");
