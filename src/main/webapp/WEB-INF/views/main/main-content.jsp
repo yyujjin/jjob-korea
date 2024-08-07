@@ -66,20 +66,18 @@
                     border: solid 1px rgba(0, 0, 0, 0.1);
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-                    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+                    /* transition: opacity 1s ease-in-out, visibility 1s ease-in-out; */
                     /* 1초 동안 부드러운 페이드 효과와 visibility 변경 */
                 }
 
                 .fade-out {
                     opacity: 0;
-                    visibility: hidden;
-                    /* 이미지가 사라질 때 보이지 않도록 설정 */
+                    transition: opacity 0.7s;
                 }
 
                 .fade-in {
                     opacity: 1;
-                    visibility: visible;
-                    /* 이미지가 나타날 때 보이도록 설정 */
+                    transition: opacity 0.7s;
                 }
             </style>
         </head>
@@ -90,9 +88,9 @@
             <!-- row-cols-md-3   중간 크기 화면(medium screen) 이상에서 한 행에 세 개의 열이 포함되도록 설정합니다. -->
 
             <div class="main-adv">
-                <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images">
+                <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images fade-in">
             </div>
-
+            
             <script>
                 $(document).ready(function () {
                     var images = [
@@ -108,8 +106,8 @@
             
                     function changeImage() {
                         var $img = $(".main-adv > img");
-                        $img.addClass('fade-out'); // 현재 이미지를 페이드 아웃
-                        
+                        $img.removeClass('fade-in').addClass('fade-out'); // 현재 이미지를 페이드 아웃
+            
                         setTimeout(function () {
                             index = (index + 1) % images.length;
                             $img.attr("src", images[index]);
