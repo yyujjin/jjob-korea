@@ -57,4 +57,11 @@ public class UserServiceImpl implements UserService{
 
 		userMapper.updateUser(userDTO);
 	}
+	
+	//회원 탈퇴
+	@Override
+	public void deleteUser(UserDTO userDTO) {
+		
+		userMapper.deleteUser(userDTO);
+	}
 }

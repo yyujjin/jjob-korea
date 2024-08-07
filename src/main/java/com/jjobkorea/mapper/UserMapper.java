@@ -24,5 +24,7 @@ public interface UserMapper {
     public void updateUser(UserDTO userDTO);
     //유저 확인
     public UserDTO findByUserId(String username);
+    //회원 탈퇴
+    public void deleteUser(UserDTO userDTO);
 
 }

@@ -12,11 +12,9 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                 crossorigin="anonymous" />
-            <!-- 글꼴 설정 -->
-            <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet" />
+           
             <style>
                 .navigation {
-                    font-family: "NanumBarunGothicBold";
                     font-size: 18px;
                 }
 
@@ -42,6 +40,7 @@
                     /* border: solid; */
                     margin-top: 15px;
                     line-height: 15px;
+                    font-weight: bold;
                 }
 
                 .nav-item {
@@ -84,8 +83,6 @@
                     <div class="form">
                       <a href="/board" class="nav-link px-4">취업 톡톡</a>
                     </div>
-          
-
                     <c:choose>
                         <c:when test="${role == 'ROLE_JOB_SEEKER'}">
                             <div class="form">
@@ -100,15 +97,13 @@
                         <c:otherwise>
 
                        </c:otherwise>
-                    </c:choose>
-
-          
+                    </c:choose>         
                     <div class="text-end log-container">
                       <ul class="nav" style="font-size: 14px;">
                         <c:choose>
                           <c:when test="${not empty username}">
                             <li class="nav-item">
-                              <span class="nav-link" style="color: black;">
+                              <span class="nav-link" style="color: black; font-weight: bold;">
                                 안녕하세요!
                                 <a style="color: blue; text-decoration: underline;">
                                   ${username}

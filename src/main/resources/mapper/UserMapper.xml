@@ -55,5 +55,9 @@
     <select id="findByUserId" parameterType="String" resultType="UserDTO">
         select * from user_info where userId = #{username}
     </select>
-
+    
+    <!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="string">
+		DELETE FROM user_info WHERE userId = #{userId}
+	</delete>
 </mapper>

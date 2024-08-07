@@ -17,11 +17,7 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
     />
-    <!-- 글꼴 설정 -->
-    <link
-            href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css"
-            rel="stylesheet"
-    />
+
 
     <style>
         .job-detail {
@@ -30,7 +26,6 @@
         }
 
         .postingTitle {
-            font-family: "NanumBarunGothic";
             font-size: 18px;
         }
     </style>
