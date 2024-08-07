@@ -20,7 +20,6 @@
             .notContent {
                padding-bottom: 20px;
                text-align: start;
-               border: 1px solid #00FF00;
                width: 50%;
                padding: 5px;
                max-width: 100px;
