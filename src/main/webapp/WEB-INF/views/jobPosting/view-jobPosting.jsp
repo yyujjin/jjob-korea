@@ -164,21 +164,20 @@
 </head>
 <body>
 <div class="container-fixed mt-5">
-    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="section-title">회사 소개</h4>
-                 <ul>
-                     <li>회사 이름 : </li>
-                     <li>대표자 : </li>
-                     <li>업종 : </li>
-                     <li>기업 규모 : </li>
-                     <li>설립 년도 : </li>
-                     <li>직원 수 : </li>
-                     <li>주소 : </li>
-                </ul>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="section-title">회사 소개</h4>
+             <ul>
+                 <li>회사 이름 : ${company.name} </li>
+                 <li>대표자 : </li>
+                 <li>업종 : </li>
+                 <li>기업 규모 : </li>
+                 <li>설립 년도 : </li>
+                 <li>직원 수 : </li>
+                 <li>주소 : </li>
+            </ul>
         </div>
+    </div>
     </c:if>
     <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
@@ -193,7 +192,7 @@
                 </ul>
             </div>
         </div>
-    </c:if>
+
 
     <!-- 버튼 섹션 -->
     <div class="actions mt-5">
