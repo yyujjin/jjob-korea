@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
+import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,6 @@ public class ResumeController {
     @Autowired
     private ResumeInfoService resumeInfoService;
 
-    
     // 이력서 메인
     @GetMapping("/resume")
     public String resister(Model model, HttpSession session) {
@@ -50,7 +50,7 @@ public class ResumeController {
 
         model.addAttribute("userId", userId);
         model.addAttribute("page", "resume_page/resume_page");
-        
+
         return "main/main";
     }
     
@@ -65,6 +65,7 @@ public class ResumeController {
 
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
         model.addAttribute("page", "resume_page/resume_write/resume_write");
+
         return "main/main";
     }
 
@@ -122,6 +123,7 @@ public class ResumeController {
 
         model.addAttribute("resumeInfoDTO", resumeInfoDTO);
         model.addAttribute("resumeInfoDTO", "resume_page/resume_edit");
+
         return "main/main";
     }
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +40,8 @@ public class JobseekerBoardController {
 
 	@Autowired
 	private JobseekerUploadService uploadService;
-	
-	//글 작성
+
+    //글 작성
 	 @PostMapping("/jobseekerWrite")
 	    public String write(JobseekerBoardDTO boardDTO, HttpSession session) {
 	        log.info("@# write");
@@ -68,6 +69,7 @@ public class JobseekerBoardController {
 	        }
 
 			model.addAttribute("page","jobseekerWrite_view");
+
 		    return "main/main";
 	    }
 
@@ -116,6 +118,7 @@ public class JobseekerBoardController {
 
 	 		//메인페이지로 연결
 	 		model.addAttribute("page", "jobseekerContent_view");
+
 	 	    return "main/main";
 	 		}
 	 
