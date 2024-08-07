@@ -164,8 +164,6 @@
 </head>
 <body>
 <div class="container-fixed mt-5">
-    <h2 class="text-center mb-4">채용 정보 상세</h2>
-
     <!-- 채용 제목 및 회사명, 지원 자격, 근무 조건 -->
     <div class="card full-border">
         <div class="card-body">
@@ -273,16 +271,6 @@
             </div>
         </div>
     </div>
-
-    <!-- 이미지 섹션 -->
-    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
-        <div class="image-container background-image">
-            <img src="<c:url value='/resources/img/jobPostingDetail/background.png' />" alt="Background Image">
-            <div class="image-text">
-                ${jobPostingDetail.companyName}<br>${jobPostingDetail.jobTitle}
-            </div>
-        </div>
-    </c:if>
 
     <c:if test="${not empty jobPostingDetail.additionalImagePaths}">
         <div class="card full-border">
