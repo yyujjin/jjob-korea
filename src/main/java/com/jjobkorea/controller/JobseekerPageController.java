@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.jjobkorea.service.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,10 +18,6 @@ import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.dto.JobseekerCommentDTO;
 import com.jjobkorea.dto.JobseekerCriteria;
 import com.jjobkorea.dto.JobseekerPageDTO;
-import com.jjobkorea.service.JobseekerBoardService;
-import com.jjobkorea.service.JobseekerCommentService;
-import com.jjobkorea.service.JobseekerPageService;
-import com.jjobkorea.service.JobseekerUploadService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,9 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 public class JobseekerPageController {
 	@Autowired
 	private JobseekerPageService service;
-		
-	
-	//게시판 메인
+	private final UserSessionService userSessionService;
+
+    public JobseekerPageController(UserSessionService userSessionService) {
+        this.userSessionService = userSessionService;
+    }
+
+    //게시판 메인
 	@RequestMapping("/board")
 	public String listWithPaging(JobseekerCriteria cri, Model model) {
 		log.info("@# list");
@@ -45,7 +46,8 @@ public class JobseekerPageController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new JobseekerPageDTO(total, cri));
-		
+		model.addAttribute("username",userSessionService.getUserName());
+
 		return "main/main";
 	}
 	

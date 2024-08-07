@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
 
+import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -68,7 +69,7 @@ public class ResumeController {
 
         model.addAttribute("userId", userId);
         model.addAttribute("page", "resume_page/resume_page");
-        
+
         return "main/main";
     }
     
@@ -83,6 +84,7 @@ public class ResumeController {
 
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
         model.addAttribute("page", "resume_page/resume_write/resume_write");
+
         return "main/main";
     }
 

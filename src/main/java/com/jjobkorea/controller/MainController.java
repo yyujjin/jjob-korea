@@ -2,6 +2,7 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
+import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class MainController {
 
     private final JobPostingService jobPostingService;
 
-    public MainController(JobPostingService jobPostingService) {
+    public MainController(JobPostingService jobPostingService, UserSessionService userSessionService) {
         this.jobPostingService = jobPostingService;
     }
 
@@ -35,6 +36,7 @@ public class MainController {
         List<JobPostingDTO> postingList = jobPostingService.getJobPostingSToMain();
         model.addAttribute("postingList", postingList);
         model.addAttribute("page","main/main-content");
+
         return "main/main";
     }
 }

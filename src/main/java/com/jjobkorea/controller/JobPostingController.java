@@ -3,6 +3,7 @@ package com.jjobkorea.controller;
 import java.util.List;
 
 import com.jjobkorea.service.JobPostingDetailService;
+import com.jjobkorea.service.UserSessionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class JobPostingController {
 
     private final JobPostingService jobPostingService;
 
-    public JobPostingController(JobPostingService jobPostingService) {
+    public JobPostingController(JobPostingService jobPostingService, UserSessionService userSessionService) {
         this.jobPostingService = jobPostingService;
     }
 
@@ -51,6 +52,7 @@ public class JobPostingController {
     public String createJobPost(Model model) {
 
         model.addAttribute("page","jobPostingDetails/addJobPosting");
+       
         return "main/main";
     }
 
