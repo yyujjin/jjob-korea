@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import com.jjobkorea.dto.CompanyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,6 @@ private final JobPostingMapper jobPostingMapper;
     public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
         this.jobPostingMapper = jobPostingMapper;
     }
-
 
     //메인페이지 진입시 실행되는 코드
     @Override
@@ -144,6 +144,11 @@ private final JobPostingMapper jobPostingMapper;
 
         return getSearchList;
 
+    }
+
+    @Override
+    public CompanyDTO getCompanyInfo(int companyId) {
+        return jobPostingMapper.getCompanyInfo(companyId);
     }
 
 }
