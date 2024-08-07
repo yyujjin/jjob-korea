@@ -285,17 +285,6 @@
         </div>
     </c:if>
 
-    <!-- 회사 소개 섹션 -->
-    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="section-title">회사 소개</h4>
-                <p>${jobPostingDetail.companyIntroduction}</p>
-                <a href="${jobPostingDetail.companyWebsite}" target="_blank">${jobPostingDetail.companyWebsite}</a>
-            </div>
-        </div>
-    </c:if>
-
     <!-- 포지션 및 자격요건 -->
     <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
