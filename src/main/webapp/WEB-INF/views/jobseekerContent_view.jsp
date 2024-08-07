@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style>
@@ -33,6 +34,21 @@
         border: 1px solid #ccc; /* 테두리 */
 		margin: 10px;
 	}
+
+	/*.like_button {
+	    background-color: #ff0000; /* 기본 버튼 배경색 */
+	    /*color: white;
+	    padding: 5px 10px;
+	    border: none;
+	    cursor: pointer;
+	    /* 버튼이 화면에 보이도록 확인 */
+	    /*display: inline-block; 
+	}*/
+
+	/*.like_button.liked {
+	    background-color: #0057ff; /* 좋아요 상태에서 버튼 배경색 */
+	/*}*/
+
 	.mld_button { /*수정/목록/삭제*/
 		background-color: #0057ff; /* 버튼 배경색 */
         color: white; /* 텍스트 색상 */
@@ -164,10 +180,12 @@
 				</td>
 			</tr>
 			<tr>
-			    <td style="text-align: center;">
-			       <input class="like_button" type="button" value="좋아요" 
-				   		  onclick="handleLike(${content_view.jobseekerCommunityBoardNum})">
-			       <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
+			    <td style="text-align: center;">좋아요
+			        <button id="likeButton" class="like_button" 
+			                onclick="handleLike(${content_view.jobseekerCommunityBoardNum}); return false;">
+			            <i id="likeIcon" class="fa-regular fa-heart"></i> <!-- 기본 상태 아이콘 -->
+			        </button>
+			        <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
 			    </td>
 			</tr>
 			<tr>
@@ -225,38 +243,61 @@
 </body>
 	<script>
 		const handleLike = (boardNum) => {
-		        $.ajax({
-		            type: "post",
-		            url: "${pageContext.request.contextPath}/like",
-		            data: {
-		                jobseekerCommunityBoardNum: boardNum
-		            },
-		            success: function(response) {
-		                if (response.redirectUrl) {
-		                    alert("로그인 후 이용해 주세요.");
-		                    window.location.href = response.redirectUrl;
-		                } else {
-		                    const hasLiked = response.hasLiked; // 서버에서 좋아요 상태를 받아옴
-		                    alert(hasLiked ? "좋아요!" : "좋아요 취소!");
-		                    $("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
-		                }
-		            },
-		            error: function(xhr) {
-		                if (xhr.status === 401) {
-		                    const redirectUrl = xhr.responseJSON.redirectUrl;
-		                    if (redirectUrl) {
-		                        alert("로그인 후 이용해 주세요");
-		                        window.location.href = redirectUrl;
-		                    }
-		                } else {
-		                    alert("좋아요 실패");
-		                }
+			event.preventDefault(); // 버튼 기본 동작 방지
+		    $.ajax({
+		        type: "post",
+		        url: "${pageContext.request.contextPath}/like",
+		        data: {
+		            jobseekerCommunityBoardNum: boardNum
+		        },
+		        success: function(response) {
+		            if (response.redirectUrl) {
+		                alert("로그인 후 이용해 주세요.");
+		                window.location.href = response.redirectUrl;
+		            } else {
+		                const hasLiked = response.hasLiked; // 서버에서 좋아요 상태를 받아옴
+		                alert(hasLiked ? "좋아요!" : "좋아요 취소!");
+					
+						// 버튼 텍스트 및 스타일 업데이트
+						// const likeButton = $("#likeButton");
+                		// if (hasLiked) {
+                    	// 	likeButton.addClass("liked")
+									
+                		// } else {
+                    	// 	likeButton.removeClass("liked")
+									
+                		// }
+						// 버튼 텍스트 및 스타일 업데이트
+						// 버튼 아이콘 업데이트
+						// 버튼 아이콘 업데이트
+						const likeIcon = $("#likeIcon");
+						if (hasLiked) {
+						    likeIcon.removeClass("fa-regular fa-heart").addClass("fa-solid fa-heart");
+						} else {
+						    likeIcon.removeClass("fa-solid fa-heart").addClass("fa-regular fa-heart");
+						}
+							
+		            	$("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
 		            }
-		        });
-		    };
+		        },
+		        error: function(xhr) {
+		            if (xhr.status === 401) {
+		                const redirectUrl = xhr.responseJSON.redirectUrl;
+		                if (redirectUrl) {
+		                    alert("로그인 후 이용해 주세요");
+		                    window.location.href = redirectUrl;
+		                }
+		            } else {
+		                alert("좋아요 실패");
+		            }
+		        }
+		    });
+		};
 				
 				const commentWrite = () => {
 					const writer = document.getElementById("jobseekerCommentWriter").value;
+					const content = document.getElementById("jobseekerCommentContent").value;
+					const no = "${content_view.jobseekerCommunityBoardNum}";
 					
 					//로그인 확인후 경고창 띄우고 링크연결
 					if(!writer){
@@ -264,9 +305,13 @@
 						window.location.href = "${pageContext.request.contextPath}/login";
 						return;
 					}
+					// 댓글 내용 확인
+					if (content.trim() === "") {
+        				alert("댓글을 입력해 주세요.");
+        				return;
+				    }
 					
-					const content = document.getElementById("jobseekerCommentContent").value;
-					const no = "${content_view.jobseekerCommunityBoardNum}";
+
 
 					$.ajax({
 						 type: "post"
