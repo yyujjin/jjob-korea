@@ -329,16 +329,6 @@
         </div>
     </c:if>
 
-    <!-- 유의사항 -->
-    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="section-title">유의사항</h4>
-                <p>${jobPostingDetail.notes}</p>
-            </div>
-        </div>
-    </c:if>
-
     <!-- 버튼 섹션 -->
     <div class="actions mt-5">
         <button type="button" class="btn btn-apply">즉시지원</button>
