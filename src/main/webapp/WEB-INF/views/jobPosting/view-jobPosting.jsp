@@ -329,18 +329,6 @@
         </div>
     </c:if>
 
-    <!-- 전형절차 -->
-    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="section-title">전형절차</h4>
-                <ul>
-                    <li>${jobPostingDetail.hiringProcess}</li>
-                </ul>
-            </div>
-        </div>
-    </c:if>
-
     <!-- 유의사항 -->
     <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
