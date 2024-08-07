@@ -16,9 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class JobPostingServiceImpl implements JobPostingService {
+private final JobPostingMapper jobPostingMapper;
 
-    @Autowired
-    JobPostingMapper jobPostingMapper;
+    public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
+        this.jobPostingMapper = jobPostingMapper;
+    }
+
 
     //메인페이지 진입시 실행되는 코드
     @Override
