@@ -52,9 +52,17 @@ public class JobPostingController {
     public String createJobPost(Model model) {
 
         model.addAttribute("page","jobPostingDetails/addJobPosting");
-       
+
         return "main/main";
     }
 
+    //공고 상세보기 페이지
+    @GetMapping ("jobPost")
+    public String view_jobPosting (Model model) {
+
+        model.addAttribute("page","jobPosting/view-jobPosting");
+
+        return "main/main";
+    }
 
 }
