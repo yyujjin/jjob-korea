@@ -2,6 +2,8 @@ package com.jjobkorea.controller;
 
 import java.util.List;
 
+import com.jjobkorea.dto.CompanyDTO;
+import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.service.JobPostingDetailService;
 import com.jjobkorea.service.UserSessionService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,10 +60,11 @@ public class JobPostingController {
 
     //공고 상세보기 페이지
     @GetMapping ("jobPosting")
-    public String view_jobPosting (Model model) {
-
+    public String view_jobPosting (Model model, HttpServletRequest request) {
+        int companyId = Integer.parseInt(request.getParameter("companyId"));
+        CompanyDTO comapny = jobPostingService.getCompanyInfo(companyId);
+        model.addAttribute("comapny",comapny);
         model.addAttribute("page","jobPosting/view-jobPosting");
-
         return "main/main";
     }
 
