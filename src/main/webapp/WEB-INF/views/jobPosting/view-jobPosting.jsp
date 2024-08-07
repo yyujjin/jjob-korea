@@ -329,18 +329,6 @@
         </div>
     </c:if>
 
-    <!-- 복지 및 혜택 -->
-    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="section-title">복지 및 혜택</h4>
-                <ul>
-                    <li>${jobPostingDetail.benefits}</li>
-                </ul>
-            </div>
-        </div>
-    </c:if>
-
     <!-- 전형절차 -->
     <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
