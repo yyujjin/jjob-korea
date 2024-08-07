@@ -168,26 +168,14 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="section-title">회사 소개</h4>
-                <p><strong>담당업무 (${jobPostingDetail.positionCount}명)</strong></p>
-                <ul>
-                    <li>${jobPostingDetail.positionResponsibilities}</li>
-                </ul>
-                <p><strong>스킬</strong></p>
-                <ul>
-                    <li>${jobPostingDetail.skills}</li>
-                </ul>
-                <p><strong>핵심역량</strong></p>
-                <ul>
-                    <li>${jobPostingDetail.coreCompetencies}</li>
-                </ul>
-                <p><strong>자격요건</strong></p>
-                <ul>
-                    <li>학력: ${jobPostingDetail.education}</li>
-                    <li>경력: ${jobPostingDetail.experience}년 이상</li>
-                </ul>
-                <p><strong>우대조건</strong></p>
-                <ul>
-                    <li>${jobPostingDetail.preferredConditions}</li>
+                 <ul>
+                     <li>회사 이름 : </li>
+                     <li>대표자 : </li>
+                     <li>업종 : </li>
+                     <li>기업 규모 : </li>
+                     <li>설립 년도 : </li>
+                     <li>직원 수 : </li>
+                     <li>주소 : </li>
                 </ul>
             </div>
         </div>
@@ -197,9 +185,11 @@
             <div class="card-body">
                 <h4 class="section-title">채용 정보</h4>
                 <ul>
-                    <li>고용 형태: ${jobPostingDetail.employmentType}</li>
-                    <li>근무 지역: ${jobPostingDetail.location}</li>
-                    <li>근무 시간: ${jobPostingDetail.workHours}</li>
+                    <li>직무 : </li>
+                    <li>근무 지역 : </li>
+                    <li>고용 형태 : </li>
+                    <li>경력 여부 : </li>
+                    <li>채용 마감 날짜 : </li>
                 </ul>
             </div>
         </div>
