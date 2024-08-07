@@ -8,13 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.service.UserService;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -37,8 +33,7 @@ public class UserController {
 
     //로그아웃
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();  // 세션 무효화
+    public String logout() {
         return "redirect:/";  // 로그인 페이지로 리디렉션
     }
 
@@ -99,13 +94,11 @@ public class UserController {
     @DeleteMapping("/deleteUser")
     @ResponseBody
     public String deleteUser(@RequestParam("userId") String userId) {
-    	
     	UserDTO userDTO = new UserDTO();
     	userDTO.setUserId(userId);
     	log.info("@#userId"+userId);
     	userService.deleteUser(userDTO);
     	log.info("삭제 된 userDTO : {}",userDTO);
-    	
     	return "success";
     }
 }

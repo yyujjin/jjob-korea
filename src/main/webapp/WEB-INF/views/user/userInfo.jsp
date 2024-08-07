@@ -83,8 +83,17 @@
                         url: '${pageContext.request.contextPath}/deleteUser',
                         data: { userId: userId },
                         success: function (response) {
-                            alert('회원 탈퇴가 성공적으로 완료되었습니다')
-                            window.location.href = '${pageContext.request.contextPath}/';
+                           $.ajax({
+                               type: 'get',
+                               url: '${pageContext.request.contextPath}/logout', // 로그아웃 요청
+                               success: function () {
+                                   alert('회원 탈퇴가 성공적으로 완료되었습니다. 로그아웃 처리되었습니다.');
+                                   window.location.href = '${pageContext.request.contextPath}/';
+                               },
+                               error: function (xhr, status, error) {
+                                   alert('로그아웃 중 문제가 발생했습니다. 다시 시도해주세요.');
+                               }
+                           });
                         },
                         error: function (xhr, status, error) {
                             alert('탈퇴 중 문제가 발생했습니다. 다시 시도해주세요.')
