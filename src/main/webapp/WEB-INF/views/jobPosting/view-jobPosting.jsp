@@ -164,12 +164,10 @@
 </head>
 <body>
 <div class="container-fixed mt-5">
-
-    <!-- 포지션 및 자격요건 -->
     <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
             <div class="card-body">
-                <h4 class="section-title">포지션 및 자격요건</h4>
+                <h4 class="section-title">회사 소개</h4>
                 <p><strong>담당업무 (${jobPostingDetail.positionCount}명)</strong></p>
                 <ul>
                     <li>${jobPostingDetail.positionResponsibilities}</li>
@@ -194,12 +192,10 @@
             </div>
         </div>
     </c:if>
-
-    <!-- 근무 조건 -->
     <c:if test="${empty jobPostingDetail.additionalImagePaths}">
         <div class="card">
             <div class="card-body">
-                <h4 class="section-title">근무 조건</h4>
+                <h4 class="section-title">채용 정보</h4>
                 <ul>
                     <li>고용 형태: ${jobPostingDetail.employmentType}</li>
                     <li>근무 지역: ${jobPostingDetail.location}</li>
