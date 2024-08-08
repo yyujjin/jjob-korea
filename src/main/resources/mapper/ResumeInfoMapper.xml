@@ -16,7 +16,13 @@
             resumeSchoolName, resumeCpName, resumeCpDept, resumeCpJoinDate, resumeCpLeaveDate, 
             resumeCpPosition, resumeCpDuty, resumeCpSalary, resumeIntroduce FROM resume_user_information WHERE id = #{arg0} AND resumePageUserId = #{arg1}
     </select>
-
+    
+	<select id = "findPhotoByUserID" resultType="String" parameterType="Long">
+		select resumeProfilePhoto
+		from resume_user_information
+		where id = #{resumeId} 
+	</select>
+	
     <insert id="insert" parameterType="com.jjobkorea.dto.ResumeInfoDTO">
         INSERT INTO resume_user_information (
             resumePageTitle, resumeUserName, resumeBirthDay, resumeGender, resumeUserEmail, resumeUserPhone, resumeUserCellPhone, resumeUserAddress, 

@@ -195,21 +195,21 @@
             <div class="photo">
                 <div class="profilephoto">
                     <c:choose>
-                        <c:when test="${not empty resumeInfoDTO.resumeFilePath}">
+                        <c:when test="${not empty image}">
                             <div id="photo-instructions" style="color: gray; display:none;">
                                 사진 크기는<br>
                                 150x210만 <br>
                                 가능합니다.
                             </div>
-                            <img id="output" src="${pageContext.request.contextPath}/resume_write/edit/image/${resumeInfoDTO.resumeFilePath}" alt="uploaded image" width="150" height="210" style="display:block;">
+                            <img id="output" src="data:image/jpeg;base64,${image}" alt="uploaded image" width="150" height="210" style="display:block;">
                         </c:when>
                         <c:otherwise>
                             <div id="photo-instructions" style="color: gray; display:block;">
                                 사진 크기는<br>
                                 150x210만 <br>
-                                가능합니다.
+                                가능합니다. 
                             </div>
-                            <img id="output" src="${pageContext.request.contextPath}/resume_write/edit/image/${resumeInfoDTO.resumeFilePath}" alt="uploaded image" width="150" height="210" style="display:none;">
+                            <img id="output" src="data:image/jpeg;base64,${image}" alt="uploaded image" width="150" height="210" style="display:none;">
                         </c:otherwise>
                     </c:choose>
                 </div>
