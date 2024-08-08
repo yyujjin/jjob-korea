@@ -54,8 +54,10 @@ public class JobPostingController {
     @GetMapping ("/jobPosting")
     public String view_jobPosting (@RequestParam (value = "companyId") int companyId,Model model) {
 
-        log.info("넘어온 값 : {}", companyId);
+
         model.addAttribute("company",jobPostingService.getCompanyInfo(companyId));
+        model.addAttribute("jobPosting",jobPostingService.getJobPosting(companyId));
+        log.info("넘어온 값 : {}", jobPostingService.getJobPosting(companyId));
         model.addAttribute("page","jobPosting/view-jobPosting");
         return "main/main";
     }
