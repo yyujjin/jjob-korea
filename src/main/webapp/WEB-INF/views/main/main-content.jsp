@@ -131,7 +131,7 @@
                 <c:forEach items="${postingList}" var="postingList">
 
                     <div class="col">
-                       <a href="/jobPosting?companyId=${postingList.companyId}">
+                        <a href="/jobPosting">
                             <div class="card h-100 w-90 text-center">
                                 <img src="<c:out value='${postingList.postingImage}'/>"
                                     class="card-img-top fixed-size-image" alt="..." />
