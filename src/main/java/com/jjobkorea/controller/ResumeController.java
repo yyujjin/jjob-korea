@@ -21,7 +21,6 @@ import com.jjobkorea.dto.ResumeInfoDTO;
 import com.jjobkorea.service.ResumeInfoService;
 import com.jjobkorea.service.UserSessionService;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,14 +34,13 @@ public class ResumeController {
     private final UserSessionService userSessionService; 
     // 이력서 메인
     @GetMapping("/resume")
-    public String resister(Model model, HttpSession session) {
+    public String resister(Model model) {
         log.info("@#hello");
         
         String userId = userSessionService.getUserId(); //아이디 가져오기
         userSessionService.getUserName(); //이름 가져오기
         
         List<ResumeInfoDTO> resumes = resumeInfoService.findByUserId(userId);
-        System.out.println("@#@##@#@#@#@#@#@#@#@############################" + resumes);
         model.addAttribute("resumes", resumes);
         
         for(ResumeInfoDTO test : resumes) {
@@ -57,15 +55,11 @@ public class ResumeController {
     
     // 이력서 작성 페이지 로직
     @GetMapping("/resume/create")
-    public String resumeWrite(Model model, HttpSession session) {
+    public String resumeWrite(Model model) {
         log.info("@#resume_write");
 
-        String userId = userSessionService.getUserId(); //아이디 가져오기
+        userSessionService.getUserId(); //아이디 가져오기
         userSessionService.getUserName(); //이름 가져오기
-
-        if(userId == null) {
-        	return "redirect:/login";
-        }
         
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
         model.addAttribute("page", "resume_page/resume_write/resume_write");
@@ -75,7 +69,7 @@ public class ResumeController {
 
     // 이력서 저장 로직
     @PostMapping("/resume/create")
-    public String addResume(@RequestParam("resumeProfilePhoto") MultipartFile file, @ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session, Model model) throws ParseException {
+    public String addResume(@RequestParam("resumeProfilePhoto") MultipartFile file, @ModelAttribute ResumeInfoDTO resumeInfoDTO, Model model) throws ParseException {
         log.info("@#saveResume");
 
         String userId = userSessionService.getUserId(); //아이디 가져오기
@@ -106,7 +100,7 @@ public class ResumeController {
     }
 //     이력서 수정 페이지 접속 로직
     @GetMapping("/resume_write/edit")
-    public String editResume(@RequestParam("id") Long id, Model model, HttpSession session) throws IOException {
+    public String editResume(@RequestParam("id") Long id, Model model) throws IOException {
         log.info("@#resume edit");
         
         String userId = userSessionService.getUserId(); //아이디 가져오기
@@ -129,7 +123,7 @@ public class ResumeController {
     }
     // 이력서 수정 완료 업데이트 로직
     @PostMapping("/resume_write/edit")
-    public String updateResume(@RequestParam("resumeId") MultipartFile file, @ModelAttribute ResumeInfoDTO resumeInfoDTO, HttpSession session) {
+    public String updateResume(@RequestParam("resumeId") MultipartFile file, @ModelAttribute ResumeInfoDTO resumeInfoDTO) {
         log.info("resumeUpdate");
         UUID uuid = UUID.randomUUID();
         
@@ -167,14 +161,11 @@ public class ResumeController {
     }
     // 이력서 삭제 로직
     @PostMapping("/resume/delete")
-    public String delete(@RequestParam("id") Long id, HttpSession session) {
+    public String delete(@RequestParam("id") Long id) {
     	log.info("@#delete");
     	String userId = userSessionService.getUserId(); //아이디 가져오기
         userSessionService.getUserName(); //이름 가져오기
-    	
-    	if (userId == null) {
-            return "redirect:/login";
-        }
+
     	resumeInfoService.delete(id, userId);
         
 		return "redirect:/resume";
