@@ -161,6 +161,7 @@
             padding-left: 1rem; /* 왼쪽 여백 추가 */
         }
     </style>
+ <script src="../../resources/js/jobPosting/view-jobPosting.js" defer></script> <!--js연결-->
 </head>
 <body>
 <div class="container-fixed mt-5">
@@ -196,13 +197,12 @@
 
     <!-- 버튼 섹션 -->
     <div class="actions mt-5">
-        <button type="button" class="btn btn-apply">지원하기</button>
+        <button type="button" id="applyButton" class="btn btn-apply">지원하기 </button>
     </div>
 </div>
 
-<!-- jQuery -->
-<script src="<c:url value='/resources/js/jquery-3.7.1.min.js' />"></script>
 <!-- Bootstrap JS -->
 <script src="<c:url value='/resources/js/bootstrap/bootstrap.min.js' />"></script>
+
 </body>
 </html>
