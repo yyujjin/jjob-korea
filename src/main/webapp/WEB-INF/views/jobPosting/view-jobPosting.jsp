@@ -168,7 +168,7 @@
         <div class="card-body">
             <h4 class="section-title">회사 소개</h4>
              <ul>
-                 <li>회사 이름 : ${company.name} </li>
+                 <li>회사 이름 : </li>
                  <li>대표자 : </li>
                  <li>업종 : </li>
                  <li>기업 규모 : </li>
@@ -178,8 +178,8 @@
             </ul>
         </div>
     </div>
-    </c:if>
-    <c:if test="${empty jobPostingDetail.additionalImagePaths}">
+
+
         <div class="card">
             <div class="card-body">
                 <h4 class="section-title">채용 정보</h4>
