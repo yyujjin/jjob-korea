@@ -184,11 +184,11 @@
             <div class="card-body">
                 <h4 class="section-title">채용 정보</h4>
                 <ul>
-                    <li>직무 : </li>
-                    <li>근무 지역 : </li>
-                    <li>고용 형태 : </li>
-                    <li>경력 여부 : </li>
-                    <li>채용 마감 날짜 : </li>
+                    <li>직무 : ${jobPosting.jobTitle}</li>
+                    <li>근무 지역 : ${jobPosting.workLocation}</li>
+                    <li>고용 형태 :  ${jobPosting.employmentType}</li>
+                    <li>경력 여부 : ${jobPosting.jobExperience}</li>
+                    <li>채용 마감 날짜 : ${jobPosting.deadline}</li>
                 </ul>
             </div>
         </div>
