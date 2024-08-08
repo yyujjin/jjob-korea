@@ -14,8 +14,10 @@
             }
 
             .wide-title {
-               width: 100%;
+               width: 600px;
                margin: 10px;
+               font-size: 18px;
+               font-weight: bold;
             }
 
             .notContent {
@@ -24,7 +26,8 @@
                padding: 5px;
                border: none;
             }
-            .ContentTitle{
+
+            .ContentTitle {
                border: 2px solid black;
             }
 
@@ -53,9 +56,13 @@
                color: #00FF00;
             }
 
+            .mld_button:hover {
+               color: blue;
+            }
+
             .mld_button {
-               background-color: #0057ff;
-               color: white;
+               background-color: white;
+               color: black;
                padding: 5px 10px;
                border: none;
                cursor: pointer;
@@ -65,8 +72,7 @@
 
             .uploadResult {
                margin-top: 20px;
-               background-color: #f0f0f0;
-               width: 95%;
+               width: 100%;
                padding: 10px;
             }
 
@@ -75,18 +81,18 @@
                flex-wrap: wrap;
                padding: 0;
                list-style-type: none;
+               justify-content: center;
             }
 
             .uploadResult ul li {
                margin: 5px;
                padding: 10px;
-               border: 1px solid #ccc;
-               background-color: #fff;
+               background-color: #ffffff00;
                text-align: center;
             }
 
             .uploadResult ul li img {
-               max-width: 100px;
+               max-width: 200px;
                height: auto;
             }
 
@@ -150,21 +156,25 @@
       <body>
          <table width="500" border="1">
             <form method="post" action="jobseekerModify">
-               <input type="hidden" name="jobseekerCommunityBoardNum" value="${content_view.jobseekerCommunityBoardNum}">
+               <input type="hidden" name="jobseekerCommunityBoardNum"
+                  value="${content_view.jobseekerCommunityBoardNum}">
                <input type="hidden" name="pageNum" value="${pageMaker.pageNum}">
                <input type="hidden" name="amount" value="${pageMaker.amount}">
-               <input type="hidden" name="jobseekerCommunityBoardName" value="${content_view.jobseekerCommunityBoardName}">
+               <input type="hidden" name="jobseekerCommunityBoardName"
+                  value="${content_view.jobseekerCommunityBoardName}">
                <thead>
                   <tr>
                      <td class="notContent">
                         조회수 ${content_view.jobseekerCommunityBoardHit} &nbsp; 좋아요
-                        <button id="likeButton" class="like_button" onclick="handleLike(${content_view.jobseekerCommunityBoardNum}); return false;">
+                        <button id="likeButton" class="like_button"
+                           onclick="handleLike(${content_view.jobseekerCommunityBoardNum}); return false;">
                            <i id="likeIcon" class="fa-regular fa-heart"></i> <!-- 기본 상태 아이콘 -->
                         </button>
                         <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
                      </td>
                      <td class="notContent" style="text-align: right;">
-                        글번호 ${content_view.jobseekerCommunityBoardNum} &nbsp; 작성자 ${content_view.jobseekerCommunityBoardName}
+                        글번호 ${content_view.jobseekerCommunityBoardNum} &nbsp; 작성자
+                        ${content_view.jobseekerCommunityBoardName}
                      </td>
                   </tr>
                </thead>
@@ -173,10 +183,10 @@
                      <td class="ContentTitle" colspan="2">
                         <c:choose>
                            <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
-                              <input type="text" name="jobseekerCommunityBoardTitle" value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
+                              <input type="text" name="jobseekerCommunityBoardTitle"
+                                 value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
                            </c:when>
                            <c:otherwise>
-                              <!-- &nbsp;${content_view.jobseekerCommunityBoardTitle} -->
                               <div class="wide-title">&nbsp;${content_view.jobseekerCommunityBoardTitle}</div>
                            </c:otherwise>
                         </c:choose>
@@ -184,23 +194,34 @@
                   </tr>
                   <tr>
                      <td class="BoardContent" colspan="2" style="align-content: center;">
+
+                        <div class="uploadResult hidden" id="uploadResult">
+                           <ul id="photoList" class="photoList">
+                              <!-- 사진나옴 -->
+                           </ul>
+                        </div>
+
                         <c:choose>
                            <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
-                              <textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}</textarea>
+                              <textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}
+                              </textarea>
                            </c:when>
                            <c:otherwise>
-                              <div class="BoardContent" style="border: none;">${content_view.jobseekerCommunityBoardContent}</div>
-                              <!-- <div class="BoardContent">${content_view.jobseekerCommunityBoardContent}</div> -->
+                              <div class="BoardContent" style="border: none;">
+                                 ${content_view.jobseekerCommunityBoardContent}
+                              </div>
                            </c:otherwise>
                         </c:choose>
                      </td>
+
                   </tr>
                   <tr>
                      <td colspan="2" style="text-align: right;">
                         <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
                            <input class="mld_button" type="submit" value="수정">
                         </c:if>
-                        &nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get" formaction="/board">
+                        &nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get"
+                           formaction="/board">
                         &nbsp;&nbsp;
                         <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
                            <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
@@ -210,19 +231,13 @@
                </tbody>
             </form>
          </table>
-         
-         
+
          <!-- 첨부파일 출력 -->
-         첨부파일
+
          <div class="bigPicture">
             <div class="bigPic">
-
+               <!-- 누르면 큰 사진 나옴 -->
             </div>
-         </div>
-         <div class="uploadResult">
-            <ul>
-
-            </ul>
          </div>
 
          <div id="commentForm">
