@@ -59,11 +59,8 @@ public class JobPostingController {
     }
 
     //공고 상세보기 페이지
-    @GetMapping ("jobPosting")
-    public String view_jobPosting (Model model, HttpServletRequest request) {
-        int companyId = Integer.parseInt(request.getParameter("companyId"));
-        CompanyDTO comapny = jobPostingService.getCompanyInfo(companyId);
-        model.addAttribute("comapny",comapny);
+    @GetMapping ("/jobPosting")
+    public String view_jobPosting (Model model) {
         model.addAttribute("page","jobPosting/view-jobPosting");
         return "main/main";
     }
