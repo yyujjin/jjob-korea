@@ -10,30 +10,26 @@
             table {
                width: 100%;
                border-collapse: collapse;
-               /* border: 1px solid #ccc; */
+               border: none;
             }
 
             .wide-title {
-               width: 50%;
+               width: 100%;
             }
 
             .notContent {
                padding-bottom: 20px;
                text-align: start;
-               width: 50%;
                padding: 5px;
-               max-width: 100px;
-               /* border: solid 1px #00FF00;  */
+               border: none;
             }
 
             .BoardContent {
                width: 85%;
                height: 400px;
-               /* 높이 조정 */
                padding: 20px;
-               /* 내부 여백 */
-               border: 1px solid #ccc;
-               /* 테두리 */
+               border: 2px solid black;
+               border-radius: 3px;
                margin: 10px;
             }
 
@@ -160,86 +156,66 @@
       <body>
          <table width="500" border="1">
             <form method="post" action="jobseekerModify">
-               <input type="hidden" name="jobseekerCommunityBoardNum"
-                  value="${content_view.jobseekerCommunityBoardNum}">
+               <input type="hidden" name="jobseekerCommunityBoardNum" value="${content_view.jobseekerCommunityBoardNum}">
                <input type="hidden" name="pageNum" value="${pageMaker.pageNum}">
                <input type="hidden" name="amount" value="${pageMaker.amount}">
-               <!-- 수정시 작성자 아이디 기억 -->
-               <input type="hidden" name="jobseekerCommunityBoardName"
-                  value="${content_view.jobseekerCommunityBoardName}">
+               <input type="hidden" name="jobseekerCommunityBoardName" value="${content_view.jobseekerCommunityBoardName}">
                <thead>
                   <tr>
                      <td class="notContent">
-                        조회수
-                        ${content_view.jobseekerCommunityBoardHit}
-                        &nbsp;
-                        좋아요
-                        <button id="likeButton" class="like_button"
-                           onclick="handleLike(${content_view.jobseekerCommunityBoardNum}); return false;">
+                        조회수 ${content_view.jobseekerCommunityBoardHit} &nbsp; 좋아요
+                        <button id="likeButton" class="like_button" onclick="handleLike(${content_view.jobseekerCommunityBoardNum}); return false;">
                            <i id="likeIcon" class="fa-regular fa-heart"></i> <!-- 기본 상태 아이콘 -->
                         </button>
                         <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
                      </td>
-
-                     <td class="notContent">
-                        글번호
-                        ${content_view.jobseekerCommunityBoardNum}
-                        &nbsp;
-                        작성자
-                        ${content_view.jobseekerCommunityBoardName}
+                     <td class="notContent" style="text-align: right;">
+                        글번호 ${content_view.jobseekerCommunityBoardNum} &nbsp; 작성자 ${content_view.jobseekerCommunityBoardName}
                      </td>
                   </tr>
                </thead>
-               <tr>
-                  <td class="ContentTitle">
-                     <c:choose>
-                        <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
-                           <input type="text" name="jobseekerCommunityBoardTitle"
-                              value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
-                        </c:when>
-                        <c:otherwise>
-                           ${content_view.jobseekerCommunityBoardTitle}
-                        </c:otherwise>
-                     </c:choose>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="BoardContent">
-                     <c:choose>
-                        <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
-                           <textarea class="BoardContent"
-                              name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}</textarea>
-                        </c:when>
-                        <c:otherwise>
-                           <div class="BoardContent">${content_view.jobseekerCommunityBoardContent}</div>
-                        </c:otherwise>
-                     </c:choose>
-                  </td>
-               </tr>
-               <tr>
-                  <td style="text-align: center;">좋아요
-                     <button id="likeButton" class="like_button"
-                        onclick="handleLike(${content_view.jobseekerCommunityBoardNum}); return false;">
-                        <i id="likeIcon" class="fa-regular fa-heart"></i> <!-- 기본 상태 아이콘 -->
-                     </button>
-                     <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
-                  </td>
-               </tr>
-               <tr>
-                  <td colspan="2" style="text-align: right;">
-                     <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
-                        <input class="mld_button" type="submit" value="수정">
-                     </c:if>
-                     &nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get"
-                        formaction="/board">
-                     &nbsp;&nbsp;
-                     <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
-                        <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
-                     </c:if>
-                  </td>
-               </tr>
+               <tbody>
+                  <tr>
+                     <td class="ContentTitle" colspan="2">
+                        <c:choose>
+                           <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
+                              <input type="text" name="jobseekerCommunityBoardTitle" value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
+                           </c:when>
+                           <c:otherwise>
+                              ${content_view.jobseekerCommunityBoardTitle}
+                           </c:otherwise>
+                        </c:choose>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="BoardContent" colspan="2">
+                        <c:choose>
+                           <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
+                              <textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}</textarea>
+                           </c:when>
+                           <c:otherwise>
+                              <div class="BoardContent">${content_view.jobseekerCommunityBoardContent}</div>
+                           </c:otherwise>
+                        </c:choose>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="2" style="text-align: right;">
+                        <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
+                           <input class="mld_button" type="submit" value="수정">
+                        </c:if>
+                        &nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get" formaction="/board">
+                        &nbsp;&nbsp;
+                        <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
+                           <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
+                        </c:if>
+                     </td>
+                  </tr>
+               </tbody>
             </form>
          </table>
+         
+         
          <!-- 첨부파일 출력 -->
          첨부파일
          <div class="bigPicture">
