@@ -161,6 +161,7 @@
             padding-left: 1rem; /* 왼쪽 여백 추가 */
         }
     </style>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script src="../../resources/js/jobPosting/view-jobPosting.js" defer></script> <!--js연결-->
 </head>
 <body>
