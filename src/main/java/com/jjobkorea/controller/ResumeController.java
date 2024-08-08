@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
 
+import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -42,9 +43,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ResumeController {
     @Autowired
     private ResumeInfoService resumeInfoService;
-    @Value("${spring.servlet.multipart.location}")
-	private String filepath;
-    
     // 이력서 메인
     @GetMapping("/resume")
     public String resister(Model model, HttpSession session) {
@@ -68,7 +66,7 @@ public class ResumeController {
 
         model.addAttribute("userId", userId);
         model.addAttribute("page", "resume_page/resume_page");
-        
+
         return "main/main";
     }
     
@@ -83,6 +81,7 @@ public class ResumeController {
 
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
         model.addAttribute("page", "resume_page/resume_write/resume_write");
+
         return "main/main";
     }
 
@@ -140,31 +139,9 @@ public class ResumeController {
         }
 
         model.addAttribute("resumeInfoDTO", resumeInfoDTO);
-//        model.addAttribute("resumeInfoDTO", "resume_page/resume_edit");
-        return "resume_page/resume_edit";
-    }
-    
-    @GetMapping("/resume_write/edit/image/{fileName}")
-    public ResponseEntity<byte[]> showImage(@PathVariable("fileName") String fileName, ResumeInfoDTO resumeInfoDTO) {
-		log.info("@# display fileName=>"+fileName);
-		
-//		업로드 파일경로+이름
-		File file = new File("D:\\dev\\upload\\"+fileName);
-		log.info("@# file=>"+file);
-		
-		ResponseEntity<byte[]> result=null;
-		HttpHeaders headers=new HttpHeaders();
-		
-		try {
-//			파일타입을 헤더에 추가
-			headers.add("Content-Type", Files.probeContentType(file.toPath()));
-//			파일정보를 byte 배열로 복사+헤더정보+http상태 정상을 결과에 저장
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
+        model.addAttribute("resumeInfoDTO", "resume_page/resume_edit");
+
+        return "main/main";
     }
     // 이력서 수정 완료 업데이트 로직
     @PostMapping("/resume_write/edit")

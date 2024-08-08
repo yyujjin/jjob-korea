@@ -3,6 +3,7 @@ package com.jjobkorea.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,8 @@ public class JobseekerCommentController {
 	//서비스단
 	@Autowired
 	private JobseekerCommentService service;
-	
-	@PostMapping("/jobseekerSave")
+
+    @PostMapping("/jobseekerSave")
 	public @ResponseBody ArrayList<JobseekerCommentDTO> save(@RequestParam HashMap<String, String> param
 			// 로그인세션
 			,HttpSession session) { 

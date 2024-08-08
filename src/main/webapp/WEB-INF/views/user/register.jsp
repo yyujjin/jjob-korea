@@ -140,7 +140,7 @@ $(document).ready(function() {
     </div>
     <div id="individualForm" class="container02">
         <form id="signup-form" method="post" action="/register">
-            <input type="hidden" name="type" value="individual">
+            <input type="hidden" name="role" value="ROLE_JOB_SEEKER">
             <div class="form-group">
                 <input type="text" id="userId" name="userId" placeholder="아이디" required>
                 <div id="idError" class="error-message" style="color:red;"></div>
@@ -250,7 +250,7 @@ $(document).ready(function() {
                     <li><span style="color: red;">*</span>필수정보</li>
                 </div>
             </div>
-            <input type="hidden" name="type" value="enterprise">
+            <input type="hidden" name="role" value="ROLE_COMPANY_USER">
             <div class="form-group">
                 <select name="companyType" class="selectType" required>
                     <option value="" disabled selected style="display: none;">기업형태</option>
