@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .requestMatchers("/WEB-INF/views/**").permitAll()//jsp
                 .requestMatchers("/resources/**").permitAll()
                 .requestMatchers("/", "/login", "/register").permitAll() //메인, 로그인, 회원가입
-                .requestMatchers("/jobPosts", "/searchFilter","/jobPosting","/jobPosting?error*","/error?*").permitAll()//채용 정보
+                .requestMatchers("/jobPosts", "/searchFilter","/jobPosting").permitAll()//채용 정보
                 .requestMatchers(
                         "/jobseekerContent_view",
                                 "/requestPage/jobseekerContent_view",
@@ -32,8 +32,7 @@ public class SecurityConfig {
                                 "/board",
                                 "/display",
                                 "/getFileList",
-                                "/download").permitAll() //게시판,
-                .requestMatchers("/**").permitAll()
+                                "/download").permitAll() //게시판
                 .anyRequest().authenticated()
         );
 
