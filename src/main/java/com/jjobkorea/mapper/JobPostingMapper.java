@@ -25,5 +25,5 @@ public interface JobPostingMapper {
     public CompanyDTO getCompanyInfo(int companyId);
 
     //채용 정보 가져오기
-    public JobPostingDTO getJobPosting();
+    public JobPostingDTO getJobPosting(int companyId);
 }
