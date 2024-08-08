@@ -180,7 +180,6 @@
             </style>
             <script type="text/javascript"
                 src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
-<!--            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/resume_css/write.css">-->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         </head>
 
