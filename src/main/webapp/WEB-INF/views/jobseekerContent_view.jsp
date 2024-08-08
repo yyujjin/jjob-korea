@@ -187,7 +187,7 @@
                                  value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
                            </c:when>
                            <c:otherwise>
-                              <div class="wide-title">&nbsp;${content_view.jobseekerCommunityBoardTitle}</div>
+                              <div class="wide-title">&nbsp;<a style="color: blue;">제목</a>&nbsp;:&nbsp;${content_view.jobseekerCommunityBoardTitle}</div>
                            </c:otherwise>
                         </c:choose>
                      </td>
