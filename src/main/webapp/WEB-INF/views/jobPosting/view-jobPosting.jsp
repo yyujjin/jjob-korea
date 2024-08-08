@@ -196,7 +196,7 @@
 
     <!-- 버튼 섹션 -->
     <div class="actions mt-5">
-        <button type="button" class="btn btn-apply">즉시지원</button>
+        <button type="button" class="btn btn-apply">지원하기</button>
     </div>
 </div>
 
