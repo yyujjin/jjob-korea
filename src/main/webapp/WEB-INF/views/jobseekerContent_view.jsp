@@ -8,13 +8,14 @@
          <title>Insert title here</title>
          <style>
             table {
-               width: 100%;
+               width: 95%;
                border-collapse: collapse;
                border: none;
             }
 
             .wide-title {
                width: 100%;
+               margin: 10px;
             }
 
             .notContent {
@@ -23,14 +24,17 @@
                padding: 5px;
                border: none;
             }
+            .ContentTitle{
+               border: 2px solid black;
+            }
 
             .BoardContent {
-               width: 85%;
+               width: 100%;
                height: 400px;
-               padding: 20px;
+               padding: 3px;
                border: 2px solid black;
+               text-align: center;
                border-radius: 3px;
-               margin: 10px;
             }
 
             .like_button {
@@ -50,17 +54,11 @@
             }
 
             .mld_button {
-               /*수정/목록/삭제*/
                background-color: #0057ff;
-               /* 버튼 배경색 */
                color: white;
-               /* 텍스트 색상 */
                padding: 5px 10px;
-               /* 버튼 여백 */
                border: none;
-               /* 테두리 제거 */
                cursor: pointer;
-               /* 커서 변경 */
                float: right;
                margin: 10px;
             }
@@ -68,6 +66,7 @@
             .uploadResult {
                margin-top: 20px;
                background-color: #f0f0f0;
+               width: 95%;
                padding: 10px;
             }
 
@@ -110,19 +109,14 @@
             #commentForm {
                display: flex;
                justify-content: flex-end;
-               /* 오른쪽 정렬 */
                margin-top: 20px;
-               /* 상단 여백 */
+               width: 95%;
             }
 
             #commentForm input[type="text"] {
                margin-right: 5px;
-               /* 오른쪽 여백 */
                padding: 5px;
-               /* 내부 여백 */
                border: 1px solid #ccc;
-               /* 테두리 */
-
             }
 
             #comment-list {
@@ -130,7 +124,7 @@
             }
 
             #comment-list table {
-               width: 100%;
+               width: 95%;
                border-collapse: collapse;
             }
 
@@ -182,19 +176,21 @@
                               <input type="text" name="jobseekerCommunityBoardTitle" value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
                            </c:when>
                            <c:otherwise>
-                              ${content_view.jobseekerCommunityBoardTitle}
+                              <!-- &nbsp;${content_view.jobseekerCommunityBoardTitle} -->
+                              <div class="wide-title">&nbsp;${content_view.jobseekerCommunityBoardTitle}</div>
                            </c:otherwise>
                         </c:choose>
                      </td>
                   </tr>
                   <tr>
-                     <td class="BoardContent" colspan="2">
+                     <td class="BoardContent" colspan="2" style="align-content: center;">
                         <c:choose>
                            <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
                               <textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}</textarea>
                            </c:when>
                            <c:otherwise>
-                              <div class="BoardContent">${content_view.jobseekerCommunityBoardContent}</div>
+                              <div class="BoardContent" style="border: none;">${content_view.jobseekerCommunityBoardContent}</div>
+                              <!-- <div class="BoardContent">${content_view.jobseekerCommunityBoardContent}</div> -->
                            </c:otherwise>
                         </c:choose>
                      </td>
