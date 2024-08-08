@@ -42,4 +42,8 @@ public class ResumeInfoServiceImpl implements ResumeInfoService {
 		resumeInfoMapper.delete(id, userId);
 		
 	}
+	@Override
+	public String findPhotoByUserID(Long resumeId) {
+		return resumeInfoMapper.findPhotoByUserID(resumeId);
+	}
 }
