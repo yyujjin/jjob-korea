@@ -51,7 +51,7 @@ public class SecurityConfig {
 
         httpSecurity
                 .sessionManagement((auth) -> auth
-                        .maximumSessions(3)
+                        .maximumSessions(1)
                         .maxSessionsPreventsLogin(false)); //초과 시 기존 세션 삭제후 새로운 로그인 진행
 
 
