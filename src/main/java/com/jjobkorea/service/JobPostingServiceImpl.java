@@ -151,4 +151,9 @@ private final JobPostingMapper jobPostingMapper;
         return jobPostingMapper.getCompanyInfo(companyId);
     }
 
+    @Override
+    public JobPostingDTO getJobPosting(int companyId) {
+        return jobPostingMapper.getJobPosting(companyId);
+    }
+
 }
