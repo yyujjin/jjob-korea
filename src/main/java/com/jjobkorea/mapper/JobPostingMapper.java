@@ -23,4 +23,7 @@ public interface JobPostingMapper {
 
     //기업 정보 가져오기
     public CompanyDTO getCompanyInfo(int companyId);
+
+    //채용 정보 가져오기
+    public JobPostingDTO getJobPosting();
 }

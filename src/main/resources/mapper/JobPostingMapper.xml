@@ -116,5 +116,9 @@
         select * from team_db.companyinfo where id = #{companyId};
     </select>
 
+    <select id="getJobPosting" resultType="JobPostingDTO" parameterType="int">
+        select * from team_db.jobposting where companyId = #{companyId};
+    </select>
+
 </mapper>
 
