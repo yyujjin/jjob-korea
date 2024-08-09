@@ -7,61 +7,71 @@
 		<title>Insert title here</title>
 		<style>
 			table {
-				width: 100%;
+				width: 95%;
 				border-collapse: collapse;
-				border: 1px solid #ccc;
+				border: none;
 			}
 
 			th,
 			td {
 				padding: 20px;
 				text-align: left;
-				border: 1px solid #ccc;
 			}
 
-			.wide-name {
+			.width-name {
 				width: 25%;
+				font-weight: bold;
+				font-size: 15px;
 			}
 
-			.wide-title {
-				width: 50%;
+			.width-title {
+				width: 600px;
+				margin: 10px;
+				font-size: 18px;
+				font-weight: bold;
 			}
 
 			.notContent {
+				padding-bottom: 10px;
+				text-align: start;
 				padding: 5px;
-				margin: 5;
+				border: none;
 			}
 
 			.BoardContent {
-				width: 85%;
+				width: 100%;
 				height: 400px;
-				/* 높이 조정 */
-				padding: 20px;
-				/* 내부 여백 */
-				border: 1px solid #ccc;
-				/* 테두리 */
+				padding: 3px;
+				text-align: center;
+				border-radius: 3px;
 			}
 
 			.upload-list {
-				text-align: right;
-				margin-top: 10px;
+				justify-content: space-between;
+				display: flex;
+				width: 1180px;
+				text-align: left;
 			}
 
-			.upload-list button,
-			.upload-list a {
+			.upload-list button {
 				background-color: #0057ff;
 				color: white;
 				padding: 5px 10px;
 				border: none;
 				cursor: pointer;
 				text-decoration: none;
-				/* 밑줄 제거 */
 				display: inline-block;
-				/* 버튼과 앵커 태그를 동일하게 inline-block으로 설정 */
 				font-size: 14px;
-				/* 글씨 크기 조정 */
-				margin: 5px;
-				/* 여백 조정 */
+			}
+
+			.upload-list a {
+				color: black;
+				padding: 5px 10px;
+				border: none;
+				cursor: pointer;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 15px;
 			}
 
 			.button-container a {
@@ -79,8 +89,8 @@
 			}
 
 			.uploadDiv label {
-				background-color: #0057ff;
-				color: white;
+				font-size: 14px;
+				color: black;
 				padding: 5px 10px;
 				text-decoration: none;
 				border: none;
@@ -88,10 +98,9 @@
 			}
 
 			.uploadResult {
+				margin-top: auto;
 				width: 100%;
-				background-color: #abaaaa;
 				padding: 10px;
-				margin-top: 10px;
 			}
 
 			.uploadResult ul {
@@ -99,19 +108,18 @@
 				flex-wrap: wrap;
 				padding: 0;
 				list-style-type: none;
+				justify-content: center;
 			}
 
 			.uploadResult ul li {
-				list-style: none;
-				padding: 10px;
-				background: #fff;
 				margin: 5px;
-				border: 1px solid #ccc;
+				padding: 10px;
+				background-color: #ffffff00;
 				text-align: center;
 			}
 
 			.uploadResult ul li img {
-				width: 50px;
+				width: 200px;
 				height: auto;
 			}
 		</style>
@@ -142,34 +150,36 @@
 			<form id="frm" method="post" action="/jobseekerWrite">
 				<table>
 					<tr>
-						<td class="notContent" class="width-name">아이디 : ${username}</td>
+						<td class="notContent" class="width-name"> 작성자 ${username}</td>
 						<input type="hidden" name="jobseekerCommunityBoardName" value="${username}">
 					<tr>
 						<td class="notContent">
-							<input placeholder="제목을 입력하세요" type="text" name="jobseekerCommunityBoardTitle"
+							<a style="color: blue;">제목</a> :
+							<input placeholder="제목을 입력해주세요." type="text" name="jobseekerCommunityBoardTitle"
 								class="width-title">
 						</td>
 					</tr>
 					<tr>
 						<td class="BoardContent">
-							<textarea placeholder="내용을 입력하세요" class="BoardContent" rows="10"
+							<textarea placeholder="내용을 입력해주세요." class="BoardContent" rows="10"
 								name="jobseekerCommunityBoardContent"></textarea>
+							<div class="uploadResult">
+								<ul></ul>
+							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="upload-list">
-					<button type="submit">입력</button>
 					<a href="/board">목록보기</a>
+					<button type="submit">등록</button>
 				</div>
 			</form>
 			<div class="uploadDiv">
-				<label for="uploadFile">첨부파일</label> <span style="color: gainsboro;">첨부파일은 내용 제일 상단에 게재됩니다.</span>
+				<label for="uploadFile">첨부파일</label> <span style="color: gainsboro; font-size: 13px;">첨부파일은 내용 제일 상단에 게재됩니다.</span>
 				<input type="file" id="uploadFile" name="uploadFile" multiple>
 			</div>
 
-			<div class="uploadResult">
-				<ul></ul>
-			</div>
+
 		</div>
 	</body>
 
