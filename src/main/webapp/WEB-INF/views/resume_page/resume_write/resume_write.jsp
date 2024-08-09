@@ -16,14 +16,6 @@
                     align-items: center;
                 }
 
-                header {
-                    width: 100%;
-                    background-color: white;
-                    padding: 10px 0;
-                    display: flex;
-                    justify-content: center;
-                }
-
                 .main-container {
                     display: flex;
                     width: 100%;
@@ -38,6 +30,7 @@
                     background: white;
                     border-radius: 5px;
                     margin-right: 20px;
+                    font-size: 15px;
                 }
 
                 .profilephoto {
@@ -51,11 +44,6 @@
                     margin-top: 10px;
                 }
 
-                h3 {
-                    font-size: 1.2em;
-                    margin-bottom: 10px;
-                }
-
                 input,
                 select,
                 textarea {
@@ -65,6 +53,8 @@
                     border-radius: 5px;
                     width: calc(50% - 10px);
                     gap: 10px;
+                    width: 200px;
+                    height: 10px;
                 }
 
                 button {
@@ -108,7 +98,7 @@
                 }
 
                 textarea {
-                    width: 100%;
+                    width: 600px;
                     resize: none;
                 }
 
@@ -177,6 +167,14 @@
                     font-size: 12px;
                     margin-top: 75px;
                 }
+
+                .personal-info {
+                    border: solid 1px black;
+                }
+
+                #resumeGender {
+                    height: 35px;
+                }
             </style>
             <script type="text/javascript"
                 src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
@@ -184,12 +182,6 @@
         </head>
 
         <body>
-            <header>
-                <div class="logo">
-                    <img src="${pageContext.request.contextPath}/resources/img/jjobkorea_logo.png" alt="JJOBKOREA Logo"
-                        width="200px">
-                </div>
-            </header>
 
             <form method="post" action="/resume/create" enctype="multipart/form-data">
                 <div class="main-container">
@@ -230,36 +222,37 @@
                         </section>
 
                         <section class="personal-info">
-                            <h3>인적 사항 <a style="color: gray; font-size: 11px;">
-                                    <b class="b">*</b>은 필수항목 입니다.</a>
-                                <div class="input-group">
-                                    이름<b class="b">*</b>
-                                    <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName"
-                                        required><br>
-                                    생년월일<b class="b">*</b>
-                                    <input type="text" placeholder="생년월일" name="resumeBirthDay" id="resumeBirthDay"
-                                        required>
-                                    <select name="resumeGender" id="resumeGender">
-                                        <option value="0" selected disabled>성별<b class="b">*</b></option>
-                                        <option value="1">남자</option>
-                                        <option value="2">여자</option>
-                                    </select><br>
-                                    이메일<b class="b">*</b>
-                                    <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
-                                        required><br>
-                                    전화번호
-                                    <input type="text" placeholder="전화번호" name="resumeUserPhone" id="resumeUserPhone"
-                                        required><br>
-                                    휴대번호<b class="b">*</b>
-                                    <input type="text" placeholder="휴대번호" name="resumeUserCellPhone"
-                                        id="resumeUserCellPhone" required><br>
-                                    주소<b class="b">*</b>
-                                    <input type="text" placeholder="주소" name="resumeUserAddress" id="resumeUserAddress"
-                                        required>
-                                </div>
+                            <a style="font-size: 16px;">인적 사항</a> <a style="color: gray; font-size: 11px;">
+                                <b class="b">*</b>은 필수항목 입니다.</a>
+                            <div class="input-group">
+                                이름<b class="b">*</b>
+                                <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName"
+                                    required>
+                                생년월일<b class="b">*</b>
+                                <input type="text" placeholder="생년월일" name="resumeBirthDay" id="resumeBirthDay"
+                                    required>
+                                    &nbsp;
+                                <select name="resumeGender" id="resumeGender">
+                                    <option value="0" selected disabled>성별<b class="b">*</b></option>
+                                    <option value="1">남자</option>
+                                    <option value="2">여자</option>
+                                </select><br>
+                                이메일<b class="b">*</b>
+                                <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
+                                    required><br>
+                                전화번호
+                                <input type="text" placeholder="전화번호" name="resumeUserPhone" id="resumeUserPhone"
+                                    required><br>
+                                휴대번호<b class="b">*</b>
+                                <input type="text" placeholder="휴대번호" name="resumeUserCellPhone"
+                                    id="resumeUserCellPhone" required><br>
+                                주소<b class="b">*</b>
+                                <input type="text" placeholder="주소" name="resumeUserAddress" id="resumeUserAddress"
+                                    required>
+                            </div>
                         </section>
                         <section class="skills">
-                            <h3>기술 스택 <a style="color: black; font-size: 10px;">(최대 3개 선택 가능)</a></h3>
+                            기술 스택 <a style="color: black; font-size: 10px;">(최대 3개 선택 가능)</a>
                             <div class="select-skill">
                                 <select id="skills" onchange="addSkill()">
                                     <option value="선택안함" selected>선택안함</option>
@@ -275,42 +268,42 @@
                                 </select>
                             </div>
                             <input type="hidden" name="resumeSkillName" id="resumeSkillName" value="" required>
-                        
+
                             <div id="selectedSkills" class="p-3">
                                 <!-- 추가된 스킬을 보여줄 공간 -->
                             </div>
-                        
+
                             <script>
                                 var selectedSkills = [];
-                                    
+
                                 function updateHiddenInput() {
                                     const resumeSkillNameInput = document.getElementById("resumeSkillName");
                                     resumeSkillNameInput.value = selectedSkills.join(',');
                                 }
-                        
+
                                 function addSkill() {
                                     const skillSelect = document.getElementById("skills");
                                     const selectedOption = skillSelect.options[skillSelect.selectedIndex];
                                     const selectedSkillsDiv = document.getElementById("selectedSkills");
-                        
+
                                     const skillId = 'skill-' + selectedOption.value.replace(/\s+/g, '-');
-                        
+
                                     // Check if the skill already exists
                                     if (!document.getElementById(skillId)) {
                                         // Check the number of currently selected skills
                                         const currentSkillCount = selectedSkillsDiv.getElementsByClassName('skill-item').length;
-                        
+
                                         if (currentSkillCount >= 3) {
                                             alert("기술은 최대 3개까지 선택 가능합니다.");
                                             return;
                                         }
-                        
+
                                         const skillElement = document.createElement("div");
                                         skillElement.setAttribute("id", skillId);
                                         skillElement.className = 'skill-item';
                                         skillElement.innerHTML = selectedOption.value + " <button class='remove-skill-btn' onclick='removeSkill(\"" + skillId + "\", \"" + selectedOption.value + "\")'>x</button>";
                                         selectedSkillsDiv.appendChild(skillElement);
-                        
+
                                         // Add the skill to the selectedSkills array
                                         selectedSkills.push(selectedOption.value);
                                         updateHiddenInput();
@@ -320,12 +313,12 @@
                                     // Reset the select element to default value
                                     skillSelect.selectedIndex = 0;
                                 }
-                        
+
                                 function removeSkill(skillId, skillValue) {
                                     const skillElement = document.getElementById(skillId);
                                     if (skillElement) {
                                         skillElement.remove();
-                        
+
                                         // Remove the skill from the selectedSkills array
                                         const index = selectedSkills.indexOf(skillValue);
                                         if (index > -1) {
@@ -336,15 +329,15 @@
                                 }
                             </script>
                         </section>
-                        
+
 
                         <section class="portfolio">
-                            <h3>포트폴리오</h3>
+                            포트폴리오
                             <input type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
                                 required>
                         </section>
                         <section class="education">
-                            <h3>학력란</h3>
+                            학력란
                             <div class="input-group">
                                 <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
                                     required>
@@ -358,7 +351,7 @@
                             </div>
                         </section>
                         <section class="career">
-                            <h3>경력란</h3>
+                            경력란
                             <div class="input-group">
                                 <input type="text" placeholder="회사명" name="resumeCpName" id="resumeCpName" required>
                                 <input type="text" placeholder="부서명" name="resumeCpDept" id="resumeCpDept" required>
@@ -373,7 +366,7 @@
                             </div>
                         </section>
                         <section class="self-intro">
-                            <h3>자기소개서란</h3>
+                            자기소개서란
                             <textarea placeholder="1000자 이내로 작성해주세요" cols="50" rows="20" name="resumeIntroduce"
                                 id="resumeIntroduce" required></textarea>
                         </section>
@@ -386,7 +379,7 @@
                         </div> -->
 
                         <div class="btn">
-                     
+
                             <c:if test="${resumePageUserId == sessionScope.user.userId}">
                                 <button type="submit" id="saveButton"
                                     style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
