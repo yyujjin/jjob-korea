@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .requestMatchers("/WEB-INF/views/**").permitAll()//jsp
                 .requestMatchers("/resources/**").permitAll()
                 .requestMatchers("/", "/login", "/register").permitAll() //메인, 로그인, 회원가입
-                .requestMatchers("/jobPosts", "/searchFilter").permitAll() //채용 정보
+                .requestMatchers("/jobPosts", "/searchFilter","/jobPosting").permitAll()//채용 정보
                 .requestMatchers(
                         "/jobseekerContent_view",
                                 "/requestPage/jobseekerContent_view",
@@ -32,8 +32,7 @@ public class SecurityConfig {
                                 "/board",
                                 "/display",
                                 "/getFileList",
-                                "/download").permitAll() //게시판,
-
+                                "/download").permitAll() //게시판
                 .anyRequest().authenticated()
         );
 
@@ -52,7 +51,7 @@ public class SecurityConfig {
 
         httpSecurity
                 .sessionManagement((auth) -> auth
-                        .maximumSessions(3)
+                        .maximumSessions(1)
                         .maxSessionsPreventsLogin(false)); //초과 시 기존 세션 삭제후 새로운 로그인 진행
 
 

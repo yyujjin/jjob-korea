@@ -28,4 +28,6 @@ public class JobPostingDTO {
     private int hit;
     //D-DAY
     private long countdownDays;
+    //기업 아이디 (외래키 설정해야함)
+    private int companyId;
 }

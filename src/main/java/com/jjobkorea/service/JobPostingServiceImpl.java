@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import com.jjobkorea.dto.CompanyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class JobPostingServiceImpl implements JobPostingService {
+private final JobPostingMapper jobPostingMapper;
 
-    @Autowired
-    JobPostingMapper jobPostingMapper;
+    public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
+        this.jobPostingMapper = jobPostingMapper;
+    }
 
     //메인페이지 진입시 실행되는 코드
     @Override
@@ -141,6 +144,16 @@ public class JobPostingServiceImpl implements JobPostingService {
 
         return getSearchList;
 
+    }
+
+    @Override
+    public CompanyDTO getCompanyInfo(int companyId) {
+        return jobPostingMapper.getCompanyInfo(companyId);
+    }
+
+    @Override
+    public JobPostingDTO getJobPosting(int companyId) {
+        return jobPostingMapper.getJobPosting(companyId);
     }
 
 }
