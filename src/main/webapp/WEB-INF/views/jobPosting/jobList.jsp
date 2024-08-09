@@ -36,7 +36,7 @@
 <body>
 <c:forEach items="${postingList}" var="postingList">
     <div class="list-group">
-        <a href="/jobPostingDetails/${postingList.id}" class="list-group-item list-group-item-action">
+        <a href="/jobPosting?companyId=${postingList.companyId}" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1 postingTitle"><c:out value='${postingList.postingTitle}'/></h5>
                 <small class="text-body-secondary">
