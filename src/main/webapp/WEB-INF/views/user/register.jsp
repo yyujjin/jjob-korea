@@ -8,30 +8,167 @@
 <link rel="stylesheet" href="../resources/css/login_style/loginstyle.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script>
-	$(document).ready(function() {
-		        console.log("JQuery Loaded");
-		        $('#userId, #enterpriseUserId').on('blur', function() {
-		            var userId = $(this).val();
-		            console.log("userId:", userId);
-		            if (userId) {
-		                $.ajax({
-		                    type: 'POST',
-		                    //url: '/checkId',
-		                    url: '/checkId',
-		                    data: { userId: userId },
-		                    success: function(response) {
-		                        console.log("AJAX Response:", response);
-		                        if (response.exists) {
-		                            alert('이미 존재하는 아이디입니다.'); // 메시지 창 띄우기
-		                            $(this).val(''); // 입력 필드 초기화 (선택 사항)
-		                        }
-		                    },
-		                    error: function(xhr, status, error) {
-		                        console.error("AJAX Error:", status, error);
-		                    }
-		                });
-		            }
-		        });
+    /*회원가입 입력값 검증*/
+
+    //아이디 검증
+     function validateUserId() {
+            const userId = document.getElementById('userId').value;
+            const userIdRegex = /^[a-z0-9]+$/;
+            const userIdError = document.getElementById('userIdError');
+
+            if (userId.length < 6 || userId.length > 16 || !userIdRegex.test(userId)) {
+                userIdError.textContent = "6~16자의 영문 소문자, 숫자만 사용 가능합니다.";
+                userIdError.style.display = "block";
+                return false;
+            } else {
+                userIdError.textContent = "";
+                userIdError.style.display = "none";
+                return true;
+            }
+        }
+        //비밀번호 검증
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/;
+            const passwordError = document.getElementById('passwordError');
+
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = "8~16자의 영문 대문자, 소문자, 숫자, 특수문자 조합으로 입력해주세요.";
+                passwordError.style.display = "block";
+                return false;
+            } else {
+                passwordError.textContent = "";
+                passwordError.style.display = "none";
+                return true;
+            }
+        }
+        //이름 검증
+        function validateName() {
+            const name = document.getElementById('name').value;
+            const nameRegex = /^[a-zA-Z가-힣\s]{2,12}$/;
+            const nameError = document.getElementById('nameError');
+
+            if (!nameRegex.test(name)) {
+                nameError.textContent = "2~12자 한글, 영문, 공백만 사용가능합니다.";
+                nameError.style.display = "block";
+                return false;
+            } else {
+                nameError.textContent = "";
+                nameError.style.display = "none";
+                return true;
+            }
+        }
+        //생년월일 검증
+        function validateBirthd() {
+            const birthd = document.getElementById('individualBirthd').value;
+            const birthdRegex = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/; 
+            const birthdError = document.getElementById('birthdError');
+
+            if (!birthdRegex.test(birthd)) {
+                birthdError.textContent = "생년월일 정보를 다시 확인해주세요.";
+                birthdError.style.display = "block";
+                return false;
+            } else {
+                birthdError.textContent = "";
+                birthdError.style.display = "none";
+                return true;
+            }
+        }
+        //이메일 검증
+        function validateEmail() {
+            const email = document.getElementById('email').value;
+            const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+            const emailError = document.getElementById('emailError');
+
+            if (!emailRegex.test(email)) {
+                emailError.textContent = "이메일 정보를 다시 확인해주세요.";
+                emailError.style.display = "block";
+                return false;
+            } else {
+                emailError.textContent = "";
+                emailError.style.display = "none";
+                return true;
+            }
+        }
+        //휴대폰 번호 검증
+        function validatePhone() {
+            const phone = document.getElementById('phone').value;
+            const phoneRegex = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+            const phoneError = document.getElementById('phoneError');
+
+            if (!phoneRegex.test(phone)) {
+                phoneError.textContent = "휴대폰번호를 다시 확인해주세요.";
+                phoneError.style.display = "block";
+                return false;
+            } else {
+                phoneError.textContent = "";
+                phoneError.style.display = "none";
+                return true;
+            }
+        }
+
+        function validateForm() {
+            const userIdValid = validateUserId();
+            const passwordValid = validatePassword();
+            const nameValid = validateName();
+            const birthdValid = validateBirthd();
+            const emailValid = validateEmail();
+            const phoneValid = validatePhone();
+            return userIdValid && passwordValid && nameValid && birthdValid&& emailValid && phoneValid;
+        }
+
+        $(document).ready(function () {
+            // keyup 이벤트(사용자가 키를 누른 후 뗄 때마다 실행) -> vaildate~함수 호출
+            $('#userId').on('keyup', function () {
+                validateUserId();
+            });
+            $('#password').on('keyup', function () {
+                validatePassword();
+            });
+            $('#name').on('keyup', function () {
+                validateName();
+            });
+            $('#individualBirthd').on('keyup', function () {
+                validateBirthd();
+            });
+            $('#email').on('keyup', function () {
+                validateEmail();
+            });
+            $('#phone').on('keyup', function () {
+                validatePhone();
+            });
+
+            // 폼 제출 시 유효성 검사(유효성이 적합하지 않으면 제출을 막음)
+            $('#signup-form').on('submit', function (e) {
+                if (!validateForm()) {
+                    e.preventDefault();
+                }
+            });
+        });
+	// $(document).ready(function() {
+	// 	        console.log("JQuery Loaded");
+	// 	        $('#userId, #enterpriseUserId').on('blur', function() {
+	// 	            var userId = $(this).val();
+	// 	            console.log("userId:", userId);
+	// 	            if (userId) {
+	// 	                $.ajax({
+	// 	                    type: 'POST',
+	// 	                    //url: '/checkId',
+	// 	                    url: '/checkId',
+	// 	                    data: { userId: userId },
+	// 	                    success: function(response) {
+	// 	                        console.log("AJAX Response:", response);
+	// 	                        if (response.exists) {
+	// 	                            alert('이미 존재하는 아이디입니다.'); // 메시지 창 띄우기
+	// 	                            $(this).val(''); // 입력 필드 초기화 (선택 사항)
+	// 	                        }
+	// 	                    },
+	// 	                    error: function(xhr, status, error) {
+	// 	                        console.error("AJAX Error:", status, error);
+	// 	                    }
+	// 	                });
+	// 	            }
+	// 	        });
 
 		        // 탭 전환 기능
 		        $('.tab').on('click', function() {
@@ -46,7 +183,7 @@
 		                $('#enterpriseForm').show();
 		            }
 		        });
-		    });
+		    // });
 </script>
 <script>
 $(document).ready(function() {
@@ -143,16 +280,20 @@ $(document).ready(function() {
             <input type="hidden" name="type" value="individual">
             <div class="form-group">
                 <input type="text" id="userId" name="userId" placeholder="아이디" required>
+                <div id="userIdError" class="error-message"></div>
                 <div id="idError" class="error-message" style="color:red;"></div>
             </div>
             <div class="form-group">
                 <input type="password" id="password" name="password" placeholder="비밀번호(8-16자 영문, 숫자, 특수문자)" required>
+                <div id="passwordError" class="error-message"></div>
             </div>
             <div class="form-group">
                 <input type="text" id="name" name="name" placeholder="이름" required>
+                <div id="nameError" class="error-message"></div>
             </div>
             <div class="form-group">
-                <input type="text" id="individualBirthd" name="birthd" placeholder="생년월일(예시:20000131)" maxlength="8" required>
+                <input type="text" id="individualBirthd" id="birthd" name="birthd" placeholder="생년월일(예시:20000131)" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                <div id="birthdError" class="error-message"></div>
                 <div class="radio-Box">
                     <input type="radio" id="individualBoy" name="gender" value="M" required>
                     <label for="individualBoy">남자</label>
@@ -162,9 +303,11 @@ $(document).ready(function() {
             </div>
             <div class="form-group">
                 <input type="text" id="email" name="email" placeholder="이메일" required>
+                <div id="emailError" class="error-message"></div>
             </div>
             <div class="form-group">
-                <input type="text" id="phone" name="phone" placeholder="휴대폰번호" required>
+                <input type="text" id="phone" name="phone" placeholder="휴대폰번호(숫자만 입력해주세요.)" required>
+                <div id="phoneError" class="error-message"></div>
             </div>
             <div class="form-group">
                 <input type="text" id="addr" name="addr" placeholder="주소" required>
