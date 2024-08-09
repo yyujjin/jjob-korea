@@ -3,6 +3,7 @@
 	<html>
 
 	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<style>
@@ -15,13 +16,15 @@
 			th,
 			td {
 				padding: 20px;
-				text-align: left;
 			}
-
+			
 			.width-name {
+				display: inline-block;
 				width: 25%;
 				font-weight: bold;
 				font-size: 15px;
+				/* text-align: right; */
+				align-self: flex-end; 
 			}
 
 			.width-title {
@@ -33,10 +36,10 @@
 
 			.notContent {
 				padding-bottom: 10px;
-				text-align: start;
 				padding: 5px;
 				border: none;
 			}
+
 
 			.BoardContent {
 				width: 100%;
@@ -72,6 +75,9 @@
 				text-decoration: none;
 				display: inline-block;
 				font-size: 15px;
+			}
+			.upload-list a:hover {
+				color: blue;
 			}
 
 			.button-container a {
@@ -150,8 +156,9 @@
 			<form id="frm" method="post" action="/jobseekerWrite">
 				<table>
 					<tr>
-						<td class="notContent" class="width-name"> 작성자 ${username}</td>
+						<td class="notContent" class="width-name" style="text-align: end;"> 작성자 ${username}</td>
 						<input type="hidden" name="jobseekerCommunityBoardName" value="${username}">
+					</tr>
 					<tr>
 						<td class="notContent">
 							<a style="color: blue;">제목</a> :
@@ -175,7 +182,8 @@
 				</div>
 			</form>
 			<div class="uploadDiv">
-				<label for="uploadFile">첨부파일</label> <span style="color: gainsboro; font-size: 13px;">첨부파일은 내용 제일 상단에 게재됩니다.</span>
+				<label for="uploadFile">첨부파일</label> <span style="color: gainsboro; font-size: 13px;">첨부파일은 내용 제일 상단에
+					게재됩니다.</span>
 				<input type="file" id="uploadFile" name="uploadFile" multiple>
 			</div>
 
