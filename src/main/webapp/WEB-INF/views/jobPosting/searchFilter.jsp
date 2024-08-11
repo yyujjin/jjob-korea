@@ -19,7 +19,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">채용공고 상세검색</a>
+        <a class="navbar-brand" href="/jobPosts">채용공고 상세검색</a>
         <button
                 class="navbar-toggler"
                 type="button"
