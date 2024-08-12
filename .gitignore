@@ -38,3 +38,6 @@ out/
 
 ### application.properties ###
 application.properties
+
+### DBconfiguration ###
+src/main/java/com/jjobkorea/configuration/DBconfiguration.java
