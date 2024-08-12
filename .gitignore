@@ -40,4 +40,4 @@ out/
 application.properties
 
 # DBconfiguration 파일 무시
-configuration/DBconfiguration.java
+src/main/java/com/jjobkorea/configuration/DBconfiguration
