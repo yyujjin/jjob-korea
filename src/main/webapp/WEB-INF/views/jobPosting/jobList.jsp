@@ -72,9 +72,9 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li class="page-item"><a class="page-link" href="/jobPosting?pageNum=1">1</a></li>
-        <li class="page-item"><a class="page-link" href="/jobPosting?pageNum=2">2</a></li>
-        <li class="page-item"><a class="page-link" href="/jobPosting?pageNum=3">3</a></li>
+        <li class="page-item"><a class="page-link" href="/jobPosts?pageNum=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="/jobPosts?pageNum=2">2</a></li>
+        <li class="page-item"><a class="page-link" href="/jobPosts?pageNum=3">3</a></li>
         <li class="page-item">
             <a class="page-link" href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
