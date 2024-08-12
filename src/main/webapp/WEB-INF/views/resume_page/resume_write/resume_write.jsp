@@ -18,17 +18,16 @@
 
                 .main-container {
                     display: flex;
-                    width: 100%;
                     max-width: 1100px;
                     margin: 20px;
                     border: 1px solid black;
+                    height: auto;
                 }
 
                 .content {
                     flex: 3;
                     padding: 20px;
                     background: white;
-                    border-radius: 5px;
                     margin-right: 20px;
                     font-size: 15px;
                 }
@@ -45,16 +44,12 @@
                 }
 
                 input,
-                select,
-                textarea {
+                select {
                     padding: 10px;
                     margin: 5px 0;
                     border: 1px solid black;
-                    border-radius: 5px;
-                    width: calc(50% - 10px);
-                    gap: 10px;
                     width: 200px;
-                    height: 10px;
+                    height: 40px;
                 }
 
                 button {
@@ -85,12 +80,11 @@
                     background-color: blue;
                     color: white;
                     padding: 5px 15px;
-                    border-radius: 3px;
                     cursor: pointer;
                     display: inline-block;
                     font-size: 13px;
                     margin-top: 10px;
-                    margin-left: 65px;
+                    margin-left: 50px;
                 }
 
                 #file {
@@ -98,13 +92,17 @@
                 }
 
                 textarea {
-                    width: 600px;
+                    width: auto;
                     resize: none;
                 }
 
+                /* 이미지 들어가는 폼 */
                 #output {
-                    border-radius: 3px;
                     border: none;
+                    width: 150px;
+                    height: 210px;
+                    margin-left: -20px;
+                    margin-top: -20px;
                 }
 
                 .skill-item {
@@ -158,22 +156,25 @@
                     width: 100%;
                     height: 100%;
                     background-color: white;
-                    cursor: pointer;
                     border: solid 1px black;
-                    border-radius: 3px;
                 }
 
+                /* 사진크기는... */
                 #photo-instructions {
                     font-size: 12px;
-                    margin-top: 75px;
+                    margin-top: 55px;
                 }
 
-                .personal-info {
-                    border: solid 1px black;
+                .input-group input,
+                .input-group select {
+                    display: block;
+                    margin-bottom: 10px;
+                    width: 200px;
                 }
 
                 #resumeGender {
-                    height: 35px;
+                    height: 40px;
+                    width: 100px;
                 }
             </style>
             <script type="text/javascript"
@@ -188,11 +189,11 @@
                     <div class="photo">
                         <div class="profilephoto">
                             <div id="photo-instructions" style="color: gray;">
-                                사진 크기는<br>
+                                사진 크기는<b class="b">*</b><br>
                                 150x210만 <br>
                                 가능합니다.
                             </div>
-                            <img id="output" src="" alt="uploaded image" width="150" height="210" style="display:none;">
+                            <img id="output" src="" alt="uploaded image" style="display:none;">
                         </div>
                         <label for="file">
                             <div class="btn-upload">사진 업로드</div>
@@ -216,42 +217,51 @@
 
                     <div class="content">
                         <section>
-                            <b>이력서 제목</b>
-                            <input type="text" placeholder="이력서 제목을 입력해주세요" name="resumePageTitle" id="resumePageTitle"
-                                required>
+                            <b style="font-size: 16px;">이력서 제목<b class="b">*</b></b>
+                            <input style="width: 300px;" type="text" placeholder="이력서 제목을 입력해주세요" name="resumePageTitle"
+                                id="resumePageTitle" required>
                         </section>
 
                         <section class="personal-info">
-                            <a style="font-size: 16px;">인적 사항</a> <a style="color: gray; font-size: 11px;">
-                                <b class="b">*</b>은 필수항목 입니다.</a>
+                            <a style="font-size: 16px;">인적 사항</a>
+                            <a style="color: gray; font-size: 11px;">
+                                <b class="b">*</b>은 필수항목 입니다.
+                            </a>
                             <div class="input-group">
-                                이름<b class="b">*</b>
-                                <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName"
-                                    required>
-                                생년월일<b class="b">*</b>
+                                <label>이름<b class="b">*</b></label>
+                                <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName" required>
+
+                                <label>생년월일<b class="b">*</b></label>
                                 <input type="text" placeholder="생년월일" name="resumeBirthDay" id="resumeBirthDay"
                                     required>
-                                    &nbsp;
+
+                                <label>성별<b class="b">*</b></label>
                                 <select name="resumeGender" id="resumeGender">
-                                    <option value="0" selected disabled>성별<b class="b">*</b></option>
+                                    <option value="0" selected disabled>성별</option>
                                     <option value="1">남자</option>
                                     <option value="2">여자</option>
-                                </select><br>
-                                이메일<b class="b">*</b>
+                                </select>
+
+                                <label>이메일<b class="b">*</b></label>
                                 <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
-                                    required><br>
-                                전화번호
+                                    required>
+
+                                <label>전화번호<b class="b">*</b></label>
                                 <input type="text" placeholder="전화번호" name="resumeUserPhone" id="resumeUserPhone"
-                                    required><br>
-                                휴대번호<b class="b">*</b>
+                                    required>
+
+                                <label>휴대번호<b class="b">*</b></label>
                                 <input type="text" placeholder="휴대번호" name="resumeUserCellPhone"
-                                    id="resumeUserCellPhone" required><br>
-                                주소<b class="b">*</b>
+                                    id="resumeUserCellPhone" required>
+
+                                <label>주소<b class="b">*</b></label>
                                 <input type="text" placeholder="주소" name="resumeUserAddress" id="resumeUserAddress"
                                     required>
                             </div>
                         </section>
-                        <section class="skills">
+
+                        </section>
+                        <section class="skills" style="font-size: 14px;">
                             기술 스택 <a style="color: black; font-size: 10px;">(최대 3개 선택 가능)</a>
                             <div class="select-skill">
                                 <select id="skills" onchange="addSkill()">
@@ -332,14 +342,14 @@
 
 
                         <section class="portfolio">
-                            포트폴리오
-                            <input type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
+                            포트폴리오<b class="b">*</b>
+                            <input style="width: 300px;" type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
                                 required>
                         </section>
                         <section class="education">
-                            학력란
+                            학력란<b class="b">*</b>
                             <div class="input-group">
-                                <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
+                                학교명<b class="b">*</b> <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
                                     required>
                                 <select name="resumeEduStage" id="resumeEduStage" required>
                                     <option selected disabled>학교구분</option>
@@ -351,23 +361,25 @@
                             </div>
                         </section>
                         <section class="career">
-                            경력란
+                            경력란<b class="b">*</b>
                             <div class="input-group">
-                                <input type="text" placeholder="회사명" name="resumeCpName" id="resumeCpName" required>
-                                <input type="text" placeholder="부서명" name="resumeCpDept" id="resumeCpDept" required>
-                                <input type="text" placeholder="입사연월" name="resumeCpJoinDate" id="resumeCpJoinDate"
+                                회사명<b class="b">*</b> <input type="text" placeholder="회사명" name="resumeCpName" id="resumeCpName" required>
+                                부서명<b class="b">*</b> <input type="text" placeholder="부서명" name="resumeCpDept" id="resumeCpDept" required>
+                                입사연월<b class="b">*</b> <input type="text" placeholder="입사연월" name="resumeCpJoinDate" id="resumeCpJoinDate"
                                     required>
-                                <input type="text" placeholder="퇴사연월" name="resumeCpLeaveDate" id="resumeCpLeaveDate"
+                                퇴사연월<b class="b">*</b> <input type="text" placeholder="퇴사연월" name="resumeCpLeaveDate"
+                                    id="resumeCpLeaveDate" required>
+                                직급/직책<b class="b">*</b> <input type="text" placeholder="직급/직책" name="resumeCpPosition"
+                                    id="resumeCpPosition" required>
+                                연봉<b class="b">*</b> <input type="text" placeholder="연봉" name="resumeCpSalary" id="resumeCpSalary"
                                     required>
-                                <input type="text" placeholder="직급/직책" name="resumeCpPosition" id="resumeCpPosition"
+                                담당업무<b class="b">*</b> <input type="text" placeholder="담당업무" name="resumeCpDuty" id="resumeCpDuty"
                                     required>
-                                <input type="text" placeholder="연봉" name="resumeCpSalary" id="resumeCpSalary" required>
-                                <input type="text" placeholder="담당업무" name="resumeCpDuty" id="resumeCpDuty" required>
                             </div>
                         </section>
                         <section class="self-intro">
-                            자기소개서란
-                            <textarea placeholder="1000자 이내로 작성해주세요" cols="50" rows="20" name="resumeIntroduce"
+                            자기소개서란<b class="b">*</b><br>
+                            <textarea placeholder="1000자 이내로 작성해주세요" cols="80" rows="20" name="resumeIntroduce"
                                 id="resumeIntroduce" required></textarea>
                         </section>
 
