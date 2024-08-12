@@ -48,8 +48,13 @@
                     padding: 10px;
                     margin: 5px 0;
                     border: 1px solid black;
+                    box-sizing: border-box;
                     width: 200px;
-                    height: 40px;
+                }
+
+                textarea {
+                    width: 90%;
+                    height: 200px;
                 }
 
                 button {
@@ -91,18 +96,13 @@
                     display: none;
                 }
 
-                textarea {
-                    width: auto;
-                    resize: none;
-                }
-
                 /* 이미지 들어가는 폼 */
                 #output {
                     border: none;
                     width: 150px;
                     height: 210px;
-                    margin-left: -20px;
-                    margin-top: -20px;
+                    margin: -20px 0 0 -20px;
+                    /* 통합된 마진 설정 */
                 }
 
                 .skill-item {
@@ -119,13 +119,13 @@
                     border: none;
                     cursor: pointer;
                     margin-left: 5px;
-                    padding: 0;
                     width: 20px;
                     height: 20px;
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    padding: 0;
                 }
 
                 .remove-skill-btn:hover {
@@ -153,27 +153,44 @@
                 }
 
                 .btn button {
-                    width: 100%;
-                    height: 100%;
+                    width: 100px;
+                    height: 35px;
                     background-color: white;
                     border: solid 1px black;
                 }
 
-                /* 사진크기는... */
                 #photo-instructions {
                     font-size: 12px;
                     margin-top: 55px;
                 }
 
-                .input-group input,
-                .input-group select {
-                    display: block;
+                /* Unified Input 그룹 스타일 */
+                .input-group {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    /* Adjust spacing between fields */
+                    align-items: flex-start;
+                }
+
+                .input-item {
+                    display: flex;
+                    flex-direction: column;
                     margin-bottom: 10px;
+                }
+
+                .input-item label {
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                    /* Add space between label and input */
+                }
+
+                .input-item input,
+                .input-item select {
                     width: 200px;
                 }
 
                 #resumeGender {
-                    height: 40px;
                     width: 100px;
                 }
             </style>
@@ -228,35 +245,49 @@
                                 <b class="b">*</b>은 필수항목 입니다.
                             </a>
                             <div class="input-group">
-                                <label>이름<b class="b">*</b></label>
-                                <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName" required>
+                                <div class="input-item">
+                                    <label for="resumeUserName">이름<b class="b">*</b></label>
+                                    <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName"
+                                        required>
+                                </div>
 
-                                <label>생년월일<b class="b">*</b></label>
-                                <input type="text" placeholder="생년월일" name="resumeBirthDay" id="resumeBirthDay"
-                                    required>
+                                <div class="input-item">
+                                    <label for="resumeBirthDay">생년월일<b class="b">*</b></label>
+                                    <input type="text" placeholder="생년월일" name="resumeBirthDay" id="resumeBirthDay"
+                                        required>
+                                </div>
 
-                                <label>성별<b class="b">*</b></label>
-                                <select name="resumeGender" id="resumeGender">
-                                    <option value="0" selected disabled>성별</option>
-                                    <option value="1">남자</option>
-                                    <option value="2">여자</option>
-                                </select>
+                                <div class="input-item">
+                                    <label for="resumeUserEmail">이메일<b class="b">*</b></label>
+                                    <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
+                                        required>
+                                </div>
+                                <div class="input-item">
+                                    <label for="resumeGender">성별<b class="b">*</b></label>
+                                    <select name="resumeGender" id="resumeGender" required>
+                                        <option value="0" selected disabled>성별</option>
+                                        <option value="1">남자</option>
+                                        <option value="2">여자</option>
+                                    </select>
+                                </div>
 
-                                <label>이메일<b class="b">*</b></label>
-                                <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
-                                    required>
 
-                                <label>전화번호<b class="b">*</b></label>
-                                <input type="text" placeholder="전화번호" name="resumeUserPhone" id="resumeUserPhone"
-                                    required>
+                                <div class="input-item">
+                                    <label for="resumeUserPhone">전화번호</label>
+                                    <input type="text" placeholder="전화번호" name="resumeUserPhone" id="resumeUserPhone">
+                                </div>
 
-                                <label>휴대번호<b class="b">*</b></label>
-                                <input type="text" placeholder="휴대번호" name="resumeUserCellPhone"
-                                    id="resumeUserCellPhone" required>
+                                <div class="input-item">
+                                    <label for="resumeUserCellPhone">휴대번호<b class="b">*</b></label>
+                                    <input type="text" placeholder="휴대번호" name="resumeUserCellPhone"
+                                        id="resumeUserCellPhone" required>
+                                </div>
 
-                                <label>주소<b class="b">*</b></label>
-                                <input type="text" placeholder="주소" name="resumeUserAddress" id="resumeUserAddress"
-                                    required>
+                                <div class="input-item">
+                                    <label for="resumeUserAddress">주소<b class="b">*</b></label>
+                                    <input type="text" placeholder="주소" name="resumeUserAddress" id="resumeUserAddress"
+                                        required>
+                                </div>
                             </div>
                         </section>
 
@@ -343,14 +374,14 @@
 
                         <section class="portfolio">
                             포트폴리오<b class="b">*</b>
-                            <input style="width: 300px;" type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio" id="resumePortfolio"
-                                required>
+                            <input style="width: 300px;" type="url" placeholder="URL 주소를 입력하세요" name="resumePortfolio"
+                                id="resumePortfolio" required>
                         </section>
                         <section class="education">
                             학력란<b class="b">*</b>
                             <div class="input-group">
-                                학교명<b class="b">*</b> <input type="text" placeholder="학교명" name="resumeSchoolName" id="resumeSchoolName"
-                                    required>
+                                학교명<b class="b">*</b> <input type="text" placeholder="학교명" name="resumeSchoolName"
+                                    id="resumeSchoolName" required>
                                 <select name="resumeEduStage" id="resumeEduStage" required>
                                     <option selected disabled>학교구분</option>
                                     <option value="고등학교">고등학교</option>
@@ -363,32 +394,52 @@
                         <section class="career">
                             경력란<b class="b">*</b>
                             <div class="input-group">
-                                회사명<b class="b">*</b> <input type="text" placeholder="회사명" name="resumeCpName" id="resumeCpName" required>
-                                부서명<b class="b">*</b> <input type="text" placeholder="부서명" name="resumeCpDept" id="resumeCpDept" required>
-                                입사연월<b class="b">*</b> <input type="text" placeholder="입사연월" name="resumeCpJoinDate" id="resumeCpJoinDate"
-                                    required>
-                                퇴사연월<b class="b">*</b> <input type="text" placeholder="퇴사연월" name="resumeCpLeaveDate"
-                                    id="resumeCpLeaveDate" required>
-                                직급/직책<b class="b">*</b> <input type="text" placeholder="직급/직책" name="resumeCpPosition"
-                                    id="resumeCpPosition" required>
-                                연봉<b class="b">*</b> <input type="text" placeholder="연봉" name="resumeCpSalary" id="resumeCpSalary"
-                                    required>
-                                담당업무<b class="b">*</b> <input type="text" placeholder="담당업무" name="resumeCpDuty" id="resumeCpDuty"
-                                    required>
+                                <div class="input-item">
+                                    <label for="resumeCpName">회사명<b class="b">*</b></label>
+                                    <input type="text" placeholder="회사명" name="resumeCpName" id="resumeCpName" required>
+                                </div>
+
+                                <div class="input-item">
+                                    <label for="resumeCpDept">부서명<b class="b">*</b></label>
+                                    <input type="text" placeholder="부서명" name="resumeCpDept" id="resumeCpDept" required>
+                                </div>
+
+                                <div class="input-item">
+                                    <label for="resumeCpJoinDate">입사연월<b class="b">*</b></label>
+                                    <input type="text" placeholder="입사연월" name="resumeCpJoinDate" id="resumeCpJoinDate"
+                                        required>
+                                </div>
+
+                                <div class="input-item">
+                                    <label for="resumeCpLeaveDate">퇴사연월<b class="b">*</b></label>
+                                    <input type="text" placeholder="퇴사연월" name="resumeCpLeaveDate"
+                                        id="resumeCpLeaveDate" required>
+                                </div>
+
+                                <div class="input-item">
+                                    <label for="resumeCpPosition">직급/직책<b class="b">*</b></label>
+                                    <input type="text" placeholder="직급/직책" name="resumeCpPosition" id="resumeCpPosition"
+                                        required>
+                                </div>
+
+                                <div class="input-item">
+                                    <label for="resumeCpSalary">연봉<b class="b">*</b></label>
+                                    <input type="text" placeholder="연봉" name="resumeCpSalary" id="resumeCpSalary"
+                                        required>
+                                </div>
+
+                                <div class="input-item">
+                                    <label for="resumeCpDuty">담당업무<b class="b">*</b></label>
+                                    <input type="text" placeholder="담당업무" name="resumeCpDuty" id="resumeCpDuty"
+                                        required>
+                                </div>
                             </div>
                         </section>
                         <section class="self-intro">
                             자기소개서란<b class="b">*</b><br>
-                            <textarea placeholder="1000자 이내로 작성해주세요" cols="80" rows="20" name="resumeIntroduce"
+                            <textarea placeholder="1000자 이내로 작성해주세요" cols="100" rows="20" name="resumeIntroduce"
                                 id="resumeIntroduce" required></textarea>
                         </section>
-
-                        <!-- <div class="btn">
-                            <button type="submit"
-                                style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
-                            <button type="button" onclick="saveResume()">임시저장</button>
-                            <button type="button" onclick="">수정</button>
-                        </div> -->
 
                         <div class="btn">
 
