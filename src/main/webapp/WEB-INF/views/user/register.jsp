@@ -45,11 +45,11 @@
         //이름 검증
         function validateName() {
             const name = document.getElementById('name').value;
-            const nameRegex = /^[a-zA-Z가-힣\s]{2,12}$/;
+            const nameRegex = /^[a-z가-힣]{2,12}$/;
             const nameError = document.getElementById('nameError');
 
             if (!nameRegex.test(name)) {
-                nameError.textContent = "2~12자 한글, 영문, 공백만 사용가능합니다.";
+                nameError.textContent = "2~12자 한글, 영문 소문자만 사용가능합니다.";
                 nameError.style.display = "block";
                 return false;
             } else {
