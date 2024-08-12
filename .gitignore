@@ -38,6 +38,3 @@ out/
 
 ### application.properties ###
 application.properties
-
-### DBconfiguration ###
-configuration/DBconfiguration
