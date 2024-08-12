@@ -39,5 +39,5 @@ out/
 ### application.properties ###
 application.properties
 
-# DBconfiguration 파일 무시
-src/main/java/com/jjobkorea/configuration/DBconfiguration
+### DBconfiguration ###
+DBconfiguration
