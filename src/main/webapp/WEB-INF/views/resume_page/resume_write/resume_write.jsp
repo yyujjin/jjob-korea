@@ -102,7 +102,6 @@
                     width: 150px;
                     height: 210px;
                     margin: -20px 0 0 -20px;
-                    /* 통합된 마진 설정 */
                 }
 
                 .skill-item {
@@ -150,6 +149,7 @@
                     text-align: center;
                     gap: 10px;
                     margin-left: 74%;
+                    border: none;
                 }
 
                 .btn button {
@@ -169,7 +169,6 @@
                     display: flex;
                     flex-wrap: wrap;
                     gap: 10px;
-                    /* Adjust spacing between fields */
                     align-items: flex-start;
                 }
 
@@ -182,7 +181,6 @@
                 .input-item label {
                     font-weight: bold;
                     margin-bottom: 5px;
-                    /* Add space between label and input */
                 }
 
                 .input-item input,
@@ -212,13 +210,10 @@
                             </div>
                             <img id="output" src="" alt="uploaded image" style="display:none;">
                         </div>
-                        <label for="file">
-                            <div class="btn-upload">사진 업로드</div>
-                            <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
-                                onchange="loadFile(event)" style="display: none;" required>
-                        </label>
+                        <div class="btn-upload" onclick="document.getElementById('file').click();">사진 업로드</div>
+                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*" onchange="loadFile(event)" style="display:none;" required>
                     </div>
-
+                    
                     <script>
                         function loadFile(event) {
                             var output = document.getElementById('output');
@@ -227,11 +222,22 @@
                             output.style.display = 'block';
                             output.src = URL.createObjectURL(event.target.files[0]);
                             output.onload = function () {
-                                URL.revokeObjectURL(output.src) // free memory
+                                URL.revokeObjectURL(output.src); // 메모리 해제
                             }
                         }
+                    
+                        // 폼 제출 시 파일 선택 여부 검사
+                        document.querySelector('form').addEventListener('submit', function(event) {
+                            var fileInput = document.getElementById('file');
+                            if (!fileInput.value) {
+                                alert("사진을 업로드해 주세요.");
+                                fileInput.focus();
+                                event.preventDefault();
+                            }
+                        });
                     </script>
-
+                    
+                    
                     <div class="content">
                         <section>
                             <b style="font-size: 16px;">이력서 제목<b class="b">*</b></b>
@@ -262,15 +268,15 @@
                                     <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
                                         required>
                                 </div>
+                                
                                 <div class="input-item">
                                     <label for="resumeGender">성별<b class="b">*</b></label>
                                     <select name="resumeGender" id="resumeGender" required>
-                                        <option value="0" selected disabled>성별</option>
+                                        <option value="" selected disabled>성별</option>
                                         <option value="1">남자</option>
                                         <option value="2">여자</option>
                                     </select>
                                 </div>
-
 
                                 <div class="input-item">
                                     <label for="resumeUserPhone">전화번호</label>
@@ -378,12 +384,12 @@
                                 id="resumePortfolio" required>
                         </section>
                         <section class="education">
-                            학력란<b class="b">*</b>
+                            학력란
                             <div class="input-group">
-                                학교명<b class="b">*</b> <input type="text" placeholder="학교명" name="resumeSchoolName"
+                                학교명<b class="b">*</b><input type="text" placeholder="학교명" name="resumeSchoolName"
                                     id="resumeSchoolName" required>
                                 <select name="resumeEduStage" id="resumeEduStage" required>
-                                    <option selected disabled>학교구분</option>
+                                    <option value="" selected disabled>학교구분</option>
                                     <option value="고등학교">고등학교</option>
                                     <option value="대학교(2, 3년)">대학교(2, 3년)</option>
                                     <option value="대학교(4년)">대학교(4년)</option>
@@ -392,7 +398,7 @@
                             </div>
                         </section>
                         <section class="career">
-                            경력란<b class="b">*</b>
+                            경력란
                             <div class="input-group">
                                 <div class="input-item">
                                     <label for="resumeCpName">회사명<b class="b">*</b></label>
@@ -441,12 +447,12 @@
                                 id="resumeIntroduce" required></textarea>
                         </section>
 
-                        <div class="btn">
-
+                        <div class="btn" style="border: none;">
                             <c:if test="${resumePageUserId == sessionScope.user.userId}">
                                 <button type="submit" id="saveButton"
                                     style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
                             </c:if>
+                            <!-- <button type="button" style="border: solid 1px black;" onclick="saveResume()">임시저장</button> -->
                             <button type="button" onclick="saveResume()">임시저장</button>
                         </div>
                     </div>
