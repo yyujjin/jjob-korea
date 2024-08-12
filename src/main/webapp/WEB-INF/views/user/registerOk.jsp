@@ -6,7 +6,6 @@
 <title>회원가입 성공</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
         background-color: #f7f7f7;
         display: flex;
         justify-content: center;
@@ -45,7 +44,7 @@
     <div class="container">
         <h1>회원가입 성공</h1>
         <p>회원가입이 성공적으로 완료되었습니다.</p>
-        <p><button onclick="window.location.href='/'">메인화면으로 이동</button></p>
+        <p><button onclick="window.location.href='/login'">로그인 페이지로 이동하기</button></p>
     </div>
 </body>
 </html>

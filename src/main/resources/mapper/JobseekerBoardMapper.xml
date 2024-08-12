@@ -67,17 +67,32 @@
 	    where jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
 	</update>
 	
-<!-- 	좋아요 -->
-  <update id="likes" parameterType="int">
-        update jobseekerCommunityBoard
-        set likes = likes + 1 
+    <select id="hasLiked" parameterType="map" resultType="boolean">
+        select count(*) > 0
+        from UserLikes
         where jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
-  </update>
+        and userId = #{userId}
+        and status = 1
+    </select>
+
+    <update id="updateLikeStatus" parameterType="map">
+        insert into UserLikes (userId, jobseekerCommunityBoardNum, status)
+        values (#{userId}, #{jobseekerCommunityBoardNum}, #{status})
+        on duplicate key update status = values(status)
+    </update>
+
+    <select id="getLikeCount" parameterType="int" resultType="int">
+        select count(*)
+        from UserLikes
+        where jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
+        and status = 1
+    </select>
     
-  <select id="getLikeCount" parameterType="int" resultType="int">
-	    select likes
-	    from jobseekerCommunityBoard 
-	    where jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
-  </select>
+    <!-- 좋아요 수 업데이트 쿼리 -->
+    <update id="updateLikeCount">
+        UPDATE jobseekerCommunityBoard
+        SET likes = #{likeCount}
+        WHERE jobseekerCommunityBoardNum = #{jobseekerCommunityBoardNum}
+    </update>
 	
 </mapper>

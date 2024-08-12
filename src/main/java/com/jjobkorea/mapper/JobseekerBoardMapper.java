@@ -17,6 +17,8 @@ public interface JobseekerBoardMapper {
 	public void jobseekerDelete(HashMap<String, String> param);
 	public void jobseekerHit(int jobseekerCommunityBoardNum);
 	
-	public void likes(int jobseekerCommunityBoardNum);
+	public boolean hasLiked(HashMap<String, String> param);
+	public void updateLikeStatus(HashMap<String, String> param);
 	public int getLikeCount(int jobseekerCommunityBoardNum);
+	public void updateLikeCount(HashMap<String, String> param);
 }

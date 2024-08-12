@@ -1,13 +1,10 @@
 package com.jjobkorea.service;
 
 import java.util.HashMap;
-
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.jjobkorea.controller.UserController;
 import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.mapper.UserMapper;
@@ -17,18 +14,11 @@ public class UserServiceImpl implements UserService{
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private  final UserMapper userMapper;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserServiceImpl(UserMapper userMapper) {
+    public UserServiceImpl(UserMapper userMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userMapper = userMapper;
-    }
-
-    //로그인
-    @Override
-    public UserDTO login(UserDTO userDTO) {
-
-        log.info("넘어온 userDTO : {}",userDTO);
-
-        return userMapper.login(userDTO);
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     
     //아이디 중복 체크
@@ -41,12 +31,15 @@ public class UserServiceImpl implements UserService{
     //개인 회원가입-데이터 베이스 연결 
 	@Override
 	public void registerUser(HashMap<String, String> param) {
+		param.put("password",bCryptPasswordEncoder.encode(param.get("password")));
+
 		userMapper.individualUser(param);
 	}
 	
 	//기업 회원가입-데이터베이스 연결
 	@Override
 	public void companyUser(HashMap<String, String> param) {
+		param.put("password",bCryptPasswordEncoder.encode(param.get("password")));
 		userMapper.companyUser(param);
 		userMapper.insertCompanyInfo(param);
 	}

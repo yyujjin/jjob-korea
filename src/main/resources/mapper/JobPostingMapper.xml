@@ -13,6 +13,7 @@
 		, jobExperience
 		, deadline
 		, hit
+        , companyId
     </sql>
 
     <select id="getPostingListToMain" resultType="JobPostingDTO">
@@ -111,6 +112,13 @@
 
     </select>
 
+    <select id="getCompanyInfo" resultType="CompanyDTO" parameterType="int">
+        select * from team_db.companyinfo where id = #{companyId};
+    </select>
+
+    <select id="getJobPosting" resultType="JobPostingDTO" parameterType="int">
+        select * from team_db.jobposting where companyId = #{companyId};
+    </select>
 
 </mapper>
 

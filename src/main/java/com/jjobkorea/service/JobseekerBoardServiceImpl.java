@@ -2,6 +2,7 @@ package com.jjobkorea.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,16 +97,53 @@ public class JobseekerBoardServiceImpl implements JobseekerBoardService{
     }
 
     @Override
-    public void likes(int jobseekerCommunityBoardNum) {
-    	log.info("좋아요");
-        JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
-        dao.likes(jobseekerCommunityBoardNum);
-    }
-
-    @Override
     public int getLikeCount(int jobseekerCommunityBoardNum) {
-    	log.info("좋아요 카운트");
+        log.info("좋아요 수 조회");
         JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
         return dao.getLikeCount(jobseekerCommunityBoardNum);
     }
+    
+    @Override
+    public void updateLikeCount(HashMap<String, String> param) {
+        log.info("좋아요 수 갱신");
+
+        // HashMap에서 jobseekerCommunityBoardNum과 likeCount 추출
+        int jobseekerCommunityBoardNum = Integer.parseInt(param.get("jobseekerCommunityBoardNum"));
+        int likeCount = getLikeCount(jobseekerCommunityBoardNum);
+
+        // HashMap에 좋아요 수를 추가
+        param.put("likeCount", String.valueOf(likeCount));
+
+        // jobseekerCommunityBoard 테이블의 좋아요 수 업데이트
+        JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
+        dao.updateLikeCount(param);
+    }
+
+    @Override
+    public void likeOrUnlike(HashMap<String, String> param) {
+        log.info("좋아요 처리 / 취소");
+        JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
+        boolean alreadyLiked = dao.hasLiked(param);
+
+        if (alreadyLiked) {
+            param.put("status", "0"); // 좋아요 취소
+        } else {
+            param.put("status", "1"); // 좋아요 추가
+        }
+        dao.updateLikeStatus(param);
+
+        // 좋아요 수 갱신
+        updateLikeCount(param);
+
+        int likeCount = dao.getLikeCount(Integer.parseInt(param.get("jobseekerCommunityBoardNum")));
+        log.info("현재 좋아요 수: " + likeCount);
+    }
+
+    @Override
+    public boolean hasLiked(HashMap<String, String> param) {
+        log.info("좋아요 여부 확인");
+        JobseekerBoardMapper dao = sqlSession.getMapper(JobseekerBoardMapper.class);
+        return dao.hasLiked(param);
+    }
+
 }

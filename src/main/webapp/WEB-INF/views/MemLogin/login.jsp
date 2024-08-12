@@ -5,9 +5,7 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
+
     .tab-container {
         width: 400px;
         margin: 50px auto;

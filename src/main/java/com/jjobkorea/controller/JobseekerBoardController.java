@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +40,8 @@ public class JobseekerBoardController {
 
 	@Autowired
 	private JobseekerUploadService uploadService;
-	
-	//글 작성
+
+    //글 작성
 	 @PostMapping("/jobseekerWrite")
 	    public String write(JobseekerBoardDTO boardDTO, HttpSession session) {
 	        log.info("@# write");
@@ -68,6 +69,7 @@ public class JobseekerBoardController {
 	        }
 
 			model.addAttribute("page","jobseekerWrite_view");
+
 		    return "main/main";
 	    }
 
@@ -116,6 +118,7 @@ public class JobseekerBoardController {
 
 	 		//메인페이지로 연결
 	 		model.addAttribute("page", "jobseekerContent_view");
+
 	 	    return "main/main";
 	 		}
 	 
@@ -171,27 +174,38 @@ public class JobseekerBoardController {
 
 		        return "redirect:/board";
 		}
+		 
+		 
 		 @PostMapping("/like")
 		 @ResponseBody
-		 public ResponseEntity<Map<String, Object>> like(@RequestParam("jobseekerCommunityBoardNum") int jobseekerCommunityBoardNum, HttpSession session) {
+		 public ResponseEntity<Map<String, Object>> like(
+		         @RequestParam("jobseekerCommunityBoardNum") int jobseekerCommunityBoardNum,
+		         HttpSession session) {
 		     log.info("@# like");
-		     log.info("@# boardNum => " + jobseekerCommunityBoardNum);
+		     log.info("@# 글번호 => " + jobseekerCommunityBoardNum);
 
 		     Map<String, Object> response = new HashMap<>();
 
-		     // 로그인 여부 확인
-		     if (session.getAttribute("user") == null) {
+		     UserDTO user = (UserDTO) session.getAttribute("user");
+		     if (user == null) {
 		         log.info("좋아요 로그인 요청");
 		         response.put("redirectUrl", "/login");
 		         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED); // 401 상태 코드 반환
 		     }
 
-		     // 좋아요 처리
-		     service.likes(jobseekerCommunityBoardNum);
-		     
-		     // 좋아요 수 반환
+		     String userId = user.getUserId();
+		     log.info("@# 회원아이디 => " + userId);
+
+		     HashMap<String, String> param = new HashMap<>();
+		     param.put("jobseekerCommunityBoardNum", String.valueOf(jobseekerCommunityBoardNum));
+		     param.put("userId", userId);
+
+		     service.likeOrUnlike(param);
+
 		     int likeCount = service.getLikeCount(jobseekerCommunityBoardNum);
+		     boolean hasLiked = service.hasLiked(param); // 좋아요 여부 반환
 		     response.put("likeCount", likeCount);
+		     response.put("hasLiked", hasLiked);
 		     return ResponseEntity.ok(response); // 200 상태 코드 반환
 		 }
 }
