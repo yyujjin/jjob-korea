@@ -384,10 +384,8 @@
             </section>
 
             <div class="btn">
+             
                 <c:if test="${resumePageUserId == sessionScope.user.userId}">
-                    <button type="button" id="editButton" onclick="editResume()">수정</button>
-                </c:if>
-                <c:if test="${resumePageUserId != sessionScope.user.userId}">
                     <button type="submit" id="saveButton" style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
                 </c:if>
             </div>
