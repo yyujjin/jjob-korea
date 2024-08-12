@@ -33,7 +33,6 @@ public class SecurityConfig {
                                 "/display",
                                 "/getFileList",
                                 "/download").permitAll() //게시판,
-
                 .anyRequest().authenticated()
         );
 

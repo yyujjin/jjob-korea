@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.jjobkorea.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jjobkorea.dto.JobseekerBoardAttachDTO;
 import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.dto.JobseekerCommentDTO;
-import com.jjobkorea.dto.MemDTO;
 import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.service.JobseekerBoardService;
 import com.jjobkorea.service.JobseekerCommentService;
 import com.jjobkorea.service.JobseekerUploadService;
+import com.jjobkorea.service.UserSessionService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -40,87 +39,90 @@ public class JobseekerBoardController {
 
 	@Autowired
 	private JobseekerUploadService uploadService;
+	
+	private final UserSessionService userSessionService;
+	
+	public JobseekerBoardController(UserSessionService userSessionService) {
+        this.userSessionService = userSessionService;
+    }
+	
+	// 글 작성
+    @PostMapping("/jobseekerWrite")
+   	public String write(JobseekerBoardDTO boardDTO, Model model) {
+        log.info("@# write");
+        log.info("@# boardDTO => " + boardDTO);
 
-    //글 작성
-	 @PostMapping("/jobseekerWrite")
-	    public String write(JobseekerBoardDTO boardDTO, HttpSession session) {
-	        log.info("@# write");
-	        log.info("@# boardDTO=>" + boardDTO);
+        String userid = userSessionService.getUserId();
+        model.addAttribute("userid",userid);
 
-	        if (session.getAttribute("user") == null) {
-	            return "redirect:/login";
-	        }
+        if (boardDTO.getAttachList() != null) {
+            boardDTO.getAttachList().forEach(attach -> log.info("@# attach => " + attach));
+        }
 
-	        if (boardDTO.getAttachList() != null) {
-	            boardDTO.getAttachList().forEach(attach -> log.info("@# attach=>" + attach));
-	        }
+        service.jobseekerWrite(boardDTO);
 
-	        service.jobseekerWrite(boardDTO);
+        return "redirect:/board";
+    }
 
-	        return "redirect:/board";
-	    }
+    // 글 작성 뷰
+    @RequestMapping("/board/create")
+    public String write_view(Model model) {
+        log.info("@# write_view");
 
-		//글작성
-	 @RequestMapping("/board/create")
-	    public String write_view(HttpSession session, Model model) {
-	        log.info("@# write_view");
-	        if (session.getAttribute("user") == null) {
-	            return "redirect:/login";
-	        }
+        String userid = userSessionService.getUserId();
+        model.addAttribute("userid",userid);
+ 
+        model.addAttribute("page", "jobseekerWrite_view");
 
-			model.addAttribute("page","jobseekerWrite_view");
-
-		    return "main/main";
-	    }
-
+        return "main/main";
+    }
 		
-	 @RequestMapping("/jobseekerContent_view")
-	 	public String content_view(@RequestParam HashMap<String, String> param, Model model, HttpSession session) {
-	 		log.info("글 보기");
-	 			
-	 		JobseekerBoardDTO dto = service.jobseekerContentView(param);
-	 		model.addAttribute("content_view", dto);
-	 		
-//	 		content_view.jsp 에서 pageMaker 를 가지고 페이징 처리
-	 		model.addAttribute("pageMaker", param);
-	 			
-	 		// 해당 게시글에 작성된 댓글 리스트를 가져옴
-	 		ArrayList<JobseekerCommentDTO> commentList = commentService.findAll(param);
-	 		model.addAttribute("commentList", commentList);
-	 			
-	 		// 로그인한 사용자 정보를 얻는다
-		 	//유저 아이디 가져오기
-		 	UserDTO user = (UserDTO) session.getAttribute("user");
-		 	if (user != null) {
-		 	String userId = user.getUserId();
-			 log.info("게시판 접근 -> 유저 아이디 : {} ",userId);
+//  write 부분 작성자 정보 아이디 가져오기
+    
+    @RequestMapping("/jobseekerContent_view")
+    public String content_view(@RequestParam HashMap<String, String> param, Model model) {
+        log.info("글 보기");
 
-	        // 로그인 상태인지 확인하고 사용자 이름을 얻는다
-		 	//유저 이름 가져오기
-		 	String userName = user.getName();
-			 log.info("게시판 접근 -> 유저 이름 : {} ",userName);
+        JobseekerBoardDTO dto = service.jobseekerContentView(param);
+        model.addAttribute("content_view", dto);
 
-	        // 게시글 작성자 ID 얻기
-	        String jobseekerCommunityBoardName = dto.getJobseekerCommunityBoardName(); // DTO에서 작성자 ID를 가져온다
+        // content_view.jsp 에서 pageMaker 를 가지고 페이징 처리
+        model.addAttribute("pageMaker", param);
 
-	        // 조회수 증가 로직
-	        if (!userName.equals(jobseekerCommunityBoardName)) { // 본인 글이 아닐 때
-	            int jobseekerCommunityBoardNum = dto.getJobseekerCommunityBoardNum(); // DTO에서 게시글 번호를 가져온다
-	            service.jobseekerHit(jobseekerCommunityBoardNum);
-	        }
-	        
-	    // 로그인 안해도 글 조회수 증가
-		} else {
-			    // user 객체가 null인 경우에도 조회수 증가
-			    int jobseekerCommunityBoardNum = dto.getJobseekerCommunityBoardNum(); // DTO에서 게시글 번호를 가져온다
-			    service.jobseekerHit(jobseekerCommunityBoardNum);
-		} // end of 로그인 안해도 글 조회수 증가
+        // 해당 게시글에 작성된 댓글 리스트를 가져옴
+        ArrayList<JobseekerCommentDTO> commentList = commentService.findAll(param);
+        model.addAttribute("commentList", commentList);
 
-	 		//메인페이지로 연결
-	 		model.addAttribute("page", "jobseekerContent_view");
+        // 로그인한 사용자 정보를 얻는다
+        String userid = userSessionService.getUserId();
+        model.addAttribute("userid", userid);
+        
+        if (userid != null) {
+            log.info("게시판 접근 -> 유저 아이디 : {} ", userid);
 
-	 	    return "main/main";
-	 		}
+            // 로그인 상태인지 확인하고 사용자 이름을 얻는다
+            String userName = userSessionService.getUserName();
+            log.info("게시판 접근 -> 유저 이름 : {} ", userName);
+
+            // 게시글 작성자 ID 얻기
+            String jobseekerCommunityBoardName = dto.getJobseekerCommunityBoardName(); // DTO에서 작성자 ID를 가져온다
+
+            // 조회수 증가 로직
+            if (!userid.equals(jobseekerCommunityBoardName)) { // 본인 글이 아닐 때
+                int jobseekerCommunityBoardNum = dto.getJobseekerCommunityBoardNum(); // DTO에서 게시글 번호를 가져온다
+                service.jobseekerHit(jobseekerCommunityBoardNum);
+            }
+        } else {
+            // user 객체가 null인 경우에도 조회수 증가
+            int jobseekerCommunityBoardNum = dto.getJobseekerCommunityBoardNum(); // DTO에서 게시글 번호를 가져온다
+            service.jobseekerHit(jobseekerCommunityBoardNum);
+        }
+
+        // 메인페이지로 연결
+        model.addAttribute("page", "jobseekerContent_view");
+
+        return "main/main";
+    }
 	 
 	// requestPage/jobseekerContent_view~로 연결하는걸 다시 여기로 연결
 		@RequestMapping("/requestPage/jobseekerContent_view")
@@ -136,14 +138,11 @@ public class JobseekerBoardController {
 		}
 	
 		@PostMapping("/jobseekerModify")
-	    public String modify(@RequestParam HashMap<String, String> param, RedirectAttributes rttr, HttpSession session) {
+	    public String modify(@RequestParam HashMap<String, String> param,
+	    					RedirectAttributes rttr) {
 	        log.info("@# modify");
 	        log.info("@# param=>" + param);
-
-	        if (session.getAttribute("user") == null) {
-	            return "redirect:/login";
-	        }
-
+	        
 	        service.jobseekerModify(param);
 
 	        rttr.addAttribute("pageNum", param.get("pageNum"));
@@ -154,14 +153,10 @@ public class JobseekerBoardController {
 	
 
 		 @PostMapping("/delete")
-		    public String delete(@RequestParam HashMap<String, String> param, RedirectAttributes rttr, HttpSession session) {
+		    public String delete(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
 		        log.info("@# delete");
 		        log.info("@# param=>" + param);
 		        log.info("@# jobseekerCommunityBoardNum=>" + param.get("jobseekerCommunityBoardNum"));
-
-		        if (session.getAttribute("user") == null) {
-		            return "redirect:/login";
-		        }
 
 		        List<JobseekerBoardAttachDTO> fileList = uploadService.getFileList(Integer.parseInt(param.get("jobseekerCommunityBoardNum")));
 		        log.info("@# fileList=>" + fileList);
@@ -180,26 +175,20 @@ public class JobseekerBoardController {
 		 @ResponseBody
 		 public ResponseEntity<Map<String, Object>> like(
 		         @RequestParam("jobseekerCommunityBoardNum") int jobseekerCommunityBoardNum,
-		         HttpSession session) {
+		         Model model) {
 		     log.info("@# like");
 		     log.info("@# 글번호 => " + jobseekerCommunityBoardNum);
 
 		     Map<String, Object> response = new HashMap<>();
 
-		     UserDTO user = (UserDTO) session.getAttribute("user");
-		     if (user == null) {
-		         log.info("좋아요 로그인 요청");
-		         response.put("redirectUrl", "/login");
-		         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED); // 401 상태 코드 반환
-		     }
-
-		     String userId = user.getUserId();
-		     log.info("@# 회원아이디 => " + userId);
+		     String userid = userSessionService.getUserId();
+		     model.addAttribute("userid",userid);
+		     log.info("@# 회원아이디 => " + userid);
 
 		     HashMap<String, String> param = new HashMap<>();
 		     param.put("jobseekerCommunityBoardNum", String.valueOf(jobseekerCommunityBoardNum));
-		     param.put("userId", userId);
-
+		     param.put("userId", userid);
+		     
 		     service.likeOrUnlike(param);
 
 		     int likeCount = service.getLikeCount(jobseekerCommunityBoardNum);

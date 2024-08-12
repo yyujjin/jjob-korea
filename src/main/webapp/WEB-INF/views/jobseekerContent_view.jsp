@@ -151,14 +151,14 @@
             </td>
          </tr>
          <tr>
-            <td class="notContent">이름
+            <td class="notContent">아이디
                ${content_view.jobseekerCommunityBoardName}
             </td>
          </tr>
          <tr>
             <td class="notContent">제목
                <c:choose>
-                  <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
+                  <c:when test="${userid == content_view.jobseekerCommunityBoardName}">
                      <input type="text" name="jobseekerCommunityBoardTitle" 
                      value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
                   </c:when>
@@ -171,33 +171,33 @@
          <tr>
             <td class="BoardContent">
             <c:choose>
-               <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
+               <c:when test="${userid == content_view.jobseekerCommunityBoardName}">
                   <textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}</textarea>
                </c:when>
-               <c:otherwise>
+			   <c:otherwise>
                   <div class="BoardContent">${content_view.jobseekerCommunityBoardContent}</div>
                </c:otherwise>
             </c:choose>
             </td>
          </tr>
-         <tr>
-             <td style="text-align: center;">좋아요
-                 <button id="likeButton" class="like_button" 
-                         onclick="handleLike(${content_view.jobseekerCommunityBoardNum}); return false;">
-                     <i id="likeIcon" class="fa-regular fa-heart"></i> <!-- 기본 상태 아이콘 -->
-                 </button>
-                 <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
-             </td>
-         </tr>
+		 <tr>
+		     <td style="text-align: center;">좋아요
+		         <button id="likeButton" class="like_button" type="button"
+		                 onclick="handleLike(event, ${content_view.jobseekerCommunityBoardNum}); return false;">
+		             <i id="likeIcon" class="fa-regular fa-heart"></i> <!-- 기본 상태 아이콘 -->
+		         </button>
+		         <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
+		     </td>
+		 </tr>
          <tr>
             <td colspan="2" style="text-align: right;">
-               <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
+               <c:if test="${userid == content_view.jobseekerCommunityBoardName}">
                   <input class="mld_button" type="submit" value="수정">
                </c:if>
                &nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get" 
                formaction="/board">
                &nbsp;&nbsp;
-               <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
+               <c:if test="${userid == content_view.jobseekerCommunityBoardName}">
                   <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
                </c:if>
             </td>
@@ -243,79 +243,55 @@
    </div>
 </body>
    <script>
-      const handleLike = (boardNum) => {
-         event.preventDefault(); // 버튼 기본 동작 방지
-          $.ajax({
-              type: "post",
-              url: "${pageContext.request.contextPath}/like",
-              data: {
-                  jobseekerCommunityBoardNum: boardNum
-              },
-              success: function(response) {
-                  if (response.redirectUrl) {
-                      alert("로그인 후 이용해 주세요.");
-                      window.location.href = response.redirectUrl;
-                  } else {
-                      const hasLiked = response.hasLiked; // 서버에서 좋아요 상태를 받아옴
-                      alert(hasLiked ? "좋아요!" : "좋아요 취소!");
-               
-                  const likeIcon = $("#likeIcon");
-                  if (hasLiked) {
-                      likeIcon.removeClass("fa-regular fa-heart").addClass("fa-solid fa-heart");
-                  } else {
-                      likeIcon.removeClass("fa-solid fa-heart").addClass("fa-regular fa-heart");
-                  }
-                     
-                     $("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
-                  }
-              },
-              error: function(xhr) {
-                  if (xhr.status === 401) {
-                      const redirectUrl = xhr.responseJSON.redirectUrl;
-                      if (redirectUrl) {
-                          alert("로그인 후 이용해 주세요");
-                          window.location.href = redirectUrl;
-                      }
-                  } else {
-                      alert("좋아요 실패");
-                  }
-              }
-          });
-      };
-            
-            const commentWrite = () => {
-               const writer = document.getElementById("jobseekerCommentWriter").value;
-               
-               //로그인 확인후 경고창 띄우고 링크연결
-               if(!writer){
-                  alert("로그인이 필요합니다.");
-                  window.location.href = "${pageContext.request.contextPath}/login";
-                  return;
-               }
-               
-               const content = document.getElementById("jobseekerCommentContent").value;
-               const no = "${content_view.jobseekerCommunityBoardNum}";
+	const handleLike = (event, boardNum) => {
+	    event.preventDefault(); 
+	    event.stopPropagation();
 
-               $.ajax({
-                   type: "post"
-                  ,data: {
-                     jobseekerCommentCommentWriter: writer
-                     ,jobseekerCommunityCommentContent: content
-                     ,jobseekerCommunityBoardNum: no
-                  }
-                  ,url: "${pageContext.request.contextPath}/jobseekercomment/jobseekerSave"
-                  ,success: function(commentList){
-                     console.log("작성성공");
-                     console.log(commentList);
-                     updateCommentList(commentList); // updateCommentList 함수 호출
-                     document.getElementById("jobseekerCommentWriter").value = "";
-                     document.getElementById("jobseekerCommentContent").value = "";
-                  }
-                  ,error: function(){
-                     console.log("실패");
-                  }
-               });//end of ajax
-            } // end of commentWrite script
+	    $.ajax({
+	        type: "post",
+	        url: `${pageContext.request.contextPath}/like`,
+	        data: {
+	            jobseekerCommunityBoardNum: boardNum
+	        },
+	        success: function(response) {
+	            if (response.hasLiked !== undefined) {
+	                const hasLiked = response.hasLiked;
+	                alert(hasLiked ? "좋아요!" : "좋아요 취소!");
+
+	                const likeIcon = $("#likeIcon");
+	                if (hasLiked) {
+	                    likeIcon.removeClass("fa-regular fa-heart").addClass("fa-solid fa-heart");
+	                } else {
+	                    likeIcon.removeClass("fa-solid fa-heart").addClass("fa-regular fa-heart");
+	                }
+	                
+	                $("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
+	            }
+	        },
+	    });
+	};
+            
+	const commentWrite = () => {
+	    const writer = document.getElementById("jobseekerCommentWriter").value;
+	    const content = document.getElementById("jobseekerCommentContent").value;
+	    const no = "${content_view.jobseekerCommunityBoardNum}";
+
+	    $.ajax({
+	        type: "post",
+	        data: {
+	            jobseekerCommentCommentWriter: writer,
+	            jobseekerCommunityCommentContent: content,
+	            jobseekerCommunityBoardNum: no
+	        },
+	        url: "${pageContext.request.contextPath}/jobseekercomment/jobseekerSave",
+	        success: function(commentList) {
+	            console.log("작성성공");
+	            updateCommentList(commentList); // updateCommentList 함수 호출
+	            document.getElementById("jobseekerCommentWriter").value = "";
+	            document.getElementById("jobseekerCommentContent").value = "";
+	        },
+	    }); // end of ajax
+	}; // end of commentWrite script
 
             const updateCommentList = (commentList) => {
                let output = "<table>";

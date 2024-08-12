@@ -91,7 +91,7 @@
                 <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images fade-in">
             </div>
             
-            <script>
+           <!-- <script>
                 $(document).ready(function () {
                     var images = [
                         "../../resources/img/main_adv/검사무료체험.png",
@@ -117,7 +117,7 @@
             
                     setInterval(changeImage, 3000); // 3초마다 이미지 변경
                 });
-            </script>
+            </script>-->
 
 
             <div style="font-weight: bold;"> 지금 <span style="color: #00FF00;">HOT</span>한 채용공고 <span

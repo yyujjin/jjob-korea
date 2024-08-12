@@ -115,7 +115,7 @@
 	<table class="table_list" width="500" border="1">
 		<tr class="table_header">
 			<td>번호</td>
-			<td>이름</td>
+			<td>아이디</td>
 			<td>제목</td>
 			<td>날짜</td>
 			<td>조회수</td>
