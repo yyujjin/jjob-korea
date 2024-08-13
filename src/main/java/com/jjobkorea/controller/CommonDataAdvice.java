@@ -1,5 +1,6 @@
 package com.jjobkorea.controller;
 
+import com.jjobkorea.dto.GoogleResponse;
 import com.jjobkorea.service.UserSessionService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,5 +19,6 @@ public class CommonDataAdvice {
     public void addCommonAttributes(Model model) {
         model.addAttribute("username", userSessionService.getUserName());
         model.addAttribute("role",userSessionService.getRole());
+        model.addAttribute("userId",userSessionService.getUserId());
     }
 }
