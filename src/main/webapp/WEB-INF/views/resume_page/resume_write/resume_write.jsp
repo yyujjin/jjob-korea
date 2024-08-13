@@ -204,40 +204,42 @@
                     <div class="photo">
                         <div class="profilephoto">
                             <div id="photo-instructions" style="color: gray;">
-                                사진 크기는<b class="b">*</b><br>
+                                사진 크기는 <b class="b">*</b><br>
                                 150x210만 <br>
                                 가능합니다.
                             </div>
-                            <img id="output" src="" alt="uploaded image" style="display:none;">
+                            <img id="output" src="" alt="업로드된 이미지" style="display:none; width: 150px; height: 210px;">
                         </div>
-                        <div class="btn-upload" onclick="document.getElementById('file').click();">사진 업로드</div>
-                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*" onchange="loadFile(event)" style="display:none;" required>
+                        <div class="btn-upload" onclick="document.getElementById('file').click();">
+                            사진 업로드
+                        </div>
+                        <input type="file" name="resumeProfilePhoto" id="file" accept="image/*"
+                            onchange="loadFile(event)" style="display:none;" required>
                     </div>
-                    
+
                     <script>
                         function loadFile(event) {
                             var output = document.getElementById('output');
                             var instructions = document.getElementById('photo-instructions');
-                            instructions.style.display = 'none';
-                            output.style.display = 'block';
-                            output.src = URL.createObjectURL(event.target.files[0]);
-                            output.onload = function () {
-                                URL.revokeObjectURL(output.src); // 메모리 해제
+
+                            if (event.target.files[0]) {
+                                // 지침 숨기고 이미지 미리보기 표시
+                                instructions.style.display = 'none';
+                                output.style.display = 'block';
+                                output.src = URL.createObjectURL(event.target.files[0]);
+
+                                output.onload = function () {
+                                    URL.revokeObjectURL(output.src); // 메모리 해제
+                                }
+                            } else {
+                                // 파일이 선택되지 않은 경우 표시 초기화
+                                instructions.style.display = 'block';
+                                output.style.display = 'none';
+                                output.src = '';
                             }
                         }
-                    
-                        // 폼 제출 시 파일 선택 여부 검사
-                        document.querySelector('form').addEventListener('submit', function(event) {
-                            var fileInput = document.getElementById('file');
-                            if (!fileInput.value) {
-                                alert("사진을 업로드해 주세요.");
-                                fileInput.focus();
-                                event.preventDefault();
-                            }
-                        });
                     </script>
-                    
-                    
+
                     <div class="content">
                         <section>
                             <b style="font-size: 16px;">이력서 제목<b class="b">*</b></b>
@@ -268,7 +270,7 @@
                                     <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail"
                                         required>
                                 </div>
-                                
+
                                 <div class="input-item">
                                     <label for="resumeGender">성별<b class="b">*</b></label>
                                     <select name="resumeGender" id="resumeGender" required>
@@ -450,9 +452,8 @@
                         <div class="btn" style="border: none;">
                             <c:if test="${resumePageUserId == sessionScope.user.userId}">
                                 <button type="submit" id="saveButton"
-                                    style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
+                                    style="color: white; background-color: blue; border: solid 1px blue;">등록</button>
                             </c:if>
-                            <!-- <button type="button" style="border: solid 1px black;" onclick="saveResume()">임시저장</button> -->
                             <button type="button" onclick="saveResume()">임시저장</button>
                         </div>
                     </div>
@@ -461,7 +462,7 @@
 
             <script>
 
-                function saveResume() {
+                function saveResume(isTemporary) {
                     const resumeData = {
                         resumePageTitle: document.getElementById('resumePageTitle').value,
                         resumeUserName: document.getElementById('resumeUserName').value,
@@ -488,32 +489,6 @@
                     alert('이력서가 임시 저장되었습니다.');
                 }
 
-                function loadResume() {
-                    const savedResumeData = localStorage.getItem('resumeData');
-                    if (savedResumeData) {
-                        const resumeData = JSON.parse(savedResumeData);
-                        document.getElementById('resumeUserName').value = resumeData.resumeUserName;
-                        document.getElementById('resumeBirthDay').value = resumeData.resumeBirthDay;
-                        document.getElementById('resumeGender').value = resumeData.resumeGender;
-                        document.getElementById('resumeUserEmail').value = resumeData.resumeUserEmail;
-                        document.getElementById('resumeUserPhone').value = resumeData.resumeUserPhone;
-                        document.getElementById('resumeUserCellPhone').value = resumeData.resumeUserCellPhone;
-                        document.getElementById('resumeUserAddress').value = resumeData.resumeUserAddress;
-                        selectedSkills = resumeData.resumeSkillName;
-                        document.getElementById('resumeSkillName').value = selectedSkills.join(',');
-                        document.getElementById('resumePortfolio').value = resumeData.resumePortfolio;
-                        document.getElementById('resumeEduStage').value = resumeData.resumeEduStage;
-                        document.getElementById('resumeSchoolName').value = resumeData.resumeSchoolName;
-                        document.getElementById('resumeCpName').value = resumeData.resumeCpName;
-                        document.getElementById('resumeCpDept').value = resumeData.resumeCpDept;
-                        document.getElementById('resumeCpJoinDate').value = resumeData.resumeCpJoinDate;
-                        document.getElementById('resumeCpLeaveDate').value = resumeData.resumeCpLeaveDate;
-                        document.getElementById('resumeCpPosition').value = resumeData.resumeCpPosition;
-                        document.getElementById('resumeCpSalary').value = resumeData.resumeCpSalary;
-                        document.getElementById('resumeCpDuty').value = resumeData.resumeCpDuty;
-                        document.getElementById('resumeIntroduce').value = resumeData.resumeIntroduce;
-                    }
-                }
                 function validateForm() {
                     var salary = document.getElementById('resumeCpSalary').value;
                     if (isNaN(salary) || salary.trim() === "") {
