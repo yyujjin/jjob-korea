@@ -26,5 +26,9 @@ public interface UserMapper {
     public UserDTO findByUserId(String username);
     //회원 탈퇴
     public void deleteUser(UserDTO userDTO);
+    //구글인증 아이디 확인  (존재하면 유저 정보 반환)
+    public UserDTO findGoogleIdentity(String googleIdentity);
+    //구글 로그인 시 정보 저장
+    public void saveGoogleUserInfo (UserDTO userDTO);
 
 }
