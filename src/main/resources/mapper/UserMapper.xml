@@ -60,4 +60,20 @@
 	<delete id="deleteUser" parameterType="string">
 		DELETE FROM user_info WHERE userId = #{userId}
 	</delete>
+    <!-- 구글 인증 찾기-->
+
+    <select id="findGoogleIdentity" parameterType="String" resultType="UserDTO">
+        select * from user_info where googleIdentity = #{googleIdentity}
+    </select>
+
+    <!-- 구글 로그인 시 정보 저장 -->
+    <insert id="saveGoogleUserInfo" parameterType="UserDTO">
+        INSERT INTO user_info (
+        userId, name, email, registrationDate, googleIdentity, role
+        ) VALUES (
+        #{userId}, #{name}, #{email}, CURRENT_TIMESTAMP, #{googleIdentity}, #{role}
+        );
+    </insert>
+
+
 </mapper>
