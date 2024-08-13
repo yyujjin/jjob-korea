@@ -172,7 +172,7 @@
                     <span class="register-link" data-type="">비밀번호 찾기</span>
                     <span class="register-link" data-type="individual">회원가입</span>
                     <div class="google_login">
-                        <a href="#">
+                        <a href="/oauth2/authorization/google">
                             <img class="login_img" src="../../resources/img/구글이미지.png">
                             구글 계정으로 로그인
                         </a>
