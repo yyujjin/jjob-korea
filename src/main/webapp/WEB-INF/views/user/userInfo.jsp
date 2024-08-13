@@ -7,19 +7,28 @@
         <title>회원 정보 수정</title>
         <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
         <style>
+
             .mypage {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                text-align: center;
                 margin-top: 50px;
             }
 
             .form-group {
                 margin-bottom: 15px;
+                width: 425px;
+                height: 40px;
+                text-align: start;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
             }
 
             label {
-                margin-right: 10px;
+                width: auto;
+                padding: 5px;
             }
 
             input[type="text"] {
@@ -27,10 +36,19 @@
                 padding: 10px;
                 border: 1px solid #ccc;
                 border-radius: 4px;
+                height: 30px;
+            }
+
+            .btn-group {
+                font-size: 13px;
+                margin-top: 50px;
+                display: flex;
+                justify-content: space-between;
+                width: 400px;
             }
 
             button[type="submit"] {
-                padding: 10px 20px;
+                padding: 7px 15px;
                 background-color: #0057ff;
                 color: white;
                 border: none;
@@ -39,12 +57,12 @@
             }
 
             button[type="submit"]:hover {
-                background-color: #0047d4;
+                background-color: #9eec2a;
             }
 
             button.cancle-button {
-                padding: 10px 20px;
-                background-color: #d9534f;
+                padding: 7px 15px;
+                background-color: #9eec2a;
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -53,7 +71,7 @@
             }
 
             button.delete-button {
-                padding: 10px 20px;
+                padding: 7px 15px;
                 background-color: #0057ff;
                 color: white;
                 border: none;
@@ -61,13 +79,13 @@
                 cursor: pointer;
                 margin-left: 10px;
             }
-            
+
             button.cancle-button:hover {
-                background-color: #c9302c;
+                background-color: blue;
             }
 
             button.delete-button:hover {
-                background-color: #c9302c;
+                background-color: #9eec2a;
             }
         </style>
         <script>
@@ -83,17 +101,17 @@
                         url: '${pageContext.request.contextPath}/deleteUser',
                         data: { userId: userId },
                         success: function (response) {
-                           $.ajax({
-                               type: 'get',
-                               url: '${pageContext.request.contextPath}/logout', // 로그아웃 요청
-                               success: function () {
-                                   alert('회원 탈퇴가 성공적으로 완료되었습니다. 로그아웃 처리되었습니다.');
-                                   window.location.href = '${pageContext.request.contextPath}/';
-                               },
-                               error: function (xhr, status, error) {
-                                   alert('로그아웃 중 문제가 발생했습니다. 다시 시도해주세요.');
-                               }
-                           });
+                            $.ajax({
+                                type: 'get',
+                                url: '${pageContext.request.contextPath}/logout', // 로그아웃 요청
+                                success: function () {
+                                    alert('회원 탈퇴가 성공적으로 완료되었습니다. 로그아웃 처리되었습니다.');
+                                    window.location.href = '${pageContext.request.contextPath}/';
+                                },
+                                error: function (xhr, status, error) {
+                                    alert('로그아웃 중 문제가 발생했습니다. 다시 시도해주세요.');
+                                }
+                            });
                         },
                         error: function (xhr, status, error) {
                             alert('탈퇴 중 문제가 발생했습니다. 다시 시도해주세요.')
@@ -109,39 +127,41 @@
 
     <body>
         <div class="mypage">
-            <h2>회원 정보 수정</h2>
+            <h2 style="margin-bottom: 50px;">회원 정보 수정</h2>
             <form id="user-info-form" method="post" action="/user/update">
                 <div class="form-group">
-                    <label for="userId">User ID:</label>
+                    <label for="userId">User ID :</label>
                     <input type="text" id="userId" name="userId" value="${userInfo.userId}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name">Name :</label>
                     <input type="text" id="name" name="name" value="${userInfo.name}">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone:</label>
+                    <label for="phone">Phone :</label>
                     <input type="text" id="phone" name="phone" value="${userInfo.phone}">
                 </div>
                 <div class="form-group">
-                    <label for="addr">Address:</label>
+                    <label for="addr">Address :</label>
                     <input type="text" id="addr" name="addr" value="${userInfo.addr}">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email">Email :</label>
                     <input type="text" id="email" name="email" value="${userInfo.email}">
                 </div>
                 <div class="form-group">
-                    <label for="birthd">Birthdate:</label>
+                    <label for="birthd">Birthdate :</label>
                     <input type="text" id="birthd" name="birthd" value="${userInfo.birthd}">
                 </div>
                 <div class="form-group">
-                    <label for="gender">Gender:</label>
+                    <label for="gender">Gender :</label>
                     <input type="text" id="gender" name="gender" value="${userInfo.gender}">
                 </div>
-                <button type="submit" class="submit">수정하기</button>
-                <button type="button" class="cancle-button" onclick="window.history.back()">취소</button>
-                <button type="button" class="delete-button" onclick="deleteUser()">탈퇴하기</button>
+                <div class="btn-group">
+                    <button type="submit" class="submit">수정하기</button>
+                    <button type="button" class="cancle-button" onclick="window.history.back()">취소</button>
+                    <button type="button" class="delete-button" onclick="deleteUser()">탈퇴하기</button>
+                </div>
             </form>
         </div>
     </body>
