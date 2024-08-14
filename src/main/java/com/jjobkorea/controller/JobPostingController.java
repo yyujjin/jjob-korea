@@ -42,7 +42,7 @@ public class JobPostingController {
 
     //공고 등록 페이지
     @GetMapping("/jobPost/create")
-    public String createJobPost(Model model) {
+    public String addpostingwrite(Model model) {
     	log.info("공고등록model", model);
         model.addAttribute("page","jobPostingDetails/addJobPosting");
 
