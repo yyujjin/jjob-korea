@@ -26,13 +26,12 @@ public class SecurityConfig {
                 .requestMatchers("/", "/login", "/register").permitAll() //메인, 로그인, 회원가입
                 .requestMatchers("/jobPosts", "/searchFilter").permitAll() //채용 정보
                 .requestMatchers(
-                        "/jobseekerContent_view",
-                                "/requestPage/jobseekerContent_view",
                                 "/getComments",
                                 "/board",
                                 "/display",
                                 "/getFileList",
                                 "/download").permitAll() //게시판,
+                					
                 .anyRequest().authenticated()
         );
 
