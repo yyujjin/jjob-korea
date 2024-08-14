@@ -179,17 +179,23 @@
                </c:otherwise>
             </c:choose>
             </td>
-         </tr>
-		 <tr>
-		     <td style="text-align: center;">좋아요
-		         <button id="likeButton" class="like_button" type="button"
-		                 onclick="handleLike(event, ${content_view.jobseekerCommunityBoardNum}); return false;">
-		             <i id="likeIcon" class="fa-regular fa-heart"></i> <!-- 기본 상태 아이콘 -->
-		         </button>
-		         <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
-		     </td>
-		 </tr>
-         <tr>
+			<tr>
+			   <td style="text-align: center;">좋아요
+			      <button id="likeButton" class="like_button" type="button"
+			              onclick="handleLike(event, ${content_view.jobseekerCommunityBoardNum}); return false;">
+			          <!-- 서버에서 받아온 좋아요 상태에 따라 아이콘 설정 -->
+			          <i id="likeIcon" class="<c:choose>
+			                                     <c:when test="${hasLiked}">
+			                                         fa-solid fa-heart
+			                                     </c:when>
+			                                     <c:otherwise>
+			                                         fa-regular fa-heart
+			                                     </c:otherwise>
+			                                   </c:choose>"></i>
+			      </button>
+			      <span id="likeCount">${likeCount}</span> <!-- 좋아요 수를 표시 -->
+			   </td>
+			</tr>
             <td colspan="2" style="text-align: right;">
                <c:if test="${userid == content_view.jobseekerCommunityBoardName}">
                   <input class="mld_button" type="submit" value="수정">
@@ -243,38 +249,43 @@
    </div>
 </body>
    <script>
-	const handleLike = (event, boardNum) => {
-	    event.preventDefault(); 
-	    event.stopPropagation();
+	// 좋아요 기능 처리
+	       const handleLike = (event, boardNum) => {
+	           event.preventDefault(); 
+	           event.stopPropagation();
 
-	    $.ajax({
-	        type: "post",
-	        url: `${pageContext.request.contextPath}/like`,
-	        data: {
-	            jobseekerCommunityBoardNum: boardNum
-	        },
-	        success: function(response) {
-	            if (response.hasLiked !== undefined) {
-	                const hasLiked = response.hasLiked;
-	                alert(hasLiked ? "좋아요!" : "좋아요 취소!");
+	           $.ajax({
+	               type: "post",
+	               url: `${pageContext.request.contextPath}/like`,
+	               data: {
+	                   jobseekerCommunityBoardNum: boardNum
+	               },
+	               success: function(response) {
+	                   if (response.hasLiked !== undefined) {
+	                       const hasLiked = response.hasLiked; 
+	                       const likeIcon = $("#likeIcon");
+	                       if (hasLiked) {
+	                           likeIcon.removeClass("fa-regular fa-heart").addClass("fa-solid fa-heart");
+	                       } else {
+	                           likeIcon.removeClass("fa-solid fa-heart").addClass("fa-regular fa-heart");
+	                       }
 
-	                const likeIcon = $("#likeIcon");
-	                if (hasLiked) {
-	                    likeIcon.removeClass("fa-regular fa-heart").addClass("fa-solid fa-heart");
-	                } else {
-	                    likeIcon.removeClass("fa-solid fa-heart").addClass("fa-regular fa-heart");
-	                }
-	                
-	                $("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
-	            }
-	        },
-	    });
-	};
+	                       const likeCount = response.likeCount; // 좋아요 수 업데이트
+	                       $("#likeCount").text(likeCount); // 좋아요 수를 표시
+	                   }
+	               },
+	           });
+	       };
             
 	const commentWrite = () => {
 	    const writer = document.getElementById("jobseekerCommentWriter").value;
 	    const content = document.getElementById("jobseekerCommentContent").value;
 	    const no = "${content_view.jobseekerCommunityBoardNum}";
+		// 댓글 내용 확인
+		if (content.trim() === "") {
+			alert("댓글을 입력해 주세요.");
+			return;
+		}
 
 	    $.ajax({
 	        type: "post",
@@ -300,6 +311,9 @@
                output += "<th>내용</th>";
                output += "<th>작성시간</th></tr>";
                for (let i in commentList){
+				const utcDate = new Date(commentList[i].jobseekerCommentTime);
+		        const koreanTime = utcDate.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+
                   output += "<tr>";
                   output += "<td>"+commentList[i].jobseekerCommentBoardNum+"</td>";
                   output += "<td>"+commentList[i].jobseekerCommentCommentWriter+"</td>";
