@@ -27,6 +27,7 @@ public class UserController {
     //로그인 페이지 로드
     @GetMapping("/login")
     public String showLoginPage(Model model) {
+    	log.info("여기로 왔음");
         model.addAttribute("page","user/login");
         return "main/main";
     }
