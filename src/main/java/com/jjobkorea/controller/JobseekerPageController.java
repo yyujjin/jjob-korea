@@ -27,8 +27,8 @@ public class JobseekerPageController {
 	@Autowired
 	private JobseekerPageService service;
 	private final UserSessionService userSessionService;
-
-    public JobseekerPageController(UserSessionService userSessionService) {
+	
+	public JobseekerPageController(UserSessionService userSessionService) {
         this.userSessionService = userSessionService;
     }
 
