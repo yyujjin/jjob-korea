@@ -4,7 +4,7 @@
 
 <!-- 	getUser -> 인터페이스에있는 메소드와 이름 같이 매칭 -->
 
-    <insert id="write">   
+    <insert id="addpostingwrite">   
     	<selectKey keyProperty="id" order="BEFORE" resultType="int">
     		select ifnull(max(id),0)+1 from JobPosting
     	</selectKey>
@@ -13,11 +13,11 @@
 		  select ifnull(max(id),0)+1,#{companyName},#{postingImage},#{postingTitle},#{jobTitle},#{workLocation},#{employmentType},#{jobExperience},#{deadline},#{companyId} from JobPosting
     </insert>
     
-    <update id="modify">        
+    <update id="addpostingmodify">        
 	update JobPosting set companyName=#{companyName},postingImage=#{postingImage},postingTitle=#{postingTitle},jobTitle=#{jobTitle},workLocation=#{workLocation},employmentType=#{employmentType},jobExperience=#{jobExperience},deadline=#{deadline},companyId=#{companyId} where id=#{id}
     </update>
 
-    <delete id="delete">        
+    <delete id="addpostingdelete">        
 	delete from JobPosting where id=#{id}
     </delete>
     
