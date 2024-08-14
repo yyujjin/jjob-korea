@@ -36,23 +36,18 @@ public class JobPostingController {
 
         return "main/main";
     }
+    
+    
+    
 
     //공고 등록 페이지
-//    @GetMapping("/jobPost/create")
-//    public String createJobPost(Model model) {
-//
-//        model.addAttribute("page","jobPostingDetails/addJobPosting");
-//
-//        return "main/main";
-//    }
+    @GetMapping("/jobPost/create")
+    public String createJobPost(Model model) {
+    	log.info("공고등록model", model);
+        model.addAttribute("page","jobPostingDetails/addJobPosting");
 
-    @PostMapping("/jobPost/create")
-    public String createJobPost(JobPostingDTO jobPostingDTO) {
-        // 처리 로직
-        return "redirect:/jobPost/success";
+        return "main/main";
     }
-    
-    
     
     //공고 상세보기 페이지
     @GetMapping ("/jobPosting")
