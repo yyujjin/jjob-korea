@@ -148,14 +148,31 @@
 </body>
 </html>
 <script>
-$(document).ready(function (e){
-	var formObj = $("form[id='frm']");
+	$(document).ready(function (e){
+		var formObj = $("form[id='frm']");
 
-	$("button[type='submit']").on("click", function(e){
-		e.preventDefault();
-		console.log("submit clicked");
+		$("button[type='submit']").on("click", function(e){
+			e.preventDefault();
 
-		var str="";
+			var title = $("input[name='jobseekerCommunityBoardTitle']").val().trim();
+	        var content = $("textarea[name='jobseekerCommunityBoardContent']").val().trim();
+
+	        // 제목과 내용이 비어 있는지 확인
+	        if (title === "" && content === "") {
+	            alert("제목과 내용을 입력해 주세요.");
+	            return; 
+
+	        }else if (title === "") {
+				alert("제목을 입력해 주세요.");
+	            return; 
+
+			}else if (content === "") {
+				alert("내용을 입력해 주세요.");
+	            return;
+			}
+			console.log("submit clicked");
+
+			var str="";
 
 		$(".uploadResult ul li").each(function (i, obj){
 			console.log("@# obj=>"+$(obj));
