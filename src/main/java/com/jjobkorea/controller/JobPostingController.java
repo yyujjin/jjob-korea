@@ -53,6 +53,18 @@ public class JobPostingController {
         return "main/main";
     }
     
+    // 공고 등록 처리 (POST 요청)
+    @PostMapping("/jobPost/create")
+    public String createJobPost(JobPostingDTO jobPostingDTO) {
+        log.info("공고 등록: {}", jobPostingDTO);
+
+        // 공고 등록 처리 로직 (예: DB 저장)
+        jobPostingService.addpostingwrite(jobPostingDTO);
+
+        // 공고 등록 후 성공 페이지로 리다이렉트
+        return "redirect:/jobPosts";
+    }
+    
     
     
     
