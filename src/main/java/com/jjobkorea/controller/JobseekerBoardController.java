@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,6 +98,10 @@ public class JobseekerBoardController {
         String userid = userSessionService.getUserId();
         model.addAttribute("userid", userid);
         
+        // 좋아요 상태 및 좋아요 수 확인
+        boolean hasLiked = false;
+        int likeCount = service.getLikeCount(dto.getJobseekerCommunityBoardNum());
+        
         if (userid != null) {
             log.info("게시판 접근 -> 유저 아이디 : {} ", userid);
 
@@ -112,11 +117,20 @@ public class JobseekerBoardController {
                 int jobseekerCommunityBoardNum = dto.getJobseekerCommunityBoardNum(); // DTO에서 게시글 번호를 가져온다
                 service.jobseekerHit(jobseekerCommunityBoardNum);
             }
+            // 현재 사용자가 해당 게시글에 좋아요를 눌렀는지 확인
+            HashMap<String, String> likeParam = new HashMap<>();
+            likeParam.put("jobseekerCommunityBoardNum", String.valueOf(dto.getJobseekerCommunityBoardNum()));
+            likeParam.put("userId", userid);
+            hasLiked = service.hasLiked(likeParam);
         } else {
-            // user 객체가 null인 경우에도 조회수 증가
+            // 사용자가 로그인하지 않은 경우에도 조회수를 증가시킴
             int jobseekerCommunityBoardNum = dto.getJobseekerCommunityBoardNum(); // DTO에서 게시글 번호를 가져온다
             service.jobseekerHit(jobseekerCommunityBoardNum);
         }
+
+        // 좋아요 상태와 좋아요 수를 JSP에 전달
+        model.addAttribute("hasLiked", hasLiked);
+        model.addAttribute("likeCount", likeCount);
 
         // 메인페이지로 연결
         model.addAttribute("page", "jobseekerContent_view");
