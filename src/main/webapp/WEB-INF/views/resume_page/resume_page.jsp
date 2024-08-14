@@ -224,7 +224,7 @@
                                             <tr>
                                                 <td>${resume.resumePageTitle}</td>
                                                 <td>
-                                                    <form action="${pageContext.request.contextPath}/resume/update"
+                                                    <form action="${pageContext.request.contextPath}/resume_write/edit"
                                                         method="get" style="display:inline;">
                                                         <input type="hidden" name="id" value="${resume.id}">
                                                         <button type="submit">수정</button>

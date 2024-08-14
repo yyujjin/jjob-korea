@@ -69,7 +69,7 @@
                             target="_blank">이용약관</a>&nbsp;
                         <a href="https://www.notion.so/2-00b302e4e6964d91b05737af8ba58004" target="_blank">고객센터</a><br>
                         대표 : 박유진<br>
-                        팀원 : 한도훈 조해욱 문균호 차혜영 서민정<br>
+                        팀원 : 한도훈 조해욱 문균호 차혜영<br>
                         <font style="vertical-align: inherit;">
                             <font style="vertical-align: inherit;">© 2024 Inc.JJobKorea Corporation</font>
                         </font>

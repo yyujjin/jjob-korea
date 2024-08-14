@@ -2,6 +2,7 @@ package com.jjobkorea.mapper;
 
 import java.util.List;
 
+import com.jjobkorea.dto.CompanyDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.jjobkorea.dto.FilterDTO;
@@ -20,4 +21,9 @@ public interface JobPostingMapper {
     //선택조건 리스트 가져오기
     public List<JobPostingDTO> getSearchList(@Param("filter") FilterDTO dto, @Param("pageNum") int pageNum);
 
+    //기업 정보 가져오기
+    public CompanyDTO getCompanyInfo(int companyId);
+
+    //채용 정보 가져오기
+    public JobPostingDTO getJobPosting(int companyId);
 }
