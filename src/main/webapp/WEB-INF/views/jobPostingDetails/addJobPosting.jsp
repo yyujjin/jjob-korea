@@ -1,136 +1,119 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>채용 공고 추가</title>
-    <!-- Bootstrap CSS -->
-    <link href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            padding: 2rem;
-        }
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+        <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+            <!DOCTYPE html>
+            <html lang="ko">
 
-        .container-fixed {
-            width: 1200px; /* 고정된 크기 */
-            margin: 0 auto; /* 가운데 정렬 */
-        }
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>채용 공고 추가</title>
+                <!-- Bootstrap CSS -->
+                <link href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />" rel="stylesheet">
+                <style>
+                    body {
+                        background-color: #f8f9fa;
+                        padding: 2rem;
+                    }
 
-        .card {
-            margin-bottom: 1.5rem;
-            border: none;
-            background-color: #fff;
-            padding: 1rem;
-            height: 100%; /* 카드의 높이를 100%로 설정하여 동일한 세로 크기 유지 */
-        }
+                    .container-fixed {
+                        width: 1200px;
+                        /* 고정된 크기 */
+                        margin: 0 auto;
+                        /* 가운데 정렬 */
+                    }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: blue; /* 텍스트 색상 */
-            border-bottom: 3px solid blue; /* 텍스트 아래 강조선 */
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
+                    .card {
+                        margin-bottom: 1.5rem;
+                        border: none;
+                        background-color: #fff;
+                        padding: 1rem;
+                        height: 100%;
+                        /* 카드의 높이를 100%로 설정하여 동일한 세로 크기 유지 */
+                    }
 
-        .form-floating {
-            margin-bottom: 0.5rem;
-        }
+                    .section-title {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: blue;
+                        /* 텍스트 색상 */
+                        border-bottom: 3px solid blue;
+                        /* 텍스트 아래 강조선 */
+                        padding-bottom: 0.5rem;
+                        margin-bottom: 1rem;
+                    }
 
-        .form-floating input,
-        .form-floating textarea,
-        .form-floating select {
-            padding: 0.5rem 0.75rem;
-            height: auto;
-        }
+                    .form-floating {
+                        margin-bottom: 0.5rem;
+                    }
 
-        .form-floating label {
-            font-size: 0.85rem;
-            color: #6c757d;
-        }
+                    .form-floating input,
+                    .form-floating textarea,
+                    .form-floating select {
+                        padding: 0.5rem 0.75rem;
+                        height: auto;
+                    }
 
-        .required::after {
-            content: "*";
-            color: red;
-        }
-    </style>
-</head>
-<body>
-<div class="container-fixed mt-5">
-    <h2 class="text-center mb-4">채용 공고 등록</h2>
-    <form action="<c:url value='/addJobPosting' />" method="post" enctype="multipart/form-data">
-        <!-- 회사 정보 섹션 -->
-<div class="card">
-    <div class="card-header section-title">회사 정보</div>
-    <div class="card-body">
-        <div class="form-floating">
-            <input type="text" class="form-control" id="companyName" name="companyName" placeholder="회사명" value="${signupCp.companyName}" readonly>
-            <label for="companyName" class="required">회사명</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="companyType" name="companyType" placeholder="회사 유형" value="${signupCp.companyType}" readonly>
-            <label for="companyType" class="required">회사 유형</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="companyAddr" name="companyAddr" placeholder="주소" value="${signupCp.companyAddr}" readonly>
-            <label for="companyAddr" class="required">주소</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="companyBusinessRegistration" name="companyBusinessRegistration" placeholder="사업자 등록번호" value="${signupCp.companyBusinessRegistration}" readonly>
-            <label for="companyBusinessRegistration" class="required">사업자 등록번호</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="industry" name="industry" placeholder="업종">
-            <label for="industry" class="required">업종</label>
-        </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" id="employeeCount" name="employeeCount" placeholder="사원수">
-            <label for="employeeCount" class="required">사원수</label>
-        </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" id="establishedYear" name="establishedYear" placeholder="설립년도">
-            <label for="establishedYear" class="required">설립년도</label>
-        </div>
-        <!-- <div class="form-floating">
-            <input type="url" class="form-control" id="companyWebsite" name="companyWebsite" placeholder="홈페이지">
-            <label for="companyWebsite" class="required">홈페이지</label>
-        </div> -->
-    </div>
-</div>
+                    .form-floating label {
+                        font-size: 0.85rem;
+                        color: #6c757d;
+                    }
 
-        <!-- 사용자 정보 섹션 -->
-        <div class="card">
-            <div class="card-header section-title">사용자 정보</div>
-            <div class="card-body">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" value="${userInfo.userId}" readonly>
-                    <label for="userId" class="required">아이디</label>
-                </div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="이름" value="${userInfo.name}" readonly>
-                    <label for="name" class="required">이름</label>
-                </div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호" value="${userInfo.phone}" readonly>
-                    <label for="phone" class="required">전화번호</label>
-                </div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="이메일" value="${userInfo.email}" readonly>
-                    <label for="email" class="required">이메일</label>
-                </div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="addr" name="addr" placeholder="주소" value="${userInfo.addr}" readonly>
-                    <label for="addr" class="required">주소</label>
-                </div>
-            </div>
-        </div>
+                    .required::after {
+                        content: "*";
+                        color: red;
+                    }
+                </style>
+            </head>
 
-        <!-- 포지션 및 자격요건 섹션 -->
-<div class="card">
+            <body>
+                <div class="container-fixed mt-5">
+                    <h2 class="text-center mb-4">채용 공고 등록</h2>
+                    <form action="<c:url value='/addJobPosting' />" method="post" enctype="multipart/form-data">
+                        <!-- 회사 정보 섹션 -->
+                        <div class="card">
+                            <div class="card-header section-title">회사 소개</div>
+                            <div class="card-body">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="companyName" name="companyName"
+                                        placeholder="회사명" value="${signupCp.companyName}" readonly>
+                                    <label for="companyName" class="required">회사이름</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="" name="" placeholder="대표자"
+                                        value="${signupCp.}" readonly>
+                                    <label for="" class="required">대표자</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="companyAddr" name="companyAddr"
+                                        placeholder="주소" value="${signupCp.companyAddr}" readonly>
+                                    <label for="companyAddr" class="required">주소</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="" name="" placeholder="기업 규모"
+                                        value="${signupCp.}" readonly>
+                                    <label for="" class="required">기업 규모</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="industry" name="industry"
+                                        placeholder="업종">
+                                    <label for="industry" class="required">업종</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="employeeCount" name="employeeCount"
+                                        placeholder="사원수">
+                                    <label for="employeeCount" class="required">직원 수</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="establishedYear" name="establishedYear"
+                                        placeholder="설립년도">
+                                    <label for="establishedYear" class="required">설립년도</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 포지션 및 자격요건 섹션 -->
+                        <!-- <div class="card">
     <div class="card-header section-title">포지션 및 자격요건</div>
     <div class="card-body">
         <div class="form-floating">
@@ -162,38 +145,44 @@
             <label for="preferredConditions">우대조건</label>
         </div>
     </div>
-</div>
+</div> -->
 
 
-       <!-- 근무 조건 섹션 -->
-<div class="card">
-    <div class="card-header section-title">근무 조건</div>
-    <div class="card-body">
-        <div class="form-floating">
-            <input type="text" class="form-control" id="employmentType" name="employmentType" placeholder="고용 형태">
-            <label for="employmentType">고용 형태</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="salary" name="salary" placeholder="급여">
-            <label for="salary">급여</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="location" name="location" placeholder="근무 지역">
-            <label for="location">근무 지역</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="workHours" name="workHours" placeholder="근무 요일/시간">
-            <label for="workHours">근무 요일/시간</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="positionLevel" name="positionLevel" placeholder="직급">
-            <label for="positionLevel">직급</label>
-        </div>
-    </div>
-</div>
+                        <!-- 근무 조건 섹션 -->
+                        <div class="card">
+                            <div class="card-header section-title">근무 조건</div>
+                            <div class="card-body">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="employmentType" name="employmentType"
+                                        placeholder="고용 형태">
+                                    <label for="employmentType">고용 형태</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="" name="" placeholder="직무">
+                                    <label for="">직무</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="location" name="location"
+                                        placeholder="근무 지역">
+                                    <label for="location">근무 지역</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="" name="" placeholder="고용 형태">
+                                    <label for="">고용 형태</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="" name="" placeholder="경력 여부">
+                                    <label for="">경력 여부</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="" name="" placeholder="채용 마감 날짜">
+                                    <label for="">채용 마감 날짜</label>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- 복지 및 혜택 섹션 -->
-        <div class="card">
+                        <!-- 복지 및 혜택 섹션 -->
+                        <!-- <div class="card">
             <div class="card-header section-title">복지 및 혜택</div>
             <div class="card-body">
                 <div class="form-floating">
@@ -201,10 +190,10 @@
                     <label for="benefits">복지 혜택</label>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!-- 전형절차 섹션 -->
-        <div class="card">
+                        <!-- 전형절차 섹션 -->
+                        <!-- <div class="card">
             <div class="card-header section-title">전형절차</div>
             <div class="card-body">
                 <div class="form-floating">
@@ -212,10 +201,10 @@
                     <label for="hiringProcess">전형절차</label>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!-- 유의사항 섹션 -->
-        <div class="card">
+                        <!-- 유의사항 섹션 -->
+                        <!-- <div class="card">
             <div class="card-header section-title">유의사항</div>
             <div class="card-body">
                 <div class="form-floating">
@@ -223,10 +212,10 @@
                     <label for="notes">유의사항</label>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-       <!-- 회사 로고 및 채용 공고 이미지 업로드 -->
-<div class="card">
+                        <!-- 회사 로고 및 채용 공고 이미지 업로드 -->
+                        <!-- <div class="card">
     <div class="card-header section-title">이미지 업로드</div>
     <div class="card-body">
         <div class="form-floating">
@@ -242,19 +231,20 @@
             <label for="additionalImages">추가 이미지</label>
         </div>
     </div>
-</div>
+</div> -->
 
 
-        <!-- 제출 버튼 -->
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary mt-4">제출</button>
-        </div>
-    </form>
-</div>
+                        <!-- 제출 버튼 -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-4">제출</button>
+                        </div>
+                    </form>
+                </div>
 
-<!-- jQuery -->
-<script src="<c:url value='/resources/js/jquery-3.7.1.min.js' />"></script>
-<!-- Bootstrap JS -->
-<script src="<c:url value='/resources/js/bootstrap/bootstrap.min.js' />"></script>
-</body>
-</html>
+                <!-- jQuery -->
+                <script src="<c:url value='/resources/js/jquery-3.7.1.min.js' />"></script>
+                <!-- Bootstrap JS -->
+                <script src="<c:url value='/resources/js/bootstrap/bootstrap.min.js' />"></script>
+            </body>
+
+            </html>
