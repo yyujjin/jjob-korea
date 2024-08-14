@@ -101,19 +101,12 @@
                     <div class="text-end log-container">
                       <ul class="nav" style="font-size: 14px;">
                         <c:choose>
-                          <c:when test="${not empty username or not empty userId}">
+                          <c:when test="${not empty username}">
                             <li class="nav-item">
                               <span class="nav-link" style="color: black; font-weight: bold;">
                                 안녕하세요!
                                 <a style="color: blue; text-decoration: underline;">
-                                     <c:choose>
-                                        <c:when test="${not empty username}">
-                                            ${username}
-                                        </c:when>
-                                        <c:otherwise>
-                                            ${userId}
-                                        </c:otherwise>
-                                     </c:choose>
+                                  ${username}
                                 </a> 님
                               </span>
                             </li>
