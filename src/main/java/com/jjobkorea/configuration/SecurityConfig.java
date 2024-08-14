@@ -26,8 +26,8 @@ public class SecurityConfig {
                 .requestMatchers("/", "/login", "/register").permitAll() //메인, 로그인, 회원가입
                 .requestMatchers("/jobPosts", "/searchFilter","/jobPosting").permitAll()//채용 정보
                 .requestMatchers(
-                        "/jobseekerContent_view",
-                                "/requestPage/jobseekerContent_view",
+//                        "/jobseekerContent_view",
+//                                "/requestPage/jobseekerContent_view",
                                 "/getComments",
                                 "/board",
                                 "/display",
