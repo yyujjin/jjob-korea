@@ -31,8 +31,8 @@
         .section-title {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #007bff; /* 텍스트 색상 */
-            border-bottom: 3px solid #007bff; /* 텍스트 아래 강조선 */
+            color: blue; /* 텍스트 색상 */
+            border-bottom: 3px solid blue; /* 텍스트 아래 강조선 */
             padding-bottom: 0.5rem;
             margin-bottom: 1rem;
         }
@@ -61,7 +61,7 @@
 </head>
 <body>
 <div class="container-fixed mt-5">
-    <h2 class="text-center mb-4">채용 공고 추가</h2>
+    <h2 class="text-center mb-4">채용 공고 등록</h2>
     <form action="<c:url value='/addJobPosting' />" method="post" enctype="multipart/form-data">
         <!-- 회사 정보 섹션 -->
 <div class="card">
@@ -95,10 +95,10 @@
             <input type="number" class="form-control" id="establishedYear" name="establishedYear" placeholder="설립년도">
             <label for="establishedYear" class="required">설립년도</label>
         </div>
-        <div class="form-floating">
+        <!-- <div class="form-floating">
             <input type="url" class="form-control" id="companyWebsite" name="companyWebsite" placeholder="홈페이지">
             <label for="companyWebsite" class="required">홈페이지</label>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -107,26 +107,25 @@
             <div class="card-header section-title">사용자 정보</div>
             <div class="card-body">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="memId" name="memId" placeholder="아이디" value="${signupTb.memId}" readonly>
-                    <label for="memId" class="required">아이디</label>
+                    <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" value="${userInfo.userId}" readonly>
+                    <label for="userId" class="required">아이디</label>
                 </div>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="memName" name="memName" placeholder="이름" value="${signupTb.memName}" readonly>
-                    <label for="memName" class="required">이름</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="이름" value="${userInfo.name}" readonly>
+                    <label for="name" class="required">이름</label>
                 </div>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="memPhone" name="memPhone" placeholder="전화번호" value="${signupTb.memPhone}" readonly>
-                    <label for="memPhone" class="required">전화번호</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호" value="${userInfo.phone}" readonly>
+                    <label for="phone" class="required">전화번호</label>
                 </div>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="memEmail" name="memEmail" placeholder="이메일" value="${signupTb.memEmail}" readonly>
-                    <label for="memEmail" class="required">이메일</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="이메일" value="${userInfo.email}" readonly>
+                    <label for="email" class="required">이메일</label>
                 </div>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="memAddr" name="memAddr" placeholder="주소" value="${signupTb.memAddr}" readonly>
-                    <label for="memAddr" class="required">주소</label>
+                    <input type="text" class="form-control" id="addr" name="addr" placeholder="주소" value="${userInfo.addr}" readonly>
+                    <label for="addr" class="required">주소</label>
                 </div>
-                
             </div>
         </div>
 
