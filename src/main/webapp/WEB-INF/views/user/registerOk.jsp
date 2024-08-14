@@ -1,50 +1,71 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>회원가입 성공</title>
-<style>
-    body {
-        background-color: #f7f7f7;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    .container {
-        max-width: 600px;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-    h1 {
-        margin-bottom: 20px;
-        color: #007bff;
-    }
-    p {
-        margin-bottom: 20px;
-    }
-    button {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
-</style>
+    <meta charset="UTF-8">
+    <title>회원가입 성공</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+        .swal2-custom-popup {
+            border-radius: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        }
+    
+        .swal2-custom-title {
+            font-size: 1.5em;
+            color: #0000ff;
+        }
+    
+        .swal2-custom-icon {
+            color: #ff0000;
+        }
+    
+        .swal2-custom-confirm-button {
+            background-color: #0000ff;
+            border-radius: 10px;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+    
+        .swal2-custom-confirm-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
 </head>
+
 <body>
-    <div class="container">
-        <h1>회원가입 성공</h1>
-        <p>회원가입이 성공적으로 완료되었습니다.</p>
-        <p><button onclick="window.location.href='/login'">로그인 페이지로 이동하기</button></p>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                text: '회원가입이 완료되었습니다.',
+                icon: 'success',
+                confirmButtonColor: '#0000FF',
+                confirmButtonText: '로그인 화면으로 가기',
+                background: 'rgba(255, 255, 255, 0.8)',  // 알림창 배경색을 약간 투명하게 설정
+                color: '#000',  // 텍스트 색상
+                backdrop: `
+                    rgba(255, 255, 255, 0.8)
+                    left top
+                    no-repeat
+                    `,  // 알림창 뒤 배경 스타일
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 팝업 창에 대한 클래스
+                        title: 'swal2-custom-title', // 제목에 대한 클래스
+                        icon: 'swal2-custom-icon',   // 아이콘에 대한 클래스
+                        confirmButton: 'swal2-custom-confirm-button' // 확인 버튼에 대한 클래스
+                    }
+                }).then(() => {
+                    window.location.href = '/login';
+                });
+            });
+            </script>
+    
 </body>
+
 </html>
