@@ -119,6 +119,26 @@
     <select id="getJobPosting" resultType="JobPostingDTO" parameterType="int">
         select * from team_db.jobposting where companyId = #{companyId};
     </select>
+    
+
+
+    <insert id="addpostingwrite">   
+    	<selectKey keyProperty="id" order="BEFORE" resultType="int">
+    		select ifnull(max(id),0)+1 from JobPosting
+    	</selectKey>
+    	
+		  insert into JobPosting(id,companyName,postingImage,postingTitle,jobTitle,workLocation,employmentType,jobExperience,deadline,companyId,money) 
+		  select ifnull(max(id),0)+1,#{companyName},#{postingImage},#{postingTitle},#{jobTitle},#{workLocation},#{employmentType},#{jobExperience},#{deadline},#{companyId},#{money} from JobPosting
+    </insert>
+    
+    <update id="addpostingmodify">        
+	update JobPosting set companyName=#{companyName},postingImage=#{postingImage},postingTitle=#{postingTitle},jobTitle=#{jobTitle},workLocation=#{workLocation},employmentType=#{employmentType},jobExperience=#{jobExperience},deadline=#{deadline},companyId=#{companyId},money=#{money} where id=#{id}
+    </update>
+
+    <delete id="addpostingdelete">        
+	delete from JobPosting where id=#{id}
+    </delete>
+
 
 </mapper>
 
