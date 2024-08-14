@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,17 +30,23 @@ public class JobseekerCommentController {
 	//서비스단
 	@Autowired
 	private JobseekerCommentService service;
+	
+	private final UserSessionService userSessionService;
+	
+	public JobseekerCommentController(UserSessionService userSessionService) {
+        this.userSessionService = userSessionService;
+    }
 
     @PostMapping("/jobseekerSave")
 	public @ResponseBody ArrayList<JobseekerCommentDTO> save(@RequestParam HashMap<String, String> param
 			// 로그인세션
-			,HttpSession session) { 
+			,Model model) { 
 		log.info("@# save");
 		log.info("@# param=>"+param);
-		// 로그인 안했을때 예외처리
-		if (session.getAttribute("user") == null) {
-            throw new IllegalStateException();
-        }
+
+        String userid = userSessionService.getUserId();
+        param.put("jobseekerCommentCommentWriter", userid);
+        
 		service.save(param);
 		
 		// 해당 게시글에 작성된 댓글 리스트를 가져옴
@@ -53,16 +60,6 @@ public class JobseekerCommentController {
         HashMap<String, String> param = new HashMap<>();
         param.put("jobseekerCommunityBoardNum", String.valueOf(jobseekerCommunityBoardNum));
         return service.findAll(param);
-    }
-	
-	// 로그인을 안한 예외를 받아서 로그인 페이지로 이동
-	@ControllerAdvice
-	public static class GlobalExceptionHandler {
-	    @ExceptionHandler(IllegalStateException.class)
-	    public ResponseEntity<String> handleIllegalStateException(IllegalStateException ex) {
-	    	return new ResponseEntity<>("redirect:/login", HttpStatus.UNAUTHORIZED);
-	    }
-	}
-	
+    }	
 }
 
