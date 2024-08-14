@@ -124,11 +124,11 @@
 
     <insert id="addpostingwrite">   
     	<selectKey keyProperty="id" order="BEFORE" resultType="int">
-    		select ifnull(max(id),0)+1 from JobPosting
+    		select ifnull(max(id),0)+1 from team_db.JobPosting
     	</selectKey>
     	
-		  insert into JobPosting(id,companyName,postingImage,postingTitle,jobTitle,workLocation,employmentType,jobExperience,deadline,companyId,money) 
-		  select ifnull(max(id),0)+1,#{companyName},#{postingImage},#{postingTitle},#{jobTitle},#{workLocation},#{employmentType},#{jobExperience},#{deadline},#{companyId},#{money} from JobPosting
+		  insert into team_db.JobPosting(id,companyName,postingImage,postingTitle,jobTitle,workLocation,employmentType,jobExperience,deadline,companyId,money) 
+		  select ifnull(max(id),0)+1,#{companyName},#{postingImage},#{postingTitle},#{jobTitle},#{workLocation},#{employmentType},#{jobExperience},#{deadline},#{companyId},#{money} from team_db.JobPosting
     </insert>
     
 

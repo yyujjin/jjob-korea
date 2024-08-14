@@ -11,11 +11,10 @@
         body {
             background-color: #f8f9fa;
             padding: 20px;
-            font-family: 'Arial', sans-serif;
         }
 
-        .container {
-            max-width: 600px;
+        .addPosting {
+            max-width: 100%;
             background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
@@ -72,12 +71,13 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="addPosting">
         <h1>채용 공고 등록</h1>
-        <form action="JobPostServlet" method="post" enctype="multipart/form-data">
+        <!-- <form action="/jobPost/create" method="post" enctype="multipart/form-data"> -->
+        <form action="/jobPost/create" method="post">
             <div class="form-group">
-                <label for="position">직무:</label>
-                <select id="position" name="position" class="form-control">
+                <label for="jobTitle">직무</label>
+                <select id="jobTitle" name="jobTitle" class="form-control">
                     <option value="" selected disabled>선택안함</option>
                     <option value="developer">개발자</option>
                     <option value="designer">디자이너</option>
@@ -86,25 +86,23 @@
             </div>
 
             <div class="form-group">
-                <label>경력:</label><br>
+                <label>경력</label><br>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="no_experience" name="experience" value="no_experience"
-                        class="form-check-input" onclick="toggleExperienceInput(false)">
-                    <label class="form-check-label" for="no_experience">경력무관</label>
+                    <input type="radio" id="jobExperience" name="experience" value="jobExperience"
+                        class="form-check-input">
+                    <label class="form-check-label" for="jobExperience">경력무관</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="newbie" name="experience" value="newbie" class="form-check-input"
-                        onclick="toggleExperienceInput(false)">
+                    <input type="radio" id="newbie" name="experience" value="newbie" class="form-check-input">
                     <label class="form-check-label" for="newbie">신입</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="experienced" name="experience" value="experienced"
-                        class="form-check-input" onclick="toggleExperienceInput(true)">
+                    <input type="radio" id="experienced" name="experience" value="experienced" class="form-check-input">
                     <label class="form-check-label" for="experienced">경력</label>
                 </div>
-            </div>
+            </div>            
 
-            <div id="experience_years" style="display:none;">
+            <!-- <div id="experience_years" style="display:none;">
                 <div class="form-group">
                     <label for="experience_start">경력 연도:</label>
                     <input type="text" id="experience_start" name="experience_start" class="form-control"
@@ -114,16 +112,16 @@
                     <input type="text" id="experience_end" name="experience_end" class="form-control"
                         placeholder="종료 연도">
                 </div>
+            </div> -->
+
+            <div class="form-group">
+                <label for="workLocation">근무지</label>
+                <input type="text" id="workLocation" name="workLocation" class="form-control" placeholder="근무지">
             </div>
 
             <div class="form-group">
-                <label for="location">근무지:</label>
-                <input type="text" id="location" name="location" class="form-control" placeholder="근무지">
-            </div>
-
-            <div class="form-group">
-                <label for="employment_type">고용 형태:</label>
-                <select id="employment_type" name="employment_type" class="form-control">
+                <label for="employmentType">고용 형태</label>
+                <select id="employmentType" name="employmentType" class="form-control">
                     <option value="" selected disabled>선택안함</option>
                     <option value="contract">계약직</option>
                     <option value="permanent">정규직</option>
@@ -133,30 +131,30 @@
             </div>
 
             <div class="form-group">
-                <label for="post_title">공고 제목:</label>
-                <input type="text" id="post_title" name="post_title" class="form-control" placeholder="공고 제목">
+                <label for="postingTitle">공고 제목</label>
+                <input type="text" id="postingTitle" name="postingTitle" class="form-control" placeholder="공고 제목">
             </div>
 
             <div class="form-group">
-                <label for="salary">급여:</label>
-                <input type="text" id="salary" name="salary" class="form-control" placeholder="급여 (숫자만 입력)">
+                <label for="money">급여</label>
+                <input type="text" id="money" name="money" class="form-control" placeholder="급여 (숫자만 입력)">
             </div>
 
             <div class="form-group">
-                <label for="closing_date">채용 마감 날짜:</label>
-                <input type="date" id="closing_date" name="closing_date" class="form-control">
+                <label for="deadline">채용 마감 날짜</label>
+                <input type="date" id="deadline" name="deadline" class="form-control">
             </div>
-
+<!-- 
             <div class="form-group">
-                <label for="company_logo">회사 이미지:</label>
-                <input type="file" id="company_logo" name="company_logo" class="form-control-file">
-            </div>
+                <label for="postingImage">회사 이미지</label>
+                <input type="file" id="postingImage" name="postingImage" class="form-control-file">
+            </div> -->
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="details">상세 정보:</label>
                 <textarea id="details" name="details" rows="5" class="form-control"
                     placeholder="상세 정보를 입력하세요"></textarea>
-            </div>
+            </div> -->
 
             <button type="submit" class="btn btn-primary">등록</button>
         </form>
