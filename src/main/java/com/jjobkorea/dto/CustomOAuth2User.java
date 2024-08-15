@@ -42,4 +42,9 @@ public class CustomOAuth2User implements OAuth2User {
     public String getName() {
         return userDTO.getName();
     }
+
+    //인증 번호
+    public String getRegistrationId() {
+        return userDTO.getRegistrationId();
+    }
 }

@@ -85,4 +85,18 @@ public class UserSessionService {
         log.info("사용자 권한 : {}",auth.getAuthority());
         return auth.getAuthority();
     }
+
+    public String getRegistrationId() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof CustomOAuth2User) {
+            CustomOAuth2User oAuth2User = (CustomOAuth2User) principal;
+            String registrationId = oAuth2User.getRegistrationId();
+            return registrationId;
+        }
+        return null;
+    }
 }
