@@ -65,4 +65,14 @@
     <select id="findByRegistrationId" parameterType="String" resultType="UserDTO">
         select * from google_user where registrationId = #{registrationId}
     </select>
+
+    <!--구글 유저 저장-->
+    <insert id="saveGoogleUser" parameterType="UserDTO">
+        INSERT INTO google_user (
+        userId, password, name, email, registrationDate, role, registrationId
+        ) VALUES (
+        #{userId}, #{password}, #{name}, #{email}, CURRENT_TIMESTAMP, #{role},#{registrationId}
+        );
+    </insert>
 </mapper>
+
