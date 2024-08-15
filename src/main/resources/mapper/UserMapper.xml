@@ -69,9 +69,9 @@
     <!--구글 유저 저장-->
     <insert id="saveGoogleUser" parameterType="UserDTO">
         INSERT INTO google_user (
-        userId, password, name, email, registrationDate, role, registrationId
+        userId, name, email, registrationDate, role, registrationId
         ) VALUES (
-        #{userId}, #{password}, #{name}, #{email}, CURRENT_TIMESTAMP, #{role},#{registrationId}
+        #{userId}, #{name}, #{email}, CURRENT_TIMESTAMP, #{role},#{registrationId}
         );
     </insert>
 </mapper>
