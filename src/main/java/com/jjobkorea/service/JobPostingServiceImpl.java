@@ -162,7 +162,7 @@ private final JobPostingMapper jobPostingMapper;
     @Override
     public void addpostingwrite(JobPostingDTO jobPostingDTO) {
         log.info("@# jobPostingDTO => " + jobPostingDTO);
-
+        jobPostingMapper.addpostingwrite(jobPostingDTO);
 //        // 단일 이미지 파일 처리
 //        String postingImage = jobPostingDTO.getPostingImage();
 //        if (postingImage == null || postingImage.isEmpty()) {

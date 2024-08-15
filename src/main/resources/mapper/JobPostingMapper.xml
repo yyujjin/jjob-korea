@@ -127,8 +127,8 @@
     		select ifnull(max(id),0)+1 from team_db.JobPosting
     	</selectKey>
     	
-		  insert into team_db.JobPosting(id,companyName,postingTitle,jobTitle,workLocation,employmentType,jobExperience,deadline,money) 
-		  select ifnull(max(id),0)+1,#{companyName},#{postingTitle},#{jobTitle},#{workLocation},#{employmentType},#{jobExperience},#{deadline},#{money} from team_db.JobPosting
+		  INSERT INTO team_db.JobPosting(id, companyName, postingTitle, jobTitle, workLocation, employmentType, jobExperience, deadline, money) 
+    VALUES (#{id}, #{companyName}, #{postingTitle}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money});
     </insert>
     
 

@@ -73,32 +73,31 @@
 <body>
     <div class="addPosting">
         <h1>채용 공고 등록</h1>
-        <!-- <form action="/jobPost/create" method="post" enctype="multipart/form-data"> -->
-        <form action="/jobPost/create" method="post">
+         <form action="/jobPost/create" method="post" enctype="multipart/form-data"> 
+<!--        <form action="/jobPost/create" method="post">-->
             <div class="form-group">
                 <label for="jobTitle">직무</label>
                 <select id="jobTitle" name="jobTitle" class="form-control">
                     <option value="" selected disabled>선택안함</option>
-                    <option value="developer">개발자</option>
-                    <option value="designer">디자이너</option>
-                    <option value="manager">매니저</option>
+                    <option value="개발자">개발자</option>
+                    <option value="디자이너">디자이너</option>
+                    <option value="매니저">매니저</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label>경력</label><br>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="jobExperience" name="experience" value="jobExperience"
-                        class="form-check-input">
-                    <label class="form-check-label" for="jobExperience">경력무관</label>
+                    <input type="radio" id="jobExperience" name="jobExperience" class="form-check-input">
+                    <label class="form-check-label" for="jobExperience" aria-valuetext="경력무관">경력무관</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="newbie" name="experience" value="newbie" class="form-check-input">
-                    <label class="form-check-label" for="newbie">신입</label>
+                    <input type="radio" id="newbie" name="jobExperience" class="form-check-input">
+                    <label class="form-check-label" for="jobExperience" aria-valuetext="신입">신입</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="experienced" name="experience" value="experienced" class="form-check-input">
-                    <label class="form-check-label" for="experienced">경력</label>
+                    <input type="radio" id="jobExperience" name="jobExperience" class="form-check-input">
+                    <label class="form-check-label" for="jobExperience" aria-valuetext="경력">경력</label>
                 </div>
             </div>            
 
@@ -123,10 +122,10 @@
                 <label for="employmentType">고용 형태</label>
                 <select id="employmentType" name="employmentType" class="form-control">
                     <option value="" selected disabled>선택안함</option>
-                    <option value="contract">계약직</option>
-                    <option value="permanent">정규직</option>
-                    <option value="intern">인턴</option>
-                    <option value="freelance">프리랜서</option>
+                    <option value="계약직">계약직</option>
+                    <option value="정규직">정규직</option>
+                    <option value="인턴">인턴</option>
+                    <option value="프리랜서">프리랜서</option>
                 </select>
             </div>
 
