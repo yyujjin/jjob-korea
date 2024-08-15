@@ -1,5 +1,6 @@
 package com.jjobkorea.service;
 
+import com.jjobkorea.dto.CustomOAuth2User;
 import com.jjobkorea.dto.GoogleResponseDTO;
 import com.jjobkorea.dto.UserDTO;
 import com.jjobkorea.mapper.UserMapper;
@@ -54,8 +55,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         userDTO.setRole("ROLE_JOB_SEEKER");
         userDTO.setRegistrationId(googleResponseDTO.getProviderId());
 
-        //DB에 넣어주기
-        userMapper.saveGoogleUser(userDTO);
+        //DB에 구글 유저 정보가 없다면 저장하는 로직
+        UserDTO findUser = userMapper.findByRegistrationId(googleResponseDTO.getProviderId());
+        if (findUser == null) {
+            //DB에 넣어주기
+            userMapper.saveGoogleUser(userDTO);
+        }
 
 
         return oAuth2User;
