@@ -113,30 +113,33 @@
             }
 
             .google_login {
-                border: solid 1px lightgray;
+                margin-top: 40px;
                 font-family: 'Roboto', sans-serif;
                 font-weight: bold;
-                color: #000000;
-                text-align: center;
                 background-color: #FFFFFF;
-                width: 180px;
+                width: 100%;
                 border-radius: 2px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                text-align: center;
+                /* border: solid 1px lightgray; */
             }
 
             .google_login a {
-                color: black;
+                color: gray;
                 text-decoration: none;
-                margin: 10px;
-                display: block;
-                justify-content: center;
+                width: 100%;
+            }
+
+            .google_login a,
+            .login_img {
+                display: flex;
             }
 
             .login_img {
+                margin-top: 20px;
                 background-color: #FFFFFF;
-                height: 20px;
+                height: 45px;
+                width: 45px;
+                margin-right: 65px;
             }
         </style>
     </head>
@@ -171,12 +174,6 @@
                     <span class="register-link" data-type="">아이디 찾기</span>
                     <span class="register-link" data-type="">비밀번호 찾기</span>
                     <span class="register-link" data-type="individual">회원가입</span>
-                    <div class="google_login">
-                        <a href="#">
-                            <img class="login_img" src="../../resources/img/구글이미지.png">
-                            구글 계정으로 로그인
-                        </a>
-                    </div>
                 </div>
             </form>
 
@@ -201,7 +198,14 @@
                     <span class="register-link" data-type="enterprise">회원가입</span>
                 </div>
             </form>
-
+            <div class="google_login">
+                <a href="#">
+                    소셜 계정으로 로그인하기
+                    <img class="login_img" src="../../resources/img/구글이미지.png">
+                    <img class="login_img" src="../../resources/img/카톡이미지.png">
+                    <img class="login_img" src="../../resources/img/깃허브이미지.png">
+                </a>
+            </div>
         </div>
 
         <!-- 스크립트 -->
