@@ -62,8 +62,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             userMapper.saveGoogleUser(userDTO);
         }
 
-
-        return oAuth2User;
+        return new CustomOAuth2User(userDTO);
     }
 
 }
