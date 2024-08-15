@@ -88,16 +88,16 @@
             <div class="form-group">
                 <label>경력</label><br>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="jobExperience" name="jobExperience" class="form-check-input">
-                    <label class="form-check-label" for="jobExperience" aria-valuetext="경력무관">경력무관</label>
+                    <input type="radio" id="jobExperience" name="jobExperience" class="form-check-input" value="경력무관">
+                    <label class="form-check-label" for="none-Experience">경력무관</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="newbie" name="jobExperience" class="form-check-input">
-                    <label class="form-check-label" for="jobExperience" aria-valuetext="신입">신입</label>
+                    <input type="radio" id="newbie" name="jobExperience" class="form-check-input" value="신입">
+                    <label class="form-check-label" for="newbie" >신입</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="jobExperience" name="jobExperience" class="form-check-input">
-                    <label class="form-check-label" for="jobExperience" aria-valuetext="경력">경력</label>
+                    <input type="radio" id="jobExperience" name="jobExperience" class="form-check-input" value="경력">
+                    <label class="form-check-label" for="Experience">경력</label>
                 </div>
             </div>            
 
