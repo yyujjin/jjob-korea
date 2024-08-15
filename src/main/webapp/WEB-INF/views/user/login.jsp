@@ -199,13 +199,12 @@
                 </div>
             </form>
             <div class="google_login">
+                <a href="#">
                     소셜 계정으로 로그인하기
-                    <a href="/oauth2/authorization/google">
-                        <img class="login_img" src="../../resources/img/구글이미지.png">
-                    </a>
+                    <img class="login_img" src="../../resources/img/구글이미지.png">
                     <img class="login_img" src="../../resources/img/카톡이미지.png">
                     <img class="login_img" src="../../resources/img/깃허브이미지.png">
-
+                </a>
             </div>
         </div>
 
