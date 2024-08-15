@@ -26,5 +26,6 @@ public interface UserMapper {
     public UserDTO findByUserId(String username);
     //회원 탈퇴
     public void deleteUser(UserDTO userDTO);
-
+    //구글 유저 찾기
+    public UserDTO findByRegistrationId(String registrationId);
 }
