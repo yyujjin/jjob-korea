@@ -18,5 +18,6 @@ public class CommonDataAdvice {
     public void addCommonAttributes(Model model) {
         model.addAttribute("username", userSessionService.getUserName());
         model.addAttribute("role",userSessionService.getRole());
+        model.addAttribute("registrationId",userSessionService.getRegistrationId());
     }
 }

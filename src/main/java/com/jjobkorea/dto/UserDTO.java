@@ -28,4 +28,6 @@ public class UserDTO {
 	private Date registrationDate;
 	//권한
 	private String role;
+	//구글  registrationId
+	private String registrationId;
 }

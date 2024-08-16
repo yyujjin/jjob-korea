@@ -1,5 +1,6 @@
 package com.jjobkorea.configuration;
 
+import com.jjobkorea.service.CustomOAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+private final CustomOAuth2UserService customOAuth2UserService;
+
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+        this.customOAuth2UserService = customOAuth2UserService;
+    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -26,13 +33,13 @@ public class SecurityConfig {
                 .requestMatchers("/", "/login", "/register").permitAll() //메인, 로그인, 회원가입
                 .requestMatchers("/jobPosts", "/searchFilter","/jobPosting").permitAll()//채용 정보
                 .requestMatchers(
-//                        "/jobseekerContent_view",
-//                                "/requestPage/jobseekerContent_view",
-                                "/getComments",
-                                "/board",
-                                "/display",
-                                "/getFileList",
-                                "/download").permitAll() //게시판
+                        "/jobseekerContent_view",
+                        "/requestPage/jobseekerContent_view",
+                        "/getComments",
+                        "/board",
+                        "/display",
+                        "/getFileList",
+                        "/download").permitAll() //게시판
                 .anyRequest().authenticated()
         );
 
@@ -59,8 +66,18 @@ public class SecurityConfig {
                 .sessionManagement((auth) -> auth
                 .sessionFixation().changeSessionId());
 
+        httpSecurity
+                .oauth2Login((oauth2) -> oauth2
+                        .loginPage("/login") //커스텀 로그인 페이지 띄우기
+                        .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
+                                .userService(customOAuth2UserService)));
+
         //csrf 사용 x
         httpSecurity.csrf((auth) -> auth.disable());
+
+        httpSecurity
+                .httpBasic((basic)->basic.disable());
+
         return httpSecurity.build();
     }
 }

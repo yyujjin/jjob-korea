@@ -60,4 +60,19 @@
 	<delete id="deleteUser" parameterType="string">
 		DELETE FROM user_info WHERE userId = #{userId}
 	</delete>
+
+    <!--구글 유저 찾기-->
+    <select id="findByRegistrationId" parameterType="String" resultType="UserDTO">
+        select * from google_user where registrationId = #{registrationId}
+    </select>
+
+    <!--구글 유저 저장-->
+    <insert id="saveGoogleUser" parameterType="UserDTO">
+        INSERT INTO google_user (
+        userId, name, email, registrationDate, role, registrationId
+        ) VALUES (
+        #{userId}, #{name}, #{email}, CURRENT_TIMESTAMP, #{role},#{registrationId}
+        );
+    </insert>
 </mapper>
+

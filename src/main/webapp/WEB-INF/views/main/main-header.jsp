@@ -110,9 +110,11 @@
                                 </a> 님
                               </span>
                             </li>
-                            <li class="nav-item">
-                              <a href="/user" class="nav-link link-body-emphasis px-2 text-secondary">회원정보 수정</a>
-                            </li>
+                             <c:if test="${empty registrationId}">
+                              <li class="nav-item">
+                                <a href="/user" class="nav-link link-body-emphasis px-2 text-secondary">회원정보 수정</a>
+                              </li>
+                            </c:if>
                             <li class="nav-item">
                               <a href="/logout" class="nav-link link-body-emphasis px-2 text-secondary">로그아웃</a>
                             </li>
