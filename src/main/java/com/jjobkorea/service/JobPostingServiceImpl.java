@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class JobPostingServiceImpl implements JobPostingService {
+	
 private final JobPostingMapper jobPostingMapper;
 
     public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
@@ -155,5 +156,28 @@ private final JobPostingMapper jobPostingMapper;
     public JobPostingDTO getJobPosting(int companyId) {
         return jobPostingMapper.getJobPosting(companyId);
     }
+
+    
+    //공고등록
+    @Override
+    public void addpostingwrite(JobPostingDTO jobPostingDTO) {
+        log.info("@# jobPostingDTO => " + jobPostingDTO);
+        jobPostingMapper.addpostingwrite(jobPostingDTO);
+//        // 단일 이미지 파일 처리
+//        String postingImage = jobPostingDTO.getPostingImage();
+//        if (postingImage == null || postingImage.isEmpty()) {
+//            log.info("@# No posting image found");
+//            return;
+//        }
+//
+//        log.info("@# Posting image => " + postingImage);
+//
+//        // 첨부파일 정보를 데이터베이스에 저장
+//        AttachFileDTO attachFile = new AttachFileDTO();
+//        attachFile.setPostingImage(postingImage);
+//        attachFile.setBoardNo(jobPostingDTO.getCompanyId());
+//        jobPostingMapper.insertFile(attachFile);  // jobPostingMapper를 사용하여 파일 저장
+    }
+
 
 }
