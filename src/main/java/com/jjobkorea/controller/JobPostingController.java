@@ -44,10 +44,7 @@ public class JobPostingController {
     @GetMapping("/jobPost/create")
     public String addpostingwrite(Model model) {
     	log.info("공고등록model", model);
-//    	
-//        String userid = userSessionService.getUserId();
-//        model.addAttribute("userid",userid);
-//    	
+  	
         model.addAttribute("page","jobPostingDetails/addJobPosting");
 
         return "main/main";

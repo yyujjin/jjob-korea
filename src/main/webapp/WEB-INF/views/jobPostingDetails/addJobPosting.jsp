@@ -101,18 +101,6 @@
                 </div>
             </div>            
 
-            <!-- <div id="experience_years" style="display:none;">
-                <div class="form-group">
-                    <label for="experience_start">경력 연도:</label>
-                    <input type="text" id="experience_start" name="experience_start" class="form-control"
-                        placeholder="시작 연도">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="experience_end" name="experience_end" class="form-control"
-                        placeholder="종료 연도">
-                </div>
-            </div> -->
-
             <div class="form-group">
                 <label for="workLocation">근무지</label>
                 <input type="text" id="workLocation" name="workLocation" class="form-control" placeholder="근무지">
