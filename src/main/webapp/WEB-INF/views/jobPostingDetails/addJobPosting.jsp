@@ -14,11 +14,12 @@
             }
 
             .addPosting {
-                max-width: 100%;
+                max-width: 1000px;
                 background-color: #ffffff;
                 padding: 20px;
                 border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                margin: 0 auto; /* 수평 중앙 정렬 */
             }
 
             h1 {
