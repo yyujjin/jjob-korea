@@ -1,5 +1,10 @@
 package com.jjobkorea.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +53,11 @@ public class JobPostingController {
         return "main/main";
     }
 
-    // 공고 등록 페이지
+ // 공고 등록 페이지
     @GetMapping("/jobPost/create")
     public String addpostingwrite(Model model) {
-        log.info("공고등록model", model);
+        log.info("공고 등록 페이지 진입");
         model.addAttribute("page", "jobPostingDetails/addJobPosting");
-
         return "main/main";
     }
 
@@ -61,29 +65,41 @@ public class JobPostingController {
     @PostMapping("/jobPost/create")
     public String createJobPost(JobPostingDTO jobPostingDTO, 
                                 @RequestParam("imageFile") MultipartFile file) {
-        log.info("공고 등록: {}", jobPostingDTO);
+        log.info("공고 등록 시작: {}", jobPostingDTO);
 
-        // Step 1: Save the file to local storage temporarily
-        String localFilePath = saveFileLocally(file);
+        try {
+            // Step 1: Save the file to local storage temporarily
+            String localFilePath = saveFileLocally(file);
+            log.info("파일이 로컬에 저장됨: {}", localFilePath);
 
-        // Step 2: Upload image to S3
-        String imageUrl = uploadImageService.uploadImage(localFilePath);
+            // Step 2: Upload image to S3
+            String imageUrl = uploadImageService.uploadImage(localFilePath);
+            log.info("이미지가 S3에 업로드됨: {}", imageUrl);
 
-        if (imageUrl != null) {
-            // Step 3: Save image URL to RDS
-            saveImageService.saveImageUrl(imageUrl);
+            if (imageUrl != null) {
+                // Step 3: Save image URL to RDS
+                saveImageService.saveImageUrl(imageUrl);
+                log.info("이미지 URL이 RDS에 저장됨: {}", imageUrl);
 
-            // Step 4: 공고 등록 처리 로직 (예: DB 저장)
-            jobPostingDTO.setPostingImage(imageUrl);
-            jobPostingService.addpostingwrite(jobPostingDTO);
+                // Step 4: 공고 등록 처리 로직 (예: DB 저장)
+                jobPostingDTO.setPostingImage(imageUrl);
+                jobPostingService.addpostingwrite(jobPostingDTO);
+                log.info("공고 등록 완료: {}", jobPostingDTO);
 
-            // 공고 등록 후 성공 페이지로 리다이렉트
-            return "redirect:/jobPosts";
-        } else {
-            // 이미지 업로드 실패 시 에러 페이지로 리다이렉트
+                // 공고 등록 후 성공 페이지로 리다이렉트
+                return "redirect:/jobPosts";
+            } else {
+                log.error("이미지 업로드 실패");
+                // 이미지 업로드 실패 시 에러 페이지로 리다이렉트
+                return "redirect:/error";
+            }
+        } catch (Exception e) {
+            log.error("공고 등록 중 오류 발생", e);
+            // 예외 발생 시 에러 페이지로 리다이렉트
             return "redirect:/error";
         }
     }
+
 
     // 공고 상세보기 페이지
     @GetMapping("/jobPosting")
@@ -94,10 +110,34 @@ public class JobPostingController {
         return "main/main";
     }
 
-    // 로컬에 파일 저장 로직 구현 (임시 저장)
     private String saveFileLocally(MultipartFile file) {
-        // 파일을 로컬에 저장하는 로직을 구현하세요.
-        // 파일 경로를 반환해야 합니다.
-        return "localFilePath";  // 실제 구현 시 올바른 파일 경로를 반환해야 합니다.
+        // 저장할 디렉토리 경로 설정
+        String uploadDir = "uploads";  // 프로젝트 루트에 uploads 디렉토리가 생성됨
+
+        // 디렉토리가 존재하지 않으면 생성
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // 원본 파일명 가져오기
+        String originalFilename = file.getOriginalFilename();
+        if (originalFilename == null) {
+            throw new RuntimeException("파일 이름을 가져올 수 없습니다.");
+        }
+
+        // 파일을 저장할 경로 설정
+        String filePath = Paths.get(uploadDir, originalFilename).toString();
+
+        try {
+            // 파일을 지정된 경로에 저장
+            Path destinationPath = Paths.get(filePath);
+            Files.copy(file.getInputStream(), destinationPath);
+
+            // 저장된 파일 경로 반환
+            return filePath;
+        } catch (IOException e) {
+            throw new RuntimeException("파일 저장 중 오류가 발생했습니다.", e);
+        }
     }
 }
