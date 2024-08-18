@@ -33,5 +33,5 @@ public interface JobPostingMapper {
     public void insertFile(JobPostingDTO postingImageDTO);
     
     // 채용공고에 연결된 이미지 파일들 가져오기
-    public List<JobPostingDTO> getFilesByPostingId(int postingId);
+    public List<JobPostingDTO> getFilesByPostingId(int id);
 }
