@@ -131,11 +131,11 @@
                 <label for="deadline">채용 마감 날짜</label>
                 <input type="date" id="deadline" name="deadline" class="form-control">
             </div>
-<!-- 
+
             <div class="form-group">
                 <label for="postingImage">회사 이미지</label>
                 <input type="file" id="postingImage" name="postingImage" class="form-control-file">
-            </div> -->
+            </div>
 
             <!-- <div class="form-group">
                 <label for="details">상세 정보:</label>

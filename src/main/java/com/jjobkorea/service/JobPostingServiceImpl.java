@@ -20,9 +20,22 @@ public class JobPostingServiceImpl implements JobPostingService {
 	
 private final JobPostingMapper jobPostingMapper;
 
-    public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
-        this.jobPostingMapper = jobPostingMapper;
-    }
+//공고등록 이미지 서비스 추가
+private final UploadImageService uploadImageService;
+private final SaveImageService saveImageService;
+
+//    public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
+//        this.jobPostingMapper = jobPostingMapper;
+//    }
+
+@Autowired
+public JobPostingServiceImpl(JobPostingMapper jobPostingMapper, 
+                             UploadImageService uploadImageService, 
+                             SaveImageService saveImageService) {
+    this.jobPostingMapper = jobPostingMapper;
+    this.uploadImageService = uploadImageService;
+    this.saveImageService = saveImageService;
+}
 
     //메인페이지 진입시 실행되는 코드
     @Override
@@ -163,6 +176,24 @@ private final JobPostingMapper jobPostingMapper;
     public void addpostingwrite(JobPostingDTO jobPostingDTO) {
         log.info("@# jobPostingDTO => " + jobPostingDTO);
         jobPostingMapper.addpostingwrite(jobPostingDTO);
+
+        // 이미지 파일 처리
+        String postingImage = jobPostingDTO.getPostingImage();
+        if (postingImage == null || postingImage.isEmpty()) {
+            log.info("@# No posting image found");
+            return;
+        }
+
+        log.info("@# Posting image => " + postingImage);
+
+        // 이미지 S3에 업로드
+        String imageUrl = uploadImageService.uploadImage(postingImage);
+        log.info("@# Uploaded image URL => " + imageUrl);
+
+        // 이미지 URL RDS에 저장
+        saveImageService.saveImageUrl(imageUrl);
+        log.info("@# Image URL saved to RDS");
+    }
 //        // 단일 이미지 파일 처리
 //        String postingImage = jobPostingDTO.getPostingImage();
 //        if (postingImage == null || postingImage.isEmpty()) {
@@ -177,7 +208,5 @@ private final JobPostingMapper jobPostingMapper;
 //        attachFile.setPostingImage(postingImage);
 //        attachFile.setBoardNo(jobPostingDTO.getCompanyId());
 //        jobPostingMapper.insertFile(attachFile);  // jobPostingMapper를 사용하여 파일 저장
-    }
-
-
+    
 }

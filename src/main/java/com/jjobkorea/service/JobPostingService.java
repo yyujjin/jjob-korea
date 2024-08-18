@@ -25,6 +25,12 @@ public interface JobPostingService {
     
 	// 채용공고등록
 	public void addpostingwrite(JobPostingDTO jobPostingDTO);
-	//채용공고등록이미지
-//	public void insertFile(AttachFileDTO attachFile);
+
+	//채용공고등록이미지 aws rds로 저장하기
+	public interface UploadImageService {
+	    String uploadImage(String filePath);
+	}
+	public interface SaveImageService {
+	    void saveImageUrl(String imageUrl);
+	}
 }
