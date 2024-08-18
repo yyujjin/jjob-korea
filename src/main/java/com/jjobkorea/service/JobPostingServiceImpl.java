@@ -176,23 +176,6 @@ public JobPostingServiceImpl(JobPostingMapper jobPostingMapper,
     public void addpostingwrite(JobPostingDTO jobPostingDTO) {
         log.info("@# jobPostingDTO => " + jobPostingDTO);
         jobPostingMapper.addpostingwrite(jobPostingDTO);
-
-        String postingImage = jobPostingDTO.getPostingImage();
-        if (postingImage == null || postingImage.isEmpty()) {
-            log.info("@# No posting image found");
-            return;
-        }
-
-        try {
-            log.info("@# Posting image => " + postingImage);
-            String imageUrl = uploadImageService.uploadImage(postingImage);
-            log.info("@# Uploaded image URL => " + imageUrl);
-            saveImageService.saveImageUrl(imageUrl);
-            log.info("@# Image URL saved to RDS");
-        } catch (Exception e) {
-            log.error("Error occurred during image upload or save", e);
-            // 에러 처리 로직 추가 가능 (예: 사용자에게 알림 또는 롤백)
-        }
     }
 //        // 단일 이미지 파일 처리
 //        String postingImage = jobPostingDTO.getPostingImage();
