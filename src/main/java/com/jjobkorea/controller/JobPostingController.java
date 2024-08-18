@@ -12,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jjobkorea.dto.JobPostingDTO;
 import com.jjobkorea.service.JobPostingService;
-import com.jjobkorea.service.JobPostingService.SaveImageService;
-import com.jjobkorea.service.JobPostingService.UploadImageService;
+import com.jjobkorea.service.SaveImageService;
+import com.jjobkorea.service.UploadImageService;
 import com.jjobkorea.service.UserSessionService;
 
 import lombok.extern.slf4j.Slf4j;
