@@ -50,13 +50,13 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    
+
 //AWS
-	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
     implementation 'com.sun.activation:javax.activation:1.2.0'
-	implementation 'io.awspring.cloud:spring-cloud-aws-context:2.4.0'
-	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
+    implementation 'io.awspring.cloud:spring-cloud-aws-context:2.4.0'
+    implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
 
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -67,23 +67,28 @@ dependencies {
     // Hibernate Core Dependency (JPA 구현체) 사용
     implementation 'org.hibernate.orm:hibernate-core:6.1.7.Final'
     //json 라이브러리
-	implementation 'net.sf.json-lib:json-lib:2.4:jdk15@jar'
-	implementation 'commons-lang:commons-lang:2.6'
-	implementation 'commons-logging:commons-logging:1.2'
-	implementation 'commons-collections:commons-collections:3.2.2'
-	implementation 'commons-beanutils:commons-beanutils:1.9.4'
-	implementation 'net.sf.ezmorph:ezmorph:1.0.6'
+    implementation 'net.sf.json-lib:json-lib:2.4:jdk15@jar'
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'commons-logging:commons-logging:1.2'
+    implementation 'commons-collections:commons-collections:3.2.2'
+    implementation 'commons-beanutils:commons-beanutils:1.9.4'
+    implementation 'net.sf.ezmorph:ezmorph:1.0.6'
     //oauth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     //spring security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
     //AWS
-   implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
     implementation 'com.sun.activation:javax.activation:1.2.0'
-   implementation 'io.awspring.cloud:spring-cloud-aws-context:2.4.0'
-   implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
+    implementation 'io.awspring.cloud:spring-cloud-aws-context:2.4.0'
+    implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+    implementation 'com.sun.activation:javax.activation:1.2.0'
+    implementation 'io.awspring.cloud:spring-cloud-aws-context:2.4.0'
+    implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
 }
 
 tasks.named('test') {
