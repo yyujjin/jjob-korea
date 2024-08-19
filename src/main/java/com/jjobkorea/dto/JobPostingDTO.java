@@ -10,8 +10,8 @@ public class JobPostingDTO {
     private int id;
     //기업이름 (기업테이블이랑 JOIN하게되면 해당 변수 삭제하기)
     private String companyName;
-    //채용 공고 사진
-    private String postingImage;
+   /* //채용 공고 사진
+    private String postingImage;*/
     //채용 공고 제목
     private String postingTitle;
     //직무
@@ -30,6 +30,8 @@ public class JobPostingDTO {
     private long countdownDays;
     //기업 아이디 (외래키 설정해야함)
     private int companyId;
+    //기업 이미지 (추가할 것)
+    private String jobPostingUploadPath;
     
     //급여 디비에 추가함
     private String money;

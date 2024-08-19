@@ -1,3 +1,4 @@
+/*
 $(document).ready(function () {
     var images = [
         "../../resources/img/main_adv/검사무료체험.png",
@@ -22,4 +23,4 @@ $(document).ready(function () {
     }
 
     setInterval(changeImage, 3000); // 3초마다 이미지 변경
-});
+});*/
