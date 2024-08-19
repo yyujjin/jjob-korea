@@ -11,7 +11,7 @@ language="java" contentType="text/html; charset=UTF-8"%>
             href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="../../resources/css/view-jobPosting.css" />
+        <link rel="stylesheet" href="../../resources/css/jobPosting/view-jobPosting.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script
             src="../../resources/js/jobPosting/view-jobPosting.js"
