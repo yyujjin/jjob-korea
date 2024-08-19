@@ -160,8 +160,10 @@ private final JobPostingMapper jobPostingMapper;
     
     //공고등록
     @Override
-    public void addpostingwrite(JobPostingDTO jobPostingDTO) {
+    public void addpostingwrite(JobPostingDTO jobPostingDTO,int companyId) {
         log.info("@# jobPostingDTO => " + jobPostingDTO);
+
+        jobPostingDTO.setCompanyId(companyId);
         jobPostingMapper.addpostingwrite(jobPostingDTO);
 //        // 단일 이미지 파일 처리
 //        String postingImage = jobPostingDTO.getPostingImage();

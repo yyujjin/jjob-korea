@@ -24,7 +24,7 @@ public interface JobPostingService {
     public JobPostingDTO getJobPosting(int companyId);
     
 	// 채용공고등록
-	public void addpostingwrite(JobPostingDTO jobPostingDTO);
+	public void addpostingwrite(JobPostingDTO jobPostingDTO,int companyId);
 	//채용공고등록이미지
 //	public void insertFile(AttachFileDTO attachFile);
 }
