@@ -1,14 +1,11 @@
 package com.jjobkorea.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Base64;
 import java.util.List;
@@ -18,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +25,6 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.jjobkorea.dto.ResumeInfoDTO;
 import com.jjobkorea.service.ResumeInfoService;
 import com.jjobkorea.service.UserSessionService;
-import com.oracle.wls.shaded.org.apache.xml.utils.URI.MalformedURIException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +43,7 @@ public class ResumeController {
     public String resister(Model model ) {
         log.info("@#hello");
         
+        // 현재 사용자의 ID 가져오기
         String userId = userSessionService.getUserId(); //아이디 가져오기
         userSessionService.getUserName(); //이름 가져오기
         
@@ -55,7 +51,7 @@ public class ResumeController {
         model.addAttribute("resumes", resumes);
         
         for(ResumeInfoDTO test : resumes) {
-            log.info("Resume birth date: {}", test.getResumeBirthDay());
+            log.info("생년월일 : {}", test.getResumeBirthDay());
         }
 
         model.addAttribute("userId", userId);
@@ -69,8 +65,8 @@ public class ResumeController {
     public String resumeWrite(Model model) {
         log.info("@#resume_write");
 
-        userSessionService.getUserId(); //아이디 가져오기
-        userSessionService.getUserName(); //이름 가져오기
+        userSessionService.getUserId(); 
+        userSessionService.getUserName(); 
         
         model.addAttribute("resume_user_information", new ResumeInfoDTO());
         model.addAttribute("page", "resume_page/resume_write/resume_write");
@@ -86,7 +82,6 @@ public class ResumeController {
         userSessionService.getUserName(); //이름 가져오기
         
         resumeInfoDTO.setResumePageUserId(userId);
-        UUID uuid = UUID.randomUUID();
 
         // 필수 필드 유효성 검사
         if (resumeInfoDTO.getResumePageTitle() == null || resumeInfoDTO.getResumePageTitle().isEmpty()) {
@@ -101,6 +96,8 @@ public class ResumeController {
         resumeInfoService.insert(resumeInfoDTO);
         return "redirect:/resume";
     }
+    
+    
     private String uploadFileToS3Bucket(MultipartFile file) throws IOException {
         String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
         
@@ -118,6 +115,8 @@ public class ResumeController {
         log.info("fileUrl 로 파일이 업로드 되었습니다."+fileUrl);
         return fileUrl; // S3 URL 반환
     }
+    
+    
 //     이력서 수정 페이지 접속 로직
     @SuppressWarnings("deprecation")
 	@GetMapping("/resume_write/edit")
@@ -155,6 +154,8 @@ public class ResumeController {
 
         return "resume_page/resume_edit";
     }
+    
+    
     // 이력서 수정 완료 업데이트 로직
     @PostMapping("/resume_write/edit")
     public String updateResume(@RequestParam("id") Long id,
@@ -164,18 +165,10 @@ public class ResumeController {
 
         // 현재 사용자의 ID 가져오기
         String userId = userSessionService.getUserId();
-        
-        
-        // 수정을 했을 때 기존 사진이랑 변경이 없으면 원래 루트를 쓰겟다. 그걸 검증하는 로직이 파일이 널이냐 아니냐, file 이 무조건 널이 아닐꺼야.
-        // 프론트에서 수정을 안해도 데이터가 다 넘어 오잖아. 사진도 아마 넘어 올거거든. 빈 값이 아닌 경우 기존 사진이어도 실행이 되고 기존 사진이 아니어도 실행이 되는 로직. 
-
-        // 기존 이력서 정보 가져오기
         ResumeInfoDTO existingResume = resumeInfoService.findByIdAndUserId(id, userId);
         
-          
-        
         if (existingResume == null) {
-            log.error("Resume with ID {} does not exist for user {}", id, userId);
+            log.error("ID가 {}인 이력서는 사용자 {}에게 존재하지 않습니다.", id, userId);
             return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
         }
         
@@ -183,30 +176,27 @@ public class ResumeController {
         if (file != null && !file.isEmpty()) {
             String newFileName = uploadFileToS3Bucket(file);
             resumeInfoDTO.setResumeFilePath(newFileName);
-            log.info("New file uploaded and path set: {}", newFileName);
         } else {
             // 파일이 업로드되지 않은 경우 기존 파일 경로 유지
         	
             resumeInfoDTO.setResumeFilePath(existingResume.getResumeFilePath());
-            log.info("No new file uploaded, keeping existing file path: {}", existingResume.getResumeFilePath());
         }
         
-
         // 사용자 ID 설정
         resumeInfoDTO.setResumePageUserId(userId);
         resumeInfoService.update(resumeInfoDTO);
-        log.info("Resume updated successfully for user {}: {}", userId, resumeInfoDTO);
 
         return "redirect:/resume";
     }
-
 
     // 이력서 삭제 로직
     @PostMapping("/resume/delete")
     public String delete(@RequestParam("id") Long id) {
     	log.info("@#delete");
-    	String userId = userSessionService.getUserId(); //아이디 가져오기
-        userSessionService.getUserName(); //이름 가져오기
+    	
+    	// 현재 사용자의 ID 가져오기
+    	String userId = userSessionService.getUserId(); 
+        userSessionService.getUserName(); 
         
         ResumeInfoDTO resumeInfoDTO = resumeInfoService.findByIdAndUserId(id, userId);
         if (resumeInfoDTO != null && resumeInfoDTO.getResumeFilePath() != null) {
@@ -214,8 +204,6 @@ public class ResumeController {
         }
 
     	resumeInfoService.delete(id, userId);
-        
 		return "redirect:/resume";
 	}
-    
 }
