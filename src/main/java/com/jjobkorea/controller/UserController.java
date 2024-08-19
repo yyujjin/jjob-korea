@@ -57,7 +57,7 @@ public class UserController {
         return "user/registerOk";
     }
 
-    /*// 아이디 중복 체크
+    // 아이디 중복 체크
     @PostMapping("/checkId")
     @ResponseBody
     public HashMap<String, Boolean> checkId(@RequestParam("userId") String userId) {
@@ -66,7 +66,7 @@ public class UserController {
             put("userId", userId);
         }}));
         return response;
-    }*/
+    }
     
     //회원 정보(개인,기업) 조회
     @GetMapping("/user")
