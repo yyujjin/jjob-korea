@@ -1,6 +1,8 @@
 package com.jjobkorea.controller;
 
 import java.util.List;
+import com.jjobkorea.dto.CompanyDTO;
+import com.jjobkorea.service.UserService;
 import com.jjobkorea.service.UserSessionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class JobPostingController {
 
     private final JobPostingService jobPostingService;
+    private final UserSessionService userSessionService;
+    private final UserService userService;
 
-    public JobPostingController(JobPostingService jobPostingService, UserSessionService userSessionService) {
+    public JobPostingController(JobPostingService jobPostingService, UserSessionService userSessionService, UserService userService) {
         this.jobPostingService = jobPostingService;
+        this.userSessionService = userSessionService;
+        this.userService = userService;
     }
     
     // 채용 정보 리스트
@@ -49,8 +55,12 @@ public class JobPostingController {
     public String createJobPost(JobPostingDTO jobPostingDTO) {
         log.info("공고 등록: {}", jobPostingDTO);
 
-        // 공고 등록 처리 로직 (예: DB 저장)
-        jobPostingService.addpostingwrite(jobPostingDTO);
+        //컴퍼니 아이디 가져오기
+        int companyId = userService.getCompanyId( userSessionService.getUserId());
+        log.info("컴퍼니 아이디 : {} ",companyId);
+
+        // 공고 등록
+       jobPostingService.addpostingwrite(jobPostingDTO,companyId);
 
         // 공고 등록 후 성공 페이지로 리다이렉트
         return "redirect:/jobPosts";
