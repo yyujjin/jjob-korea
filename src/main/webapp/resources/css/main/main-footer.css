@@ -1,0 +1,37 @@
+
+@font-face {
+    font-family: 'PTBandocheB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/PTBandocheB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: "PTBandocheB", sans-serif;
+    /* font-family: "Noto Sans KR", sans-serif; */
+}
+
+.text-body-secondary a {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    /* 밑줄 제거 */
+}
+
+/* .text-body-secondary a:hover {
+    color: blue;
+    text-decoration: none;
+} */
+
+/* transition을 위한 디자인 */
+
+.col-md-4 .mb-3 a {
+    transition: color 0.5s;
+    transition-timing-function: steps(5, end);
+}
+
+.col-md-4 .mb-3 a:hover {
+    color: #9eec2a;
+    font-size: 19px;
+}

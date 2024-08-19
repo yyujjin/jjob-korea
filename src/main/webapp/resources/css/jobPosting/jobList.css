@@ -1,0 +1,9 @@
+
+.job-detail {
+    /* 개별 항목 거리 조정  */
+    padding: 3px;
+}
+
+.postingTitle {
+    font-size: 18px;
+}

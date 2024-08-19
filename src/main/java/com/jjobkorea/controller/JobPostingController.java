@@ -27,25 +27,19 @@ public class JobPostingController {
     @GetMapping("jobPosts")
     public String enterJobPosting(@RequestParam (value = "pageNum", required = false, defaultValue = "1") String pageNum, Model model) {
 
-        log.info("요청받은 페이지: {}", pageNum);
-
-        //요청 받은 페이지 넘기기
         List<JobPostingDTO> postingList = jobPostingService.getPostingList( Integer.parseInt(pageNum));
         model.addAttribute("postingList", postingList);
         model.addAttribute("page", "jobPosting/jobPostingMain");
 
         return "main/main";
     }
-    
-    
-    
 
     //공고 등록 페이지
     @GetMapping("/jobPost/create")
     public String addpostingwrite(Model model) {
     	log.info("공고등록model", model);
   	
-        model.addAttribute("page","jobPostingDetails/addJobPosting");
+        model.addAttribute("page","jobPosting/addJobPosting");
 
         return "main/main";
     }

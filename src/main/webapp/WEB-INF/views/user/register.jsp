@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
     <html>
@@ -334,6 +335,24 @@
                 <div class="tab active" data-tab="individual">개인회원</div>
                 <div class="tab" data-tab="enterprise">기업회원</div>
             </div>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 양식</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="../../resources/css/user/register.css" />
+<script src="../../resources/js/user/register.js" defer></script>
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="individual">개인회원</div>
+            <div class="tab" data-tab="enterprise">기업회원</div>
+
         </div>
         <div id="individualForm" class="container02">
             <form id="signup-form" method="post" action="/register">
