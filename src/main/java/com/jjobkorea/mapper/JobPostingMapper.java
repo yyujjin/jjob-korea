@@ -29,6 +29,7 @@ public interface JobPostingMapper {
 
 	// 채용공고등록
 	public void addpostingwrite(JobPostingDTO jobPostingDTO);
+
 	//채용공고등록이미지
 //	public void insertFile(AttachFileDTO attachFile);
 }

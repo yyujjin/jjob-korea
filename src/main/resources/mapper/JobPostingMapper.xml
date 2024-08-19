@@ -122,13 +122,9 @@
     
 
 
-    <insert id="addpostingwrite">   
-    	<selectKey keyProperty="id" order="BEFORE" resultType="int">
-    		select ifnull(max(id),0)+1 from team_db.JobPosting
-    	</selectKey>
-    	
-		  INSERT INTO team_db.JobPosting(id, companyName, postingTitle, jobTitle, workLocation, employmentType, jobExperience, deadline, money) 
-    VALUES (#{id}, #{companyName}, #{postingTitle}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money});
+    <insert id="addpostingwrite"  parameterType="JobPostingDTO" >
+        INSERT INTO team_db.JobPosting(companyName, postingTitle, jobTitle, workLocation, employmentType, jobExperience, deadline, money, companyId)
+        VALUES (#{companyName}, #{postingTitle}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money}, #{companyId});
     </insert>
     
 
