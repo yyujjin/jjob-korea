@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.nio.file.Files;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +29,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.jjobkorea.dto.ResumeInfoDTO;
 import com.jjobkorea.service.ResumeInfoService;
 import com.jjobkorea.service.UserSessionService;
+import com.oracle.wls.shaded.org.apache.xml.utils.URI.MalformedURIException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +45,7 @@ public class ResumeController {
     private final UserSessionService userSessionService; 
     // 이력서 메인
     @GetMapping("/resume")
-    public String resister(Model model) {
+    public String resister(Model model ) {
         log.info("@#hello");
         
         String userId = userSessionService.getUserId(); //아이디 가져오기
@@ -111,26 +114,27 @@ public class ResumeController {
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata);
             amazonS3.putObject(putObjectRequest);
         }
-
-        return amazonS3.getUrl(bucketName, fileName).toString(); // S3 URL 반환
+        String fileUrl = amazonS3.getUrl(bucketName, fileName).toString();
+        log.info("fileUrl 로 파일이 업로드 되었습니다."+fileUrl);
+        return fileUrl; // S3 URL 반환
     }
 //     이력서 수정 페이지 접속 로직
     @SuppressWarnings("deprecation")
 	@GetMapping("/resume_write/edit")
-    public String editResume(@RequestParam("id") Long id, Model model) throws IOException {
+    public String editResume(@RequestParam("id") Long id, Model model, ResumeInfoDTO resumeInfoDTO) throws IOException {
         log.info("@#resume edit");
         
         String userId = userSessionService.getUserId(); //아이디 가져오기
         userSessionService.getUserName(); //이름 가져오기
         
-        ResumeInfoDTO resumeInfoDTO = resumeInfoService.findByIdAndUserId(id, userId);
-        
+        resumeInfoDTO = resumeInfoService.findByIdAndUserId(id, userId);
+   
+        log.info("loaded ResumeInfoDTO: {}", resumeInfoDTO);
         String findPath = resumeInfoService.findPhotoByUserID(id);
-      	 
         
         if (findPath != null) {
-        	if(!findPath.startsWith("http://") && !findPath.startsWith("https://")) {
-        		findPath = "http://" + findPath;
+        	if(!findPath.startsWith("https://") && !findPath.startsWith("https://")) {
+        		findPath = "https:" + findPath;
         	}
         	try {
         		URL url = new URL(findPath);
@@ -143,7 +147,7 @@ public class ResumeController {
 		            model.addAttribute("image", base64Image);
 		            model.addAttribute("imageName", findPath);
         		}
-			} catch (IOException e) {
+			} catch (MalformedURLException e) {
 				log.error("이미지 파일을 로드하는데 실패하였습니다.", e);
 			}
         }
@@ -153,36 +157,50 @@ public class ResumeController {
     }
     // 이력서 수정 완료 업데이트 로직
     @PostMapping("/resume_write/edit")
-    public String updateResume(@RequestParam("id") Long id, @RequestParam("resumeProfilePhoto") MultipartFile file, @ModelAttribute ResumeInfoDTO resumeInfoDTO) throws IOException {
-        log.info("resumeUpdate");
-        
-        String userId = userSessionService.getUserId(); //아이디 가져오기
-        userSessionService.getUserName(); //이름 가져오기
-        
-        log.info("Received ID: {}", resumeInfoDTO.getId());
-        // 필수 필드 유효성 검사
-        if (resumeInfoDTO.getResumePageTitle() == null || resumeInfoDTO.getResumePageTitle().isEmpty()) {
-            log.error("이력서가 존재하지 않습니다.");
-            return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
-        }
-        ResumeInfoDTO existingResume = resumeInfoService.findByIdAndUserId(id, userId);
-        if (existingResume == null) {
-            log.error("존재하지 않는 이력서입니다.");
-            return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
-        }
+    public String updateResume(@RequestParam("id") Long id,
+                               @RequestParam(value = "resumeProfilePhoto", required = false) MultipartFile file,
+                               @ModelAttribute ResumeInfoDTO resumeInfoDTO) throws IOException {
+        log.info("Updating resume with ID: {}", id);
 
-        if (file != null && !file.isEmpty()) {
-        	String fileName = uploadFileToS3Bucket(file);
-            resumeInfoDTO.setResumeFilePath(fileName);
-        } else {
-            // 새로운 파일이 업로드되지 않았으면 기존 파일 경로를 유지합니다.
-        	resumeInfoDTO.setResumeFilePath(existingResume.getResumeFilePath());
-//            resumeInfoDTO.setResumeProfilePhoto(existingResume.getResumeProfilePhoto());
+        // 현재 사용자의 ID 가져오기
+        String userId = userSessionService.getUserId();
+        
+        
+        // 수정을 했을 때 기존 사진이랑 변경이 없으면 원래 루트를 쓰겟다. 그걸 검증하는 로직이 파일이 널이냐 아니냐, file 이 무조건 널이 아닐꺼야.
+        // 프론트에서 수정을 안해도 데이터가 다 넘어 오잖아. 사진도 아마 넘어 올거거든. 빈 값이 아닌 경우 기존 사진이어도 실행이 되고 기존 사진이 아니어도 실행이 되는 로직. 
+
+        // 기존 이력서 정보 가져오기
+        ResumeInfoDTO existingResume = resumeInfoService.findByIdAndUserId(id, userId);
+        
+          
+        
+        if (existingResume == null) {
+            log.error("Resume with ID {} does not exist for user {}", id, userId);
+            return "redirect:/resume"; // 에러 페이지로 리디렉션하거나 적절한 처리
         }
-        log.info("이력서를 업데이트 했습니다: {}", resumeInfoDTO);
+        
+        // 파일 업로드 처리 및 경로 설정
+        if (file != null && !file.isEmpty()) {
+            String newFileName = uploadFileToS3Bucket(file);
+            resumeInfoDTO.setResumeFilePath(newFileName);
+            log.info("New file uploaded and path set: {}", newFileName);
+        } else {
+            // 파일이 업로드되지 않은 경우 기존 파일 경로 유지
+        	
+            resumeInfoDTO.setResumeFilePath(existingResume.getResumeFilePath());
+            log.info("No new file uploaded, keeping existing file path: {}", existingResume.getResumeFilePath());
+        }
+        
+
+        // 사용자 ID 설정
+        resumeInfoDTO.setResumePageUserId(userId);
         resumeInfoService.update(resumeInfoDTO);
+        log.info("Resume updated successfully for user {}: {}", userId, resumeInfoDTO);
+
         return "redirect:/resume";
     }
+
+
     // 이력서 삭제 로직
     @PostMapping("/resume/delete")
     public String delete(@RequestParam("id") Long id) {
