@@ -12,7 +12,7 @@
     
     <select id="findByIdAndUserId" parameterType="hashMap" resultType="com.jjobkorea.dto.ResumeInfoDTO">
         SELECT id, resumePageTitle, resumeUserName, resumeBirthDay, resumeGender, resumeUserEmail, resumeUserPhone, resumeUserCellPhone, resumeUserAddress, 
-            resumeProfilePhoto, resumeSkillName, resumePortfolio, resumePageUserId, resumeEduStage, 
+            resumeProfilePhoto AS resumeFilePath, resumeSkillName, resumePortfolio, resumePageUserId, resumeEduStage, 
             resumeSchoolName, resumeCpName, resumeCpDept, resumeCpJoinDate, resumeCpLeaveDate, 
             resumeCpPosition, resumeCpDuty, resumeCpSalary, resumeIntroduce FROM resume_user_information WHERE id = #{arg0} AND resumePageUserId = #{arg1}
     </select>
