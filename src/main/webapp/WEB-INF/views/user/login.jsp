@@ -38,11 +38,7 @@
                 </div>
                 <button type="submit">로그인</button>
             </div>
-            <div class="link-container">
-                <span class="register-link" data-type="">아이디 찾기</span>
-                <span class="register-link" data-type="">비밀번호 찾기</span>
-                <span class="register-link" data-type="individual">회원가입</span>
-            </div>
+
         </form>
 
         <!-- 기업회원 로그인 폼 -->
