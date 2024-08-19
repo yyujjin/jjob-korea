@@ -39,7 +39,7 @@ public class JobPostingController {
     public String addpostingwrite(Model model) {
     	log.info("공고등록model", model);
   	
-        model.addAttribute("page","jobPostingDetails/addJobPosting");
+        model.addAttribute("page","jobPosting/addJobPosting");
 
         return "main/main";
     }
