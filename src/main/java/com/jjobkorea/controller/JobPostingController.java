@@ -71,10 +71,16 @@ public class JobPostingController {
     
     //공고 상세보기 페이지
     @GetMapping ("/jobPosting")
-    public String view_jobPosting (@RequestParam (value = "companyId") int companyId,Model model) {
+    public String view_jobPosting (@RequestParam (value = "companyId") int companyId,
+                                   @RequestParam (value = "id") int id,
+                                   Model model) {
+
+        CompanyDTO companyDTO = new CompanyDTO();
+        companyDTO.setId(companyId);
+
 
         model.addAttribute("company",jobPostingService.getCompanyInfo(companyId));
-        model.addAttribute("jobPosting",jobPostingService.getJobPosting(companyId));
+        model.addAttribute("jobPosting",jobPostingService.getJobPosting(id));
         model.addAttribute("page","jobPosting/view-jobPosting");
         return "main/main";
     }

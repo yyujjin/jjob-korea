@@ -117,7 +117,7 @@
     </select>
 
     <select id="getJobPosting" resultType="JobPostingDTO" parameterType="int">
-        select * from team_db.jobposting where companyId = #{companyId};
+        select * from team_db.jobposting where id = #{id};
     </select>
     
 
