@@ -12,8 +12,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
@@ -30,35 +28,26 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
-        log.info("oAuth2User.getAttribute():{}", oAuth2User.getAttributes());
-
-        //구글 registrationId 가져오기
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         log.info("registrationId :{}",registrationId);
 
         GoogleResponseDTO googleResponseDTO= new GoogleResponseDTO(oAuth2User.getAttributes());
 
-        //TODO:findByRegistrationId(업데이트)는 일단 하지말고 저장만 하기
-
-        //1. 유저 디티오 객체 선언하고
         UserDTO userDTO = new UserDTO();
 
-        //2. 값 넣어주기
-        //아이디 저장
         int index = googleResponseDTO.getEmail().indexOf("@");
         String userId = googleResponseDTO.getEmail().substring(0, index);
 
         userDTO.setUserId(userId);
         userDTO.setName(googleResponseDTO.getName());
         userDTO.setEmail(googleResponseDTO.getEmail());
-        //구직자만
+
         userDTO.setRole("ROLE_JOB_SEEKER");
         userDTO.setRegistrationId(googleResponseDTO.getProviderId());
 
-        //DB에 구글 유저 정보가 없다면 저장하는 로직
         UserDTO findUser = userMapper.findByRegistrationId(googleResponseDTO.getProviderId());
         if (findUser == null) {
-            //DB에 넣어주기
+
             userMapper.saveGoogleUser(userDTO);
         }
 
