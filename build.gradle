@@ -78,6 +78,12 @@ dependencies {
     //spring security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
+    //AWS
+   implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+    implementation 'com.sun.activation:javax.activation:1.2.0'
+   implementation 'io.awspring.cloud:spring-cloud-aws-context:2.4.0'
+   implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
 }
 
 tasks.named('test') {
