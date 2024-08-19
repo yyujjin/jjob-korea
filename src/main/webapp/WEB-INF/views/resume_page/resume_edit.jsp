@@ -5,13 +5,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이력서 작성</title>
+    <style>
+        body {
+            background: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
+        header {
+            width: 100%;
+            background-color: white;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            display: flex;
+            width: 100%;
+            max-width: 1100px;
+            margin: 20px;
+            border: 1px solid black;
+        }
+
+        .content {
+            flex: 3;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .profilephoto {
+            background: white;
+            width: 150px;
+            height: 210px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-left: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid black;
+            border-radius: 5px;
+            width: calc(50% - 10px);
+            gap: 10px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .btn-upload {
+            background-color: blue;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 13px;
+            margin-top: 10px;
+            margin-left: 65px;
+        }
+
+        #file {
+            display: none;
+        }
+
+        textarea {
+            width: 100%;
+            resize: none;
+        }
+
+        #output {
+            border-radius: 3px;
+            border: none;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .remove-skill-btn {
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-left: 5px;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-skill-btn:hover {
+            background-color: greenyellow;
+        }
+
+        #selectedSkills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .b {
+            color: red;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            width: 250px;
+            height: 30px;
+            text-align: center;
+            gap: 10px;
+            margin-left: 74%;
+        }
+
+        .btn button {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            cursor: pointer;
+            border: solid 1px black;
+            border-radius: 3px;
+        }
+
+        #photo-instructions {
+            font-size: 12px;
+            margin-top: 75px;
+        }
+    </style>
     <script type="text/javascript"
         src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../../resources/css/resume/resume_edit.css" />
-    <script src="../../resources/js/resume/resume_edit.js" defer></script>
-
 </head>
 <body>
     <header>
@@ -102,7 +270,83 @@
                     <!-- 추가된 스킬을 보여줄 공간 -->
                 </div>
 
+                <script>
+                    var selectedSkills = [];
 
+                    function updateHiddenInput() {
+                        const resumeSkillNameInput = document.getElementById("resumeSkillName");
+                        resumeSkillNameInput.value = selectedSkills.join(',');
+                    }
+
+                    function addSkill() {
+                        const skillSelect = document.getElementById("skills");
+                        const selectedOption = skillSelect.options[skillSelect.selectedIndex];
+                        const selectedSkillsDiv = document.getElementById("selectedSkills");
+
+                        const skillId = 'skill-' + selectedOption.value.replace(/\s+/g, '-');
+
+                        // Check if the skill already exists
+                        if (!document.getElementById(skillId)) {
+                            // Check the number of currently selected skills
+                            const currentSkillCount = selectedSkillsDiv.getElementsByClassName('skill-item').length;
+
+                            if (currentSkillCount >= 3) {
+                                alert("기술은 최대 3개까지 선택 가능합니다.");
+                                return;
+                            }
+
+                            const skillElement = document.createElement("div");
+                            skillElement.setAttribute("id", skillId);
+                            skillElement.className = 'skill-item';
+                            skillElement.innerHTML = selectedOption.value + " <button class='remove-skill-btn' onclick='removeSkill(\"" + skillId + "\", \"" + selectedOption.value + "\")'>x</button>";
+                            selectedSkillsDiv.appendChild(skillElement);
+
+                            // Add the skill to the selectedSkills array
+                            selectedSkills.push(selectedOption.value);
+                            updateHiddenInput();
+                        } else {
+                            alert("이미 선택된 기술입니다.");
+                        }
+                        // Reset the select element to default value
+                        skillSelect.selectedIndex = 0;
+                    }
+
+                    function removeSkill(skillId, skillValue) {
+                        const skillElement = document.getElementById(skillId);
+                        if (skillElement) {
+                            skillElement.remove();
+
+                            // Remove the skill from the selectedSkills array
+                            const index = selectedSkills.indexOf(skillValue);
+                            if (index > -1) {
+                                selectedSkills.splice(index, 1);
+                            }
+                            updateHiddenInput();
+                        }
+                    }
+
+                    function loadExistingSkills() {
+                        const existingSkills = "${resumeInfoDTO.resumeSkillName}".split(',');
+
+                        existingSkills.forEach(skill => {
+                            if (skill && skill !== '선택안함') {
+                                selectedSkills.push(skill);
+
+                                const skillId = 'skill-' + skill.replace(/\s+/g, '-');
+                                const selectedSkillsDiv = document.getElementById("selectedSkills");
+                                const skillElement = document.createElement("div");
+                                skillElement.setAttribute("id", skillId);
+                                skillElement.className = 'skill-item';
+                                skillElement.innerHTML = skill + " <button class='remove-skill-btn' onclick='removeSkill(\"" + skillId + "\", \"" + skill + "\")'>x</button>";
+                                selectedSkillsDiv.appendChild(skillElement);
+                            }
+                        });
+
+                        updateHiddenInput();
+                    }
+
+                    document.addEventListener("DOMContentLoaded", loadExistingSkills);
+                </script>
             </section>
 
             <section class="portfolio">
@@ -150,6 +394,13 @@
         </div>
     </form>
 
-
+    <script>
+        function loadFile(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.style.display = 'block';
+            document.getElementById('photo-instructions').style.display = 'none';
+        }
+    </script>
 </body>
 </html>

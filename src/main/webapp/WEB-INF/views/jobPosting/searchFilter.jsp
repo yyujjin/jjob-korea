@@ -12,7 +12,7 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../../resources/css/jobPosting/searchFilter.css" />
+    <link rel="stylesheet" href="../../resources/css/searchFilter.css" />
     <script src="../../resources/js/jobPosting/searchFilter.js" defer></script> <!--js연결-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><!-- jQuery 라이브러리 추가 -->
 </head>

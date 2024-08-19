@@ -27,7 +27,7 @@ public class UserController {
     //로그인 페이지 로드
     @GetMapping("/login")
     public String showLoginPage(Model model) {
-
+    	log.info("여기로 왔음");
         model.addAttribute("page","user/login");
         return "main/main";
     }
@@ -48,7 +48,7 @@ public class UserController {
     //개인과 기업을 구분하여 회원가입
     @PostMapping("/register")
     public String registerOk(@RequestParam HashMap<String, String> param) {
-
+        log.info("넘어온 값 : {}",param);
         if ("enterprise".equals(param.get("type"))) {
             userService.companyUser(param);
         } else {
@@ -56,7 +56,6 @@ public class UserController {
         }
         return "user/registerOk";
     }
-
 
     // 아이디 중복 체크
     @PostMapping("/checkId")
@@ -68,14 +67,13 @@ public class UserController {
         }}));
         return response;
     }
-
     
     //회원 정보(개인,기업) 조회
     @GetMapping("/user")
     public String userInfo(Model model){
         
     	UserDTO userInfo = userService.userInfo(userSessionService.getUserId());
-
+    	log.info("가져온 userInfo : {}",userInfo);
     	model.addAttribute("userInfo",userInfo);
         model.addAttribute("page","user/userInfo");
 
@@ -88,6 +86,7 @@ public class UserController {
     public String updateUser(UserDTO userDTO) {
     	
     	userService.updateUser(userDTO);
+    	log.info("업데이트 된 userDTO : {}",userDTO);
     	
     	return "user/updateSuccess";
     }
