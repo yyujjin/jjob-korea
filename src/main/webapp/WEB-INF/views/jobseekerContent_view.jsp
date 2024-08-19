@@ -166,11 +166,19 @@
                   <tr>
                      <td class="notContent">
                         조회수 ${content_view.jobseekerCommunityBoardHit} &nbsp; 좋아요
-                        <button id="likeButton" class="like_button"
-                           onclick="handleLike(${content_view.jobseekerCommunityBoardNum}); return false;">
-                           <i id="likeIcon" class="fa-regular fa-heart"></i> <!-- 기본 상태 아이콘 -->
+                        <button id="likeButton" class="like_button" type="button"
+                                onclick="handleLike(event, ${content_view.jobseekerCommunityBoardNum}); return false;">
+                            <!-- 서버에서 받아온 좋아요 상태에 따라 아이콘 설정 -->
+                            <i id="likeIcon" class="<c:choose>
+                                                       <c:when test="${hasLiked}">
+                                                           fa-solid fa-heart
+                                                       </c:when>
+                                                       <c:otherwise>
+                                                           fa-regular fa-heart
+                                                       </c:otherwise>
+                                                     </c:choose>"></i>
                         </button>
-                        <span id="likeCount">${content_view.likes}</span> <!-- 좋아요 수를 표시 -->
+                        <span id="likeCount">${likeCount}</span> <!-- 좋아요 수를 표시 -->
                      </td>
                      <td class="notContent" style="text-align: right;">
                         글번호 ${content_view.jobseekerCommunityBoardNum} &nbsp; 작성자
@@ -182,7 +190,7 @@
                   <tr>
                      <td class="ContentTitle" colspan="2">
                         <c:choose>
-                           <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
+                           <c:when test="${userid == content_view.jobseekerCommunityBoardName}">
                               <input type="text" name="jobseekerCommunityBoardTitle"
                                  value="${content_view.jobseekerCommunityBoardTitle}" class="wide-title">
                            </c:when>
@@ -202,7 +210,7 @@
                         </div>
 
                         <c:choose>
-                           <c:when test="${user.name == content_view.jobseekerCommunityBoardName}">
+                           <c:when test="${userid == content_view.jobseekerCommunityBoardName}">
                               <textarea class="BoardContent" name="jobseekerCommunityBoardContent">${content_view.jobseekerCommunityBoardContent}
                               </textarea>
                            </c:when>
@@ -217,13 +225,13 @@
                   </tr>
                   <tr>
                      <td colspan="2" style="text-align: right;">
-                        <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
+                        <c:if test="${userid == content_view.jobseekerCommunityBoardName}">
                            <input class="mld_button" type="submit" value="수정">
                         </c:if>
                         &nbsp;&nbsp;<input class="mld_button" type="submit" value="목록보기" formmethod="get"
                            formaction="/board">
                         &nbsp;&nbsp;
-                        <c:if test="${user.name == content_view.jobseekerCommunityBoardName}">
+                        <c:if test="${userid == content_view.jobseekerCommunityBoardName}">
                            <input class="mld_button" type="submit" value="삭제" formmethod="post" formaction="delete">
                         </c:if>
                      </td>
@@ -241,7 +249,7 @@
          </div>
 
          <div id="commentForm">
-            <input type="hidden" id="jobseekerCommentWriter" value="${user.name}">
+            <input type="hidden" id="jobseekerCommentWriter" value="${userid}">
             <input type="text" id="jobseekerCommentContent" placeholder="댓글을 작성해주세요">
             <button id="commentWriteButton" onclick="commentWrite()">댓글작성</button>
          </div>
@@ -266,58 +274,42 @@
          </div>
       </body>
       <script>
-         const handleLike = (boardNum) => {
-            event.preventDefault(); // 버튼 기본 동작 방지
-            $.ajax({
-               type: "post",
-               url: "${pageContext.request.contextPath}/like",
-               data: {
-                  jobseekerCommunityBoardNum: boardNum
-               },
-               success: function (response) {
-                  if (response.redirectUrl) {
-                     alert("로그인 후 이용해 주세요.");
-                     window.location.href = response.redirectUrl;
-                  } else {
-                     const hasLiked = response.hasLiked; // 서버에서 좋아요 상태를 받아옴
-                     alert(hasLiked ? "좋아요!" : "좋아요 취소!");
+        // 좋아요 기능 처리
+        const handleLike = (event, boardNum) => {
+	           event.preventDefault(); 
+	           event.stopPropagation();
 
-                     const likeIcon = $("#likeIcon");
-                     if (hasLiked) {
-                        likeIcon.removeClass("fa-regular fa-heart").addClass("fa-solid fa-heart");
-                     } else {
-                        likeIcon.removeClass("fa-solid fa-heart").addClass("fa-regular fa-heart");
-                     }
+	           $.ajax({
+	               type: "post",
+	               url: `${pageContext.request.contextPath}/like`,
+	               data: {
+	                   jobseekerCommunityBoardNum: boardNum
+	               },
+	               success: function(response) {
+	                   if (response.hasLiked !== undefined) {
+	                       const hasLiked = response.hasLiked; 
+	                       const likeIcon = $("#likeIcon");
+	                       if (hasLiked) {
+	                           likeIcon.removeClass("fa-regular fa-heart").addClass("fa-solid fa-heart");
+	                       } else {
+	                           likeIcon.removeClass("fa-solid fa-heart").addClass("fa-regular fa-heart");
+	                       }
 
-                     $("#likeCount").text(response.likeCount); // 좋아요 수 업데이트
-                  }
-               },
-               error: function (xhr) {
-                  if (xhr.status === 401) {
-                     const redirectUrl = xhr.responseJSON.redirectUrl;
-                     if (redirectUrl) {
-                        alert("로그인 후 이용해 주세요");
-                        window.location.href = redirectUrl;
-                     }
-                  } else {
-                     alert("좋아요 실패");
-                  }
-               }
-            });
-         };
-
-         const commentWrite = () => {
-            const writer = document.getElementById("jobseekerCommentWriter").value;
-
-            //로그인 확인후 경고창 띄우고 링크연결
-            if (!writer) {
-               alert("로그인이 필요합니다.");
-               window.location.href = "${pageContext.request.contextPath}/login";
-               return;
-            }
-
-            const content = document.getElementById("jobseekerCommentContent").value;
-            const no = "${content_view.jobseekerCommunityBoardNum}";
+	                       const likeCount = response.likeCount; // 좋아요 수 업데이트
+	                       $("#likeCount").text(likeCount); // 좋아요 수를 표시
+	                   }
+	               },
+	           });
+	       };
+   const commentWrite = () => {
+	   const writer = document.getElementById("jobseekerCommentWriter").value;
+	   const content = document.getElementById("jobseekerCommentContent").value;
+	   const no = "${content_view.jobseekerCommunityBoardNum}";
+		// 댓글 내용 확인
+		if (content.trim() === "") {
+			alert("댓글을 입력해 주세요.");
+			return;
+		}
 
             $.ajax({
                type: "post"
@@ -461,5 +453,4 @@
             })();
          }); // end of document ready
       </script>
-
       </html>

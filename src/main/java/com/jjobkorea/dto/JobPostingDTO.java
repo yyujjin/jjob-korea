@@ -30,4 +30,7 @@ public class JobPostingDTO {
     private long countdownDays;
     //기업 아이디 (외래키 설정해야함)
     private int companyId;
+    
+    //급여 디비에 추가함
+    private String money;
 }

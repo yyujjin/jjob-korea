@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <html lang="ko">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="ko">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>이력서 작성</title>
-            <style>
-                body {
-                    background: white;
-                    margin: 0;
-                    padding: 0;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이력서 작성</title>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../resources/css/resume/resume_write.css" />
+    <script src="../../resources/js/resume/resume_write.js" defer></script>
 
                 .main-container {
                     display: flex;
@@ -484,74 +480,24 @@
                             <button type="button" onclick="saveResume()">임시저장</button>
                         </div>
                     </div>
+                </section>
+
+                <section class="self-intro">
+                    자기소개서란<b class="b">*</b><br>
+                    <textarea placeholder="1000자 이내로 작성해주세요" cols="100" rows="20" name="resumeIntroduce"
+                        id="resumeIntroduce" required></textarea>
+                </section>
+
+                <div class="btn" style="border: none;">
+                    <c:if test="${resumePageUserId == sessionScope.user.userId}">
+                        <button type="submit" id="saveButton"
+                            style="color: white; background-color: blue; border: solid 1px blue;">등록</button>
+                    </c:if>
+                    <button type="button" onclick="saveResume()">임시저장</button>
                 </div>
-            </form>
+            </div>
+        </div>
+    </form>
+</body>
 
-            <script>
-
-                function saveResume() {
-                    const resumeData = {
-                        resumePageTitle: document.getElementById('resumePageTitle').value,
-                        resumeUserName: document.getElementById('resumeUserName').value,
-                        resumeBirthDay: document.getElementById('resumeBirthDay').value,
-                        resumeGender: document.getElementById('resumeGender').value,
-                        resumeUserEmail: document.getElementById('resumeUserEmail').value,
-                        resumeUserPhone: document.getElementById('resumeUserPhone').value,
-                        resumeUserCellPhone: document.getElementById('resumeUserCellPhone').value,
-                        resumeUserAddress: document.getElementById('resumeUserAddress').value,
-                        resumeSkillName: selectedSkills,
-                        resumePortfolio: document.getElementById('resumePortfolio').value,
-                        resumeEduStage: document.getElementById('resumeEduStage').value,
-                        resumeSchoolName: document.getElementById('resumeSchoolName').value,
-                        resumeCpName: document.getElementById('resumeCpName').value,
-                        resumeCpDept: document.getElementById('resumeCpDept').value,
-                        resumeCpJoinDate: document.getElementById('resumeCpJoinDate').value,
-                        resumeCpLeaveDate: document.getElementById('resumeCpLeaveDate').value,
-                        resumeCpPosition: document.getElementById('resumeCpPosition').value,
-                        resumeCpSalary: document.getElementById('resumeCpSalary').value,
-                        resumeCpDuty: document.getElementById('resumeCpDuty').value,
-                        resumeIntroduce: document.getElementById('resumeIntroduce').value,
-                    };
-                    localStorage.setItem('resumeData', JSON.stringify(resumeData));
-                    alert('이력서가 임시 저장되었습니다.');
-                }
-
-                function loadResume() {
-                    const savedResumeData = localStorage.getItem('resumeData');
-                    if (savedResumeData) {
-                        const resumeData = JSON.parse(savedResumeData);
-                        document.getElementById('resumeUserName').value = resumeData.resumeUserName;
-                        document.getElementById('resumeBirthDay').value = resumeData.resumeBirthDay;
-                        document.getElementById('resumeGender').value = resumeData.resumeGender;
-                        document.getElementById('resumeUserEmail').value = resumeData.resumeUserEmail;
-                        document.getElementById('resumeUserPhone').value = resumeData.resumeUserPhone;
-                        document.getElementById('resumeUserCellPhone').value = resumeData.resumeUserCellPhone;
-                        document.getElementById('resumeUserAddress').value = resumeData.resumeUserAddress;
-                        selectedSkills = resumeData.resumeSkillName;
-                        document.getElementById('resumeSkillName').value = selectedSkills.join(',');
-                        document.getElementById('resumePortfolio').value = resumeData.resumePortfolio;
-                        document.getElementById('resumeEduStage').value = resumeData.resumeEduStage;
-                        document.getElementById('resumeSchoolName').value = resumeData.resumeSchoolName;
-                        document.getElementById('resumeCpName').value = resumeData.resumeCpName;
-                        document.getElementById('resumeCpDept').value = resumeData.resumeCpDept;
-                        document.getElementById('resumeCpJoinDate').value = resumeData.resumeCpJoinDate;
-                        document.getElementById('resumeCpLeaveDate').value = resumeData.resumeCpLeaveDate;
-                        document.getElementById('resumeCpPosition').value = resumeData.resumeCpPosition;
-                        document.getElementById('resumeCpSalary').value = resumeData.resumeCpSalary;
-                        document.getElementById('resumeCpDuty').value = resumeData.resumeCpDuty;
-                        document.getElementById('resumeIntroduce').value = resumeData.resumeIntroduce;
-                    }
-                }
-                function validateForm() {
-                    var salary = document.getElementById('resumeCpSalary').value;
-                    if (isNaN(salary) || salary.trim() === "") {
-                        alert('연봉 필드는 숫자여야 합니다.');
-                        return false;
-                    }
-                    return true;
-                }
-            </script>
-
-        </body>
-
-        </html>
+</html>

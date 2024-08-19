@@ -115,7 +115,7 @@
 	<table class="table_list" width="500" border="1">
 		<tr class="table_header">
 			<td>번호</td>
-			<td>이름</td>
+			<td>아이디</td>
 			<td>제목</td>
 			<td>날짜</td>
 			<td>조회수</td>
@@ -164,9 +164,8 @@
 	                   var day = ('0' + dateObj.getDate()).slice(-2);
 	                   var hours = ('0' + dateObj.getHours()).slice(-2);
 	                   var minutes = ('0' + dateObj.getMinutes()).slice(-2);
-	                   var seconds = ('0' + dateObj.getSeconds()).slice(-2);
 
-	                   var formattedDate = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+	                   var formattedDate = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
 
 	                   $(this).text(formattedDate);
 	               }
@@ -233,7 +232,7 @@
 		        var minutes = ('0' + dateObj.getMinutes()).slice(-2);
 		        var seconds = ('0' + dateObj.getSeconds()).slice(-2);
 
-		        var formattedDate = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+		        var formattedDate = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
 
 		        // 변환된 날짜를 해당 span 요소에 표시
 		        $(this).text(formattedDate);
