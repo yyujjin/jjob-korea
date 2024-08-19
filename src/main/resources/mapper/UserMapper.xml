@@ -74,5 +74,10 @@
         #{userId}, #{name}, #{email}, CURRENT_TIMESTAMP, #{role},#{registrationId}
         );
     </insert>
+
+    <!--companyId 가져오기-->
+    <select id="getCompanyId" parameterType="String" resultType="int">
+        select id from user_info where userId = #{userId}
+    </select>
 </mapper>
 
