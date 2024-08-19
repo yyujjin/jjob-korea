@@ -127,7 +127,13 @@
         INSERT INTO team_db.JobPosting(companyName, postingTitle, jobTitle, workLocation, employmentType, jobExperience, deadline, money, companyId)
         VALUES (#{companyName}, #{postingTitle}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money}, #{companyId});
     </insert>
-    
+
+    <update id="updateHit" parameterType="int">
+        UPDATE jobPosting
+        SET hit = hit + 1
+        WHERE id = #{id};
+    </update>
+
 
 
 </mapper>

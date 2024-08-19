@@ -181,5 +181,10 @@ private final JobPostingMapper jobPostingMapper;
 //        jobPostingMapper.insertFile(attachFile);  // jobPostingMapper를 사용하여 파일 저장
     }
 
+    @Override
+    public void updateHit(int id) {
+        jobPostingMapper.updateHit(id);
+    }
+
 
 }

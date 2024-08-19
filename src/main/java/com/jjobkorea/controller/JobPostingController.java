@@ -78,6 +78,8 @@ public class JobPostingController {
         CompanyDTO companyDTO = new CompanyDTO();
         companyDTO.setId(companyId);
 
+        //조회수 증가
+        jobPostingService.updateHit(id);
 
         model.addAttribute("company",jobPostingService.getCompanyInfo(companyId));
         model.addAttribute("jobPosting",jobPostingService.getJobPosting(id));
