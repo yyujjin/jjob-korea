@@ -193,8 +193,7 @@
     <script type="text/javascript"
         src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../../resources/css/resume/resume_edit.css" />
-    <script src="../../resources/js/resume/resume_edit.js" defer></script>
+
 
 </head>
 <body>
@@ -288,8 +287,8 @@
                     </div>
                 </div>
             </section>
-            <section class="skills" style="font-size: 14px;">
-                기술 스택 <a style="color: black; font-size: 10px;">(최대 3개 선택 가능)</a>
+            <section class="skills">
+                <h3>기술 스택 <a style="color: black; font-size: 10px;">(최대 3개 선택 가능)</a></h3>
                 <div class="select-skill">
                     <select id="skills" onchange="addSkill()">
                         <option value="선택안함" selected>선택안함</option>
@@ -310,8 +309,86 @@
                     <!-- 추가된 스킬을 보여줄 공간 -->
                 </div>
 
+                <script>
+                    var selectedSkills = [];
 
+                    function updateHiddenInput() {
+                        const resumeSkillNameInput = document.getElementById("resumeSkillName");
+                        resumeSkillNameInput.value = selectedSkills.join(',');
+                    }
+
+                    function addSkill() {
+                        const skillSelect = document.getElementById("skills");
+                        const selectedOption = skillSelect.options[skillSelect.selectedIndex];
+                        const selectedSkillsDiv = document.getElementById("selectedSkills");
+
+                        const skillId = 'skill-' + selectedOption.value.replace(/\s+/g, '-');
+
+                        // Check if the skill already exists
+                        if (!document.getElementById(skillId)) {
+                            // Check the number of currently selected skills
+                            const currentSkillCount = selectedSkillsDiv.getElementsByClassName('skill-item').length;
+
+                            if (currentSkillCount >= 3) {
+                                alert("기술은 최대 3개까지 선택 가능합니다.");
+                                return;
+                            }
+
+                            const skillElement = document.createElement("div");
+                            skillElement.setAttribute("id", skillId);
+                            skillElement.className = 'skill-item';
+                            skillElement.innerHTML = selectedOption.value + " <button class='remove-skill-btn' onclick='removeSkill(\"" + skillId + "\", \"" + selectedOption.value + "\")'>x</button>";
+                            selectedSkillsDiv.appendChild(skillElement);
+
+                            // Add the skill to the selectedSkills array
+                            selectedSkills.push(selectedOption.value);
+                            updateHiddenInput();
+                        } else {
+                            alert("이미 선택된 기술입니다.");
+                        }
+                        // Reset the select element to default value
+                        skillSelect.selectedIndex = 0;
+                    }
+
+                    function removeSkill(skillId, skillValue) {
+                        const skillElement = document.getElementById(skillId);
+                        if (skillElement) {
+                            skillElement.remove();
+
+                            // Remove the skill from the selectedSkills array
+                            const index = selectedSkills.indexOf(skillValue);
+                            if (index > -1) {
+                                selectedSkills.splice(index, 1);
+                            }
+                            updateHiddenInput();
+                        }
+                    }
+
+                    function loadExistingSkills() {
+                        const existingSkills = "${resumeInfoDTO.resumeSkillName}".split(',');
+
+                        existingSkills.forEach(skill => {
+                            if (skill && skill !== '선택안함') {
+                                selectedSkills.push(skill);
+
+                                const skillId = 'skill-' + skill.replace(/\s+/g, '-');
+                                const selectedSkillsDiv = document.getElementById("selectedSkills");
+                                const skillElement = document.createElement("div");
+                                skillElement.setAttribute("id", skillId);
+                                skillElement.className = 'skill-item';
+                                skillElement.innerHTML = skill + " <button class='remove-skill-btn' onclick='removeSkill(\"" + skillId + "\", \"" + skill + "\")'>x</button>";
+                                selectedSkillsDiv.appendChild(skillElement);
+                            }
+                        });
+
+                        updateHiddenInput();
+                    }
+
+                    document.addEventListener("DOMContentLoaded", loadExistingSkills);
+                </script>
             </section>
+            
+            
 
             <section class="portfolio">
                 포트폴리오<b class="b">*</b>
@@ -319,19 +396,19 @@
                     id="resumePortfolio" value="${resumeInfoDTO.resumePortfolio}" required>
             </section>
             <section class="education">
-                학력란
-                <div class="input-group">
-                    학교명<b class="b">*</b><input type="text" placeholder="학교명" name="resumeSchoolName"
-                        id="resumeSchoolName" value="${resumeInfoDTO.resumeSchoolName}" required>
-                    <select name="resumeEduStage" id="resumeEduStage" required>
-                        <option value="" selected disabled>학교구분</option>
-                        <option value="고등학교">고등학교</option>
-                        <option value="대학교(2, 3년)">대학교(2, 3년)</option>
-                        <option value="대학교(4년)">대학교(4년)</option>
-                        <option value="대학원">대학원</option>
-                    </select>
-                </div>
-            </section>
+    학력란
+    <div class="input-group">
+        학교명<b class="b">*</b><input type="text" placeholder="학교명" name="resumeSchoolName"
+            id="resumeSchoolName" value="${resumeInfoDTO.resumeSchoolName}" required>
+        <select name="resumeEduStage" id="resumeEduStage" required>
+            <option value="" disabled <c:if test="${empty resumeInfoDTO.resumeEduStage}">selected</c:if>>학교구분</option>
+            <option value="고등학교" <c:if test="${resumeInfoDTO.resumeEduStage == '고등학교'}">selected</c:if>>고등학교</option>
+            <option value="대학교(2, 3년)" <c:if test="${resumeInfoDTO.resumeEduStage == '대학교(2, 3년)'}">selected</c:if>>대학교(2, 3년)</option>
+            <option value="대학교(4년)" <c:if test="${resumeInfoDTO.resumeEduStage == '대학교(4년)'}">selected</c:if>>대학교(4년)</option>
+            <option value="대학원" <c:if test="${resumeInfoDTO.resumeEduStage == '대학원'}">selected</c:if>>대학원</option>
+        </select>
+    </div>
+</section>
             <section class="career">
                 경력란
                 <div class="input-group">
@@ -386,8 +463,6 @@
                         <button type="submit" id="saveButton"
                             style="color: white; background-color: blue; border: solid 1px blue;">저장</button>
                     </c:if>
-                    <!-- <button type="button" style="border: solid 1px black;" onclick="saveResume()">임시저장</button> -->
-                    <button type="button" onclick="saveResume()">임시저장</button>
                 </div>
         </div>
     </form>
