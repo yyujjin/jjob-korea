@@ -1,5 +1,6 @@
 package com.jjobkorea.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.jjobkorea.dto.CompanyDTO;
@@ -21,10 +22,13 @@ public interface JobPostingMapper {
     public List<JobPostingDTO> getSearchList(@Param("filter") FilterDTO dto, @Param("pageNum") int pageNum);
 
     // 기업 정보 가져오기
-    public CompanyDTO getCompanyInfo(int companyId);
+//    public CompanyDTO getCompanyInfo(int companyId);
 
     // 채용 정보 가져오기
-    public JobPostingDTO getJobPosting(int companyId);
+//    public JobPostingDTO getJobPosting(int id);
+    
+
+    public JobPostingDTO view_jobPosting(HashMap<String, String> param);
 
     // 채용공고등록
     public void addpostingwrite(JobPostingDTO jobPostingDTO);

@@ -113,11 +113,11 @@
     </select>
 
     <select id="getCompanyInfo" resultType="CompanyDTO" parameterType="int">
-        select * from team_db.companyinfo where id = #{companyId};
+        select * from team_db.companyInfo where id = #{companyId};
     </select>
 
     <select id="getJobPosting" resultType="JobPostingDTO" parameterType="int">
-        select * from team_db.jobposting where companyId = #{companyId};
+        select * from team_db.jobposting where id = #{id};
     </select>
     
 
@@ -128,9 +128,16 @@
     	</selectKey>
     	
 		  	  INSERT INTO team_db.JobPosting(id, companyName, postingTitle, postingdetails, jobTitle, workLocation, employmentType, jobExperience, deadline, money, jobPostingUploadPath) 
-    VALUES (#{id}, #{companyName}, #{postingTitle}, #{postingdetails}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money}, #{jobPostingFilePath})  </insert>
+    VALUES (#{id}, #{companyName}, #{postingTitle}, #{postingdetails}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money}, #{jobPostingFilePath})  
+    </insert>
     
-
+<!--    조회수-->
+    <update id="JobPosting" parameterType="int">
+	    update team_db.JobPosting
+	    set hit = hit + 1
+	    where id = #{id}
+	</update>
+	
 
 </mapper>
 

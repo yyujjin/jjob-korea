@@ -2,6 +2,7 @@ package com.jjobkorea.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -89,10 +90,9 @@ public class JobPostingController {
     
     //공고 상세보기 페이지
     @GetMapping ("/jobPosting")
-    public String view_jobPosting (@RequestParam (value = "companyId") int companyId,Model model) {
+    public String view_jobPosting (@RequestParam HashMap<String, String> param,Model model) {
 
-        model.addAttribute("company",jobPostingService.getCompanyInfo(companyId));
-        model.addAttribute("jobPosting",jobPostingService.getJobPosting(companyId));
+        model.addAttribute("company",jobPostingService.view_jobPosting(param));
         model.addAttribute("page","jobPosting/view-jobPosting");
         return "main/main";
     }

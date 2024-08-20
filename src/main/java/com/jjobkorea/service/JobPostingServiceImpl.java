@@ -2,6 +2,7 @@ package com.jjobkorea.service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
 
 import com.jjobkorea.dto.CompanyDTO;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.jjobkorea.dto.FilterDTO;
 import com.jjobkorea.dto.JobPostingDTO;
+import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.mapper.JobPostingMapper;
+import com.jjobkorea.mapper.JobseekerBoardMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -150,17 +153,6 @@ private JobPostingMapper jobPostingMapper;
         return getSearchList;
 
     }
-
-    @Override
-    public CompanyDTO getCompanyInfo(int companyId) {
-        return jobPostingMapper.getCompanyInfo(companyId);
-    }
-
-    @Override
-    public JobPostingDTO getJobPosting(int companyId) {
-        return jobPostingMapper.getJobPosting(companyId);
-    }
-
     
     //공고등록
     @Override
@@ -182,5 +174,15 @@ private JobPostingMapper jobPostingMapper;
 //        attachFile.setPostingImage(postingImage);
 //        attachFile.setBoardNo(jobPostingDTO.getCompanyId());
 //        jobPostingMapper.insertFile(attachFile);  // jobPostingMapper를 사용하여 파일 저장
+
+	@Override
+	public JobPostingDTO view_jobPosting(HashMap<String, String> param) {
+		
+	log.info("@# BoardServiceImpl content_view");
+		
+	JobPostingDTO dto = jobPostingMapper.view_jobPosting(param);
+		
+		return dto;
+	}
     
 }
