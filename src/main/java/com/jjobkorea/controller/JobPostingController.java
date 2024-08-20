@@ -49,7 +49,7 @@ public class JobPostingController {
     @GetMapping("/jobPost/create")
     public String addpostingwrite(Model model) {
         log.info("공고 등록 페이지 진입");
-        model.addAttribute("page", "jobPostingDetails/addJobPosting");
+        model.addAttribute("page", "jobPosting/addJobPosting");
         return "main/main";
     }
     
@@ -79,7 +79,7 @@ public class JobPostingController {
         	String fileName = UploadS3(file);
         	jobPostingDTO.setJobPostingFilePath(fileName);
         }
-    
+        
         jobPostingService.addpostingwrite(jobPostingDTO);
         return "redirect:/jobPosts";
     } 
