@@ -75,6 +75,11 @@
         <h1>채용 공고 등록</h1>
         <form action="/jobPost/create" method="post" enctype="multipart/form-data">
             <div class="form-group">
+                <label for="companyName">회사이름</label>
+                <input type="text" id="companyName" name="companyName" class="form-control" placeholder="회사이름">
+            </div>
+
+            <div class="form-group">
                 <label for="jobTitle">직무</label>
                 <select id="jobTitle" name="jobTitle" class="form-control">
                     <option value="" selected disabled>선택안함</option>
