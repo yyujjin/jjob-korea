@@ -47,17 +47,12 @@ public class JobPostingDTO {
     private String money;
     
     // 추가된 필드들
-    // 업로드된 파일의 원본 이름
-    private String jobPostingFileName;
-    
     // 파일이 저장된 경로 또는 S3 URL
     private MultipartFile jobPostingUploadPath;
     
     private String jobPostingFilePath;
     
-    // 파일을 구분하기 위한 UUID
-    private String jobPostingUuid;
-    
-    // 파일 크기
-    private long jobPostingFileSize;
+    //상세정보
+    private String postingdatails;
+
 }

@@ -57,11 +57,6 @@
                 </div>
                 <button type="submit">로그인</button>
             </div>
-            <div class="link-container">
-                <span class="register-link" data-type="">아이디 찾기</span>
-                <span class="register-link" data-type="">비밀번호 찾기</span>
-                <span class="register-link" data-type="enterprise">회원가입</span>
-            </div>
         </form>
 
         <!-- 소셜 로그인 -->
