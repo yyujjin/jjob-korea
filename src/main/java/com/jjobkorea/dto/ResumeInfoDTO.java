@@ -12,7 +12,7 @@ public class ResumeInfoDTO {
     // 인적사항란
     private Long id;
     private String resumeUserName;
-//    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+//  @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private String resumeBirthDay;
     private String resumePageTitle;
     private int resumeGender;
@@ -20,9 +20,9 @@ public class ResumeInfoDTO {
     private String resumeUserPhone;
     private String resumeUserCellPhone;
     private String resumeUserAddress;
-    // 이거 자체로 받아서 디비에 들어갈 때 시리얼라이즈가 안된다. 라는 문제가 있었어. 
+//  DB에 들어가는 값
     private MultipartFile resumeProfilePhoto;
-    // 이 필드를 생성하고 스트링 파일 PATH 를 넣어주는 필드를 생성했음. 
+//  String 값
     private String resumeFilePath;
     private String resumeSkillName;
     private String resumePageUserId;
