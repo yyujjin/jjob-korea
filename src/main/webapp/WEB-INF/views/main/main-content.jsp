@@ -31,9 +31,9 @@
     <div class="row row-cols-2 row-cols-md-4 g-4 ">
         <c:forEach items="${postingList}" var="postingList">
             <div class="col">
-                <a href="/jobPosting?companyId=${postingList.companyId}">
+                <a href="/jobPosting?companyId=${postingList.companyId}&id=${postingList.id}">
                     <div class="card h-100 w-90 text-center">
-                        <img src="<c:out value='${postingList.postingImage}'/>"
+                        <img src="<c:out value='${postingList.jobPostingUploadPath}'/>"
                             class="card-img-top fixed-size-image" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">

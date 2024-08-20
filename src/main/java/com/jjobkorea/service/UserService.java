@@ -18,4 +18,6 @@ public interface UserService {
     public void updateUser(UserDTO userDTO);
     //회원 탈퇴
     public void deleteUser(UserDTO userDTO);
+    
+	public int getCompanyId(String userId);
 }

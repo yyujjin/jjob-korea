@@ -49,7 +49,7 @@ public class UserController {
     @PostMapping("/register")
     public String registerOk(@RequestParam HashMap<String, String> param) {
 
-        if ("enterprise".equals(param.get("type"))) {
+        if ("ROLE_COMPANY_USER".equals(param.get("role"))) {
             userService.companyUser(param);
         } else {
             userService.registerUser(param);

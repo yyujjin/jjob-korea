@@ -14,86 +14,7 @@
             <script src="<c:url value='/resources/js/jobPosting/view-jobPosting.js' />" defer></script>
 
         </head>
-<style>
-    .container-fixed {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-.info-section {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-.info-section .card {
-    width: 48%;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-}
-.card-body {
-    padding: 20px;
-}
-.section-title {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #343a40;
-    font-weight: 700;
-    text-align: center;
-}
-.section-title2 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    color: #343a40;
-    font-weight: 700;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-ul li {
-    padding: 5px 0;
-    font-size: 1rem;
-    color: #495057;
-}
-ul li strong {
-    color: #212529;
-}
-.btn-apply {
-    background-color: blue;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-.btn-apply:hover {
-    background-color: #9eec2a;
-}
-.details-section {
-    margin-top: 20px;
-}
-.tabs {
-    margin-bottom: 15px;
-}
-.tabs button {
-    border: none;
-    background-color: white;
-    cursor: pointer;
-}
-.tabs button:hover {
- background-color: white;
-}
 
-.tab-content {
-    border-top: 1px solid #e9ecef;
-    padding-top: 10px;
-}
-
-</style>
         <body>
             <div class="container-fixed mt-5">
                 <!-- 회사 정보 및 채용 정보 섹션 -->
@@ -117,13 +38,13 @@ ul li strong {
                         <div class="card-body">
                             <h4 class="section-title">회사 정보</h4>
                             <ul>
-                                <li><strong>회사 이름:</strong> ${companyInfo.name}</li>
-                                <li><strong>대표자:</strong> ${companyInfo.ceo}</li>
-                                <li><strong>업종:</strong> ${companyInfo.res}</li>
-                                <li><strong>기업 규모:</strong> ${companyInfo.companyType}</li>
-                                <li><strong>설립 년도:</strong> ${companyInfo.birthd}</li>
-                                <li><strong>직원 수:</strong> ${companyInfo.employeeCount}</li>
-                                <li><strong>주소:</strong> ${companyInfo.addr}</li>
+                                <li><strong>회사 이름:</strong> ${company.name}</li>
+                                <li><strong>대표자:</strong> ${company.ceo}</li>
+                                <li><strong>업종:</strong> ${company.res}</li>
+                                <li><strong>기업 규모:</strong> ${company.companyType}</li>
+                                <li><strong>설립 년도:</strong> ${company.birthd}</li>
+                                <li><strong>직원 수:</strong> ${company.employeeCount}</li>
+                                <li><strong>주소:</strong> ${company.addr}</li>
                             </ul>
                         </div>
                     </div>
