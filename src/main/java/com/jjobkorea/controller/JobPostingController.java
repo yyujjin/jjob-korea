@@ -90,11 +90,19 @@ public class JobPostingController {
     
     //공고 상세보기 페이지
     @GetMapping ("/jobPosting")
-    public String viewjobPosting (@RequestParam HashMap<String, String> param, Model model) {
+    public String view_jobPosting (@RequestParam (value = "companyId") int companyId,
+                                   @RequestParam (value = "id") int id,
+                                   Model model) {
 
-        model.addAttribute("company",jobPostingService.viewjobPosting(param));
+        CompanyDTO companyDTO = new CompanyDTO();
+        companyDTO.setId(companyId);
+
+        //조회수 증가
+        jobPostingService.updateHit(id);
+
+        model.addAttribute("company",jobPostingService.getCompanyInfo(companyId));
+        model.addAttribute("jobPosting",jobPostingService.getJobPosting(id));
         model.addAttribute("page","jobPosting/view-jobPosting");
         return "main/main";
     }
-
 }

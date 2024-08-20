@@ -6,7 +6,6 @@ import java.util.List;
 import com.jjobkorea.dto.CompanyDTO;
 import com.jjobkorea.dto.FilterDTO;
 import com.jjobkorea.dto.JobPostingDTO;
-import com.jjobkorea.dto.JobseekerBoardDTO;
 
 public interface JobPostingService {
 
