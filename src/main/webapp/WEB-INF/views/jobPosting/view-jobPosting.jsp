@@ -7,13 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>채용 정보 상세</title>
         <!-- Bootstrap CSS -->
-
-        <link
-            href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="../../resources/css/jobPosting/view-jobPosting.css" />
-
+        <link href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />" rel="stylesheet" />
+        <link rel="stylesheet" href="<c:url value='/resources/css/jobPosting/view-jobPosting.css' />" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="<c:url value='/resources/js/jobPosting/view-jobPosting.js' />" defer></script>
         
@@ -124,7 +119,6 @@
                     <div class="tabs">
                         <button class="btn btn-light" onclick="showTab('details')">상세정보</button>
                         <button class="btn btn-light" onclick="showTab('application')">접수기간/방법</button>
-                        <button class="btn btn-light" onclick="showTab('recommendation')">추천공고</button>
                     </div>
                     <div id="details-content" class="tab-content">
                         <p>상세정보(등록페이지에서 작성한 상세정보 표기)</p>
@@ -134,9 +128,7 @@
                         <p>(채용공고에 등록된 시 자격요건-마감기한 띄우기)</p>
                         <p>기업정보(기업이 아니면 자동삭제 필수)</p>
                     </div>
-                    <div id="recommendation-content" class="tab-content" style="display: none;">
-                        <p>추천공고</p>
-                    </div>
+                  
                 </div>
             </div>
 
