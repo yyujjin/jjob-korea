@@ -109,106 +109,190 @@ $(document).ready(function () {
         const birthdValid = validateBirthd();
         const emailValid = validateEmail();
         const phoneValid = validatePhone();
+
+        if (!isEmailVerified) { // 이메일 인증이 완료되지 않았을 경우
+            alert("이메일 인증이 되지 않았습니다.");
+            return false;
+        }
         return userIdValid && passwordValid && nameValid && birthdValid && emailValid && phoneValid;
     }
+	// keyup 이벤트(사용자가 키를 누른 후 뗄 때마다 실행) -> vaildate~함수 호출
+	    $('#userId').on('keyup', function () {
+	        validateUserId();
+	    });
+	    $('#password').on('keyup', function () {
+	        validatePassword();
+	    });
+	    $('#name').on('keyup', function () {
+	        validateName();
+	    });
+	    $('#individualBirthd').on('keyup', function () {
+	        validateBirthd();
+	    });
+	    $('#email').on('keyup', function () {
+	        validateEmail();
+	    });
+	    $('#phone').on('keyup', function () {
+	        validatePhone();
+	    });
+		// 폼 제출 시 유효성 검사(유효성이 적합하지 않으면 제출을 막음)
+		   $('#signup-form').on('submit', function (e) {
+		       if (!validateForm()) {
+		           e.preventDefault();
+		       }
+		   });
+	// 이메일 인증 번호 전송
+	    function sendNumber() {
+	        console.log('sendNumber 호출됨');
+	        const email = $("#email").val();
+	        if (!validateEmail()) {
+	            return;
+	        }
+	        $.ajax({
+	            url: "/api/v1/email/send",
+	            type: "post",
+	            contentType: "application/json",
+	            data: JSON.stringify({ "mail": email }),
+	            success: function (data) {
+	                alert("인증번호가 발송되었습니다.");
+	                $("#mail_number").addClass("visible");
+	            },
+	            error: function () {
+	                alert("이메일 발송에 실패하였습니다. 다시 시도해주세요.");
+	            }
+	        });
+	    }
 
-    // 입력 값 변경 시 실시간 유효성 검사
-    $('#userId').on('keyup', validateUserId);
-    $('#password').on('keyup', validatePassword);
-    $('#name').on('keyup', validateName);
-    $('#individualBirthd').on('keyup', validateBirthd);
-    $('#email').on('keyup', validateEmail);
-    $('#phone').on('keyup', validatePhone);
+	    // 이메일 인증 번호 확인
+	    function confirmNumber() {
+	        const email = $("#email").val();
+	        const number = $("#verifyCode").val();
 
-    // 폼 제출 시 유효성 검사
-    $('#signup-form').on('submit', function (e) {
-        if (!validateForm()) {
-            e.preventDefault();
-        }
+	        $.ajax({
+	            url: "/api/v1/email/verify",
+	            type: "post",
+	            contentType: "application/json",
+	            dataType: "json",
+	            data: JSON.stringify({ "mail": email, "verifyCode": number }),
+	            success: function (data) {
+	                if (data) {
+	                    alert("이메일 인증에 성공하였습니다.");
+	                    isEmailVerified = true; // 이메일 인증 성공 시 true로 설정
+	                } else {
+	                    alert("인증 번호가 올바르지 않습니다.");
+	                    isEmailVerified = false; // 인증 실패 시 false로 설정
+	                }
+	            },
+	            error: function () {
+	                alert("인증에 실패하였습니다. 다시 시도해주세요.");
+	                isEmailVerified = false; // 인증 실패 시 false로 설정
+	            }
+	        });
+	    }
+
+	    // 이벤트 바인딩
+	    $('#sendEmailButton').on('click', sendNumber);
+	    $('#verifyCodeButton').on('click', confirmNumber);
+	});
+
+	// 탭 전환 기능
+	    $('.tab').on('click', function () {
+	        var tabId = $(this).data('tab');
+	        $('.tab').removeClass('active');
+	        $(this).addClass('active');
+	        if (tabId === 'individual') {
+	            $('#individualForm').show();
+	            $('#enterpriseForm').hide();
+	        } else {
+	            $('#individualForm').hide();
+	            $('#enterpriseForm').show();
+	        }
+	    });
+    
+		//아이디 중복 확인
+		$('#userId, #enterpriseUserId').on('blur', function () {
+		    var userId = $(this).val();
+		    var inputField = $(this); // this를 inputField 변수에 저장
+		    console.log("userId:", userId);
+		    
+		    if (userId) {
+		        $.ajax({
+		            type: 'POST',
+		            url: '/checkId',
+		            data: { userId: userId },
+		            success: function (response) {
+		                console.log("AJAX Response:", response);
+		                if (response.exists) {
+		                    alert('이미 존재하는 아이디입니다.'); 
+		                    inputField.val(''); 
+		                }
+		            },
+		            error: function (xhr, status, error) {
+		                console.error("AJAX Error:", status, error);
+		            }
+		        });
+		    }
+		});
+
+   
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const tabs = document.querySelectorAll('.tab');
+    const individualForm = document.getElementById('individualForm');
+    const enterpriseForm = document.getElementById('enterpriseForm');
+    const signupForm = enterpriseForm.querySelector('form');
+
+    // 폼 제출 시 데이터 출력 이벤트 리스너 추가
+    signupForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // 기본 제출 동작을 막습니다.
+
+        const formData = new FormData(signupForm);
+        const entries = Object.fromEntries(formData.entries());
+
+        console.log('Form Data:', entries); // 제출된 데이터를 콘솔에 출력합니다.
+
+        signupForm.submit(); // 기본 제출 동작을 다시 수행합니다.
     });
 
-    // 아이디 중복 확인
-    $('#userId, #enterpriseUserId').on('blur', function () {
-        const userId = $(this).val();
-        if (userId) {
-            $.ajax({
-                type: 'POST',
-                url: '/checkId',
-                data: { userId: userId },
-                success: function (response) {
-                    if (response.exists) {
-                        alert('이미 존재하는 아이디입니다.');
-                        $(this).val(''); // 입력 필드 초기화
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error:", status, error);
-                }
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            if (tab.dataset.tab === 'enterprise') {
+                individualForm.style.display = 'none';
+                enterpriseForm.style.display = 'block';
+            } else {
+                individualForm.style.display = 'block';
+                enterpriseForm.style.display = 'none';
+            }
+        });
+    });
+
+    const filter01 = document.querySelectorAll('.filter01');
+    const filterAll = document.querySelectorAll('.all');
+
+    filterAll.forEach(allCheckbox => {
+        allCheckbox.addEventListener('click', function () {
+            const allChecked = this.checked;
+            const container = this.closest('.terms-container');
+            const checkboxes = container.querySelectorAll('.filter01');
+            checkboxes.forEach(function (obj) {
+                obj.checked = allChecked;
             });
-        }
+        });
     });
 
-    // 사업자등록번호 중복 확인
-    $('#companyRegistrationNum').on('blur', function () {
-        const companyRegistrationNum = $(this).val();
-        if (companyRegistrationNum) {
-            $.ajax({
-                type: 'POST',
-                url: '/checkCompanyRegistrationNum',
-                data: { companyRegistrationNum: companyRegistrationNum },
-                success: function (response) {
-                    if (response.exists) {
-                        alert('이미 존재하는 사업자등록번호입니다.');
-                        $('#companyRegistrationNum').val(''); // 입력 필드 초기화
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error:", status, error);
-                }
-            });
-        }
-    });
-
-    // 탭 전환 기능
-    $('.tab').on('click', function () {
-        const tabId = $(this).data('tab');
-        $('.tab').removeClass('active');
-        $(this).addClass('active');
-        if (tabId === 'individual') {
-            $('#individualForm').show();
-            $('#enterpriseForm').hide();
-        } else {
-            $('#individualForm').hide();
-            $('#enterpriseForm').show();
-        }
-    });
-
-    // 전체 동의 체크박스 클릭 시 모든 체크박스 선택/해제
-    $('.all').on('click', function () {
-        const allChecked = this.checked;
-        const container = $(this).closest('.terms-container');
-        container.find('.filter01').prop('checked', allChecked);
-    });
-
-    // 개별 체크박스 클릭 시 전체 체크박스 상태 업데이트
-    $('.filter01').on('click', function () {
-        const container = $(this).closest('.terms-container');
-        const allCheckbox = container.find('.all');
-        const checkboxes = container.find('.filter01');
-        const checked = container.find('.filter01:checked');
-        allCheckbox.prop('checked', checkboxes.length === checked.length);
-    });
-
-    // 폼 제출 시 데이터 출력
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // 기본 제출 동작을 막습니다.
-
-            const formData = new FormData(this);
-            const entries = Object.fromEntries(formData.entries());
-            console.log('Form Data:', entries); // 제출된 데이터를 콘솔에 출력합니다.
-
-            this.submit(); // 기본 제출 동작을 다시 수행합니다.
+    filter01.forEach(function (el) {
+        el.addEventListener('click', function () {
+            const container = this.closest('.terms-container');
+            const allCheckbox = container.querySelector('.all');
+            const checkboxes = container.querySelectorAll('.filter01');
+            const checked = container.querySelectorAll('.filter01:checked');
+            allCheckbox.checked = (checkboxes.length === checked.length);
         });
     });
 });
+// });
+
