@@ -11,71 +11,7 @@
         <link rel="stylesheet" href="<c:url value='/resources/css/jobPosting/view-jobPosting.css' />" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="<c:url value='/resources/js/jobPosting/view-jobPosting.js' />" defer></script>
-        
-        <!-- 추가적인 CSS -->
-        <style>
-            .container-fixed {
-                width: 80%;
-                margin: 0 auto;
-                padding: 20px;
-                background-color: #fff;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 8px;
-            }
-            .info-section {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 20px;
-            }
-            .info-section .card {
-                width: 48%;
-                border: 1px solid #e9ecef;
-                border-radius: 8px;
-            }
-            .card-body {
-                padding: 20px;
-            }
-            .section-title {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-                color: #343a40;
-                font-weight: 700;
-            }
-            ul {
-                list-style-type: none;
-                padding: 0;
-            }
-            ul li {
-                padding: 5px 0;
-                font-size: 1rem;
-                color: #495057;
-            }
-            ul li strong {
-                color: #212529;
-            }
-            .btn-apply, .btn-scrap {
-                background-color: #007bff;
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                font-size: 1rem;
-                border-radius: 5px;
-                margin-right: 10px;
-            }
-            .btn-apply:hover, .btn-scrap:hover {
-                background-color: #0056b3;
-            }
-            .details-section {
-                margin-top: 20px;
-            }
-            .tabs {
-                margin-bottom: 15px;
-            }
-            .tab-content {
-                border-top: 1px solid #e9ecef;
-                padding-top: 10px;
-            }
-        </style>
+
     </head>
     <body>
         <div class="container-fixed mt-5">
