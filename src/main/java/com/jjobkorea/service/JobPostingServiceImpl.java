@@ -168,19 +168,4 @@ private JobPostingMapper jobPostingMapper;
         log.info("@# jobPostingDTO => " + jobPostingDTO);
         jobPostingMapper.addpostingwrite(jobPostingDTO);
     }
-//        // 단일 이미지 파일 처리
-//        String postingImage = jobPostingDTO.getPostingImage();
-//        if (postingImage == null || postingImage.isEmpty()) {
-//            log.info("@# No posting image found");
-//            return;
-//        }
-//
-//        log.info("@# Posting image => " + postingImage);
-//
-//        // 첨부파일 정보를 데이터베이스에 저장
-//        AttachFileDTO attachFile = new AttachFileDTO();
-//        attachFile.setPostingImage(postingImage);
-//        attachFile.setBoardNo(jobPostingDTO.getCompanyId());
-//        jobPostingMapper.insertFile(attachFile);  // jobPostingMapper를 사용하여 파일 저장
-    
 }

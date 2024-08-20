@@ -35,10 +35,10 @@ public class JobPostingController {
    
     // 채용 정보 리스트
     @GetMapping("jobPosts")
+    public String enterJobPosting(@RequestParam(value = "pageNum", required = false, defaultValue = "1") String pageNum, Model model) {
+        log.info("요청받은 페이지: {}", pageNum);
 
-    public String enterJobPosting(@RequestParam (value = "pageNum", required = false, defaultValue = "1") String pageNum, Model model) {
-
-        List<JobPostingDTO> postingList = jobPostingService.getPostingList( Integer.parseInt(pageNum));
+        List<JobPostingDTO> postingList = jobPostingService.getPostingList(Integer.parseInt(pageNum));
         model.addAttribute("postingList", postingList);
         model.addAttribute("page", "jobPosting/jobPostingMain");
 
@@ -48,11 +48,8 @@ public class JobPostingController {
  // 공고 등록 페이지
     @GetMapping("/jobPost/create")
     public String addpostingwrite(Model model) {
-    	log.info("공고등록model", model);
-  	
-        model.addAttribute("page","jobPosting/addJobPosting");
-
-
+        log.info("공고 등록 페이지 진입");
+        model.addAttribute("page", "jobPosting/addJobPosting");
         return "main/main";
     }
     
@@ -82,7 +79,7 @@ public class JobPostingController {
         	String fileName = UploadS3(file);
         	jobPostingDTO.setJobPostingFilePath(fileName);
         }
-
+        
         jobPostingService.addpostingwrite(jobPostingDTO);
         return "redirect:/jobPosts";
     } 
