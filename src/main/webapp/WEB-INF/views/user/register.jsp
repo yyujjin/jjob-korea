@@ -43,8 +43,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" id="email" name="email" placeholder="이메일" required>
+                <input type="text" id="email" name="email" placeholder="이메일 입력" required>
                 <div id="emailError" class="error-message"></div>
+                <input type="button" id="sendEmailButton" value="이메일 인증" onclick="sendNumber()">
+            </div>
+            <div id="mail_number" class="form-group">
+                <input type="text" id="verifyCode" placeholder="인증번호 입력">
+                <input type="button" id="verifyCodeButton" value="인증번호 확인" onclick="confirmNumber()">
             </div>
             <div class="form-group">
                 <input type="text" id="phone" name="phone" placeholder="휴대폰번호(숫자만 입력해주세요.)" required>
