@@ -17,48 +17,55 @@
 
         <body>
             <div class="container-fixed mt-5">
-                <div class="info-section">
-                    <!-- 채용 정보 섹션 -->
-                    <div class="card job-info">
-                        <div class="card-body">
-                            <h4 class="section-title">채용 정보</h4>
-                            <div class="logo-section text-center">
-                                <img src="<c:out value='${jobPosting.jobPostingUploadPath}'/>" style="width: 250; height: 80; display: block;">
-                                <!-- <img id="output" src="<https://teamserverfolder.s3.ap-northeast-2.amazonaws.com/44760468-14b4-4f48-8133-359f24b1b0c7_%EA%B3%A0%EB%A8%90%EB%AF%B8.png" alt="회사로고 이미지" style="max-width: 100%; height: auto; display: block;"> -->
-                            </div>
-                            <ul>
-                                <li><strong>직무:</strong> ${jobPosting.jobTitle}</li>
-                                <li><strong>근무 지역:</strong> ${jobPosting.workLocation}</li>
-                                <li><strong>고용 형태:</strong> ${jobPosting.employmentType}</li>
-                                <li><strong>경력 여부:</strong> ${jobPosting.jobExperience}</li>
-                                <li><strong>채용 마감 날짜:</strong> ${jobPosting.deadline}</li>
-                            </ul>
-                        </div>
-                    </div>
-            
-                    <!-- 회사 정보 섹션 -->
-                    <div class="card company-info">
-                        <div class="card-body">
-                            <h4 class="section-title">회사 정보</h4>
-                            <ul>
-                                <li><strong>회사 이름:</strong> ${company.name}</li>
-                                <li><strong>대표자:</strong> ${company.ceo}</li>
-                                <li><strong>업종:</strong> ${company.res}</li>
-                                <li><strong>기업 규모:</strong> ${company.companyType}</li>
-                                <li><strong>설립 년도:</strong> ${company.birthd}</li>
-                                <li><strong>직원 수:</strong> ${company.employeeCount}</li>
-                                <li><strong>주소:</strong> ${company.addr}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            
+               <div class="info-section">
+    <!-- 채용 정보 섹션 -->
+    <div class="card job-info">
+        <div class="card-body">
+            <h4 class="section-title">채용 정보</h4>
+            <div class="logo-section text-center">
+                <c:choose>
+                    <c:when test="${jobPosting.jobPostingUploadPath != null && !jobPosting.jobPostingUploadPath.isEmpty()}">
+                        <img src="<c:out value='${jobPosting.jobPostingUploadPath}'/>" style="width: 250px; height: 80px; display: block; margin: 0 auto;">
+                    </c:when>
+                    <c:otherwise>
+                        <img src="/resources/img/이미지는준비중작은거.png" style="width: 250px; height: 80px; display: block; margin: 0 auto;">
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <ul>
+                <li><strong>직무:</strong> ${jobPosting.jobTitle}</li>
+                <li><strong>근무 지역:</strong> ${jobPosting.workLocation}</li>
+                <li><strong>고용 형태:</strong> ${jobPosting.employmentType}</li>
+                <li><strong>경력 여부:</strong> ${jobPosting.jobExperience}</li>
+                <li><strong>채용 마감 날짜:</strong> ${jobPosting.deadline}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 회사 정보 섹션 -->
+    <div class="card company-info">
+        <div class="card-body">
+            <h4 class="section-title">회사 정보</h4>
+            <ul>
+                <li><strong>회사 이름:</strong> ${company.name}</li>
+                <li><strong>대표자:</strong> ${company.ceo}</li>
+                <li><strong>업종:</strong> ${company.res}</li>
+                <li><strong>기업 규모:</strong> ${company.companyType}</li>
+                <li><strong>설립 년도:</strong> ${company.birthd}</li>
+                <li><strong>직원 수:</strong> ${company.employeeCount}</li>
+                <li><strong>주소:</strong> ${company.addr}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
 
                 <!-- 상세 정보 및 버튼 섹션 -->
                 <div class="card details-section">
                     <div class="card-body">
                         <h3 class="section-title2">상세 정보</h3>
-                      
+
                         <div id="details-content" class="tab-content">
                             <p><strong>${company.name}</strong>의 상세정보</p>
                             <p>${jobPosting.postingdetails}</p>

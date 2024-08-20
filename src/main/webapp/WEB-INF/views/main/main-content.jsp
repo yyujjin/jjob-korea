@@ -33,8 +33,16 @@
             <div class="col">
                 <a href="/jobPosting?companyId=${postingList.companyId}&id=${postingList.id}">
                     <div class="card h-100 w-90 text-center">
-                        <img src="<c:out value='${postingList.jobPostingUploadPath}'/>"
-                            class="card-img-top fixed-size-image" alt="..." />
+                        <c:choose>
+                            <c:when test="${postingList.jobPostingUploadPath != null && !postingList.jobPostingUploadPath.isEmpty()}">
+                                <img src="<c:out value='${postingList.jobPostingUploadPath}'/>"
+                                     class="card-img-top fixed-size-image" alt="Job Posting Image" />
+                            </c:when>
+                            <c:otherwise>
+                                <img src="/resources/img/이미지는준비중.png"
+                                     class="card-img-top fixed-size-image" alt="Default Image" />
+                            </c:otherwise>
+                        </c:choose>
                         <div class="card-body">
                             <h5 class="card-title">
                                 <c:out value='${postingList.companyName}' />
@@ -45,6 +53,7 @@
                         </div>
                     </div>
                 </a>
+                
             </div>
         </c:forEach>
    </div>

@@ -47,7 +47,7 @@ public class JobPostingController {
     @GetMapping("jobPosts")
 
     public String enterJobPosting(@RequestParam (value = "pageNum", required = false, defaultValue = "1") String pageNum, Model model) {
-
+    	
         List<JobPostingDTO> postingList = jobPostingService.getPostingList( Integer.parseInt(pageNum));
         model.addAttribute("postingList", postingList);
         model.addAttribute("page", "jobPosting/jobPostingMain");
@@ -101,22 +101,23 @@ public class JobPostingController {
         jobPostingService.addpostingwrite(jobPostingDTO,companyId);
         return "redirect:/jobPosts";
     } 
-    
-    //공고 상세보기 페이지
-    @GetMapping ("/jobPosting")
-    public String view_jobPosting (@RequestParam (value = "companyId") int companyId,
-                                   @RequestParam (value = "id") int id,
-                                   Model model) {
+  //공고 상세보기 페이지
+    @GetMapping("/jobPosting")
+    public String view_jobPosting(@RequestParam(value = "companyId") int companyId,
+                                  @RequestParam(value = "id") int id,
+                                  Model model) {
 
-        CompanyDTO companyDTO = new CompanyDTO();
-        companyDTO.setId(companyId);
-
-        //조회수 증가
+        // 조회수 증가
         jobPostingService.updateHit(id);
 
-        model.addAttribute("company",jobPostingService.getCompanyInfo(companyId));
-        model.addAttribute("jobPosting",jobPostingService.getJobPosting(id));
-        model.addAttribute("page","jobPosting/view-jobPosting");
+        // 공고 정보 가져오기
+        JobPostingDTO jobPosting = jobPostingService.getJobPosting(id);
+
+        // 모델에 데이터를 추가하여 뷰에서 사용할 수 있도록 설정
+        model.addAttribute("company", jobPostingService.getCompanyInfo(companyId));
+        model.addAttribute("jobPosting", jobPosting);
+        model.addAttribute("page", "jobPosting/view-jobPosting");
         return "main/main";
     }
+
 }
