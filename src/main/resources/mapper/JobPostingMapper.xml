@@ -112,15 +112,6 @@
 
     </select>
 
-    <select id="getCompanyInfo" resultType="CompanyDTO" parameterType="int">
-        select * from team_db.companyInfo where id = #{companyId};
-    </select>
-
-    <select id="getJobPosting" resultType="JobPostingDTO" parameterType="int">
-        select * from team_db.jobposting where id = #{id};
-    </select>
-    
-
 
     <insert id="addpostingwrite">   
     	<selectKey keyProperty="id" order="BEFORE" resultType="int">
@@ -138,6 +129,25 @@
 	    where id = #{id}
 	</update>
 	
+	
+		    <select id="viewjobPosting" resultType="com.jjobkorea.dto.JobPostingDTO">
+        select id
+        	  ,companyName
+        	  ,postingTitle
+        	  ,jobTitle
+        	  ,workLocation
+        	  ,employmentType 
+        	  ,jobExperience
+        	  ,deadline
+        	  ,hit
+        	  ,companyId
+        	  ,money
+        	  ,jobPostingUploadPath
+        	  ,postingdetails
+           from team_db.JobPosting
+       	where id=#{id}
+    </select>
+
 
 </mapper>
 

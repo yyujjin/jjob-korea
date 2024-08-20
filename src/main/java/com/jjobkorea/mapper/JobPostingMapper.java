@@ -28,7 +28,7 @@ public interface JobPostingMapper {
 //    public JobPostingDTO getJobPosting(int id);
     
 
-    public JobPostingDTO view_jobPosting(HashMap<String, String> param);
+    public JobPostingDTO viewjobPosting(HashMap<String, String> param);
 
     // 채용공고등록
     public void addpostingwrite(JobPostingDTO jobPostingDTO);

@@ -90,9 +90,9 @@ public class JobPostingController {
     
     //공고 상세보기 페이지
     @GetMapping ("/jobPosting")
-    public String view_jobPosting (@RequestParam HashMap<String, String> param,Model model) {
+    public String viewjobPosting (@RequestParam HashMap<String, String> param, Model model) {
 
-        model.addAttribute("company",jobPostingService.view_jobPosting(param));
+        model.addAttribute("company",jobPostingService.viewjobPosting(param));
         model.addAttribute("page","jobPosting/view-jobPosting");
         return "main/main";
     }

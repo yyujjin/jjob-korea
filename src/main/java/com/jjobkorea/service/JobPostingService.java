@@ -19,7 +19,7 @@ public interface JobPostingService {
     //상세 조건 검색 리스트 가져오기
     public List<JobPostingDTO> getSearchList(List<String> filterList, FilterDTO dto, int pageNum);
 
-    public JobPostingDTO view_jobPosting(HashMap<String, String> param);
+    public JobPostingDTO viewjobPosting(HashMap<String, String> param);
     
 	// 채용공고등록
 	public void addpostingwrite(JobPostingDTO jobPostingDTO);
