@@ -7,8 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>채용 정보 상세</title>
         <!-- Bootstrap CSS -->
-        <link href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />" rel="stylesheet" />
-        <link rel="stylesheet" href="<c:url value='/resources/css/jobPosting/view-jobPosting.css' />" />
+
+        <link
+            href="<c:url value='/resources/css/bootstrap/bootstrap.min.css' />"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../../resources/css/jobPosting/view-jobPosting.css" />
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="<c:url value='/resources/js/jobPosting/view-jobPosting.js' />" defer></script>
         
