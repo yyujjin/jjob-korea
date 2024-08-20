@@ -53,6 +53,6 @@ public class JobPostingDTO {
     private String jobPostingFilePath;
     
     //상세정보
-    private String postingdatails;
+    private String postingdetails;
 
 }
