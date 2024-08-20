@@ -19,7 +19,7 @@
     <select id="getPostingListToMain" resultType="JobPostingDTO">
         SELECT
         <include refid="jobPostingColums"/>
-        FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() order by hit desc, companyName asc limit 8
+        FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() order by hit desc, companyName asc limit 8;
     </select>
 
 
@@ -27,7 +27,7 @@
         SELECT
         <include refid="jobPostingColums"/>
         FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() ORDER BY DEADLINE ASC, COMPANYNAME ASC LIMIT 10 OFFSET
-        ${pageNum}
+        ${pageNum};
     </select>
 
 
@@ -108,16 +108,16 @@
             </trim>
             AND DEADLINE >= CURDATE()
         </where>
-        ORDER BY DEADLINE ASC, COMPANYNAME ASC LIMIT 10 OFFSET ${pageNum}
+        ORDER BY DEADLINE ASC, COMPANYNAME ASC LIMIT 10 OFFSET ${pageNum};
 
     </select>
 
     <select id="getCompanyInfo" resultType="CompanyDTO" parameterType="int">
-        select * from team_db.companyinfo where id = #{companyId}
+        select * from team_db.companyinfo where id = #{companyId};
     </select>
 
     <select id="getJobPosting" resultType="JobPostingDTO" parameterType="int">
-        select * from team_db.jobposting where companyId = #{companyId}
+        select * from team_db.jobposting where companyId = #{companyId};
     </select>
     
 
@@ -127,9 +127,8 @@
     		select ifnull(max(id),0)+1 from team_db.JobPosting
     	</selectKey>
     	
-		  INSERT INTO team_db.JobPosting(id, companyName, postingTitle, jobTitle, workLocation, employmentType, jobExperience, deadline, money, jobPostingUploadPath) 
-    VALUES (#{id}, #{companyName}, #{postingTitle}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money}, #{jobPostingFilePath})
-    </insert>
+		  	  INSERT INTO team_db.JobPosting(id, companyName, postingTitle, jobTitle, workLocation, employmentType, jobExperience, deadline, money, jobPostingUploadPath, postingdetails) 
+    VALUES (#{id}, #{companyName}, #{postingTitle}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money}, #{jobPostingFilePath}, #{postingdetails})  </insert>
     
 
 
