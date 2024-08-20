@@ -35,10 +35,10 @@ public class JobPostingController {
    
     // 채용 정보 리스트
     @GetMapping("jobPosts")
+    public String enterJobPosting(@RequestParam(value = "pageNum", required = false, defaultValue = "1") String pageNum, Model model) {
+        log.info("요청받은 페이지: {}", pageNum);
 
-    public String enterJobPosting(@RequestParam (value = "pageNum", required = false, defaultValue = "1") String pageNum, Model model) {
-
-        List<JobPostingDTO> postingList = jobPostingService.getPostingList( Integer.parseInt(pageNum));
+        List<JobPostingDTO> postingList = jobPostingService.getPostingList(Integer.parseInt(pageNum));
         model.addAttribute("postingList", postingList);
         model.addAttribute("page", "jobPosting/jobPostingMain");
 
@@ -48,11 +48,8 @@ public class JobPostingController {
  // 공고 등록 페이지
     @GetMapping("/jobPost/create")
     public String addpostingwrite(Model model) {
-    	log.info("공고등록model", model);
-  	
-        model.addAttribute("page","jobPosting/addJobPosting");
-
-
+        log.info("공고 등록 페이지 진입");
+        model.addAttribute("page", "jobPosting/addJobPosting");
         return "main/main";
     }
     
@@ -82,7 +79,38 @@ public class JobPostingController {
         	String fileName = UploadS3(file);
         	jobPostingDTO.setJobPostingFilePath(fileName);
         }
-
+        
+//        try {
+//            // Step 1: Save the file to local storage temporarily
+//            String localFilePath = saveFileLocally(jobPostingDTO.getPostingImage());
+//            log.info("파일이 로컬에 저장됨: {}", localFilePath);
+//
+//            // Step 2: Upload image to S3
+//            String imageUrl = uploadImageService.uploadImage(localFilePath);
+//            log.info("이미지가 S3에 업로드됨: {}", imageUrl);
+//
+//            if (imageUrl != null) {
+//                // Step 3: Save image URL to RDS
+//                saveImageService.saveImageUrl(imageUrl);
+//                log.info("이미지 URL이 RDS에 저장됨: {}", imageUrl);
+//
+//                // Step 4: 공고 등록 처리 로직 (예: DB 저장)
+//                jobPostingDTO.setPostingImage(imageUrl);
+//                jobPostingService.addpostingwrite(jobPostingDTO);
+//                log.info("공고 등록 완료: {}", jobPostingDTO);
+//
+//                // 공고 등록 후 성공 페이지로 리다이렉트
+//                return "redirect:/jobPosts";
+//            } else {
+//                log.error("이미지 업로드 실패");
+//                // 이미지 업로드 실패 시 에러 페이지로 리다이렉트
+//                return "redirect:/error";
+//            }
+//        } catch (Exception e) {
+//            log.error("공고 등록 중 오류 발생", e);
+//            // 예외 발생 시 에러 페이지로 리다이렉트
+//            return "redirect:/error";
+//        }
         jobPostingService.addpostingwrite(jobPostingDTO);
         return "redirect:/jobPosts";
     } 
