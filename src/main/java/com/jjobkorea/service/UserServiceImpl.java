@@ -23,10 +23,9 @@ public class UserServiceImpl implements UserService{
     
     //아이디 중복 체크
     @Override
-	public boolean userIdExists(HashMap<String, String> param) {
-		
-		return userMapper.checkUserId(param.get("userId")) > 0;
-	}
+    public boolean userIdExists(String userId) {
+        return userMapper.checkUserId(userId) > 0;
+    }
     
     //개인 회원가입-데이터 베이스 연결 
 	@Override
