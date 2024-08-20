@@ -23,7 +23,8 @@
                         <div class="card-body">
                             <h4 class="section-title">채용 정보</h4>
                             <div class="logo-section text-center">
-                                <img id="output" src="<img id="output" src="https://teamserverfolder.s3.ap-northeast-2.amazonaws.com/44760468-14b4-4f48-8133-359f24b1b0c7_%EA%B3%A0%EB%A8%90%EB%AF%B8.png" alt="회사로고 이미지" style="max-width: 100%; height: auto; display: block;">
+                                <img src="<c:out value='${jobPosting.jobPostingUploadPath}'/>" style="width: 250; height: 80; display: block;">
+                                <!-- <img id="output" src="<https://teamserverfolder.s3.ap-northeast-2.amazonaws.com/44760468-14b4-4f48-8133-359f24b1b0c7_%EA%B3%A0%EB%A8%90%EB%AF%B8.png" alt="회사로고 이미지" style="max-width: 100%; height: auto; display: block;"> -->
                             </div>
                             <ul>
                                 <li><strong>직무:</strong> ${jobPosting.jobTitle}</li>

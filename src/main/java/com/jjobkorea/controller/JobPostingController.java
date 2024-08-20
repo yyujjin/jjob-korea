@@ -84,20 +84,20 @@ public class JobPostingController {
 
     // 공고 등록 처리 (POST 요청) - 이미지 업로드 포함
     @PostMapping("/jobPost/create")
-    public String createJobPost(JobPostingDTO jobPostingDTO)
-//                                @RequestParam("jobPostingUploadPath") MultipartFile file) throws IOException {
-    {
+    public String createJobPost(JobPostingDTO jobPostingDTO,
+                                @RequestParam("jobPostingUploadPath") MultipartFile file) throws IOException {
+    
         log.info("공고 등록 시작: {}", jobPostingDTO);
         
         //컴퍼니 아이디 가져오기
         int companyId = userService.getCompanyId(userSessionService.getUserId());
         log.info("컴퍼니 아이디 : {} ",companyId);
         
-//        if(file != null && !file.isEmpty()) {
-//        	String fileName = UploadS3(file);
-//        	jobPostingDTO.setJobPostingFilePath(fileName);
-//        }
-//
+        if(file != null && !file.isEmpty()) {
+        	String fileName = UploadS3(file);
+        	jobPostingDTO.setJobPostingFilePath(fileName);
+        }
+
         jobPostingService.addpostingwrite(jobPostingDTO,companyId);
         return "redirect:/jobPosts";
     } 
