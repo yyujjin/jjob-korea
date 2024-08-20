@@ -17,12 +17,14 @@
 
         <body>
             <div class="container-fixed mt-5">
-                <!-- 회사 정보 및 채용 정보 섹션 -->
                 <div class="info-section">
                     <!-- 채용 정보 섹션 -->
-                    <div class="card">
+                    <div class="card job-info">
                         <div class="card-body">
                             <h4 class="section-title">채용 정보</h4>
+                            <div class="logo-section text-center">
+                                <img id="output" src="<img id="output" src="https://teamserverfolder.s3.ap-northeast-2.amazonaws.com/44760468-14b4-4f48-8133-359f24b1b0c7_%EA%B3%A0%EB%A8%90%EB%AF%B8.png" alt="회사로고 이미지" style="max-width: 100%; height: auto; display: block;">
+                            </div>
                             <ul>
                                 <li><strong>직무:</strong> ${jobPosting.jobTitle}</li>
                                 <li><strong>근무 지역:</strong> ${jobPosting.workLocation}</li>
@@ -32,9 +34,9 @@
                             </ul>
                         </div>
                     </div>
-
+            
                     <!-- 회사 정보 섹션 -->
-                    <div class="card">
+                    <div class="card company-info">
                         <div class="card-body">
                             <h4 class="section-title">회사 정보</h4>
                             <ul>
@@ -49,24 +51,17 @@
                         </div>
                     </div>
                 </div>
+            
 
                 <!-- 상세 정보 및 버튼 섹션 -->
                 <div class="card details-section">
                     <div class="card-body">
                         <h3 class="section-title2">상세 정보</h3>
-                        <div class="tabs">
-                            <button class="btn btn-light" onclick="showTab('details')">상세정보</button>
-                            <button class="btn btn-light" onclick="showTab('application')">접수기간/방법</button>
-                        </div>
+                      
                         <div id="details-content" class="tab-content">
-                            <p>상세정보</p>
+                            <p><strong>${company.name}</strong>의 상세정보</p>
                             <p>${jobPosting.postingdetails}</p>
                         </div>
-                        <div id="application-content" class="tab-content" style="display: none;">
-                            <p>접수기간/방법</p>
-                            <p>${jobPosting.deadline}</p>
-                        </div>
-
                     </div>
                 </div>
 

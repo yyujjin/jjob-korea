@@ -14,7 +14,7 @@ public class JobPostingDTO {
     private String companyName;
     
     // 채용 공고 사진
-    private String postingImage;
+//    private String postingImage;
     
     // 채용 공고 제목
     private String postingTitle;
@@ -51,7 +51,6 @@ public class JobPostingDTO {
     private MultipartFile jobPostingUploadPath;
     
     private String jobPostingFilePath;
-    
     //상세정보
     private String postingdetails;
 
