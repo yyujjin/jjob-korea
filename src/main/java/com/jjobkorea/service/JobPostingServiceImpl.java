@@ -2,7 +2,6 @@ package com.jjobkorea.service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.List;
 
 import com.jjobkorea.dto.CompanyDTO;
@@ -11,9 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.jjobkorea.dto.FilterDTO;
 import com.jjobkorea.dto.JobPostingDTO;
-import com.jjobkorea.dto.JobseekerBoardDTO;
 import com.jjobkorea.mapper.JobPostingMapper;
-import com.jjobkorea.mapper.JobseekerBoardMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,15 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class JobPostingServiceImpl implements JobPostingService {
 	
-	@Autowired
-private JobPostingMapper jobPostingMapper;
+private final JobPostingMapper jobPostingMapper;
 
-
-//    public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
-//        this.jobPostingMapper = jobPostingMapper;
-//    }
-
-
+    public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
+        this.jobPostingMapper = jobPostingMapper;
+    }
 
     //메인페이지 진입시 실행되는 코드
     @Override
@@ -153,29 +146,31 @@ private JobPostingMapper jobPostingMapper;
         return getSearchList;
 
     }
-    
-    //공고등록
+
     @Override
-    public void addpostingwrite(JobPostingDTO jobPostingDTO) {
-        log.info("@# jobPostingDTO => " + jobPostingDTO);
-        jobPostingMapper.addpostingwrite(jobPostingDTO);
+    public CompanyDTO getCompanyInfo(int companyId) {
+        return jobPostingMapper.getCompanyInfo(companyId);
+    }
+
+    @Override
+    public JobPostingDTO getJobPosting(int companyId) {
+        return jobPostingMapper.getJobPosting(companyId);
     }
 
     
-    //공고상세
-	@Override
-	public JobPostingDTO viewjobPosting(HashMap<String, String> param) {
-		
-	log.info("@# view_jobPosting");
-		
-	JobPostingDTO dto = jobPostingMapper.viewjobPosting(param);
-		
-		return dto;
-	}
-    
-//	
-//    @Override
-//    public void updateHit(int id) {
-//        jobPostingMapper.updateHit(id);
-//    }
+    //공고등록
+    @Override
+    public void addpostingwrite(JobPostingDTO jobPostingDTO,int companyId) {
+        log.info("@# jobPostingDTO => " + jobPostingDTO);
+
+        jobPostingDTO.setCompanyId(companyId);
+        jobPostingMapper.addpostingwrite(jobPostingDTO);
+    }
+
+    @Override
+    public void updateHit(int id) {
+        jobPostingMapper.updateHit(id);
+    }
+
+
 }
