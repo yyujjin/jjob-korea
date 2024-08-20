@@ -1,6 +1,5 @@
 package com.jjobkorea.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.jjobkorea.dto.CompanyDTO;
@@ -18,9 +17,15 @@ public interface JobPostingService {
     //상세 조건 검색 리스트 가져오기
     public List<JobPostingDTO> getSearchList(List<String> filterList, FilterDTO dto, int pageNum);
 
-    public JobPostingDTO viewjobPosting(HashMap<String, String> param);
+    //기업 정보 가져오기
+    public CompanyDTO getCompanyInfo(int companyId);
+
+    //채용 정보 가져오기
+    public JobPostingDTO getJobPosting(int companyId);
     
 	// 채용공고등록
-	public void addpostingwrite(JobPostingDTO jobPostingDTO);
+	public void addpostingwrite(JobPostingDTO jobPostingDTO,int companyId);
 
+    //조회수 업데이트
+    public void updateHit(int id);
 }
