@@ -169,6 +169,7 @@ private final JobPostingMapper jobPostingMapper;
         jobPostingMapper.addpostingwrite(jobPostingDTO);
     }
 
+
     @Override
     public void updateHit(int id) {
         jobPostingMapper.updateHit(id);

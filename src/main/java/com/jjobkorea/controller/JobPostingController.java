@@ -53,7 +53,7 @@ public class JobPostingController {
     // 공고 등록 페이지
     @GetMapping("/jobPost/create")
     public String addpostingwrite(Model model) {
-        log.info("공고등록 페이지 진입: model={}", model);
+
         model.addAttribute("page", "jobPosting/addJobPosting");
         return "main/main";
     }
@@ -87,7 +87,9 @@ public class JobPostingController {
             jobPostingDTO.setJobPostingFilePath(filePath); // 반환된 URL을 DTO에 설정
         }
 
+
         jobPostingService.addpostingwrite(jobPostingDTO, companyId); // 공고 등록 처리
+
         return "redirect:/jobPosts";
     }
 

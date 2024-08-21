@@ -49,9 +49,11 @@ public class JobPostingDTO {
     // 추가된 필드들
     // 파일이 저장된 경로 또는 S3 URL
     private MultipartFile jobPostingUploadPath;
+
     private String jobPostingFilePath; // 파일 경로를 저장할 String 변수
 
     //상세정보
     private String postingdetails;
+
 
 }

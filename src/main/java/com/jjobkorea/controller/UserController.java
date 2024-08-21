@@ -1,6 +1,7 @@
 package com.jjobkorea.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import com.jjobkorea.service.UserSessionService;
@@ -44,7 +45,14 @@ public class UserController {
         model.addAttribute("page", "user/register");
         return "main/main";
     }
-
+    
+    @PostMapping("/checkId")
+    @ResponseBody
+    public Map<String, Boolean> checkId(@RequestParam("userId") String userId) {
+        boolean exists = userService.userIdExists(userId);
+        return Map.of("exists", exists);
+    }
+    
     //개인과 기업을 구분하여 회원가입
     @PostMapping("/register")
     public String registerOk(@RequestParam HashMap<String, String> param) {
