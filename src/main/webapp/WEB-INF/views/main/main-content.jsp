@@ -24,7 +24,7 @@
 
    <div style="font-weight: bold;"> 지금 <span style="color: #00FF00;">HOT</span>한 채용공고
         <span style="color: blue;">TOP8</span>
-        <span id="updateTime">(매일 오전 09:00 ~ 익일 오전 09:00 기준)</span>
+        <span id="updateTime">조회수는 매주 수요일 오전 09:00에 초기화됩니다.</span>
    </div>
    <br>
 
@@ -35,7 +35,7 @@
                     <div class="card h-100 w-90 text-center">
                         <c:choose>
                             <c:when test="${postingList.jobPostingUploadPath != null && !postingList.jobPostingUploadPath.isEmpty()}">
-                                <img src="<c:out value='${postingList.jobPostingUploadPath}'/>"
+                                <img src="<c:out value='${postingList.jobPostingFilePath}'/>"
                                      class="card-img-top fixed-size-image" alt="Job Posting Image" />
                             </c:when>
                             <c:otherwise>

@@ -25,7 +25,7 @@
             <div class="logo-section text-center">
                 <c:choose>
                     <c:when test="${jobPosting.jobPostingUploadPath != null && !jobPosting.jobPostingUploadPath.isEmpty()}">
-                        <img src="<c:out value='${jobPosting.jobPostingUploadPath}'/>" style="width: 250px; height: 80px; display: block; margin: 0 auto;">
+                        <img src="<c:out value='${jobPosting.jobPostingFilePath}'/>" style="width: 250px; height: 80px; display: block; margin: 0 auto;">
                     </c:when>
                     <c:otherwise>
                         <img src="/resources/img/이미지는준비중작은거.png" style="width: 250px; height: 80px; display: block; margin: 0 auto;">
