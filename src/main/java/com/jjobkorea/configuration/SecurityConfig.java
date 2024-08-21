@@ -39,6 +39,8 @@ private final CustomOAuth2UserService customOAuth2UserService;
                                 "/getFileList",
                                 "/download").permitAll() //게시판
                 .requestMatchers("/api/v1/email/send", "/api/v1/email/verify").permitAll()  // 이메일 인증 경로 접근 허용
+                .requestMatchers("/checkId").permitAll()  // checkId (아이디 중복 확인) 접근 허용
+                .requestMatchers("/deleteUser").permitAll()  // 유저 삭제 접근 허용
                 .anyRequest().authenticated()
         );
 
