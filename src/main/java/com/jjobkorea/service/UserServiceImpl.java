@@ -63,4 +63,12 @@ public class UserServiceImpl implements UserService{
 		
 		userMapper.deleteUser(userDTO);
 	}
+
+	@Override
+	public int getCompanyId(String userId) {
+		return userMapper.getCompanyId(userId);
+	}
+
+	//companyId 가져오기
+
 }

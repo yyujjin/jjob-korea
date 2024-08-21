@@ -1,3 +1,4 @@
+
 package com.jjobkorea.mapper;
 
 import java.util.HashMap;
@@ -30,4 +31,6 @@ public interface UserMapper {
     public UserDTO findByRegistrationId(String registrationId);
     //구글 유저 저장
     public void saveGoogleUser(UserDTO userDTO);
+    //companyId 가져오기
+    public int getCompanyId(String userId);
 }

@@ -1,5 +1,6 @@
 package com.jjobkorea.service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import com.jjobkorea.dto.CompanyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jjobkorea.dto.FilterDTO;
 import com.jjobkorea.dto.JobPostingDTO;
@@ -18,15 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class JobPostingServiceImpl implements JobPostingService {
 	
-	@Autowired
-private JobPostingMapper jobPostingMapper;
+private final JobPostingMapper jobPostingMapper;
 
-
-//    public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
-//        this.jobPostingMapper = jobPostingMapper;
-//    }
-
-
+    public JobPostingServiceImpl(JobPostingMapper jobPostingMapper) {
+        this.jobPostingMapper = jobPostingMapper;
+    }
 
     //메인페이지 진입시 실행되는 코드
     @Override
@@ -164,8 +162,19 @@ private JobPostingMapper jobPostingMapper;
     
     //공고등록
     @Override
-    public void addpostingwrite(JobPostingDTO jobPostingDTO) {
+    public void addpostingwrite(JobPostingDTO jobPostingDTO,int companyId) {
         log.info("@# jobPostingDTO => " + jobPostingDTO);
+
+        jobPostingDTO.setCompanyId(companyId);
         jobPostingMapper.addpostingwrite(jobPostingDTO);
     }
+
+
+    @Override
+    public void updateHit(int id) {
+        jobPostingMapper.updateHit(id);
+    }
+    
+    
+
 }

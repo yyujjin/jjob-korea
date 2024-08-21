@@ -31,7 +31,7 @@ public class MainController {
     // 메인
     @GetMapping("/")
     public String enterMainContent(Model model) {
-
+    	
         //채용 정보 리스트 가져오기
         List<JobPostingDTO> postingList = jobPostingService.getJobPostingSToMain();
         model.addAttribute("postingList", postingList);
