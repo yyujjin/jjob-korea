@@ -15,23 +15,12 @@
 		, hit
         , companyId
         , postingdetails
-        , jobPostingUploadPath
+        , jobPostingUploadPath AS jobPostingFilePath
     </sql>
 
     <select id="getPostingListToMain" resultType="JobPostingDTO">
         SELECT
-        , companyName
-		, postingImage
-		, postingTitle
-		, jobTitle
-		, workLocation
-		, employmentType
-		, jobExperience
-		, deadline
-		, hit
-        , companyId
-        , postingdetails
-        , jobPostingUploadPath
+        <include refid="jobPostingColums"/>
         FROM TEAM_DB.JOBPOSTING WHERE DEADLINE >= CURDATE() order by hit desc, companyName asc limit 8;
     </select>
 
@@ -129,14 +118,15 @@
         select * from team_db.companyinfo where id = #{companyId};
     </select>
 
-    <select id="getJobPosting" resultType="JobPostingDTO" parameterType="int">
-        select * from team_db.jobposting where id = #{id};
+<select id="getJobPosting" resultType="com.jjobkorea.dto.JobPostingDTO" parameterType="int">
+        select id, companyName, postingTitle, postingdetails, 
+        jobTitle, workLocation, employmentType, jobExperience, deadline, money, companyId, 
+        jobPostingUploadPath AS jobPostingFilePath from team_db.jobposting where id = #{companyId} LIMIT 1;
     </select>
-    
 
 
     <insert id="addpostingwrite"  parameterType="JobPostingDTO" >
-        INSERT INTO team_db.JobPosting(companyName, postingTitle, postingdetails, jobTitle, workLocation, employmentType, jobExperience, deadline, money, companyId, jobPostingUploadPath AS jobPostingFilePath)
+        INSERT INTO team_db.JobPosting(companyName, postingTitle, postingdetails, jobTitle, workLocation, employmentType, jobExperience, deadline, money, companyId, jobPostingUploadPath)
         VALUES (#{companyName}, #{postingTitle}, #{postingdetails}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money}, #{companyId}, #{jobPostingFilePath});
     </insert>
     

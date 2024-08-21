@@ -1,5 +1,6 @@
 package com.jjobkorea.service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import com.jjobkorea.dto.CompanyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jjobkorea.dto.FilterDTO;
 import com.jjobkorea.dto.JobPostingDTO;
@@ -171,6 +173,7 @@ private final JobPostingMapper jobPostingMapper;
     public void updateHit(int id) {
         jobPostingMapper.updateHit(id);
     }
-
+    
+    
 
 }

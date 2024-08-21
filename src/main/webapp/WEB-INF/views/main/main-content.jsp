@@ -18,6 +18,7 @@
         </head>
 
         <body>
+            <form method="get" action="/" enctype="multipart/form-data" onsubmit="return validateForm();">
             <div class="main-adv">
                 <img src="../../resources/img/main_adv/검사무료체험.png" class="adv-images fade-in">
             </div>
@@ -34,16 +35,16 @@
                         <a href="/jobPosting?companyId=${postingList.companyId}&id=${postingList.id}">
                             <div class="card h-100 w-90 text-center">
                                 <c:choose>
-                                    <c:when
-                                        test="${postingList.jobPostingUploadPath == null || postingList.jobPostingUploadPath.isEmpty()}">
+                                    <c:when test="${postingList.jobPostingFilePath == null || postingList.jobPostingFilePath.isEmpty()}">
                                         <img src="/resources/img/이미지는준비중.png" class="card-img-top fixed-size-image"
-                                            alt="Default Image" />
+                                        alt="Default Image" />
                                     </c:when>
                                     <c:otherwise>
-                                        <img src="<c:out value='${postingList.jobPostingUploadPath}'/>"
-                                            style="width: 250px; height: 80px; display: block; margin: 0 auto;">
+                                        <img src="<c:out value='${postingList.jobPostingFilePath}'/>" class="card-img-top fixed-size-image"
+                                        alt="Default Image" />
                                     </c:otherwise>
                                 </c:choose>
+                                
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <c:out value='${postingList.companyName}' />
@@ -62,6 +63,7 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                 crossorigin="anonymous"></script>
+            </form>
         </body>
 
         </html>
