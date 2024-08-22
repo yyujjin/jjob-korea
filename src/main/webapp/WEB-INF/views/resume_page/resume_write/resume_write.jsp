@@ -516,6 +516,7 @@
 
                                 function toggleInputFields(isChecked) {
                                     inputFields.forEach(function (input) {
+                                        input.value = "";
                                         input.disabled = isChecked; // 신입 체크박스가 선택되면 경력 입력 칸 비활성화
                                     });
                                 }
