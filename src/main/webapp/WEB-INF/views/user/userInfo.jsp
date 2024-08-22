@@ -16,7 +16,7 @@
 <body>
     <div class="mypage">
         <h2 style="margin-bottom: 50px;">회원 정보 수정</h2>
-        <form id="user-info-form" method="post" action="/user/update">
+        <form id="user-info-form" method="post" action="/userUpdate">
             <div class="form-group">
                 <label for="userId">User ID :</label>
                 <input type="text" id="userId" name="userId" value="${userInfo.userId}" readonly>
@@ -46,7 +46,7 @@
                 <input type="text" id="gender" name="gender" value="${userInfo.gender}">
             </div>
             <div class="btn-group">
-                <button type="submit" class="submit">수정하기</button>
+                <button type="submit" class="submit" onclick="updateUser(event)">수정하기</button>
                 <button type="button" class="cancle-button" onclick="window.history.back()">취소</button>
                 <button type="button" class="delete-button" onclick="deleteUser()">탈퇴하기</button>
             </div>

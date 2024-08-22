@@ -78,13 +78,12 @@ public class UserController {
     	
     } 
     
-    //회원정보 수정
-    @PostMapping("/user/update")
-    public String updateUser(UserDTO userDTO) {
-    	
-    	userService.updateUser(userDTO);
-    	
-    	return "user/updateSuccess";
+  //회원정보 수정
+    @PutMapping("/userUpdate")
+    @ResponseBody
+    public String updateUser(@ModelAttribute UserDTO userDTO) {
+        userService.updateUser(userDTO);
+        return "success";
     }
     
     //회원 탈퇴
@@ -93,7 +92,6 @@ public class UserController {
     public String deleteUser(@RequestParam("userId") String userId) {
     	UserDTO userDTO = new UserDTO();
     	userDTO.setUserId(userId);
-    	log.info("@#userId"+userId);
     	userService.deleteUser(userDTO);
     	log.info("삭제 된 userDTO : {}",userDTO);
     	return "success";
