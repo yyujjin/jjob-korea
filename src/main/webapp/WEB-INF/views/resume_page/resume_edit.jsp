@@ -169,8 +169,18 @@
                     gap: 10px;
                     align-items: flex-start;
                 }
-
+                .input-group1 {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    align-items: flex-start;
+                }
                 .input-item {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 10px;
+                }
+                .input-item1 {
                     display: flex;
                     flex-direction: column;
                     margin-bottom: 10px;
@@ -188,6 +198,15 @@
 
                 #resumeGender {
                     width: 100px;
+                }
+                .career-label,
+                .isFreshman {
+                    font-weight: bold;
+                }
+
+                .career {
+                    justify-content: start;
+                    display: flex;
                 }
             </style>
     <script type="text/javascript"
@@ -241,26 +260,26 @@
                 <a style="color: gray; font-size: 11px;">
                     <b class="b">*</b>은 필수항목 입니다.
                 </a>
-                <div class="input-group">
-                    <div class="input-item">
+                <div class="input-group1">
+                    <div class="input-item1">
                         <label for="resumeUserName">이름<b class="b">*</b></label>
                         <input type="text" placeholder="이름" name="resumeUserName" id="resumeUserName" value="${resumeInfoDTO.resumeUserName}"
                             required>
                     </div>
 
-                    <div class="input-item">
+                    <div class="input-item1">
                         <label for="resumeBirthDay">생년월일<b class="b">*</b></label>
                         <input type="text" placeholder="생년월일" name="resumeBirthDay" id="resumeBirthDay" value="${resumeInfoDTO.resumeBirthDay}"
                             required>
                     </div>
 
-                    <div class="input-item">
+                    <div class="input-item1">
                         <label for="resumeUserEmail">이메일<b class="b">*</b></label>
                         <input type="email" placeholder="이메일" name="resumeUserEmail" id="resumeUserEmail" value="${resumeInfoDTO.resumeUserEmail}"
                             required>
                     </div>
                     
-                    <div class="input-item">
+                    <div class="input-item1">
                         <label for="resumeGender">성별<b class="b">*</b></label>
                         <select name="resumeGender" id="resumeGender" required>
                                 <option value="0" selected disabled>성별</option>
@@ -269,18 +288,18 @@
                         </select>
                     </div>
 
-                    <div class="input-item">
+                    <div class="input-item1">
                         <label for="resumeUserPhone">전화번호</label>
                         <input type="text" placeholder="전화번호" name="resumeUserPhone" id="resumeUserPhone" value="${resumeInfoDTO.resumeUserPhone}">
                     </div>
 
-                    <div class="input-item">
+                    <div class="input-item1">
                         <label for="resumeUserCellPhone">휴대번호<b class="b">*</b></label>
                         <input type="text" placeholder="휴대번호" name="resumeUserCellPhone" value="${resumeInfoDTO.resumeUserCellPhone}"
                             id="resumeUserCellPhone" required>
                     </div>
 
-                    <div class="input-item">
+                    <div class="input-item1">
                         <label for="resumeUserAddress">주소<b class="b">*</b></label>
                         <input type="text" placeholder="주소" name="resumeUserAddress" id="resumeUserAddress" value="${resumeInfoDTO.resumeUserAddress}"
                             required>
@@ -409,8 +428,14 @@
         </select>
     </div>
 </section>
-            <section class="career">
-                경력란
+            <section>
+                <div class="career">
+                    <span class="career-label">경력</span>&nbsp;&nbsp;&nbsp;
+                    <div class="isFreshman">
+                        <label for="isFreshman" class="isFreshman">신입</label>
+                        <input type="checkbox" id="isFreshman" name="isFreshman" style="width: 20px;">
+                    </div>
+                </div>
                 <div class="input-group">
                     <div class="input-item">
                         <label for="resumeCpName">회사명<b class="b">*</b></label>
@@ -452,6 +477,28 @@
                             required>
                     </div>
                 </div>
+                </section>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const checkbox = document.getElementById('isFreshman');
+                        const inputFields = document.querySelectorAll('.input-group .input-item input');
+
+                        // 초기 상태 설정
+                        toggleInputFields(checkbox.checked);
+
+                        // 체크박스 변경 시 이벤트 리스너 추가
+                        checkbox.addEventListener('change', function () {
+                            toggleInputFields(checkbox.checked);
+                        });
+
+                        function toggleInputFields(isChecked) {
+                            inputFields.forEach(function (input) {
+                                input.value = "";
+                                input.disabled = isChecked; // 신입 체크박스가 선택되면 경력 입력 칸 비활성화
+                            });
+                        }
+                    });
+                </script>
                 <section class="self-intro">
                     자기소개서란<b class="b">*</b><br>
                     <textarea placeholder="1000자 이내로 작성해주세요" cols="100" rows="20" name="resumeIntroduce"
