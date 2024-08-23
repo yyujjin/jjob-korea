@@ -126,8 +126,8 @@
 
 
     <insert id="addpostingwrite"  parameterType="JobPostingDTO" >
-        INSERT INTO team_db.JobPosting(companyName, postingTitle, postingdetails, jobTitle, workLocation, employmentType, jobExperience, deadline, money, companyId, jobPostingUploadPath)
-        VALUES (#{companyName}, #{postingTitle}, #{postingdetails}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline}, #{money}, #{companyId}, #{jobPostingFilePath});
+        INSERT INTO team_db.JobPosting(companyName, postingTitle, postingdetails, jobTitle, workLocation, employmentType, jobExperience, deadline,filters, money, companyId, jobPostingUploadPath)
+        VALUES (#{companyName}, #{postingTitle}, #{postingdetails}, #{jobTitle}, #{workLocation}, #{employmentType}, #{jobExperience}, #{deadline},  #{filters}, #{money}, #{companyId}, #{jobPostingFilePath});
     </insert>
     
     <update id="updateHit" parameterType="int">

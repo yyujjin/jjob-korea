@@ -36,7 +36,10 @@ public class JobPostingDTO {
     
     // 조회수
     private int hit;
-    
+
+    //필터
+    private String filters;
+
     // D-DAY
     private long countdownDays;
     

@@ -86,6 +86,10 @@ public class JobPostingController {
             String filePath = uploadFileToS3(file); // 파일을 S3에 업로드하고 URL을 반환
             jobPostingDTO.setJobPostingFilePath(filePath); // 반환된 URL을 DTO에 설정
         }
+        String filters = jobPostingDTO.getJobTitle()+jobPostingDTO.getWorkLocation()+jobPostingDTO.getEmploymentType()+
+                jobPostingDTO.getJobExperience()+"";
+
+        jobPostingDTO.setFilters(filters);
 
 
         jobPostingService.addpostingwrite(jobPostingDTO, companyId); // 공고 등록 처리
