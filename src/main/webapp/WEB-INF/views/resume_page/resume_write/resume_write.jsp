@@ -454,46 +454,47 @@
                                 <div class="isFreshman">
                                     <label for="isFreshman" class="isFreshman">신입</label>
                                     <input type="checkbox" id="isFreshman" name="isFreshman" style="width: 20px;">
+                                    <span style="color: gray; font-size: 11px;">신입체크시 경력란이 비활성화됩니다.</span>
                                 </div>
                             </div>
 
                             <div class="input-group">
                                 <div class="input-item">
-                                    <label for="resumeCpName">회사명<b class="b">*</b></label>
+                                    <label for="resumeCpName">회사명</label>
                                     <input type="text" placeholder="회사명" name="resumeCpName" id="resumeCpName" required>
                                 </div>
 
                                 <div class="input-item">
-                                    <label for="resumeCpDept">부서명<b class="b">*</b></label>
+                                    <label for="resumeCpDept">부서명</label>
                                     <input type="text" placeholder="부서명" name="resumeCpDept" id="resumeCpDept" required>
                                 </div>
 
                                 <div class="input-item">
-                                    <label for="resumeCpJoinDate">입사연월<b class="b">*</b></label>
+                                    <label for="resumeCpJoinDate">입사연월</label>
                                     <input type="text" placeholder="입사연월" name="resumeCpJoinDate" id="resumeCpJoinDate"
                                         required>
                                 </div>
 
                                 <div class="input-item">
-                                    <label for="resumeCpLeaveDate">퇴사연월<b class="b">*</b></label>
+                                    <label for="resumeCpLeaveDate">퇴사연월</label>
                                     <input type="text" placeholder="퇴사연월" name="resumeCpLeaveDate"
                                         id="resumeCpLeaveDate" required>
                                 </div>
 
                                 <div class="input-item">
-                                    <label for="resumeCpPosition">직급/직책<b class="b">*</b></label>
+                                    <label for="resumeCpPosition">직급/직책</label>
                                     <input type="text" placeholder="직급/직책" name="resumeCpPosition" id="resumeCpPosition"
                                         required>
                                 </div>
 
                                 <div class="input-item">
-                                    <label for="resumeCpSalary">연봉<b class="b">*</b></label>
+                                    <label for="resumeCpSalary">연봉</label>
                                     <input type="text" placeholder="연봉" name="resumeCpSalary" id="resumeCpSalary"
                                         required>
                                 </div>
 
                                 <div class="input-item">
-                                    <label for="resumeCpDuty">담당업무<b class="b">*</b></label>
+                                    <label for="resumeCpDuty">담당업무</label>
                                     <input type="text" placeholder="담당업무" name="resumeCpDuty" id="resumeCpDuty"
                                         required>
                                 </div>
