@@ -83,9 +83,9 @@
                 <label for="jobTitle">직무</label>
                 <select id="jobTitle" name="jobTitle" class="form-control">
                     <option value="" selected disabled>선택안함</option>
-                    <option value="개발자">개발자</option>
-                    <option value="디자이너">디자이너</option>
-                    <option value="매니저">매니저</option>
+                    <option value="개발자">프론트엔드</option>
+                    <option value="디자이너">백엔드</option>
+                    <option value="매니저">풀스택</option>
                 </select>
             </div>
 
