@@ -1,12 +1,10 @@
 # <img src="/docs/images/jjobkorea_logo.png" width="150" height="70"> 프로젝트 소개
 
----
 
 잡코리아를 벤치마킹한 구인구직 사이트
 
 ## 👩🏻‍💻팀원 소개
 
----
 
 - 박유진 (팀장)
 - 문균호
@@ -16,13 +14,11 @@
 
 ## 📆개발 기간
 
----
 
 2024년 7월 2일 ~ 2024년 8월 23일
 
 ## ⚙️개발 환경 및 기술 스택
 
----
 
 - **개발 환경**: STS4, IntelliJ IDEA, VS Code
 - **프로그래밍 언어**: Java, JavaScript, CSS, HTML
@@ -34,8 +30,6 @@
 - **보안**: Spring Security, OAuth 2.0
 
 ## 🔐보안
-
----
 
 
 
@@ -140,8 +134,6 @@ httpSecurity
 
 ## ✨ AWS RDS를 사용한 데이터 베이스 설정
 
----
 
 ## 페이지 별 기능 소개
 
----
