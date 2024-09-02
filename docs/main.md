@@ -4,8 +4,6 @@
 
 ## 📌주요 기능
 
----
-
 <details>
 <summary>네비게이션 메뉴</summary>
 

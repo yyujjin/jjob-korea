@@ -4,8 +4,6 @@
 
 ## 📌주요 기능
 
----
-
 <details>
 <summary>정규식 검증</summary>
 

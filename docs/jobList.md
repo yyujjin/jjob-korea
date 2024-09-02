@@ -1,16 +1,10 @@
 ## ✨채용 정보 페이지 전체 화면
 
----
-
 ![image.png](/docs/images/jobList/jobList_1.png)
 
 ## 📌주요 기능
 
----
-
 ### 채용 공고 상세 검색
-
----
 
 ![image.png](/docs/images/jobList/jobList_2.png)
 
@@ -48,8 +42,6 @@
 
 ### 채용 정보 리스트
 
----
-
 ![image.png](/docs/images/jobList/jobList_5.png)
 
 <details>
@@ -66,7 +58,5 @@
 </details>
 
 ### 페이징
-
----
 
 - 각 페이지에 채용 정보가 10개씩  출력됩니다.
