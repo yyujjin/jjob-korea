@@ -1,24 +1,61 @@
 # <img src="/docs/images/jjobkorea_logo.png" width="150" height="70"> 프로젝트 소개
 
 
-잡코리아를 벤치마킹한 구인구직 사이트
+**잡코리아를 벤치마킹한 구인구직 사이트**
 
-## 👩🏻‍💻팀원 소개
-
-
-- 박유진 (팀장)
-- 문균호
-- 조해욱
-- 차혜영
-- 한도훈
+## 📋목차
+- [개발 기간](#개발-기간)
+- [팀원 소개 및 역할 분담](#팀원-소개-및-역할-분담)
+- [개발 환경 및 기술 스택](#개발-환경-및-기술-스택)
+- [보안](#보안)
+- [페이지별 사용자 시나리오](#페이지별-사용자-시나리오)
 
 ## 📆개발 기간
+- 1차: 2024년 7월 2일 - 7월 17일
+- 2차: 2024년 7월 24일 - 8월 23일
+
+## 👥팀원 소개 및 역할 분담
+
+### 📌 1차
+
+- **박유진**: [팀장] - 메인 페이지 및 채용 정보 페이지 풀스택 개발
+    - 메인 페이지와 채용 정보 페이지를 풀스택으로 개발하여 전체적인 사용자 경험을 구축했습니다.
+
+- **문균호**: [팀원] - 로그인 및 회원가입 페이지 풀스택 개발
+    - 사용자 인증과 관련된 핵심 기능인 로그인 및 회원가입 페이지를 풀스택으로 개발하여, 사용자 관리 기능의 기초를 다졌습니다.
+
+- **조해욱**: [팀원] - 게시판 페이지 풀스택 개발
+    - 사용자들이 게시글을 작성하고 상호작용할 수 있는 게시판 기능을 설계하고 구현하여, 커뮤니케이션의 중심 기능을 제공했습니다.
+
+- **한도훈**: [팀원] - 이력서 페이지 풀스택 개발
+    - 사용자들이 이력서를 작성, 수정, 저장할 수 있는 이력서 페이지를 풀스택으로 개발하여, 채용 시스템의 중요한 부분을 완성했습니다.
+
+- **차태후**: [팀원] - 공고 등록 페이지 및 채용 정보 상세보기 페이지 풀스택 개발
+    - 채용 공고를 등록하고 상세 정보를 조회할 수 있는 페이지를 설계 및 구현하여, 채용 프로세스의 핵심 기능을 담당했습니다.
+
+### 📌 2차
+2차 프로젝트에서는 차태후 팀원이 빠지고 차혜영 팀원이 새로 합류했습니다.
+
+- **박유진**: [팀장] - 스프링 시큐리티 및 OAuth2 Google 인증 적용
+    - 애플리케이션의 보안을 강화하기 위해 스프링 시큐리티를 도입하고, OAuth2를 활용한 Google 인증 기능을 추가하여 사용자 인증 절차를 개선했습니다.
+
+- **문균호**: [팀원] - 회원가입 로직 개선 및 이메일 인증 기능 구현
+    - 회원가입 과정에서 데이터 유효성 검사와 정규식 검사를 추가하여 입력 데이터의 정확성을 보장하고, SMTP 기반 이메일 인증 기능을 구현하여 보안을 강화했습니다.
+
+- **조해욱**: [팀원] - 좋아요 버튼 기능 구현
+    - 사용자 피드백을 반영하기 위해 게시판에 좋아요 버튼 기능을 추가하여 사용자 경험을 향상시켰습니다.
+
+- **한도훈**: [팀원] - AWS 기반 데이터베이스 환경 구축
+    - 애플리케이션의 데이터 관리를 위해 AWS를 활용한 데이터베이스 환경을 구축하고, 성능 및 확장성을 고려한 클라우드 기반의 인프라를 설정했습니다.
+
+- **차혜영**: [팀원] - UI 개선 및 기능 고도화
+    - 기존 디자인과 UI를 전반적으로 개선하고, 자바스크립트를 활용해 광고 배너 슬라이드를 구현하였으며, 채용 공고 등록 페이지를 고도화하여 사용자 경험을 향상시켰습니다.
 
 
-2024년 7월 2일 ~ 2024년 8월 23일
+
+
 
 ## ⚙️개발 환경 및 기술 스택
-
 
 - **개발 환경**: STS4, IntelliJ IDEA, VS Code
 - **프로그래밍 언어**: Java, JavaScript, CSS, HTML
@@ -29,111 +66,30 @@
 - **버전 관리**: GitHub
 - **보안**: Spring Security, OAuth 2.0
 
-## 🔐보안
+## 🔒보안
 
+**본 프로젝트에서는 사용자 데이터를 보호하고, 애플리케이션의 안전성을 강화하기 위해 다양한 보안 조치를 도입했습니다.**
 
+### 🛡️ 스프링 시큐리티 적용
+- **목적**: 애플리케이션 전반에 걸친 접근 제어를 통해 비인가 사용자의 접근을 차단하고, 사용자 역할에 따라 권한을 부여합니다.
+- **구현 내용**: Spring Security를 활용하여 인증(Authentication) 및 인가(Authorization) 시스템을 구축했습니다. 이를 통해 사용자 로그인 및 권한 관리가 체계적으로 이루어집니다.
 
-<img src="/docs/images/security/security_1.png" width="150" height="70">
+### 🔐 OAuth2 기반 Google 인증
+- **목적**: 사용자가 안전하게 외부 계정(Google)을 통해 애플리케이션에 로그인할 수 있도록 지원합니다.
+- **구현 내용**: OAuth2 프로토콜을 활용하여 Google 인증 기능을 구현했습니다. 이를 통해 사용자는 안전하고 간편하게 로그인할 수 있으며, 민감한 자격 증명이 애플리케이션 서버에 직접 저장되지 않습니다.
 
-Spring Security는 애플리케이션의 인증(Authentication)과 권한 부여(Authorization)를 관리하고, 보안 관련 기능을 제공합니다.
+### ✅ 데이터 유효성 검사 및 정규식 검사 
+- **목적**: 입력된 데이터의 정확성을 보장하고, 악의적인 입력으로부터 애플리케이션을 보호합니다.
+- **구현 내용**: 회원가입 및 주요 데이터 입력 로직에서 정규식과 데이터 유효성 검사를 통해 잘못된 데이터 입력을 사전에 차단하고, 보안성을 강화했습니다.
 
-### 주요 보안 기능
-<details>
-  <summary>세션 방식</summary>
+### 📧 이메일 인증 
+- **목적**: 회원가입 시 이메일 인증을 통해 사용자의 신원을 확인하고, 가짜 계정 생성 등을 방지합니다.
+- **구현 내용**: SMTP 프로토콜을 활용하여 회원가입 시 이메일 인증 기능을 구현했습니다. 사용자는 이메일을 통해 계정을 활성화해야만 서비스에 접근할 수 있습니다.
 
-- 사용자의 로그인 상태를 서버의 세션에 저장하고, 세션 ID를 쿠키를 통해 클라이언트와 통신하여 인증을 처리합니다.
-</details>
+### 🗄️ AWS 기반 데이터베이스 보안 
+- **목적**: 클라우드 환경에서 데이터베이스의 안전성을 확보하고, 데이터 접근을 제한합니다.
+- **구현 내용**: AWS RDS를 사용하여 데이터베이스를 설정하고, 보안 그룹 및 접근 제어를 통해 데이터베이스에 대한 안전한 접근을 관리합니다.
 
-<details>
-  <summary> BCryp를 사용한 비밀번호 암호화 </summary>
-
-- 사용자의 비밀번호를 안전하게 저장하기 위해 암호화 알고리즘을 사용하여 비밀번호를 해시 처리하였습니다. 
-
-```java
-@Bean
-public BCryptPasswordEncoder bCryptPasswordEncoder() {
-    return new  BCryptPasswordEncoder();
-}
-```
-
-```java
-@Override
-public void registerUser(HashMap<String, String> param) {
-    param.put("password",bCryptPasswordEncoder.encode(param.get("password")));
-
-    userMapper.individualUser(param);
-}
-```
-`암호화 전 : 1234`
-
-`암호화 후 : $2a$10$lq2k83jqlpiJQ5LPs5tQQe/vtgmlsgRQ32d/KQGpk/UQlQfw.w3AC`
-</details>
-
-<details>
-  <summary>경로 기반 접근 제어</summary>
-
-- URL 패턴에 따라 사용자의 접근 권한을 제어합니다.
-- 특정 경로에 대해 인증된 사용자만 접근할 수 있도록 설정하였습니다.
-```java
-@Bean
-public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-
-    httpSecurity.authorizeHttpRequests((auth) -> auth
-            .requestMatchers("/WEB-INF/views/**").permitAll()//jsp
-            .requestMatchers("/resources/**").permitAll()
-            .requestMatchers("/", "/login", "/register","/checkId","/userUpdate","/deleteUser").permitAll() //메인, 로그인, 회원가입,아이디 중복, 회원정보 수정, 회원 삭제 확인
-            .requestMatchers("/jobPosts", "/searchFilter","/jobPosting").permitAll()//채용 정보
-            .requestMatchers(
-                    "/getComments",
-                    "/board",
-                    "/display",
-                    "/getFileList",
-                    "/download").permitAll() //게시판
-            .requestMatchers("/api/v1/email/send", "/api/v1/email/verify").permitAll()  // 이메일 인증 경로 접근 허용
-
-            .anyRequest().authenticated()
-    );
-```
-</details>
-
-<details>
-  <summary>세션 소멸 시간</summary>
-
-- 60분
-```java
-  server.servlet.session.timeout=60m
-  ```
-</details>
-
-<details>
-  <summary>다중 로그인 허용 개수 설정</summary>
-
-- 다중 로그인 허용 개수를 하나로 설정하여 초과시 기존 세션을 하나 삭제시키고 새로운 로그인을 진행하도록 설정하였습니다. 
-```java
-httpSecurity
-            .sessionManagement((auth) -> auth
-            .maximumSessions(1)
-            .maxSessionsPreventsLogin(false));
- ```
-</details>
-
-<details>
-  <summary>세션 고정 보호 설정</summary>
-
-- 로그인 시 세션은 동일하지만 서버로 전달되는 세션 쿠키 id값을 변경시키도록 설정하였습니다.
-```java
-httpSecurity
-            .sessionManagement((auth) -> auth
-            .sessionFixation().changeSessionId());
- ```
-</details>
-
-
-
-
-
-## ✨ AWS RDS를 사용한 데이터 베이스 설정
-
-
-## 페이지 별 기능 소개
+## 🖥️ 페이지별 사용자 시나리오
+📁 [로그인 페이지](login.md)
 
